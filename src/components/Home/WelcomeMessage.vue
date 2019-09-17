@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h3>Hello {{ name }} from my Vue.js page, built with Webpack 4!</h3>
+    <h3 class="title">
+      Hello 3 {{ name }} from my Vue.js page, built with Webpack 4!
+    </h3>
   </div>
 </template>
 
@@ -14,3 +16,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.title {
+  color: #0000f0;
+}
+</style>
