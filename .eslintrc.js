@@ -1,7 +1,8 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
+    sourceType: 'module'
   },
   env: {
     browser: true,
@@ -16,7 +17,9 @@ module.exports = {
     'standard'
   ],
   plugins: [
-    'vue'
+    'vue',
+    'standard',
+    'promise'
   ],
   rules: {
     'generator-star-spacing': 'off',
