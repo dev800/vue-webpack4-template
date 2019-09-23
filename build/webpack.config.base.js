@@ -15,83 +15,84 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'assets': utils.resolve('assets'),
+      '@': utils.resolve('src'),
+      'js': utils.resolve('src/js'),
+      'css': utils.resolve('src/css'),
       'pages': utils.resolve('src/pages'),
+      'components': utils.resolve('src/components'),
       'static': utils.resolve('static'),
-      'components': utils.resolve('src/components')
     }
   },
 
   module: {
     rules: [{
-        test: /\.(js|vue)$/,
-        use: 'eslint-loader',
-        enforce: 'pre'
-      },
-      {
-        test: /\.vue$/,
-        use: [{
-          loader: 'vue-loader',
-          options: {
-            extractCSS: true,
-            preserveWhitespace: false
-          }
-          // },
-          // {
-          //   loader: 'iview-loader',
-          //   options: {
-          //     prefix: false
-          //   }
-        }]
-
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
+      test: /\.(js|vue)$/,
+      use: 'eslint-loader',
+      enforce: 'pre'
+    },
+    {
+      test: /\.vue$/,
+      use: [{
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true,
+          preserveWhitespace: false
         }
+        // },
+        // {
+        //   loader: 'iview-loader',
+        //   options: {
+        //     prefix: false
+        //   }
+      }]
+    },
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+      }
+    },
+    {
+      test: /\.(c|sc|sa|le)ss$/,
+      use: [{
+        loader: MiniCssExtractPlugin.loader
       },
-      {
-        test: /\.(c|sc|sa|le)ss$/,
-        use: [{
-            loader: MiniCssExtractPlugin.loader
-          },
-          'css-loader?sourceMap',
-          'sass-loader?sourceMap',
-          'less-loader?sourceMap&javascriptEnabled=true'
-        ]
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: utils.assetsPath('img/[name].[hash:7].[ext]')
-          }
-        }
-      },
-      {
-        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: utils.assetsPath('media/[name].[hash:7].[ext]')
-          }
-        }
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-          }
+        'css-loader?sourceMap',
+        'sass-loader?sourceMap',
+        'less-loader?sourceMap&javascriptEnabled=true'
+      ]
+    },
+    {
+      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:32].[ext]')
         }
       }
+    },
+    {
+      test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('media/[name].[hash:32].[ext]')
+        }
+      }
+    },
+    {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('fonts/[name].[hash:32].[ext]')
+        }
+      }
+    }
     ]
   },
 

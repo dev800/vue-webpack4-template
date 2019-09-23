@@ -1,5 +1,5 @@
 <template>
-  <div class="full-width center-content">
+  <div class="">
     <div>
       <img src="static/img/logo.png">
     </div>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import WelcomeMessage from 'components/Home/WelcomeMessage'
+import WelcomeMessage from '@/components/Home/WelcomeMessage'
 
 export default {
   components: {
