@@ -1,9 +1,11 @@
 'use strict'
+const path = require('path')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const isProd = process.env.NODE_ENV === 'production'
+const ROOT_PATH = path.resolve(__dirname, './')
 
 const {
   VueLoaderPlugin
@@ -15,12 +17,16 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
+      '~': ROOT_PATH,
       '@': utils.resolve('src'),
-      'js': utils.resolve('src/js'),
-      'css': utils.resolve('src/css'),
-      'pages': utils.resolve('src/pages'),
-      'components': utils.resolve('src/components'),
       'static': utils.resolve('static'),
+    }
+  },
+
+  devtool: 'source-map',
+  entry: generateEntries => {
+    return {
+      admin: ['@/admin/index.js', 'babel-polyfill']
     }
   },
 

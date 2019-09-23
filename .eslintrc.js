@@ -22,6 +22,7 @@ module.exports = {
     'promise'
   ],
   rules: {
+    'space-before-function-paren': [2, "never"],
     'generator-star-spacing': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
