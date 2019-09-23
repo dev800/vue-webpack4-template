@@ -3,8 +3,8 @@ function load(path) {
 }
 
 const routes = [
-  { path: '/admin', component: load('home') },
-  { path: '/admin/*', component: load('errors/not-found') }
+  { path: '/', component: load('home') },
+  { path: '/*', component: load('errors/not-found') }
 ]
 
 export {

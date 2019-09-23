@@ -107,8 +107,8 @@ module.exports = {
       filename: isProd ? 'css/[name].[contenthash].css' : 'css/[name].css'
     }),
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
+      filename: 'admin.html',
+      template: 'src/admin/index.html',
       inject: true
     }),
     new VueLoaderPlugin(),
