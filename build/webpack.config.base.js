@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const isProd = process.env.NODE_ENV === 'production'
-const ROOT_PATH = path.resolve(__dirname, './')
+const ROOT_PATH = path.resolve(__dirname, '../')
 
 const {
   VueLoaderPlugin
@@ -29,76 +29,58 @@ module.exports = {
       admin: ['@/admin/index.js', 'babel-polyfill']
     }
   },
-
+  output: {
+    publicPath: '/',
+    filename: isProd ? 'js/[name].[contenthash].js' : 'js/[name].js',
+    chunkFilename: isProd ? 'js/[name].chunk.[chunkhash].js' : 'js/[name].chunk.js',
+    path: `${ROOT_PATH}/dist`
+  },
   module: {
-    rules: [{
-      test: /\.(js|vue)$/,
-      use: 'eslint-loader',
-      enforce: 'pre'
-    },
-    {
-      test: /\.vue$/,
-      use: [{
-        loader: 'vue-loader',
-        options: {
-          extractCSS: true,
-          preserveWhitespace: false
-        }
-        // },
-        // {
-        //   loader: 'iview-loader',
-        //   options: {
-        //     prefix: false
-        //   }
-      }]
-    },
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-      }
-    },
-    {
-      test: /\.(c|sc|sa|le)ss$/,
-      use: [{
-        loader: MiniCssExtractPlugin.loader
+    rules: [
+      {
+        test: /\.(js|vue)$/,
+        use: 'eslint-loader',
+        enforce: 'pre'
       },
-        'css-loader?sourceMap',
-        'sass-loader?sourceMap',
-        'less-loader?sourceMap&javascriptEnabled=true'
-      ]
-    },
-    {
-      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:32].[ext]')
+      {
+        test: /\.vue$/,
+        use: [{
+          loader: 'vue-loader',
+          options: {
+            extractCSS: true,
+            preserveWhitespace: false
+          }
+        }]
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      },
+      {
+        test: /\.(c|sc|sa|le)ss$/,
+        use: [{
+          loader: MiniCssExtractPlugin.loader
+        },
+          'css-loader?sourceMap',
+          'sass-loader?sourceMap',
+          'less-loader?sourceMap&javascriptEnabled=true'
+        ]
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf|mp4|webm|ogg|mp3|wav|flac|aac|png|jpe?g|gif|svg)(\?.*)?$/i,
+        use: {
+          loader: 'file-loader',
+          options: {
+            limit: 8192,
+            name(file) {
+              return isProd ? '[path][name].[hash].[ext]' : '[path][name].[ext]';
+            }
+          }
         }
       }
-    },
-    {
-      test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: utils.assetsPath('media/[name].[hash:32].[ext]')
-        }
-      }
-    },
-    {
-      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:32].[ext]')
-        }
-      }
-    }
     ]
   },
 
@@ -106,6 +88,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: isProd ? 'css/[name].[contenthash].css' : 'css/[name].css'
     }),
+    // https://github.com/jantimon/html-webpack-plugin/tree/master/examples
     new HtmlWebpackPlugin({
       filename: 'admin.html',
       template: 'src/admin/index.html',

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --progress --watch --config build/webpack.config.dev.js",
-    "prod": "webpack --config build/webpack.config.prod.js",
+    "prod": "NODE_ENV=production webpack --config build/webpack.config.prod.js",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --ext .js,.vue src --fix",
     "test:unit": "jest --config test/jest.config.js",
@@ -21,6 +21,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "babel-polyfill": "^6.26.0",
+    "file-loader": "^4.2.0",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3"
