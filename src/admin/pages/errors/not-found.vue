@@ -1,6 +1,6 @@
 <template>
   <div class="x-error-404">
-    页面没找到
+    not found
   </div>
 </template>
 

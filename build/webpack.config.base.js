@@ -65,8 +65,8 @@ module.exports = {
           loader: MiniCssExtractPlugin.loader
         },
           'css-loader?sourceMap',
-          'sass-loader?sourceMap',
-          'less-loader?sourceMap&javascriptEnabled=true'
+          'sass-loader?sourceMap'
+          // 'less-loader?sourceMap&javascriptEnabled=true'
         ]
       },
       {

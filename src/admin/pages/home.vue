@@ -1,5 +1,6 @@
 <template>
   <div class="x-admin-home">
+    <Icon type="ios-landline" />
     <img src="~/static/img/logo.png">
     <input
       type="button"
@@ -16,9 +17,12 @@
 
 <script>
 import NProgress from 'nprogress'
+import Icon from '@/ui/components/icon'
 
 export default {
-  components: {},
+  components: {
+    Icon: Icon
+  },
   mounted() {
     console.log('mounted...')
     // NProgress.configure({ showSpinner: false })
