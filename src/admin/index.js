@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
+import './css/main.scss'
 
-Vue.config.devtools = true // 去掉注释来打开Vue调试工具
+Vue.config.devtools = process.env.NODE_ENV === 'development' // 去掉注释来打开Vue调试工具
 Vue.use(VueRouter)
 
 const router = new VueRouter({
