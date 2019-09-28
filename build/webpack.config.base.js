@@ -23,7 +23,7 @@ module.exports = {
     }
   },
 
-  devtool: 'source-map',
+  devtool: isProd ? 'cheap-source-map' : 'source-map',
   entry: generateEntries => {
     return {
       admin: ['@/admin/index.js', 'babel-polyfill']
@@ -60,13 +60,21 @@ module.exports = {
         }
       },
       {
-        test: /\.(c|sc|sa|le)ss$/,
+        test: /\.(c|sc|sa)ss$/,
         use: [{
           loader: MiniCssExtractPlugin.loader
         },
           'css-loader?sourceMap',
           'sass-loader?sourceMap'
-          // 'less-loader?sourceMap&javascriptEnabled=true'
+        ]
+      },
+      {
+        test: /\.(le)ss$/,
+        use: [{
+          loader: MiniCssExtractPlugin.loader
+        },
+          'css-loader?sourceMap',
+          'less-loader?sourceMap&javascriptEnabled=true'
         ]
       },
       {

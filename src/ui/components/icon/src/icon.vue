@@ -9,7 +9,7 @@
 const prefixCls = 'fmfont'
 
 export default {
-  name: 'Icon',
+  name: 'FmIcon',
   props: {
     type: { type: String, default: null },
     size: { type: [Number, String], default: null },

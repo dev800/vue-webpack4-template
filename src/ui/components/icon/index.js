@@ -1,2 +1,8 @@
-import Icon from './icon.vue'
-export default Icon
+import FmIcon from './src/icon.vue'
+
+/* istanbul ignore next */
+FmIcon.install = function(Vue) {
+  Vue.component(FmIcon.name, FmIcon)
+}
+
+export default FmIcon
