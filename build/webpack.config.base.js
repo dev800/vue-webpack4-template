@@ -1,6 +1,7 @@
 'use strict'
 const path = require('path')
 
+const ManifestPlugin = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ROOT_PATH = path.resolve(__dirname, '../')
@@ -13,7 +14,7 @@ const utils = require('./utils')
 
 module.exports = {
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.ts', '.vue', '.json'],
     alias: {
       '~': ROOT_PATH,
       '@': utils.resolve('src'),
@@ -24,7 +25,7 @@ module.exports = {
   devtool: 'source-map',
   entry: generateEntries => {
     return {
-      admin: ['@/admin/index.js', 'babel-polyfill']
+      demo: ['@/demo/index.js'],
     }
   },
   output: {
@@ -78,10 +79,11 @@ module.exports = {
   },
 
   plugins: [
+    new ManifestPlugin(),
     // https://github.com/jantimon/html-webpack-plugin/tree/master/examples
     new HtmlWebpackPlugin({
-      filename: 'admin.html',
-      template: 'src/admin/index.html',
+      filename: 'index.html',
+      template: 'src/demo/index.html',
       inject: true
     }),
     new VueLoaderPlugin(),

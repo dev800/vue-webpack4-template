@@ -12,7 +12,7 @@ module.exports = merge(baseConfig, {
   mode: 'development',
 
   devServer: {
-    clientLogLevel: 'warning',
+    clientLogLevel: 'debug',
     hot: true,
     contentBase: 'dist',
     compress: true,
@@ -21,7 +21,7 @@ module.exports = merge(baseConfig, {
     open: true,
     overlay: { warnings: false, errors: true },
     publicPath: '/',
-    quiet: true
+    quiet: false
   },
 
   module: {
