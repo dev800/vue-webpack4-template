@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     onShowMessage(e) {
-      this.$message('这是一条消息提示')
+      this.$message({ message: '你好测试一下错误消息啦啦', type: 'warning', duration: 200000000 })
     },
     onStartProgress(e) {
       console.log('onStartProgress', e)

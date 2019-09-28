@@ -38,13 +38,13 @@
   white-space: nowrap;
   outline: none;
   &:focus { /* focus */
-    > .el-tree-node__content {
+    > .fm-tree-node__content {
       background-color: $--tree-node-hover-background-color;
     }
   }
 
   @include when(drop-inner) {
-    > .el-tree-node__content .el-tree-node__label {
+    > .fm-tree-node__content .fm-tree-node__label {
       background-color: $--color-primary;
       color: #fff;
     }
@@ -56,17 +56,17 @@
     height: 26px;
     cursor: pointer;
 
-    & > .el-tree-node__expand-icon {
+    & > .fm-tree-node__expand-icon {
       padding: 6px;
     }
-    & > label.el-checkbox {
+    & > label.fm-checkbox {
       margin-right: 8px;
     }
     &:hover {
       background-color: $--tree-node-hover-background-color;
     }
 
-    .el-tree.is-dragging & {
+    .fm-tree.is-dragging & {
       cursor: move;
 
       & * {
@@ -74,7 +74,7 @@
       }
     }
 
-    .el-tree.is-dragging.is-drop-not-allow & {
+    .fm-tree.is-dragging.is-drop-not-allow & {
       cursor: not-allowed;
     }
   }
@@ -107,16 +107,16 @@
     color: $--tree-expand-icon-color;
   }
 
-  & > .el-tree-node__children {
+  & > .fm-tree-node__children {
     overflow: hidden;
     background-color: transparent;
   }
 
-  &.is-expanded > .el-tree-node__children {
+  &.is-expanded > .fm-tree-node__children {
     display: block;
   }
 }
 
-.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+.fm-tree--highlight-current .fm-tree-node.is-current > .fm-tree-node__content {
   background-color: mix($--color-white, $--color-primary, 92%);
 }

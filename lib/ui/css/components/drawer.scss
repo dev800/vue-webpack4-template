@@ -91,7 +91,7 @@
 }
 
 @mixin animation-in($direction) {
-  .el-drawer__open &.#{$direction} {
+  .fm-drawer__open &.#{$direction} {
     animation: #{$direction}-drawer-in 225ms cubic-bezier(0, 0, .2, 1) 0ms;
   }
 }
@@ -188,7 +188,7 @@ $directions: rtl, ltr, ttb, btt;
   }
 }
 
-.el-drawer__container {
+.fm-drawer__container {
   position: relative;
   left: 0;
   right: 0;
@@ -198,10 +198,10 @@ $directions: rtl, ltr, ttb, btt;
   width: 100%;
 }
 
-.el-drawer-fade-enter-active {
+.fm-drawer-fade-enter-active {
   animation: el-drawer-fade-in 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 }
 
-.el-drawer-fade-leave-active {
+.fm-drawer-fade-leave-active {
   animation: el-drawer-fade-in 225ms cubic-bezier(0, 0, 0.2, 1) 0ms reverse;
 }

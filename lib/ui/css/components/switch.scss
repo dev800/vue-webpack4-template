@@ -10,8 +10,8 @@
   height: $--switch-height;
   vertical-align: middle;
   @include when(disabled) {
-    & .el-switch__core,
-    & .el-switch__label {
+    & .fm-switch__core,
+    & .fm-switch__label {
       cursor: not-allowed;
     }
   }
@@ -80,7 +80,7 @@
   }
 
   @include when(checked) {
-    .el-switch__core {
+    .fm-switch__core {
       border-color: $--switch-on-color;
       background-color: $--switch-on-color;
       &::after {
@@ -95,13 +95,13 @@
   }
 
   @include m(wide) {
-    .el-switch__label {
-      &.el-switch__label--left {
+    .fm-switch__label {
+      &.fm-switch__label--left {
         span {
           left: 10px;
         }
       }
-      &.el-switch__label--right {
+      &.fm-switch__label--right {
         span {
           right: 10px;
         }

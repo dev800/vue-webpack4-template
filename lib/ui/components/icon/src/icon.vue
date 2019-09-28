@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     classes() {
-      return [prefixCls, `icon-${this.type}`]
+      return [prefixCls, `fm-icon-${this.type}`]
     },
     styles() {
       const style = {}
