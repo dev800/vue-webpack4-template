@@ -1,7 +1,9 @@
 'use strict'
 
 const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 const ROOT_PATH = path.resolve(__dirname, '../')
@@ -9,6 +11,7 @@ const ROOT_PATH = path.resolve(__dirname, '../')
 module.exports = merge(baseConfig, {
   mode: 'production',
   optimization: {
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
     splitChunks: {
       cacheGroups: {
         commons: {
@@ -52,7 +55,8 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css'
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[id].[hash].css'
     })
   ]
 })

@@ -1,7 +1,6 @@
 'use strict'
 const path = require('path')
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ROOT_PATH = path.resolve(__dirname, '../')
@@ -33,6 +32,11 @@ module.exports = {
     filename: 'js/[name].js',
     chunkFilename: 'js/[name].chunk.js',
     path: `${ROOT_PATH}/dist`
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   module: {
     rules: [
