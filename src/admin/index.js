@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 import '@/ui/css/index.scss'
-import './css/main.scss'
+import './css/index.scss'
 
 Vue.config.devtools = process.env.NODE_ENV === 'development' // 去掉注释来打开Vue调试工具
 Vue.use(VueRouter)

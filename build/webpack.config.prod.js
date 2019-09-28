@@ -1,8 +1,10 @@
 'use strict'
 
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
-const MiniCssExtractPlugin  = require('mini-css-extract-plugin')
+const ROOT_PATH = path.resolve(__dirname, '../')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -17,27 +19,40 @@ module.exports = merge(baseConfig, {
       },
     },
   },
+  devtool: 'cheap-source-map',
+  output: {
+    publicPath: '/',
+    filename: 'js/[name].[contenthash].js',
+    chunkFilename: 'js/[name].chunk.[chunkhash].js',
+    path: `${ROOT_PATH}/dist`
+  },
   module: {
     rules: [
       {
-        test: /\.css?$/,
+        test: /\.(c|sc|sa)ss$/,
         use: [
-          MiniCssExtractPlugin.loader, 
-          'css-loader'
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          'css-loader?sourceMap',
+          'sass-loader?sourceMap'
         ]
-      }, {
-        test: /\.styl(us)?$/,
+      },
+      {
+        test: /\.(le)ss$/,
         use: [
-          MiniCssExtractPlugin.loader, 
-          'css-loader', 
-          'stylus-loader'
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          'css-loader?sourceMap',
+          'less-loader?sourceMap&javascriptEnabled=true'
         ]
-      }
+      },
     ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'main.css'
+      filename: 'css/[name].[contenthash].css'
     })
   ]
 })

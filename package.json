@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --progress --watch --config build/webpack.config.dev.js",
-    "build": "NODE_ENV=production webpack --config build/webpack.config.prod.js",
+    "prod": "NODE_ENV=production webpack --config build/webpack.config.prod.js",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --ext .js,.vue src --fix",
     "test:unit": "jest --config test/jest.config.js",
