@@ -71,7 +71,12 @@ export default {
       type: String,
       default: ''
     },
-    defaultOpeneds: Array,
+    defaultOpeneds: {
+      type: Array,
+      default: function() {
+        return null
+      }
+    },
     uniqueOpened: Boolean,
     router: Boolean,
     menuTrigger: {
@@ -79,9 +84,18 @@ export default {
       default: 'hover'
     },
     collapse: Boolean,
-    backgroundColor: String,
-    textColor: String,
-    activeTextColor: String,
+    backgroundColor: {
+      type: String,
+      default: null
+    },
+    textColor: {
+      type: String,
+      default: null
+    },
+    activeTextColor: {
+      type: String,
+      default: null
+    },
     collapseTransition: {
       type: Boolean,
       default: true
@@ -127,7 +141,7 @@ export default {
     this.$on('item-click', this.handleItemClick)
     this.$on('submenu-click', this.handleSubmenuClick)
     if (this.mode === 'horizontal') {
-        new Menubar(this.$el); // eslint-disable-line
+      new Menubar(this.$el); // eslint-disable-line
     }
     this.$watch('items', this.updateActiveIndex)
   },
@@ -268,7 +282,7 @@ export default {
     routeToItem(item, onError) {
       const route = item.route || item.index
       try {
-        this.$router.push(route, () => {}, onError)
+        this.$router.push(route, () => { }, onError)
       } catch (e) {
         console.error(e)
       }
@@ -286,7 +300,7 @@ export default {
     const component = (
       <ul
         role="menubar"
-        key={ +this.collapse }
+        key={+this.collapse}
         style={{ backgroundColor: this.backgroundColor || '' }}
         class={{
           'fm-menu--horizontal': this.mode === 'horizontal',
@@ -294,14 +308,14 @@ export default {
           'fm-menu': true
         }}
       >
-        { this.$slots.default }
+        {this.$slots.default}
       </ul>
     )
 
     if (this.collapseTransition) {
       return (
         <fm-menu-collapse-transition>
-          { component }
+          {component}
         </fm-menu-collapse-transition>
       )
     } else {

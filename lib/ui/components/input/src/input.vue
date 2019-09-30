@@ -154,10 +154,24 @@ export default {
   },
 
   props: {
-    value: [String, Number],
-    size: String,
-    resize: String,
-    form: String,
+    value: {
+      type: [String, Number],
+      default: function() {
+        return null
+      }
+    },
+    size: {
+      type: String,
+      default: null
+    },
+    resize: {
+      type: String,
+      default: null
+    },
+    form: {
+      type: String,
+      default: null
+    },
     disabled: Boolean,
     readonly: Boolean,
     type: {
@@ -172,22 +186,22 @@ export default {
       type: String,
       default: 'off'
     },
-    /** @Deprecated in next major version */
-    autoComplete: {
-      type: String,
-      validator(val) {
-        process.env.NODE_ENV !== 'production' &&
-            console.warn('[Fmement Warn][Input]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.')
-        return true
-      }
-    },
     validateEvent: {
       type: Boolean,
       default: true
     },
-    suffixIcon: String,
-    prefixIcon: String,
-    label: String,
+    suffixIcon: {
+      type: String,
+      default: null
+    },
+    prefixIcon: {
+      type: String,
+      default: null
+    },
+    label: {
+      type: String,
+      default: null
+    },
     clearable: {
       type: Boolean,
       default: false
@@ -200,7 +214,10 @@ export default {
       type: Boolean,
       default: false
     },
-    tabindex: String
+    tabindex: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data() {
@@ -240,28 +257,36 @@ export default {
       return this.disabled || (this.elForm || {}).disabled
     },
     nativeInputValue() {
-      return this.value === null || this.value === undefined ? '' : String(this.value)
+      return this.value === null || this.value === undefined
+        ? ''
+        : String(this.value)
     },
     showClear() {
-      return this.clearable &&
-          !this.inputDisabled &&
-          !this.readonly &&
-          this.nativeInputValue &&
-          (this.focused || this.hovering)
+      return (
+        this.clearable &&
+        !this.inputDisabled &&
+        !this.readonly &&
+        this.nativeInputValue &&
+        (this.focused || this.hovering)
+      )
     },
     showPwdVisible() {
-      return this.showPassword &&
-          !this.inputDisabled &&
-          !this.readonly &&
-          (!!this.nativeInputValue || this.focused)
+      return (
+        this.showPassword &&
+        !this.inputDisabled &&
+        !this.readonly &&
+        (!!this.nativeInputValue || this.focused)
+      )
     },
     isWordLimitVisible() {
-      return this.showWordLimit &&
-          this.$attrs.maxlength &&
-          (this.type === 'text' || this.type === 'textarea') &&
-          !this.inputDisabled &&
-          !this.readonly &&
-          !this.showPassword
+      return (
+        this.showWordLimit &&
+        this.$attrs.maxlength &&
+        (this.type === 'text' || this.type === 'textarea') &&
+        !this.inputDisabled &&
+        !this.readonly &&
+        !this.showPassword
+      )
     },
     upperLimit() {
       return this.$attrs.maxlength
@@ -275,8 +300,7 @@ export default {
     },
     inputExceed() {
       // show exceed style if length of initial value greater then maxlength
-      return this.isWordLimitVisible &&
-          (this.textLength > this.upperLimit)
+      return this.isWordLimitVisible && this.textLength > this.upperLimit
     }
   },
 
@@ -360,7 +384,11 @@ export default {
       const minRows = autosize.minRows
       const maxRows = autosize.maxRows
 
-      this.textareaCalcStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows)
+      this.textareaCalcStyle = calcTextareaHeight(
+        this.$refs.textarea,
+        minRows,
+        maxRows
+      )
     },
     setNativeInputValue() {
       const input = this.getInput()
@@ -405,7 +433,9 @@ export default {
       this.$emit('change', event.target.value)
     },
     calcIconOffset(place) {
-      const elList = [].slice.call(this.$el.querySelectorAll(`.fm-input__${place}`) || [])
+      const elList = [].slice.call(
+        this.$el.querySelectorAll(`.fm-input__${place}`) || []
+      )
       if (!elList.length) return
       let el = null
       for (let i = 0; i < elList.length; i++) {
@@ -422,7 +452,9 @@ export default {
 
       const pendant = pendantMap[place]
       if (this.$slots[pendant]) {
-        el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${this.$el.querySelector(`.fm-input-group__${pendant}`).offsetWidth}px)`
+        el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${
+          this.$el.querySelector(`.fm-input-group__${pendant}`).offsetWidth
+        }px)`
       } else {
         el.removeAttribute('style')
       }
@@ -444,12 +476,14 @@ export default {
       return this.$refs.input || this.$refs.textarea
     },
     getSuffixVisible() {
-      return this.$slots.suffix ||
-          this.suffixIcon ||
-          this.showClear ||
-          this.showPassword ||
-          this.isWordLimitVisible ||
-          (this.validateState && this.needStatusIcon)
+      return (
+        this.$slots.suffix ||
+        this.suffixIcon ||
+        this.showClear ||
+        this.showPassword ||
+        this.isWordLimitVisible ||
+        (this.validateState && this.needStatusIcon)
+      )
     }
   }
 }

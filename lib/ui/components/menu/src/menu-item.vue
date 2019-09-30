@@ -51,7 +51,12 @@ export default {
       default: null,
       validator: val => typeof val === 'string' || val === null
     },
-    route: [String, Object],
+    route: {
+      type: [String, Object],
+      default: function() {
+        return null
+      }
+    },
     disabled: Boolean
   },
   computed: {

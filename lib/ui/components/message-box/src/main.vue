@@ -123,7 +123,6 @@ const typeMap = {
 }
 
 export default {
-
   components: {
     FmInput,
     FmButton
@@ -132,9 +131,11 @@ export default {
 
   props: {
     modal: {
+      type: Boolean,
       default: true
     },
     lockScroll: {
+      type: Boolean,
       default: true
     },
     showClose: {
@@ -142,12 +143,15 @@ export default {
       default: true
     },
     closeOnClickModal: {
+      type: Boolean,
       default: true
     },
     closeOnPressEscape: {
+      type: Boolean,
       default: true
     },
     closeOnHashChange: {
+      type: Boolean,
       default: true
     },
     center: {
@@ -155,8 +159,8 @@ export default {
       type: Boolean
     },
     roundButton: {
-      default: false,
-      type: Boolean
+      type: Boolean,
+      default: false
     }
   },
 
@@ -197,7 +201,9 @@ export default {
   computed: {
     icon() {
       const { type, iconClass } = this
-      return iconClass || (type && typeMap[type] ? `fm-icon-${typeMap[type]}` : '')
+      return (
+        iconClass || (type && typeMap[type] ? `fm-icon-${typeMap[type]}` : '')
+      )
     },
 
     confirmButtonClasses() {
@@ -229,7 +235,11 @@ export default {
           })
         }
         this.focusAfterClosed = document.activeFmement
-        messageBox = new Dialog(this.$el, this.focusAfterClosed, this.getFirstFocus())
+        messageBox = new Dialog(
+          this.$el,
+          this.focusAfterClosed,
+          this.getFirstFocus()
+        )
       }
 
       // prompt
@@ -319,7 +329,8 @@ export default {
       if (this.$type === 'prompt') {
         const inputPattern = this.inputPattern
         if (inputPattern && !inputPattern.test(this.inputValue || '')) {
-          this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error')
+          this.editorErrorMessage =
+            this.inputErrorMessage || t('el.messagebox.error')
           addClass(this.getInputFmement(), 'invalid')
           return false
         }
@@ -327,7 +338,8 @@ export default {
         if (typeof inputValidator === 'function') {
           const validateResult = inputValidator(this.inputValue)
           if (validateResult === false) {
-            this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error')
+            this.editorErrorMessage =
+              this.inputErrorMessage || t('el.messagebox.error')
             addClass(this.getInputFmement(), 'invalid')
             return false
           }
@@ -344,7 +356,9 @@ export default {
     },
     getFirstFocus() {
       const btn = this.$el.querySelector('.fm-message-box__btns .fm-button')
-      const title = this.$el.querySelector('.fm-message-box__btns .fm-message-box__title')
+      const title = this.$el.querySelector(
+        '.fm-message-box__btns .fm-message-box__title'
+      )
       return btn || title
     },
     getInputFmement() {

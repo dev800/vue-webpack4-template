@@ -19,6 +19,7 @@ module.exports = {
       '~': ROOT_PATH,
       '@': utils.resolve('src'),
       'static': utils.resolve('static'),
+      'node_modules': utils.resolve('node_modules'),
     }
   },
 
@@ -79,13 +80,13 @@ module.exports = {
   },
 
   plugins: [
-    new ManifestPlugin(),
     // https://github.com/jantimon/html-webpack-plugin/tree/master/examples
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/demo/index.html',
       inject: true
     }),
+    new ManifestPlugin(),
     new VueLoaderPlugin(),
     new CopyWebpackPlugin([{
       from: utils.resolve('static'),

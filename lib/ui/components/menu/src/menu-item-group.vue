@@ -26,7 +26,8 @@ export default {
   inject: ['rootMenu'],
   props: {
     title: {
-      type: String
+      type: String,
+      default: null
     }
   },
   data() {

@@ -42,7 +42,10 @@ export default {
       type: Number,
       default: 300
     },
-    popperClass: String,
+    popperClass: {
+      type: String,
+      default: null
+    },
     disabled: Boolean,
     popperAppendToBody: {
       type: Boolean,

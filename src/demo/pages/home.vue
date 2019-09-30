@@ -1,23 +1,22 @@
 <template>
-  <div class="x-ui-home">
+  <div class="x-page-home">
     <div>
-      <FmButton
+      <fm-button
         size="small"
         type="danger"
         @click="onShowMessage"
       >
         UI测试
-      </FmButton>
-      <FmButton
+      </fm-button>
+      <fm-button
         size="small"
         type="danger"
       >
         UI测试
-      </FmButton>
-      <FmButton type="primary">
+      </fm-button>
+      <fm-button type="primary">
         UI大测试
-      </FmButton>
-      <Icon type="ios-landline" />
+      </fm-button>
       <input
         type="button"
         value="progress start"
@@ -29,19 +28,24 @@
         @click="onStopProgress"
       >
     </div>
-    <img src="~/static/img/logo.png">
+    <img
+      src="~/static/img/logo.png"
+      class="animated bounceIn infinite"
+    >
   </div>
 </template>
 
 <script>
 import NProgress from 'nprogress'
-import Icon from '~/lib/ui/components/icon'
 import FmButton from '~/lib/ui/components/button'
 
 export default {
   components: {
-    Icon: Icon,
-    FmButton: FmButton
+    'fm-button': FmButton
+  },
+  data() {
+    return {
+    }
   },
   mounted() {
     console.log('mounted...')
@@ -49,7 +53,7 @@ export default {
   },
   methods: {
     onShowMessage(e) {
-      this.$message({ message: '你好测试一下错误消息啦啦', type: 'warning', duration: 200000000 })
+      this.$message({ message: '你好测试一下错误消息啦啦', type: 'warning', duration: 1500 })
     },
     onStartProgress(e) {
       console.log('onStartProgress', e)

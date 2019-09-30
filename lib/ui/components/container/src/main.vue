@@ -14,7 +14,10 @@ export default {
   componentName: 'FmContainer',
 
   props: {
-    direction: String
+    direction: {
+      type: String,
+      default: null
+    }
   },
 
   computed: {
