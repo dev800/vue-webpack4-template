@@ -43,23 +43,23 @@ export default {
   components: {
     'fm-button': FmButton
   },
-  data() {
+  data () {
     return {
     }
   },
-  mounted() {
+  mounted () {
     console.log('mounted...')
     // NProgress.configure({ showSpinner: false })
   },
   methods: {
-    onShowMessage(e) {
+    onShowMessage (e) {
       this.$message({ message: '你好测试一下错误消息啦啦', type: 'warning', duration: 1500 })
     },
-    onStartProgress(e) {
+    onStartProgress (e) {
       console.log('onStartProgress', e)
       NProgress.start()
     },
-    onStopProgress(e) {
+    onStopProgress (e) {
       console.log('onStopProgress', e)
       NProgress.done()
       NProgress.remove()

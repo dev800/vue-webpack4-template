@@ -176,7 +176,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       selectableRange: [],
       currentScrollbar: null
@@ -184,22 +184,22 @@ export default {
   },
 
   computed: {
-    hours() {
+    hours () {
       return this.date.getHours()
     },
-    minutes() {
+    minutes () {
       return this.date.getMinutes()
     },
-    seconds() {
+    seconds () {
       return this.date.getSeconds()
     },
-    hoursList() {
+    hoursList () {
       return getRangeHours(this.selectableRange)
     },
-    minutesList() {
+    minutesList () {
       return getRangeMinutes(this.selectableRange, this.hours)
     },
-    arrowHourList() {
+    arrowHourList () {
       const hours = this.hours
       return [
         hours > 0 ? hours - 1 : undefined,
@@ -207,7 +207,7 @@ export default {
         hours < 23 ? hours + 1 : undefined
       ]
     },
-    arrowMinuteList() {
+    arrowMinuteList () {
       const minutes = this.minutes
       return [
         minutes > 0 ? minutes - 1 : undefined,
@@ -215,7 +215,7 @@ export default {
         minutes < 59 ? minutes + 1 : undefined
       ]
     },
-    arrowSecondList() {
+    arrowSecondList () {
       const seconds = this.seconds
       return [
         seconds > 0 ? seconds - 1 : undefined,
@@ -225,22 +225,22 @@ export default {
     }
   },
 
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
       !this.arrowControl && this.bindScrollEvent()
     })
   },
 
   methods: {
-    increase() {
+    increase () {
       this.scrollDown(1)
     },
 
-    decrease() {
+    decrease () {
       this.scrollDown(-1)
     },
 
-    modifyDateField(type, value) {
+    modifyDateField (type, value) {
       switch (type) {
         case 'hours': this.$emit('change', modifyTime(this.date, value, this.minutes, this.seconds)); break
         case 'minutes': this.$emit('change', modifyTime(this.date, this.hours, value, this.seconds)); break
@@ -248,7 +248,7 @@ export default {
       }
     },
 
-    handleClick(type, { value, disabled }) {
+    handleClick (type, { value, disabled }) {
       if (!disabled) {
         this.modifyDateField(type, value)
         this.emitSelectRange(type)
@@ -256,7 +256,7 @@ export default {
       }
     },
 
-    emitSelectRange(type) {
+    emitSelectRange (type) {
       if (type === 'hours') {
         this.$emit('select-range', 0, 2)
       } else if (type === 'minutes') {
@@ -267,7 +267,7 @@ export default {
       this.currentScrollbar = type
     },
 
-    bindScrollEvent() {
+    bindScrollEvent () {
       const bindFuntion = (type) => {
         this.$refs[type].wrap.onscroll = (e) => {
           // TODO: scroll is emitted when set scrollTop programatically
@@ -280,7 +280,7 @@ export default {
       bindFuntion('seconds')
     },
 
-    handleScroll(type) {
+    handleScroll (type) {
       const value = Math.min(Math.round((this.$refs[type].wrap.scrollTop - (this.scrollBarHeight(type) * 0.5 - 10) / this.typeItemHeight(type) + 3) / this.typeItemHeight(type)), (type === 'hours' ? 23 : 59))
       this.modifyDateField(type, value)
     },
@@ -288,17 +288,17 @@ export default {
     // NOTE: used by datetime / date-range panel
     //       renamed from adjustScrollTop
     //       should try to refactory it
-    adjustSpinners() {
+    adjustSpinners () {
       this.adjustSpinner('hours', this.hours)
       this.adjustSpinner('minutes', this.minutes)
       this.adjustSpinner('seconds', this.seconds)
     },
 
-    adjustCurrentSpinner(type) {
+    adjustCurrentSpinner (type) {
       this.adjustSpinner(type, this[type])
     },
 
-    adjustSpinner(type, value) {
+    adjustSpinner (type, value) {
       if (this.arrowControl) return
       const el = this.$refs[type].wrap
       if (el) {
@@ -306,7 +306,7 @@ export default {
       }
     },
 
-    scrollDown(step) {
+    scrollDown (step) {
       if (!this.currentScrollbar) {
         this.emitSelectRange('hours')
       }
@@ -335,7 +335,7 @@ export default {
       this.adjustSpinner(label, now)
       this.$nextTick(() => this.emitSelectRange(this.currentScrollbar))
     },
-    amPm(hour) {
+    amPm (hour) {
       const shouldShowAmPm = this.amPmMode.toLowerCase() === 'a'
       if (!shouldShowAmPm) return ''
       const isCapital = this.amPmMode === 'A'
@@ -343,10 +343,10 @@ export default {
       if (isCapital) content = content.toUpperCase()
       return content
     },
-    typeItemHeight(type) {
+    typeItemHeight (type) {
       return this.$refs[type].$el.querySelector('li').offsetHeight
     },
-    scrollBarHeight(type) {
+    scrollBarHeight (type) {
       return this.$refs[type].$el.offsetHeight
     }
   }

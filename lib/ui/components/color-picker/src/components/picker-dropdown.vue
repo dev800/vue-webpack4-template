@@ -92,21 +92,21 @@ export default {
     predefine: Array
   },
 
-  data() {
+  data () {
     return {
       customInput: ''
     }
   },
 
   computed: {
-    currentColor() {
+    currentColor () {
       const parent = this.$parent
       return !parent.value && !parent.showPanelColor ? '' : parent.color.value
     }
   },
 
   watch: {
-    showPopper(val) {
+    showPopper (val) {
       if (val === true) {
         this.$nextTick(() => {
           const { sl, hue, alpha } = this.$refs
@@ -119,23 +119,23 @@ export default {
 
     currentColor: {
       immediate: true,
-      handler(val) {
+      handler (val) {
         this.customInput = val
       }
     }
   },
 
-  mounted() {
+  mounted () {
     this.$parent.popperFmm = this.popperFmm = this.$el
     this.referenceFmm = this.$parent.$el
   },
 
   methods: {
-    confirmValue() {
+    confirmValue () {
       this.$emit('pick')
     },
 
-    handleConfirm() {
+    handleConfirm () {
       this.color.fromString(this.customInput)
     }
   }

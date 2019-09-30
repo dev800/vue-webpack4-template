@@ -17,9 +17,9 @@ export default {
 
   componentName: 'FmForm',
 
-  provide() {
+  provide () {
     return {
-      elForm: this
+      fmForm: this
     }
   },
 
@@ -50,21 +50,21 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
       fields: [],
       potentialLabelWidthArr: [] // use this array to calculate auto width
     }
   },
   computed: {
-    autoLabelWidth() {
+    autoLabelWidth () {
       if (!this.potentialLabelWidthArr.length) return 0
       const max = Math.max(...this.potentialLabelWidthArr)
       return max ? `${max}px` : ''
     }
   },
   watch: {
-    rules() {
+    rules () {
       // remove then add event listeners on form-item after form rules change
       this.fields.forEach(field => {
         field.removeValidateEvents()
@@ -72,11 +72,11 @@ export default {
       })
 
       if (this.validateOnRuleChange) {
-        this.validate(() => {})
+        this.validate(() => { })
       }
     }
   },
-  created() {
+  created () {
     this.$on('el.form.addField', (field) => {
       if (field) {
         this.fields.push(field)
@@ -90,7 +90,7 @@ export default {
     })
   },
   methods: {
-    resetFields() {
+    resetFields () {
       if (!this.model) {
         console.warn('[Fmement Warn][Form]model is required for resetFields to work.')
         return
@@ -99,7 +99,7 @@ export default {
         field.resetField()
       })
     },
-    clearValidate(props = []) {
+    clearValidate (props = []) {
       const fields = props.length
         ? (typeof props === 'string'
           ? this.fields.filter(field => props === field.prop)
@@ -109,7 +109,7 @@ export default {
         field.clearValidate()
       })
     },
-    validate(callback) {
+    validate (callback) {
       if (!this.model) {
         console.warn('[Fmement Warn][Form]model is required for validate to work!')
         return
@@ -119,7 +119,7 @@ export default {
       // if no callback, return promise
       if (typeof callback !== 'function' && window.Promise) {
         promise = new window.Promise((resolve, reject) => {
-          callback = function(valid) {
+          callback = function (valid) {
             valid ? resolve(valid) : reject(valid)
           }
         })
@@ -148,7 +148,7 @@ export default {
         return promise
       }
     },
-    validateField(props, cb) {
+    validateField (props, cb) {
       props = [].concat(props)
       const fields = this.fields.filter(field => props.indexOf(field.prop) !== -1)
       if (!fields.length) {
@@ -160,7 +160,7 @@ export default {
         field.validate('', cb)
       })
     },
-    getLabelWidthIndex(width) {
+    getLabelWidthIndex (width) {
       const index = this.potentialLabelWidthArr.indexOf(width)
       // it's impossible
       if (index === -1) {
@@ -168,7 +168,7 @@ export default {
       }
       return index
     },
-    registerLabelWidth(val, oldVal) {
+    registerLabelWidth (val, oldVal) {
       if (val && oldVal) {
         const index = this.getLabelWidthIndex(oldVal)
         this.potentialLabelWidthArr.splice(index, 1, val)
@@ -176,7 +176,7 @@ export default {
         this.potentialLabelWidthArr.push(val)
       }
     },
-    deregisterLabelWidth(val) {
+    deregisterLabelWidth (val) {
       const index = this.getLabelWidthIndex(val)
       this.potentialLabelWidthArr.splice(index, 1)
     }

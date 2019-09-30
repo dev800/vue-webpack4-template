@@ -37,7 +37,7 @@ export default {
   props: {
     options: {
       type: Object,
-      default() {
+      default () {
         return {
           gpuAcceleration: false
         }
@@ -49,20 +49,20 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       parent: this.$parent,
       dropdownWidth: ''
     }
   },
 
-  updated() {
+  updated () {
     this.$nextTick(_ => {
       this.popperJS && this.updatePopper()
     })
   },
 
-  mounted() {
+  mounted () {
     this.$parent.popperFmm = this.popperFmm = this.$el
     this.referenceFmm = this.$parent.$refs.input.$refs.input
     this.referenceList = this.$el.querySelector('.fm-autocomplete-suggestion__list')
@@ -70,7 +70,7 @@ export default {
     this.referenceList.setAttribute('id', this.id)
   },
 
-  created() {
+  created () {
     this.$on('visible', (val, inputWidth) => {
       this.dropdownWidth = inputWidth + 'px'
       this.showPopper = val
@@ -78,7 +78,7 @@ export default {
   },
 
   methods: {
-    select(item) {
+    select (item) {
       this.dispatch('FmAutocomplete', 'item-click', item)
     }
   }

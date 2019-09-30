@@ -47,7 +47,7 @@ import Locale from '../../../js/mixins/locale'
 import { arrayFindIndex, arrayFind, coerceTruthyValueToArray } from '../../../js/utils/util'
 
 const WEEKS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
-const getDateTimestamp = function(time) {
+const getDateTimestamp = function (time) {
   if (typeof time === 'number' || typeof time === 'string') {
     return _clearTime(new Date(time)).getTime()
   } else if (time instanceof Date) {
@@ -60,7 +60,7 @@ const getDateTimestamp = function(time) {
 // remove the first element that satisfies `pred` from arr
 // return a new array if modification occurs
 // return the original array otherwise
-const removeFromArray = function(arr, pred) {
+const removeFromArray = function (arr, pred) {
   const idx = typeof pred === 'function' ? arrayFindIndex(arr, pred) : arr.indexOf(pred)
   return idx >= 0 ? [...arr.slice(0, idx), ...arr.slice(idx + 1)] : arr
 }
@@ -78,7 +78,7 @@ export default {
     value: {},
 
     defaultValue: {
-      validator(val) {
+      validator (val) {
         // either: null, valid Date object, Array of valid Date objects
         return val === null || isDate(val) || (Array.isArray(val) && val.every(isDate))
       }
@@ -104,7 +104,7 @@ export default {
     maxDate: {},
 
     rangeState: {
-      default() {
+      default () {
         return {
           endDate: null,
           selecting: false
@@ -113,7 +113,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       tableRows: [[], [], [], [], [], []],
       lastRow: null,
@@ -122,30 +122,30 @@ export default {
   },
 
   computed: {
-    offsetDay() {
+    offsetDay () {
       const week = this.firstDayOfWeek
       // 周日为界限，左右偏移的天数，3217654 例如周一就是 -1，目的是调整前两行日期的位置
       return week > 3 ? 7 - week : -week
     },
 
-    WEEKS() {
+    WEEKS () {
       const week = this.firstDayOfWeek
       return WEEKS.concat(WEEKS).slice(week, week + 7)
     },
 
-    year() {
+    year () {
       return this.date.getFullYear()
     },
 
-    month() {
+    month () {
       return this.date.getMonth()
     },
 
-    startDate() {
+    startDate () {
       return getStartDateOfMonth(this.year, this.month)
     },
 
-    rows() {
+    rows () {
       // TODO: refactory rows / getCellClasses
       const date = new Date(this.year, this.month, 1)
       let day = getFirstDayOfMonth(date) // day of first day
@@ -234,17 +234,17 @@ export default {
   },
 
   watch: {
-    'rangeState.endDate'(newVal) {
+    'rangeState.endDate' (newVal) {
       this.markRange(this.minDate, newVal)
     },
 
-    minDate(newVal, oldVal) {
+    minDate (newVal, oldVal) {
       if (getDateTimestamp(newVal) !== getDateTimestamp(oldVal)) {
         this.markRange(this.minDate, this.maxDate)
       }
     },
 
-    maxDate(newVal, oldVal) {
+    maxDate (newVal, oldVal) {
       if (getDateTimestamp(newVal) !== getDateTimestamp(oldVal)) {
         this.markRange(this.minDate, this.maxDate)
       }
@@ -252,14 +252,14 @@ export default {
   },
 
   methods: {
-    cellMatchesDate(cell, date) {
+    cellMatchesDate (cell, date) {
       const value = new Date(date)
       return this.year === value.getFullYear() &&
-          this.month === value.getMonth() &&
-          Number(cell.text) === value.getDate()
+        this.month === value.getMonth() &&
+        Number(cell.text) === value.getDate()
     },
 
-    getCellClasses(cell) {
+    getCellClasses (cell) {
       const selectionMode = this.selectionMode
       const defaultValue = this.defaultValue ? Array.isArray(this.defaultValue) ? this.defaultValue : [this.defaultValue] : []
 
@@ -308,12 +308,12 @@ export default {
       return classes.join(' ')
     },
 
-    getDateOfCell(row, column) {
+    getDateOfCell (row, column) {
       const offsetFromStart = row * 7 + (column - (this.showWeekNumber ? 1 : 0)) - this.offsetDay
       return nextDate(this.startDate, offsetFromStart)
     },
 
-    isWeekActive(cell) {
+    isWeekActive (cell) {
       if (this.selectionMode !== 'week') return false
       const newDate = new Date(this.year, this.month, 1)
       const year = newDate.getFullYear()
@@ -339,7 +339,7 @@ export default {
       return false
     },
 
-    markRange(minDate, maxDate) {
+    markRange (minDate, maxDate) {
       minDate = getDateTimestamp(minDate)
       maxDate = getDateTimestamp(maxDate) || minDate;
       [minDate, maxDate] = [Math.min(minDate, maxDate), Math.max(minDate, maxDate)]
@@ -362,7 +362,7 @@ export default {
       }
     },
 
-    handleMouseMove(event) {
+    handleMouseMove (event) {
       if (!this.rangeState.selecting) return
 
       let target = event.target
@@ -396,7 +396,7 @@ export default {
       }
     },
 
-    handleClick(event) {
+    handleClick (event) {
       let target = event.target
       if (target.tagName === 'SPAN') {
         target = target.parentNode.parentNode

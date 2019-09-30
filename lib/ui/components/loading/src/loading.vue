@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       text: null,
       spinner: null,
@@ -52,10 +52,10 @@ export default {
   },
 
   methods: {
-    handleAfterLeave() {
+    handleAfterLeave () {
       this.$emit('after-leave')
     },
-    setText(text) {
+    setText (text) {
       this.text = text
     }
   }

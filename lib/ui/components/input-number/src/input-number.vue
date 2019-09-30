@@ -57,10 +57,10 @@ export default {
   name: 'FmInputNumber',
   mixins: [Focus('input')],
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     },
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
@@ -103,25 +103,25 @@ export default {
     placeholder: String,
     precision: {
       type: Number,
-      validator(val) {
+      validator (val) {
         return val >= 0 && val === parseInt(val, 10)
       }
     }
   },
-  data() {
+  data () {
     return {
       currentValue: 0,
       userInput: null
     }
   },
   computed: {
-    minDisabled() {
+    minDisabled () {
       return this._decrease(this.value, this.step) < this.min
     },
-    maxDisabled() {
+    maxDisabled () {
       return this._increase(this.value, this.step) > this.max
     },
-    numPrecision() {
+    numPrecision () {
       const { value, step, getPrecision, precision } = this
       const stepPrecision = getPrecision(step)
       if (precision !== undefined) {
@@ -133,19 +133,19 @@ export default {
         return Math.max(getPrecision(value), stepPrecision)
       }
     },
-    controlsAtRight() {
+    controlsAtRight () {
       return this.controls && this.controlsPosition === 'right'
     },
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize
+    _fmFormItemSize () {
+      return (this.fmFormItem || {}).fmFormItemSize
     },
-    inputNumberSize() {
-      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size
+    inputNumberSize () {
+      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
     },
-    inputNumberDisabled() {
-      return this.disabled || (this.elForm || {}).disabled
+    inputNumberDisabled () {
+      return this.disabled || (this.fmForm || {}).disabled
     },
-    displayValue() {
+    displayValue () {
       if (this.userInput !== null) {
         return this.userInput
       }
@@ -170,7 +170,7 @@ export default {
   watch: {
     value: {
       immediate: true,
-      handler(value) {
+      handler (value) {
         let newVal = value === undefined ? value : Number(value)
         if (newVal !== undefined) {
           if (isNaN(newVal)) {
@@ -195,7 +195,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     const innerInput = this.$refs.input.$refs.input
     innerInput.setAttribute('role', 'spinbutton')
     innerInput.setAttribute('aria-valuemax', this.max)
@@ -203,17 +203,17 @@ export default {
     innerInput.setAttribute('aria-valuenow', this.currentValue)
     innerInput.setAttribute('aria-disabled', this.inputNumberDisabled)
   },
-  updated() {
+  updated () {
     if (!this.$refs || !this.$refs.input) return
     const innerInput = this.$refs.input.$refs.input
     innerInput.setAttribute('aria-valuenow', this.currentValue)
   },
   methods: {
-    toPrecision(num, precision) {
+    toPrecision (num, precision) {
       if (precision === undefined) precision = this.numPrecision
       return parseFloat(Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision))
     },
-    getPrecision(value) {
+    getPrecision (value) {
       if (value === undefined) return 0
       const valueString = value.toString()
       const dotPosition = valueString.indexOf('.')
@@ -223,39 +223,39 @@ export default {
       }
       return precision
     },
-    _increase(val, step) {
+    _increase (val, step) {
       if (typeof val !== 'number' && val !== undefined) return this.currentValue
 
       const precisionFactor = Math.pow(10, this.numPrecision)
       // Solve the accuracy problem of JS decimal calculation by converting the value to integer.
       return this.toPrecision((precisionFactor * val + precisionFactor * step) / precisionFactor)
     },
-    _decrease(val, step) {
+    _decrease (val, step) {
       if (typeof val !== 'number' && val !== undefined) return this.currentValue
 
       const precisionFactor = Math.pow(10, this.numPrecision)
 
       return this.toPrecision((precisionFactor * val - precisionFactor * step) / precisionFactor)
     },
-    increase() {
+    increase () {
       if (this.inputNumberDisabled || this.maxDisabled) return
       const value = this.value || 0
       const newVal = this._increase(value, this.step)
       this.setCurrentValue(newVal)
     },
-    decrease() {
+    decrease () {
       if (this.inputNumberDisabled || this.minDisabled) return
       const value = this.value || 0
       const newVal = this._decrease(value, this.step)
       this.setCurrentValue(newVal)
     },
-    handleBlur(event) {
+    handleBlur (event) {
       this.$emit('blur', event)
     },
-    handleFocus(event) {
+    handleFocus (event) {
       this.$emit('focus', event)
     },
-    setCurrentValue(newVal) {
+    setCurrentValue (newVal) {
       const oldVal = this.currentValue
       if (typeof newVal === 'number' && this.precision !== undefined) {
         newVal = this.toPrecision(newVal, this.precision)
@@ -268,17 +268,17 @@ export default {
       this.$emit('change', newVal, oldVal)
       this.currentValue = newVal
     },
-    handleInput(value) {
+    handleInput (value) {
       this.userInput = value
     },
-    handleInputChange(value) {
+    handleInputChange (value) {
       const newVal = value === '' ? undefined : Number(value)
       if (!isNaN(newVal) || value === '') {
         this.setCurrentValue(newVal)
       }
       this.userInput = null
     },
-    select() {
+    select () {
       this.$refs.input.select()
     }
   }

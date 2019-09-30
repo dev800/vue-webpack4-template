@@ -93,7 +93,7 @@ export default {
   mixins: [Emitter],
 
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     }
   },
@@ -162,7 +162,7 @@ export default {
     marks: Object
   },
 
-  data() {
+  data () {
     return {
       firstValue: null,
       secondValue: null,
@@ -173,7 +173,7 @@ export default {
   },
 
   computed: {
-    stops() {
+    stops () {
       if (!this.showStops || this.min > this.max) return []
       if (this.step === 0) {
         process.env.NODE_ENV !== 'production' &&
@@ -189,14 +189,14 @@ export default {
       if (this.range) {
         return result.filter(step => {
           return step < 100 * (this.minValue - this.min) / (this.max - this.min) ||
-              step > 100 * (this.maxValue - this.min) / (this.max - this.min)
+            step > 100 * (this.maxValue - this.min) / (this.max - this.min)
         })
       } else {
         return result.filter(step => step > 100 * (this.firstValue - this.min) / (this.max - this.min))
       }
     },
 
-    markList() {
+    markList () {
       if (!this.marks) {
         return []
       }
@@ -212,27 +212,27 @@ export default {
         }))
     },
 
-    minValue() {
+    minValue () {
       return Math.min(this.firstValue, this.secondValue)
     },
 
-    maxValue() {
+    maxValue () {
       return Math.max(this.firstValue, this.secondValue)
     },
 
-    barSize() {
+    barSize () {
       return this.range
         ? `${100 * (this.maxValue - this.minValue) / (this.max - this.min)}%`
         : `${100 * (this.firstValue - this.min) / (this.max - this.min)}%`
     },
 
-    barStart() {
+    barStart () {
       return this.range
         ? `${100 * (this.minValue - this.min) / (this.max - this.min)}%`
         : '0%'
     },
 
-    precision() {
+    precision () {
       const precisions = [this.min, this.max, this.step].map(item => {
         const decimal = ('' + item).split('.')[1]
         return decimal ? decimal.length : 0
@@ -240,11 +240,11 @@ export default {
       return Math.max.apply(null, precisions)
     },
 
-    runwayStyle() {
+    runwayStyle () {
       return this.vertical ? { height: this.height } : {}
     },
 
-    barStyle() {
+    barStyle () {
       return this.vertical
         ? {
           height: this.barSize,
@@ -255,29 +255,29 @@ export default {
         }
     },
 
-    sliderDisabled() {
-      return this.disabled || (this.elForm || {}).disabled
+    sliderDisabled () {
+      return this.disabled || (this.fmForm || {}).disabled
     }
   },
 
   watch: {
-    value(val, oldVal) {
+    value (val, oldVal) {
       if (this.dragging ||
-          Array.isArray(val) &&
-          Array.isArray(oldVal) &&
-          val.every((item, index) => item === oldVal[index])) {
+        (Array.isArray(val) &&
+        Array.isArray(oldVal) &&
+        val.every((item, index) => item === oldVal[index])) {
         return
       }
       this.setValues()
     },
 
-    dragging(val) {
+    dragging (val) {
       if (!val) {
         this.setValues()
       }
     },
 
-    firstValue(val) {
+    firstValue (val) {
       if (this.range) {
         this.$emit('input', [this.minValue, this.maxValue])
       } else {
@@ -285,22 +285,22 @@ export default {
       }
     },
 
-    secondValue() {
+    secondValue () {
       if (this.range) {
         this.$emit('input', [this.minValue, this.maxValue])
       }
     },
 
-    min() {
+    min () {
       this.setValues()
     },
 
-    max() {
+    max () {
       this.setValues()
     }
   },
 
-  mounted() {
+  mounted () {
     let valuetext
     if (this.range) {
       if (Array.isArray(this.value)) {
@@ -330,12 +330,12 @@ export default {
     window.addEventListener('resize', this.resetSize)
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     window.removeEventListener('resize', this.resetSize)
   },
 
   methods: {
-    valueChanged() {
+    valueChanged () {
       if (this.range) {
         return ![this.minValue, this.maxValue]
           .every((item, index) => item === this.oldValue[index])
@@ -343,7 +343,7 @@ export default {
         return this.value !== this.oldValue
       }
     },
-    setValues() {
+    setValues () {
       if (this.min > this.max) {
         console.error('[Fmement Error][Slider]min should not be greater than max.')
         return
@@ -381,7 +381,7 @@ export default {
       }
     },
 
-    setPosition(percent) {
+    setPosition (percent) {
       const targetValue = this.min + percent * (this.max - this.min) / 100
       if (!this.range) {
         this.$refs.button1.setPosition(percent)
@@ -396,7 +396,7 @@ export default {
       this.$refs[button].setPosition(percent)
     },
 
-    onSliderClick(event) {
+    onSliderClick (event) {
       if (this.sliderDisabled || this.dragging) return
       this.resetSize()
       if (this.vertical) {
@@ -409,19 +409,19 @@ export default {
       this.emitChange()
     },
 
-    resetSize() {
+    resetSize () {
       if (this.$refs.slider) {
         this.sliderSize = this.$refs.slider[`client${this.vertical ? 'Height' : 'Width'}`]
       }
     },
 
-    emitChange() {
+    emitChange () {
       this.$nextTick(() => {
         this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value)
       })
     },
 
-    getStopStyle(position) {
+    getStopStyle (position) {
       return this.vertical ? { bottom: position + '%' } : { left: position + '%' }
     }
   }

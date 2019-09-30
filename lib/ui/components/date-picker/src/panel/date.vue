@@ -208,7 +208,7 @@ export default {
   },
   mixins: [Locale],
 
-  data() {
+  data () {
     return {
       popperClass: '',
       date: new Date(),
@@ -234,27 +234,27 @@ export default {
   },
 
   computed: {
-    year() {
+    year () {
       return this.date.getFullYear()
     },
 
-    month() {
+    month () {
       return this.date.getMonth()
     },
 
-    week() {
+    week () {
       return getWeekNumber(this.date)
     },
 
-    monthDate() {
+    monthDate () {
       return this.date.getDate()
     },
 
-    footerVisible() {
+    footerVisible () {
       return this.showTime || this.selectionMode === 'dates'
     },
 
-    visibleTime() {
+    visibleTime () {
       if (this.userInputTime !== null) {
         return this.userInputTime
       } else {
@@ -262,7 +262,7 @@ export default {
       }
     },
 
-    visibleDate() {
+    visibleDate () {
       if (this.userInputDate !== null) {
         return this.userInputDate
       } else {
@@ -270,7 +270,7 @@ export default {
       }
     },
 
-    yearLabel() {
+    yearLabel () {
       const yearTranslation = this.t('el.datepicker.year')
       if (this.currentView === 'year') {
         const startYear = Math.floor(this.year / 10) * 10
@@ -282,7 +282,7 @@ export default {
       return this.year + ' ' + yearTranslation
     },
 
-    timeFormat() {
+    timeFormat () {
       if (this.format) {
         return extractTimeFormat(this.format)
       } else {
@@ -290,7 +290,7 @@ export default {
       }
     },
 
-    dateFormat() {
+    dateFormat () {
       if (this.format) {
         return extractDateFormat(this.format)
       } else {
@@ -300,7 +300,7 @@ export default {
   },
 
   watch: {
-    showTime(val) {
+    showTime (val) {
       /* istanbul ignore if */
       if (!val) return
       this.$nextTick(_ => {
@@ -311,7 +311,7 @@ export default {
       })
     },
 
-    value(val) {
+    value (val) {
       if (this.selectionMode === 'dates' && this.value) return
       if (isDate(val)) {
         this.date = new Date(val)
@@ -320,17 +320,17 @@ export default {
       }
     },
 
-    defaultValue(val) {
+    defaultValue (val) {
       if (!isDate(this.value)) {
         this.date = val ? new Date(val) : new Date()
       }
     },
 
-    timePickerVisible(val) {
+    timePickerVisible (val) {
       if (val) this.$nextTick(() => this.$refs.timepicker.adjustSpinners())
     },
 
-    selectionMode(newVal) {
+    selectionMode (newVal) {
       if (newVal === 'month') {
         /* istanbul ignore next */
         if (this.currentView !== 'year' || this.currentView !== 'month') {
@@ -343,7 +343,7 @@ export default {
   },
 
   methods: {
-    proxyTimePickerDataProperties() {
+    proxyTimePickerDataProperties () {
       const format = timeFormat => { this.$refs.timepicker.format = timeFormat }
       const value = value => { this.$refs.timepicker.value = value }
       const date = date => { this.$refs.timepicker.date = date }
@@ -359,12 +359,12 @@ export default {
       selectableRange(this.selectableRange)
     },
 
-    handleClear() {
+    handleClear () {
       this.date = this.getDefaultValue()
       this.$emit('pick', null)
     },
 
-    emit(value, ...args) {
+    emit (value, ...args) {
       if (!value) {
         this.$emit('pick', value, ...args)
       } else if (Array.isArray(value)) {
@@ -381,11 +381,11 @@ export default {
     //   this.date = new Date(this.date);
     // },
 
-    showMonthPicker() {
+    showMonthPicker () {
       this.currentView = 'month'
     },
 
-    showYearPicker() {
+    showYearPicker () {
       this.currentView = 'year'
     },
 
@@ -398,15 +398,15 @@ export default {
     //   }
     // },
 
-    prevMonth() {
+    prevMonth () {
       this.date = prevMonth(this.date)
     },
 
-    nextMonth() {
+    nextMonth () {
       this.date = nextMonth(this.date)
     },
 
-    prevYear() {
+    prevYear () {
       if (this.currentView === 'year') {
         this.date = prevYear(this.date, 10)
       } else {
@@ -414,7 +414,7 @@ export default {
       }
     },
 
-    nextYear() {
+    nextYear () {
       if (this.currentView === 'year') {
         this.date = nextYear(this.date, 10)
       } else {
@@ -422,13 +422,13 @@ export default {
       }
     },
 
-    handleShortcutClick(shortcut) {
+    handleShortcutClick (shortcut) {
       if (shortcut.onClick) {
         shortcut.onClick(this)
       }
     },
 
-    handleTimePick(value, visible, first) {
+    handleTimePick (value, visible, first) {
       if (isDate(value)) {
         const newDate = this.value
           ? modifyTime(this.value, value.getHours(), value.getMinutes(), value.getSeconds())
@@ -443,11 +443,11 @@ export default {
       }
     },
 
-    handleTimePickClose() {
+    handleTimePickClose () {
       this.timePickerVisible = false
     },
 
-    handleMonthPick(month) {
+    handleMonthPick (month) {
       if (this.selectionMode === 'month') {
         this.date = modifyDate(this.date, this.year, month, 1)
         this.emit(this.date)
@@ -459,12 +459,12 @@ export default {
       }
     },
 
-    handleDatePick(value) {
+    handleDatePick (value) {
       if (this.selectionMode === 'day') {
         let newDate = this.value
           ? modifyDate(this.value, value.getFullYear(), value.getMonth(), value.getDate())
           : modifyWithTimeString(value, this.defaultTime)
-          // change default time while out of selectableRange
+        // change default time while out of selectableRange
         if (!this.checkDateWithinRange(newDate)) {
           newDate = modifyDate(this.selectableRange[0][0], value.getFullYear(), value.getMonth(), value.getDate())
         }
@@ -477,7 +477,7 @@ export default {
       }
     },
 
-    handleYearPick(year) {
+    handleYearPick (year) {
       if (this.selectionMode === 'year') {
         this.date = modifyDate(this.date, year, 0, 1)
         this.emit(this.date)
@@ -489,7 +489,7 @@ export default {
       }
     },
 
-    changeToNow() {
+    changeToNow () {
       // NOTE: not a permanent solution
       //       consider disable "now" button in the future
       if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(new Date())) {
@@ -498,7 +498,7 @@ export default {
       }
     },
 
-    confirm() {
+    confirm () {
       if (this.selectionMode === 'dates') {
         this.emit(this.value)
       } else {
@@ -512,7 +512,7 @@ export default {
       }
     },
 
-    resetView() {
+    resetView () {
       if (this.selectionMode === 'month') {
         this.currentView = 'month'
       } else if (this.selectionMode === 'year') {
@@ -522,16 +522,16 @@ export default {
       }
     },
 
-    handleEnter() {
+    handleEnter () {
       document.body.addEventListener('keydown', this.handleKeydown)
     },
 
-    handleLeave() {
+    handleLeave () {
       this.$emit('dodestroy')
       document.body.removeEventListener('keydown', this.handleKeydown)
     },
 
-    handleKeydown(event) {
+    handleKeydown (event) {
       const keyCode = event.keyCode
       const list = [38, 40, 37, 39]
       if (this.visible && !this.timePickerVisible) {
@@ -546,7 +546,7 @@ export default {
       }
     },
 
-    handleKeyControl(keyCode) {
+    handleKeyControl (keyCode) {
       const mapping = {
         year: {
           38: -4, 40: 4, 37: -1, 39: 1, offset: (date, step) => date.setFullYear(date.getFullYear() + step)
@@ -577,7 +577,7 @@ export default {
       }
     },
 
-    handleVisibleTimeChange(value) {
+    handleVisibleTimeChange (value) {
       const time = parseDate(value, this.timeFormat)
       if (time && this.checkDateWithinRange(time)) {
         this.date = modifyDate(time, this.year, this.month, this.monthDate)
@@ -588,7 +588,7 @@ export default {
       }
     },
 
-    handleVisibleDateChange(value) {
+    handleVisibleDateChange (value) {
       const date = parseDate(value, this.dateFormat)
       if (date) {
         if (typeof this.disabledDate === 'function' && this.disabledDate(date)) {
@@ -601,7 +601,7 @@ export default {
       }
     },
 
-    isValidValue(value) {
+    isValidValue (value) {
       return value && !isNaN(value) && (
         typeof this.disabledDate === 'function'
           ? !this.disabledDate(value)
@@ -609,13 +609,13 @@ export default {
       ) && this.checkDateWithinRange(value)
     },
 
-    getDefaultValue() {
+    getDefaultValue () {
       // if default-value is set, return it
       // otherwise, return now (the moment this method gets called)
       return this.defaultValue ? new Date(this.defaultValue) : new Date()
     },
 
-    checkDateWithinRange(date) {
+    checkDateWithinRange (date) {
       return this.selectableRange.length > 0
         ? timeWithinRange(date, this.selectableRange, this.format || 'HH:mm:ss')
         : true

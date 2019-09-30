@@ -23,7 +23,7 @@ export default {
   componentName: 'FmRadioGroup',
 
   inject: {
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
@@ -39,28 +39,28 @@ export default {
   },
 
   computed: {
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize
+    _fmFormItemSize () {
+      return (this.fmFormItem || {}).fmFormItemSize
     },
-    _elTag() {
+    _elTag () {
       return (this.$vnode.data || {}).tag || 'div'
     },
-    radioGroupSize() {
-      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size
+    radioGroupSize () {
+      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
     }
   },
   watch: {
-    value(value) {
+    value (value) {
       this.dispatch('FmFormItem', 'el.form.change', [this.value])
     }
   },
 
-  created() {
+  created () {
     this.$on('handleChange', value => {
       this.$emit('change', value)
     })
   },
-  mounted() {
+  mounted () {
     // 当radioGroup没有默认选项时，第一个可以选中Tab导航
     const radios = this.$el.querySelectorAll('[type=radio]')
     const firstLabel = this.$el.querySelectorAll('[role=radio]')[0]
@@ -69,7 +69,7 @@ export default {
     }
   },
   methods: {
-    handleKeydown(e) { // 左右上下按键 可以在radio组内切换不同选项
+    handleKeydown (e) { // 左右上下按键 可以在radio组内切换不同选项
       const target = e.target
       const className = target.nodeName === 'INPUT' ? '[type=radio]' : '[role=radio]'
       const radios = this.$el.querySelectorAll(className)

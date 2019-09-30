@@ -22,13 +22,13 @@ export default {
     }
   },
 
-  provide() {
+  provide () {
     return {
       elBreadcrumb: this
     }
   },
 
-  mounted() {
+  mounted () {
     const items = this.$el.querySelectorAll('.fm-breadcrumb__item')
     if (items.length) {
       items[items.length - 1].setAttribute('aria-current', 'page')

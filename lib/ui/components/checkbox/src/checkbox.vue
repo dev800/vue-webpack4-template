@@ -68,10 +68,10 @@ export default {
   mixins: [Emitter],
 
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     },
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
@@ -93,7 +93,7 @@ export default {
     size: String
   },
 
-  data() {
+  data () {
     return {
       selfModel: false,
       focus: false,
@@ -103,22 +103,22 @@ export default {
 
   computed: {
     model: {
-      get() {
+      get () {
         return this.isGroup
           ? this.store : this.value !== undefined
             ? this.value : this.selfModel
       },
 
-      set(val) {
+      set (val) {
         if (this.isGroup) {
           this.isLimitExceeded = false;
           (this._checkboxGroup.min !== undefined &&
-              val.length < this._checkboxGroup.min &&
-              (this.isLimitExceeded = true));
+            val.length < this._checkboxGroup.min &&
+            (this.isLimitExceeded = true));
 
           (this._checkboxGroup.max !== undefined &&
-              val.length > this._checkboxGroup.max &&
-              (this.isLimitExceeded = true))
+            val.length > this._checkboxGroup.max &&
+            (this.isLimitExceeded = true))
 
           this.isLimitExceeded === false &&
             this.dispatch('FmCheckboxGroup', 'input', [val])
@@ -129,7 +129,7 @@ export default {
       }
     },
 
-    isChecked() {
+    isChecked () {
       if ({}.toString.call(this.model) === '[object Boolean]') {
         return this.model
       } else if (Array.isArray(this.model)) {
@@ -139,7 +139,7 @@ export default {
       }
     },
 
-    isGroup() {
+    isGroup () {
       let parent = this.$parent
       while (parent) {
         if (parent.$options.componentName !== 'FmCheckboxGroup') {
@@ -152,30 +152,30 @@ export default {
       return false
     },
 
-    store() {
+    store () {
       return this._checkboxGroup ? this._checkboxGroup.value : this.value
     },
 
     /* used to make the isDisabled judgment under max/min props */
-    isLimitDisabled() {
+    isLimitDisabled () {
       const { max, min } = this._checkboxGroup
-      return !!(max || min) &&
-          (this.model.length >= max && !this.isChecked) ||
-          (this.model.length <= min && this.isChecked)
+      return (!!(max || min) &&
+        (this.model.length >= max && !this.isChecked)) ||
+        (this.model.length <= min && this.isChecked)
     },
 
-    isDisabled() {
+    isDisabled () {
       return this.isGroup
-        ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled || this.isLimitDisabled
-        : this.disabled || (this.elForm || {}).disabled
+        ? this._checkboxGroup.disabled || this.disabled || (this.fmForm || {}).disabled || this.isLimitDisabled
+        : this.disabled || (this.fmForm || {}).disabled
     },
 
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize
+    _fmFormItemSize () {
+      return (this.fmFormItem || {}).fmFormItemSize
     },
 
-    checkboxSize() {
-      const temCheckboxSize = this.size || this._elFormItemSize || (this.$ELEMENT || {}).size
+    checkboxSize () {
+      const temCheckboxSize = this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
       return this.isGroup
         ? this._checkboxGroup.checkboxGroupSize || temCheckboxSize
         : temCheckboxSize
@@ -183,32 +183,32 @@ export default {
   },
 
   watch: {
-    value(value) {
+    value (value) {
       this.dispatch('FmFormItem', 'el.form.change', value)
     }
   },
 
-  created() {
+  created () {
     this.checked && this.addToStore()
   },
-  mounted() { // 为indeterminate元素 添加aria-controls 属性
+  mounted () { // 为indeterminate元素 添加aria-controls 属性
     if (this.indeterminate) {
       this.$el.setAttribute('aria-controls', this.controls)
     }
   },
 
   methods: {
-    addToStore() {
+    addToStore () {
       if (
         Array.isArray(this.model) &&
-          this.model.indexOf(this.label) === -1
+        this.model.indexOf(this.label) === -1
       ) {
         this.model.push(this.label)
       } else {
         this.model = this.trueLabel || true
       }
     },
-    handleChange(ev) {
+    handleChange (ev) {
       if (this.isLimitExceeded) return
       let value
       if (ev.target.checked) {

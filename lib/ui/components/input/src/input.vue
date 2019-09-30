@@ -145,10 +145,10 @@ export default {
   inheritAttrs: false,
 
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     },
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
@@ -156,7 +156,7 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: function() {
+      default: function () {
         return null
       }
     },
@@ -220,7 +220,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       textareaCalcStyle: {},
       hovering: false,
@@ -231,37 +231,37 @@ export default {
   },
 
   computed: {
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize
+    _fmFormItemSize () {
+      return (this.fmFormItem || {}).fmFormItemSize
     },
-    validateState() {
-      return this.elFormItem ? this.elFormItem.validateState : ''
+    validateState () {
+      return this.fmFormItem ? this.fmFormItem.validateState : ''
     },
-    needStatusIcon() {
-      return this.elForm ? this.elForm.statusIcon : false
+    needStatusIcon () {
+      return this.fmForm ? this.fmForm.statusIcon : false
     },
-    validateIcon() {
+    validateIcon () {
       return {
         validating: 'fm-icon-loading',
         success: 'fm-icon-circle-check',
         error: 'fm-icon-circle-close'
       }[this.validateState]
     },
-    textareaStyle() {
+    textareaStyle () {
       return merge({}, this.textareaCalcStyle, { resize: this.resize })
     },
-    inputSize() {
-      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size
+    inputSize () {
+      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
     },
-    inputDisabled() {
-      return this.disabled || (this.elForm || {}).disabled
+    inputDisabled () {
+      return this.disabled || (this.fmForm || {}).disabled
     },
-    nativeInputValue() {
+    nativeInputValue () {
       return this.value === null || this.value === undefined
         ? ''
         : String(this.value)
     },
-    showClear() {
+    showClear () {
       return (
         this.clearable &&
         !this.inputDisabled &&
@@ -270,7 +270,7 @@ export default {
         (this.focused || this.hovering)
       )
     },
-    showPwdVisible() {
+    showPwdVisible () {
       return (
         this.showPassword &&
         !this.inputDisabled &&
@@ -278,7 +278,7 @@ export default {
         (!!this.nativeInputValue || this.focused)
       )
     },
-    isWordLimitVisible() {
+    isWordLimitVisible () {
       return (
         this.showWordLimit &&
         this.$attrs.maxlength &&
@@ -288,24 +288,24 @@ export default {
         !this.showPassword
       )
     },
-    upperLimit() {
+    upperLimit () {
       return this.$attrs.maxlength
     },
-    textLength() {
+    textLength () {
       if (typeof this.value === 'number') {
         return String(this.value).length
       }
 
       return (this.value || '').length
     },
-    inputExceed() {
+    inputExceed () {
       // show exceed style if length of initial value greater then maxlength
       return this.isWordLimitVisible && this.textLength > this.upperLimit
     }
   },
 
   watch: {
-    value(val) {
+    value (val) {
       this.$nextTick(this.resizeTextarea)
       if (this.validateEvent) {
         this.dispatch('FmFormItem', 'el.form.change', [val])
@@ -314,13 +314,13 @@ export default {
     // native input value is set explicitly
     // do not use v-model / :value in template
     // see: https://github.com/FmemeFE/element/issues/14521
-    nativeInputValue() {
+    nativeInputValue () {
       this.setNativeInputValue()
     },
     // when change between <input> and <textarea>,
     // update DOM dependent value and styles
     // https://github.com/FmemeFE/element/issues/14857
-    type() {
+    type () {
       this.$nextTick(() => {
         this.setNativeInputValue()
         this.resizeTextarea()
@@ -329,28 +329,28 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.$on('inputSelect', this.select)
   },
 
-  mounted() {
+  mounted () {
     this.setNativeInputValue()
     this.resizeTextarea()
     this.updateIconOffset()
   },
 
-  updated() {
+  updated () {
     this.$nextTick(this.updateIconOffset)
   },
 
   methods: {
-    focus() {
+    focus () {
       this.getInput().focus()
     },
-    blur() {
+    blur () {
       this.getInput().blur()
     },
-    getMigratingConfig() {
+    getMigratingConfig () {
       return {
         props: {
           icon: 'icon is removed, use suffix-icon / prefix-icon instead.',
@@ -361,17 +361,17 @@ export default {
         }
       }
     },
-    handleBlur(event) {
+    handleBlur (event) {
       this.focused = false
       this.$emit('blur', event)
       if (this.validateEvent) {
         this.dispatch('FmFormItem', 'el.form.blur', [this.value])
       }
     },
-    select() {
+    select () {
       this.getInput().select()
     },
-    resizeTextarea() {
+    resizeTextarea () {
       if (this.$isServer) return
       const { autosize, type } = this
       if (type !== 'textarea') return
@@ -390,31 +390,31 @@ export default {
         maxRows
       )
     },
-    setNativeInputValue() {
+    setNativeInputValue () {
       const input = this.getInput()
       if (!input) return
       if (input.value === this.nativeInputValue) return
       input.value = this.nativeInputValue
     },
-    handleFocus(event) {
+    handleFocus (event) {
       this.focused = true
       this.$emit('focus', event)
     },
-    handleCompositionStart() {
+    handleCompositionStart () {
       this.isComposing = true
     },
-    handleCompositionUpdate(event) {
+    handleCompositionUpdate (event) {
       const text = event.target.value
       const lastCharacter = text[text.length - 1] || ''
       this.isComposing = !isKorean(lastCharacter)
     },
-    handleCompositionEnd(event) {
+    handleCompositionEnd (event) {
       if (this.isComposing) {
         this.isComposing = false
         this.handleInput(event)
       }
     },
-    handleInput(event) {
+    handleInput (event) {
       // should not emit input during composition
       // see: https://github.com/FmemeFE/element/issues/10516
       if (this.isComposing) return
@@ -429,10 +429,10 @@ export default {
       // see: https://github.com/FmemeFE/element/issues/12850
       this.$nextTick(this.setNativeInputValue)
     },
-    handleChange(event) {
+    handleChange (event) {
       this.$emit('change', event.target.value)
     },
-    calcIconOffset(place) {
+    calcIconOffset (place) {
       const elList = [].slice.call(
         this.$el.querySelectorAll(`.fm-input__${place}`) || []
       )
@@ -454,28 +454,28 @@ export default {
       if (this.$slots[pendant]) {
         el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${
           this.$el.querySelector(`.fm-input-group__${pendant}`).offsetWidth
-        }px)`
+          }px)`
       } else {
         el.removeAttribute('style')
       }
     },
-    updateIconOffset() {
+    updateIconOffset () {
       this.calcIconOffset('prefix')
       this.calcIconOffset('suffix')
     },
-    clear() {
+    clear () {
       this.$emit('input', '')
       this.$emit('change', '')
       this.$emit('clear')
     },
-    handlePasswordVisible() {
+    handlePasswordVisible () {
       this.passwordVisible = !this.passwordVisible
       this.focus()
     },
-    getInput() {
+    getInput () {
       return this.$refs.input || this.$refs.textarea
     },
-    getSuffixVisible() {
+    getSuffixVisible () {
       return (
         this.$slots.suffix ||
         this.suffixIcon ||

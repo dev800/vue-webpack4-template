@@ -5,7 +5,7 @@ export default {
   props: {
     size: {
       type: [Number, String],
-      validator(val) {
+      validator (val) {
         if (typeof val === 'string') {
           return ['large', 'medium', 'small'].includes(val)
         }
@@ -15,7 +15,7 @@ export default {
     shape: {
       type: String,
       default: 'circle',
-      validator(val) {
+      validator (val) {
         return ['circle', 'square'].includes(val)
       }
     },
@@ -30,14 +30,14 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       isImageExist: true
     }
   },
 
   computed: {
-    avatarClass() {
+    avatarClass () {
       const { size, icon, shape } = this
       const classList = ['fm-avatar']
 
@@ -58,14 +58,14 @@ export default {
   },
 
   methods: {
-    handleError() {
+    handleError () {
       const { error } = this
       const errorFlag = error ? error() : undefined
       if (errorFlag !== false) {
         this.isImageExist = false
       }
     },
-    renderAvatar() {
+    renderAvatar () {
       const { icon, src, alt, isImageExist, srcSet, fit } = this
 
       if (isImageExist && src) {
@@ -85,7 +85,7 @@ export default {
     }
   },
 
-  render() {
+  render () {
     const { avatarClass, size } = this
 
     const sizeStyle = typeof size === 'number' ? {

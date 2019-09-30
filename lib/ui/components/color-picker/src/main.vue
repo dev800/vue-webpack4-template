@@ -76,15 +76,15 @@ export default {
   },
 
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     },
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
 
-  data() {
+  data () {
     const color = new Color({
       enableAlpha: this.showAlpha,
       format: this.colorFormat
@@ -98,7 +98,7 @@ export default {
   },
 
   computed: {
-    displayedColor() {
+    displayedColor () {
       if (!this.value && !this.showPanelColor) {
         return 'transparent'
       }
@@ -106,21 +106,21 @@ export default {
       return this.displayedRgb(this.color, this.showAlpha)
     },
 
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize
+    _fmFormItemSize () {
+      return (this.fmFormItem || {}).fmFormItemSize
     },
 
-    colorSize() {
-      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size
+    colorSize () {
+      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
     },
 
-    colorDisabled() {
-      return this.disabled || (this.elForm || {}).disabled
+    colorDisabled () {
+      return this.disabled || (this.fmForm || {}).disabled
     }
   },
 
   watch: {
-    value(val) {
+    value (val) {
       if (!val) {
         this.showPanelColor = false
       } else if (val && val !== this.color.value) {
@@ -129,11 +129,11 @@ export default {
     },
     color: {
       deep: true,
-      handler() {
+      handler () {
         this.showPanelColor = true
       }
     },
-    displayedColor(val) {
+    displayedColor (val) {
       if (!this.showPicker) return
       const currentValueColor = new Color({
         enableAlpha: this.showAlpha,
@@ -148,7 +148,7 @@ export default {
     }
   },
 
-  mounted() {
+  mounted () {
     const value = this.value
     if (value) {
       this.color.fromString(value)
@@ -157,18 +157,18 @@ export default {
   },
 
   methods: {
-    handleTrigger() {
+    handleTrigger () {
       if (this.colorDisabled) return
       this.showPicker = !this.showPicker
     },
-    confirmValue() {
+    confirmValue () {
       const value = this.color.value
       this.$emit('input', value)
       this.$emit('change', value)
       this.dispatch('FmFormItem', 'el.form.change', value)
       this.showPicker = false
     },
-    clearValue() {
+    clearValue () {
       this.$emit('input', null)
       this.$emit('change', null)
       if (this.value !== null) {
@@ -178,11 +178,11 @@ export default {
       this.showPicker = false
       this.resetColor()
     },
-    hide() {
+    hide () {
       this.showPicker = false
       this.resetColor()
     },
-    resetColor() {
+    resetColor () {
       this.$nextTick(_ => {
         if (this.value) {
           this.color.fromString(this.value)
@@ -191,7 +191,7 @@ export default {
         }
       })
     },
-    displayedRgb(color, showAlpha) {
+    displayedRgb (color, showAlpha) {
       if (!(color instanceof Color)) {
         throw Error('color should be instance of Color Class')
       }

@@ -31,7 +31,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       cursorTop: 0,
       cursorLeft: 0,
@@ -40,7 +40,7 @@ export default {
   },
 
   computed: {
-    colorValue() {
+    colorValue () {
       const hue = this.color.get('hue')
       const value = this.color.get('value')
       return { hue, value }
@@ -48,12 +48,12 @@ export default {
   },
 
   watch: {
-    colorValue() {
+    colorValue () {
       this.update()
     }
   },
 
-  mounted() {
+  mounted () {
     draggable(this.$el, {
       drag: (event) => {
         this.handleDrag(event)
@@ -67,7 +67,7 @@ export default {
   },
 
   methods: {
-    update() {
+    update () {
       const saturation = this.color.get('saturation')
       const value = this.color.get('value')
 
@@ -80,7 +80,7 @@ export default {
       this.background = 'hsl(' + this.color.get('hue') + ', 100%, 50%)'
     },
 
-    handleDrag(event) {
+    handleDrag (event) {
       const el = this.$el
       const rect = el.getBoundingClientRect()
 

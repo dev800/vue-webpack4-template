@@ -21,7 +21,7 @@ export default {
   },
 
   computed: {
-    isVertical() {
+    isVertical () {
       if (this.direction === 'vertical') {
         return true
       } else if (this.direction === 'horizontal') {

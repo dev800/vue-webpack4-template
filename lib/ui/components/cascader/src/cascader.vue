@@ -210,10 +210,10 @@ export default {
   mixins: [PopperMixin, Emitter, Locale, Migrating],
 
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     },
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
@@ -246,12 +246,12 @@ export default {
     },
     beforeFilter: {
       type: Function,
-      default: () => () => {}
+      default: () => () => { }
     },
     popperClass: String
   },
 
-  data() {
+  data () {
     return {
       dropDownVisible: false,
       checkedValue: this.value || null,
@@ -268,19 +268,19 @@ export default {
   },
 
   computed: {
-    realSize() {
-      const _elFormItemSize = (this.elFormItem || {}).elFormItemSize
-      return this.size || _elFormItemSize || (this.$ELEMENT || {}).size
+    realSize () {
+      const _fmFormItemSize = (this.fmFormItem || {}).fmFormItemSize
+      return this.size || _fmFormItemSize || (this.$ELEMENT || {}).size
     },
-    tagSize() {
+    tagSize () {
       return ['small', 'mini'].indexOf(this.realSize) > -1
         ? 'mini'
         : 'small'
     },
-    isDisabled() {
-      return this.disabled || (this.elForm || {}).disabled
+    isDisabled () {
+      return this.disabled || (this.fmForm || {}).disabled
     },
-    config() {
+    config () {
       const config = this.props || {}
       const { $attrs } = this
 
@@ -299,16 +299,16 @@ export default {
 
       return config
     },
-    multiple() {
+    multiple () {
       return this.config.multiple
     },
-    leafOnly() {
+    leafOnly () {
       return !this.config.checkStrictly
     },
-    readonly() {
+    readonly () {
       return !this.filterable || this.multiple
     },
-    clearBtnVisible() {
+    clearBtnVisible () {
       if (!this.clearable || this.isDisabled || this.filtering || !this.inputHover) {
         return false
       }
@@ -317,22 +317,22 @@ export default {
         ? !!this.checkedNodes.filter(node => !node.isDisabled).length
         : !!this.presentText
     },
-    panel() {
+    panel () {
       return this.$refs.panel
     }
   },
 
   watch: {
-    disabled() {
+    disabled () {
       this.computePresentContent()
     },
-    value(val) {
+    value (val) {
       if (!isEqual(val, this.checkedValue)) {
         this.checkedValue = val
         this.computePresentContent()
       }
     },
-    checkedValue(val) {
+    checkedValue (val) {
       const { value, dropDownVisible } = this
       const { checkStrictly, multiple } = this.config
 
@@ -349,25 +349,25 @@ export default {
       }
     },
     options: {
-      handler: function() {
+      handler: function () {
         this.$nextTick(this.computePresentContent)
       },
       deep: true
     },
-    presentText(val) {
+    presentText (val) {
       this.inputValue = val
     },
-    presentTags(val, oldVal) {
+    presentTags (val, oldVal) {
       if (this.multiple && (val.length || oldVal.length)) {
         this.$nextTick(this.updateStyle)
       }
     },
-    filtering(val) {
+    filtering (val) {
       this.$nextTick(this.updatePopper)
     }
   },
 
-  mounted() {
+  mounted () {
     const { input } = this.$refs
     if (input && input.$el) {
       this.inputInitialHeight = input.$el.offsetHeight || InputSizeMap[this.realSize] || 40
@@ -398,12 +398,12 @@ export default {
     addResizeListener(this.$el, this.updateStyle)
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     removeResizeListener(this.$el, this.updateStyle)
   },
 
   methods: {
-    getMigratingConfig() {
+    getMigratingConfig () {
       return {
         props: {
           'expand-trigger': 'expand-trigger is removed, use `props.expandTrigger` instead.',
@@ -415,7 +415,7 @@ export default {
         }
       }
     },
-    toggleDropDownVisible(visible) {
+    toggleDropDownVisible (visible) {
       if (this.isDisabled) return
 
       const { dropDownVisible } = this
@@ -433,11 +433,11 @@ export default {
         this.$emit('visible-change', visible)
       }
     },
-    handleDropdownLeave() {
+    handleDropdownLeave () {
       this.filtering = false
       this.inputValue = this.presentText
     },
-    handleKeyDown(event) {
+    handleKeyDown (event) {
       switch (event.keyCode) {
         case KeyCode.enter:
           this.toggleDropDownVisible()
@@ -453,13 +453,13 @@ export default {
           break
       }
     },
-    handleFocus(e) {
+    handleFocus (e) {
       this.$emit('focus', e)
     },
-    handleBlur(e) {
+    handleBlur (e) {
       this.$emit('blur', e)
     },
-    handleInput(val, event) {
+    handleInput (val, event) {
       !this.dropDownVisible && this.toggleDropDownVisible(true)
 
       if (event && event.isComposing) return
@@ -469,16 +469,16 @@ export default {
         this.filtering = false
       }
     },
-    handleClear() {
+    handleClear () {
       this.presentText = ''
       this.panel.clearCheckedNodes()
     },
-    handleExpandChange(value) {
+    handleExpandChange (value) {
       this.$nextTick(this.updatePopper.bind(this))
       this.$emit('expand-change', value)
       this.$emit('active-item-change', value) // Deprecated
     },
-    focusFirstNode() {
+    focusFirstNode () {
       this.$nextTick(() => {
         const { filtering } = this
         const { popper, suggestionPanel } = this.$refs
@@ -497,7 +497,7 @@ export default {
         }
       })
     },
-    computePresentContent() {
+    computePresentContent () {
       // nextTick is required, because checked nodes may not change right now
       this.$nextTick(() => {
         if (this.config.multiple) {
@@ -508,7 +508,7 @@ export default {
         }
       })
     },
-    computePresentText() {
+    computePresentText () {
       const { checkedValue, config } = this
       if (!isEmpty(checkedValue)) {
         const node = this.panel.getNodeByValue(checkedValue)
@@ -519,7 +519,7 @@ export default {
       }
       this.presentText = null
     },
-    computePresentTags() {
+    computePresentTags () {
       const { isDisabled, leafOnly, showAllLevels, separator, collapseTags } = this
       const checkedNodes = this.getCheckedNodes(leafOnly)
       const tags = []
@@ -553,7 +553,7 @@ export default {
       this.checkedNodes = checkedNodes
       this.presentTags = tags
     },
-    getSuggestions() {
+    getSuggestions () {
       let { filterMethod } = this
 
       if (!isFunction(filterMethod)) {
@@ -581,7 +581,7 @@ export default {
       this.suggestions = suggestions
       this.$nextTick(this.updatePopper)
     },
-    handleSuggestionKeyDown(event) {
+    handleSuggestionKeyDown (event) {
       const { keyCode, target } = event
       switch (keyCode) {
         case KeyCode.enter:
@@ -601,7 +601,7 @@ export default {
           break
       }
     },
-    handleDelete() {
+    handleDelete () {
       const { inputValue, pressDeleteCount, presentTags } = this
       const lastIndex = presentTags.length - 1
       const lastTag = presentTags[lastIndex]
@@ -617,7 +617,7 @@ export default {
         }
       }
     },
-    handleSuggestionClick(index) {
+    handleSuggestionClick (index) {
       const { multiple } = this
       const targetNode = this.suggestions[index]
 
@@ -630,13 +630,13 @@ export default {
         this.toggleDropDownVisible(false)
       }
     },
-    deleteTag(index) {
+    deleteTag (index) {
       const { checkedValue } = this
       const val = checkedValue[index]
       this.checkedValue = checkedValue.filter((n, i) => i !== index)
       this.$emit('remove-tag', val)
     },
-    updateStyle() {
+    updateStyle () {
       const { $el, inputInitialHeight } = this
       if (this.$isServer || !$el) return
 
@@ -664,7 +664,7 @@ export default {
     /**
      * public methods
     */
-    getCheckedNodes(leafOnly) {
+    getCheckedNodes (leafOnly) {
       return this.panel.getCheckedNodes(leafOnly)
     }
   }

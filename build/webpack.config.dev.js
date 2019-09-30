@@ -44,6 +44,18 @@ module.exports = merge(baseConfig, {
           'less-loader?javascriptEnabled=true'
         ]
       },
+      {
+        test: /\.(woff2?|eot|ttf|otf|mp4|webm|ogg|mp3|wav|flac|aac|png|jpe?g|gif|svg)(\?.*)?$/i,
+        use: {
+          loader: 'file-loader',
+          options: {
+            limit: 8192,
+            name (file) {
+              return '[path][name].[ext]';
+            }
+          }
+        }
+      }
     ]
   },
 

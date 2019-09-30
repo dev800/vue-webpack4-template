@@ -35,7 +35,7 @@ export default {
     vertical: Boolean
   },
 
-  data() {
+  data () {
     return {
       thumbLeft: 0,
       thumbTop: 0,
@@ -44,16 +44,16 @@ export default {
   },
 
   watch: {
-    'color._alpha'() {
+    'color._alpha' () {
       this.update()
     },
 
-    'color.value'() {
+    'color.value' () {
       this.update()
     }
   },
 
-  mounted() {
+  mounted () {
     const { bar, thumb } = this.$refs
 
     const dragConfig = {
@@ -71,7 +71,7 @@ export default {
   },
 
   methods: {
-    handleClick(event) {
+    handleClick (event) {
       const thumb = this.$refs.thumb
       const target = event.target
 
@@ -80,7 +80,7 @@ export default {
       }
     },
 
-    handleDrag(event) {
+    handleDrag (event) {
       const rect = this.$el.getBoundingClientRect()
       const { thumb } = this.$refs
 
@@ -99,7 +99,7 @@ export default {
       }
     },
 
-    getThumbLeft() {
+    getThumbLeft () {
       if (this.vertical) return 0
       const el = this.$el
       const alpha = this.color._alpha
@@ -109,7 +109,7 @@ export default {
       return Math.round(alpha * (el.offsetWidth - thumb.offsetWidth / 2) / 100)
     },
 
-    getThumbTop() {
+    getThumbTop () {
       if (!this.vertical) return 0
       const el = this.$el
       const alpha = this.color._alpha
@@ -119,7 +119,7 @@ export default {
       return Math.round(alpha * (el.offsetHeight - thumb.offsetHeight / 2) / 100)
     },
 
-    getBackground() {
+    getBackground () {
       if (this.color && this.color.value) {
         const { r, g, b } = this.color.toRgb()
         return `linear-gradient(to right, rgba(${r}, ${g}, ${b}, 0) 0%, rgba(${r}, ${g}, ${b}, 1) 100%)`
@@ -127,7 +127,7 @@ export default {
       return null
     },
 
-    update() {
+    update () {
       this.thumbLeft = this.getThumbLeft()
       this.thumbTop = this.getThumbTop()
       this.background = this.getBackground()

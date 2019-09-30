@@ -83,16 +83,16 @@ import TimeSpinner from '../basic/time-spinner'
 const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss')
 const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss')
 
-const minTimeOfDay = function(date) {
+const minTimeOfDay = function (date) {
   return modifyDate(MIN_TIME, date.getFullYear(), date.getMonth(), date.getDate())
 }
 
-const maxTimeOfDay = function(date) {
+const maxTimeOfDay = function (date) {
   return modifyDate(MAX_TIME, date.getFullYear(), date.getMonth(), date.getDate())
 }
 
 // increase time by amount of milliseconds, but within the range of day
-const advanceTime = function(date, amount) {
+const advanceTime = function (date, amount) {
   return new Date(Math.min(date.getTime() + amount, maxTimeOfDay(date).getTime()))
 }
 
@@ -101,7 +101,7 @@ export default {
   components: { TimeSpinner },
   mixins: [Locale],
 
-  data() {
+  data () {
     return {
       popperClass: '',
       minDate: new Date(),
@@ -117,22 +117,22 @@ export default {
   },
 
   computed: {
-    showSeconds() {
+    showSeconds () {
       return (this.format || '').indexOf('ss') !== -1
     },
 
-    offset() {
+    offset () {
       return this.showSeconds ? 11 : 8
     },
 
-    spinner() {
+    spinner () {
       return this.selectionRange[0] < this.offset ? this.$refs.minSpinner : this.$refs.maxSpinner
     },
 
-    btnDisabled() {
+    btnDisabled () {
       return this.minDate.getTime() > this.maxDate.getTime()
     },
-    amPmMode() {
+    amPmMode () {
       if ((this.format || '').indexOf('A') !== -1) return 'A'
       if ((this.format || '').indexOf('a') !== -1) return 'a'
       return ''
@@ -140,7 +140,7 @@ export default {
   },
 
   watch: {
-    value(value) {
+    value (value) {
       if (Array.isArray(value)) {
         this.minDate = new Date(value[0])
         this.maxDate = new Date(value[1])
@@ -158,7 +158,7 @@ export default {
       }
     },
 
-    visible(val) {
+    visible (val) {
       if (val) {
         this.oldValue = this.value
         this.$nextTick(() => this.$refs.minSpinner.emitSelectRange('hours'))
@@ -167,25 +167,25 @@ export default {
   },
 
   methods: {
-    handleClear() {
+    handleClear () {
       this.$emit('pick', null)
     },
 
-    handleCancel() {
+    handleCancel () {
       this.$emit('pick', this.oldValue)
     },
 
-    handleMinChange(date) {
+    handleMinChange (date) {
       this.minDate = clearMilliseconds(date)
       this.handleChange()
     },
 
-    handleMaxChange(date) {
+    handleMaxChange (date) {
       this.maxDate = clearMilliseconds(date)
       this.handleChange()
     },
 
-    handleChange() {
+    handleChange () {
       if (this.isValidValue([this.minDate, this.maxDate])) {
         this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]]
         this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]]
@@ -193,17 +193,17 @@ export default {
       }
     },
 
-    setMinSelectionRange(start, end) {
+    setMinSelectionRange (start, end) {
       this.$emit('select-range', start, end, 'min')
       this.selectionRange = [start, end]
     },
 
-    setMaxSelectionRange(start, end) {
+    setMaxSelectionRange (start, end) {
       this.$emit('select-range', start, end, 'max')
       this.selectionRange = [start + this.offset, end + this.offset]
     },
 
-    handleConfirm(visible = false) {
+    handleConfirm (visible = false) {
       const minSelectableRange = this.$refs.minSpinner.selectableRange
       const maxSelectableRange = this.$refs.maxSpinner.selectableRange
 
@@ -213,12 +213,12 @@ export default {
       this.$emit('pick', [this.minDate, this.maxDate], visible)
     },
 
-    adjustSpinners() {
+    adjustSpinners () {
       this.$refs.minSpinner.adjustSpinners()
       this.$refs.maxSpinner.adjustSpinners()
     },
 
-    changeSelectionRange(step) {
+    changeSelectionRange (step) {
       const list = this.showSeconds ? [0, 3, 6, 11, 14, 17] : [0, 3, 8, 11]
       const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : [])
       const index = list.indexOf(this.selectionRange[0])
@@ -231,13 +231,13 @@ export default {
       }
     },
 
-    isValidValue(date) {
+    isValidValue (date) {
       return Array.isArray(date) &&
-          timeWithinRange(this.minDate, this.$refs.minSpinner.selectableRange) &&
-          timeWithinRange(this.maxDate, this.$refs.maxSpinner.selectableRange)
+        timeWithinRange(this.minDate, this.$refs.minSpinner.selectableRange) &&
+        timeWithinRange(this.maxDate, this.$refs.maxSpinner.selectableRange)
     },
 
-    handleKeydown(event) {
+    handleKeydown (event) {
       const keyCode = event.keyCode
       const mapping = { 38: -1, 40: 1, 37: -1, 39: 1 }
 

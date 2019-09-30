@@ -24,7 +24,7 @@ export default {
     index: Number
   },
 
-  data() {
+  data () {
     return {
       activeNode: null,
       hoverTimer: null,
@@ -33,19 +33,19 @@ export default {
   },
 
   computed: {
-    isEmpty() {
+    isEmpty () {
       return !this.nodes.length
     },
-    menuId() {
+    menuId () {
       return `cascader-menu-${this.id}-${this.index}`
     }
   },
 
   methods: {
-    handleExpand(e) {
+    handleExpand (e) {
       this.activeNode = e.target
     },
-    handleMouseMove(e) {
+    handleMouseMove (e) {
       const { activeNode, hoverTimer } = this
       const { hoverZone } = this.$refs
 
@@ -68,18 +68,18 @@ export default {
         this.hoverTimer = setTimeout(this.clearHoverZone, this.panel.config.hoverThreshold)
       }
     },
-    clearHoverZone() {
+    clearHoverZone () {
       const { hoverZone } = this.$refs
       if (!hoverZone) return
       hoverZone.innerHTML = ''
     },
 
-    renderEmptyText(h) {
+    renderEmptyText (h) {
       return (
-        <div class="fm-cascader-menu__empty-text">{ this.t('el.cascader.noData') }</div>
+        <div class="fm-cascader-menu__empty-text">{this.t('el.cascader.noData')}</div>
       )
     },
-    renderNodeList(h) {
+    renderNodeList (h) {
       const { menuId } = this
       const { isHoverMenu } = this.panel
       const events = { on: {} }
@@ -92,12 +92,12 @@ export default {
         const { hasChildren } = node
         return (
           <cascader-node
-            key={ node.uid }
-            node={ node }
-            node-id={ `${menuId}-${index}` }
-            aria-haspopup={ hasChildren }
-            aria-owns = { hasChildren ? menuId : null }
-            { ...events }></cascader-node>
+            key={node.uid}
+            node={node}
+            node-id={`${menuId}-${index}`}
+            aria-haspopup={hasChildren}
+            aria-owns={hasChildren ? menuId : null}
+            {...events}></cascader-node>
         )
       })
 
@@ -108,7 +108,7 @@ export default {
     }
   },
 
-  render(h) {
+  render (h) {
     const { isEmpty, menuId } = this
     const events = { nativeOn: {} }
 
@@ -122,15 +122,15 @@ export default {
       <fm-scrollbar
         tag="ul"
         role="menu"
-        id={ menuId }
+        id={menuId}
         class="fm-cascader-menu"
         wrap-class="fm-cascader-menu__wrap"
         view-class={{
           'fm-cascader-menu__list': true,
           'is-empty': isEmpty
         }}
-        { ...events }>
-        { isEmpty ? this.renderEmptyText(h) : this.renderNodeList(h) }
+        {...events}>
+        {isEmpty ? this.renderEmptyText(h) : this.renderNodeList(h)}
       </fm-scrollbar>
     )
   }

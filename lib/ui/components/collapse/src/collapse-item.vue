@@ -66,14 +66,14 @@ export default {
     title: String,
     name: {
       type: [String, Number],
-      default() {
+      default () {
         return this._uid
       }
     },
     disabled: Boolean
   },
 
-  data() {
+  data () {
     return {
       contentWrapStyle: {
         height: 'auto',
@@ -89,13 +89,13 @@ export default {
   inject: ['collapse'],
 
   computed: {
-    isActive() {
+    isActive () {
       return this.collapse.activeNames.indexOf(this.name) > -1
     }
   },
 
   methods: {
-    handleFocus() {
+    handleFocus () {
       setTimeout(() => {
         if (!this.isClick) {
           this.focusing = true
@@ -104,13 +104,13 @@ export default {
         }
       }, 50)
     },
-    handleHeaderClick() {
+    handleHeaderClick () {
       if (this.disabled) return
       this.dispatch('FmCollapse', 'item-click', this)
       this.focusing = false
       this.isClick = true
     },
-    handleEnterClick() {
+    handleEnterClick () {
       this.dispatch('FmCollapse', 'item-click', this)
     }
   }

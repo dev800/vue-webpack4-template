@@ -145,7 +145,7 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
       activated: false,
       suggestions: [],
@@ -155,24 +155,24 @@ export default {
     }
   },
   computed: {
-    suggestionVisible() {
+    suggestionVisible () {
       const suggestions = this.suggestions
       const isValidData = Array.isArray(suggestions) && suggestions.length > 0
       return (isValidData || this.loading) && this.activated
     },
-    id() {
+    id () {
       return `fm-autocomplete-${generateId()}`
     }
   },
   watch: {
-    suggestionVisible(val) {
+    suggestionVisible (val) {
       const $input = this.getInput()
       if ($input) {
         this.broadcast('FmAutocompleteSuggestions', 'visible', [val, $input.offsetWidth])
       }
     }
   },
-  mounted() {
+  mounted () {
     this.debouncedGetData = debounce(this.debounce, this.getData)
     this.$on('item-click', item => {
       this.select(item)
@@ -183,11 +183,11 @@ export default {
     $input.setAttribute('aria-controls', 'id')
     $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.$refs.suggestions.$destroy()
   },
   methods: {
-    getMigratingConfig() {
+    getMigratingConfig () {
       return {
         props: {
           'custom-item': 'custom-item is removed, use scoped slot instead.',
@@ -195,7 +195,7 @@ export default {
         }
       }
     },
-    getData(queryString) {
+    getData (queryString) {
       if (this.suggestionDisabled) {
         return
       }
@@ -213,7 +213,7 @@ export default {
         }
       })
     },
-    handleChange(value) {
+    handleChange (value) {
       this.$emit('input', value)
       this.suggestionDisabled = false
       if (!this.triggerOnFocus && !value) {
@@ -223,24 +223,24 @@ export default {
       }
       this.debouncedGetData(value)
     },
-    handleFocus(event) {
+    handleFocus (event) {
       this.activated = true
       this.$emit('focus', event)
       if (this.triggerOnFocus) {
         this.debouncedGetData(this.value)
       }
     },
-    handleBlur(event) {
+    handleBlur (event) {
       this.$emit('blur', event)
     },
-    handleClear() {
+    handleClear () {
       this.activated = false
       this.$emit('clear')
     },
-    close(e) {
+    close (e) {
       this.activated = false
     },
-    handleKeyEnter(e) {
+    handleKeyEnter (e) {
       if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
         e.preventDefault()
         this.select(this.suggestions[this.highlightedIndex])
@@ -252,7 +252,7 @@ export default {
         })
       }
     },
-    select(item) {
+    select (item) {
       this.$emit('input', item[this.valueKey])
       this.$emit('select', item)
       this.$nextTick(_ => {
@@ -260,7 +260,7 @@ export default {
         this.highlightedIndex = -1
       })
     },
-    highlight(index) {
+    highlight (index) {
       if (!this.suggestionVisible || this.loading) { return }
       if (index < 0) {
         this.highlightedIndex = -1
@@ -286,7 +286,7 @@ export default {
       const $input = this.getInput()
       $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`)
     },
-    getInput() {
+    getInput () {
       return this.$refs.input.getInput()
     }
   }

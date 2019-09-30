@@ -21,41 +21,41 @@ export default {
   },
 
   computed: {
-    config() {
+    config () {
       return this.panel.config
     },
-    isLeaf() {
+    isLeaf () {
       return this.node.isLeaf
     },
-    isDisabled() {
+    isDisabled () {
       return this.node.isDisabled
     },
-    checkedValue() {
+    checkedValue () {
       return this.panel.checkedValue
     },
-    isChecked() {
+    isChecked () {
       return this.node.isSameNode(this.checkedValue)
     },
-    inActivePath() {
+    inActivePath () {
       return this.isInPath(this.panel.activePath)
     },
-    inCheckedPath() {
+    inCheckedPath () {
       if (!this.config.checkStrictly) return false
 
       return this.panel.checkedNodePaths
         .some(checkedPath => this.isInPath(checkedPath))
     },
-    value() {
+    value () {
       return this.node.getValueByOption()
     }
   },
 
   methods: {
-    handleExpand() {
+    handleExpand () {
       const { panel, node, isDisabled, config } = this
       const { multiple, checkStrictly } = config
 
-      if (!checkStrictly && isDisabled || node.loading) return
+      if ((!checkStrictly && isDisabled) || node.loading) return
 
       if (config.lazy && !node.loaded) {
         panel.lazyLoad(node, () => {
@@ -74,24 +74,24 @@ export default {
       }
     },
 
-    handleCheckChange() {
+    handleCheckChange () {
       const { panel, value, node } = this
       panel.handleCheckChange(value)
       panel.handleExpand(node)
     },
 
-    handleMultiCheckChange(checked) {
+    handleMultiCheckChange (checked) {
       this.node.doCheck(checked)
       this.panel.calculateMultiCheckedValue()
     },
 
-    isInPath(pathNodes) {
+    isInPath (pathNodes) {
       const { node } = this
       const selectedPathNode = pathNodes[node.level - 1] || {}
       return selectedPathNode.uid === node.uid
     },
 
-    renderPrefix(h) {
+    renderPrefix (h) {
       const { isLeaf, isChecked, config } = this
       const { checkStrictly, multiple } = config
 
@@ -106,7 +106,7 @@ export default {
       return null
     },
 
-    renderPostfix(h) {
+    renderPostfix (h) {
       const { node, isLeaf } = this
 
       if (node.loading) {
@@ -118,7 +118,7 @@ export default {
       return null
     },
 
-    renderCheckbox(h) {
+    renderCheckbox (h) {
       const { node, config, isDisabled } = this
       const events = {
         on: { change: this.handleMultiCheckChange },
@@ -131,15 +131,15 @@ export default {
 
       return (
         <fm-checkbox
-          value={ node.checked }
-          indeterminate={ node.indeterminate }
-          disabled={ isDisabled }
-          { ...events }
+          value={node.checked}
+          indeterminate={node.indeterminate}
+          disabled={isDisabled}
+          {...events}
         ></fm-checkbox>
       )
     },
 
-    renderRadio(h) {
+    renderRadio (h) {
       let { checkedValue, value, isDisabled } = this
 
       // to keep same reference if value cause radio's checked state is calculated by reference comparision;
@@ -149,36 +149,36 @@ export default {
 
       return (
         <fm-radio
-          value={ checkedValue }
-          label={ value }
-          disabled={ isDisabled }
-          onChange={ this.handleCheckChange }
-          nativeOnClick={ stopPropagation }>
+          value={checkedValue}
+          label={value}
+          disabled={isDisabled}
+          onChange={this.handleCheckChange}
+          nativeOnClick={stopPropagation}>
           {/* add an empty element to avoid render label */}
           <span></span>
         </fm-radio>
       )
     },
 
-    renderCheckIcon(h) {
+    renderCheckIcon (h) {
       return (
         <i class="fm-icon-check fm-cascader-node__prefix"></i>
       )
     },
 
-    renderLoadingIcon(h) {
+    renderLoadingIcon (h) {
       return (
         <i class="fm-icon-loading fm-cascader-node__postfix"></i>
       )
     },
 
-    renderExpandIcon(h) {
+    renderExpandIcon (h) {
       return (
         <i class="fm-icon-arrow-right fm-cascader-node__postfix"></i>
       )
     },
 
-    renderContent(h) {
+    renderContent (h) {
       const { panel, node } = this
       const render = panel.renderLabelFn
       const vnode = render
@@ -186,12 +186,12 @@ export default {
         : null
 
       return (
-        <span class="fm-cascader-node__label">{ vnode || node.label }</span>
+        <span class="fm-cascader-node__label">{vnode || node.label}</span>
       )
     }
   },
 
-  render(h) {
+  render (h) {
     const {
       inActivePath,
       inCheckedPath,
@@ -224,9 +224,9 @@ export default {
     return (
       <li
         role="menuitem"
-        id={ nodeId }
-        aria-expanded={ inActivePath }
-        tabindex={ disabled ? null : -1 }
+        id={nodeId}
+        aria-expanded={inActivePath}
+        tabindex={disabled ? null : -1}
         class={{
           'fm-cascader-node': true,
           'is-selectable': checkStrictly,
@@ -236,9 +236,9 @@ export default {
           'is-disabled': disabled
         }}
         {...events}>
-        { this.renderPrefix(h) }
-        { this.renderContent(h) }
-        { this.renderPostfix(h) }
+        {this.renderPrefix(h)}
+        {this.renderContent(h)}
+        {this.renderPostfix(h)}
       </li>
     )
   }

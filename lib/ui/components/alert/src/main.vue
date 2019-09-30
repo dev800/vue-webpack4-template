@@ -77,38 +77,38 @@ export default {
     effect: {
       type: String,
       default: 'light',
-      validator: function(value) {
+      validator: function (value) {
         return ['light', 'dark'].indexOf(value) !== -1
       }
     }
   },
 
-  data() {
+  data () {
     return {
       visible: true
     }
   },
 
   computed: {
-    typeClass() {
+    typeClass () {
       return `fm-alert--${this.type}`
     },
 
-    iconClass() {
+    iconClass () {
       return TYPE_CLASSES_MAP[this.type] || 'fm-icon-info'
     },
 
-    isBigIcon() {
+    isBigIcon () {
       return this.description || this.$slots.default ? 'is-big' : ''
     },
 
-    isBoldTitle() {
+    isBoldTitle () {
       return this.description || this.$slots.default ? 'is-bold' : ''
     }
   },
 
   methods: {
-    close() {
+    close () {
       this.visible = false
       this.$emit('close')
     }

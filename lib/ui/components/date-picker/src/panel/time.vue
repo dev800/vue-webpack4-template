@@ -60,7 +60,7 @@ export default {
     timeArrowControl: Boolean
   },
 
-  data() {
+  data () {
     return {
       popperClass: '',
       format: 'HH:mm:ss',
@@ -77,13 +77,13 @@ export default {
   },
 
   computed: {
-    showSeconds() {
+    showSeconds () {
       return (this.format || '').indexOf('ss') !== -1
     },
-    useArrow() {
+    useArrow () {
       return this.arrowControl || this.timeArrowControl || false
     },
-    amPmMode() {
+    amPmMode () {
       if ((this.format || '').indexOf('A') !== -1) return 'A'
       if ((this.format || '').indexOf('a') !== -1) return 'a'
       return ''
@@ -91,7 +91,7 @@ export default {
   },
 
   watch: {
-    visible(val) {
+    visible (val) {
       if (val) {
         this.oldValue = this.value
         this.$nextTick(() => this.$refs.spinner.emitSelectRange('hours'))
@@ -100,7 +100,7 @@ export default {
       }
     },
 
-    value(newVal) {
+    value (newVal) {
       let date
       if (newVal instanceof Date) {
         date = limitTimeRange(newVal, this.selectableRange, this.format)
@@ -115,28 +115,28 @@ export default {
       }
     },
 
-    selectableRange(val) {
+    selectableRange (val) {
       this.$refs.spinner.selectableRange = val
     },
 
-    defaultValue(val) {
+    defaultValue (val) {
       if (!isDate(this.value)) {
         this.date = val ? new Date(val) : new Date()
       }
     }
   },
 
-  mounted() {
+  mounted () {
     this.$nextTick(() => this.handleConfirm(true, true))
     this.$emit('mounted')
   },
 
   methods: {
-    handleCancel() {
+    handleCancel () {
       this.$emit('pick', this.oldValue, false)
     },
 
-    handleChange(date) {
+    handleChange (date) {
       // this.visible avoids edge cases, when use scrolls during panel closing animation
       if (this.visible) {
         this.date = clearMilliseconds(date)
@@ -147,18 +147,18 @@ export default {
       }
     },
 
-    setSelectionRange(start, end) {
+    setSelectionRange (start, end) {
       this.$emit('select-range', start, end)
       this.selectionRange = [start, end]
     },
 
-    handleConfirm(visible = false, first) {
+    handleConfirm (visible = false, first) {
       if (first) return
       const date = clearMilliseconds(limitTimeRange(this.date, this.selectableRange, this.format))
       this.$emit('pick', date, visible, first)
     },
 
-    handleKeydown(event) {
+    handleKeydown (event) {
       const keyCode = event.keyCode
       const mapping = { 38: -1, 40: 1, 37: -1, 39: 1 }
 
@@ -178,15 +178,15 @@ export default {
       }
     },
 
-    isValidValue(date) {
+    isValidValue (date) {
       return timeWithinRange(date, this.selectableRange, this.format)
     },
 
-    adjustSpinners() {
+    adjustSpinners () {
       return this.$refs.spinner.adjustSpinners()
     },
 
-    changeSelectionRange(step) {
+    changeSelectionRange (step) {
       const list = [0, 3].concat(this.showSeconds ? [6] : [])
       const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : [])
       const index = list.indexOf(this.selectionRange[0])

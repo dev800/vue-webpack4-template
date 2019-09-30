@@ -52,7 +52,7 @@
     font-size: $--notification-icon-size;
   }
 
-  @include e(closeBtn) {
+  @include e(close-btn) {
     position: absolute;
     top: 18px;
     right: 15px;

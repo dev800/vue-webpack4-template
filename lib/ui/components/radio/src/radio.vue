@@ -55,11 +55,11 @@ export default {
   mixins: [Emitter],
 
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     },
 
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
@@ -75,13 +75,13 @@ export default {
     size: String
   },
 
-  data() {
+  data () {
     return {
       focus: false
     }
   },
   computed: {
-    isGroup() {
+    isGroup () {
       let parent = this.$parent
       while (parent) {
         if (parent.$options.componentName !== 'FmRadioGroup') {
@@ -94,10 +94,10 @@ export default {
       return false
     },
     model: {
-      get() {
+      get () {
         return this.isGroup ? this._radioGroup.value : this.value
       },
-      set(val) {
+      set (val) {
         if (this.isGroup) {
           this.dispatch('FmRadioGroup', 'input', [val])
         } else {
@@ -106,27 +106,27 @@ export default {
         this.$refs.radio && (this.$refs.radio.checked = this.model === this.label)
       }
     },
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize
+    _fmFormItemSize () {
+      return (this.fmFormItem || {}).fmFormItemSize
     },
-    radioSize() {
-      const temRadioSize = this.size || this._elFormItemSize || (this.$ELEMENT || {}).size
+    radioSize () {
+      const temRadioSize = this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
       return this.isGroup
         ? this._radioGroup.radioGroupSize || temRadioSize
         : temRadioSize
     },
-    isDisabled() {
+    isDisabled () {
       return this.isGroup
-        ? this._radioGroup.disabled || this.disabled || (this.elForm || {}).disabled
-        : this.disabled || (this.elForm || {}).disabled
+        ? this._radioGroup.disabled || this.disabled || (this.fmForm || {}).disabled
+        : this.disabled || (this.fmForm || {}).disabled
     },
-    tabIndex() {
+    tabIndex () {
       return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0
     }
   },
 
   methods: {
-    handleChange() {
+    handleChange () {
       this.$nextTick(() => {
         this.$emit('change', this.model)
         this.isGroup && this.dispatch('FmRadioGroup', 'handleChange', this.model)

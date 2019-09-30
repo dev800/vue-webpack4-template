@@ -22,13 +22,13 @@ export default {
     colors: { type: Array, required: true },
     color: { required: true }
   },
-  data() {
+  data () {
     return {
       rgbaColors: this.parseColors(this.colors, this.color)
     }
   },
   watch: {
-    '$parent.currentColor'(val) {
+    '$parent.currentColor' (val) {
       const color = new Color()
       color.fromString(val)
 
@@ -36,18 +36,18 @@ export default {
         item.selected = color.compare(item)
       })
     },
-    colors(newVal) {
+    colors (newVal) {
       this.rgbaColors = this.parseColors(newVal, this.color)
     },
-    color(newVal) {
+    color (newVal) {
       this.rgbaColors = this.parseColors(this.colors, newVal)
     }
   },
   methods: {
-    handleSelect(index) {
+    handleSelect (index) {
       this.color.fromString(this.colors[index])
     },
-    parseColors(colors, color) {
+    parseColors (colors, color) {
       return colors.map(value => {
         const c = new Color()
         c.enableAlpha = true

@@ -99,13 +99,13 @@ export default {
     renderLabel: Function
   },
 
-  provide() {
+  provide () {
     return {
       panel: this
     }
   },
 
-  data() {
+  data () {
     return {
       checkedValue: null,
       checkedNodePaths: [],
@@ -117,39 +117,39 @@ export default {
   },
 
   computed: {
-    config() {
+    config () {
       return merge({ ...DefaultProps }, this.props || {})
     },
-    multiple() {
+    multiple () {
       return this.config.multiple
     },
-    checkStrictly() {
+    checkStrictly () {
       return this.config.checkStrictly
     },
-    leafOnly() {
+    leafOnly () {
       return !this.checkStrictly
     },
-    isHoverMenu() {
+    isHoverMenu () {
       return this.config.expandTrigger === 'hover'
     },
-    renderLabelFn() {
+    renderLabelFn () {
       return this.renderLabel || this.$scopedSlots.default
     }
   },
 
   watch: {
     options: {
-      handler: function() {
+      handler: function () {
         this.initStore()
       },
       immediate: true,
       deep: true
     },
-    value() {
+    value () {
       this.syncCheckedValue()
       this.checkStrictly && this.calculateCheckedNodePaths()
     },
-    checkedValue(val) {
+    checkedValue (val) {
       if (!isEqual(val, this.value)) {
         this.checkStrictly && this.calculateCheckedNodePaths()
         this.$emit('input', val)
@@ -158,14 +158,14 @@ export default {
     }
   },
 
-  mounted() {
+  mounted () {
     if (!isEmpty(this.value)) {
       this.syncCheckedValue()
     }
   },
 
   methods: {
-    initStore() {
+    initStore () {
       const { config, options } = this
       if (config.lazy && isEmpty(options)) {
         this.lazyLoad()
@@ -175,28 +175,28 @@ export default {
         this.syncMenuState()
       }
     },
-    syncCheckedValue() {
+    syncCheckedValue () {
       const { value, checkedValue } = this
       if (!isEqual(value, checkedValue)) {
         this.checkedValue = value
         this.syncMenuState()
       }
     },
-    syncMenuState() {
+    syncMenuState () {
       const { multiple, checkStrictly } = this
       this.syncActivePath()
       multiple && this.syncMultiCheckState()
       checkStrictly && this.calculateCheckedNodePaths()
       this.$nextTick(this.scrollIntoView)
     },
-    syncMultiCheckState() {
+    syncMultiCheckState () {
       const nodes = this.getFlattedNodes(this.leafOnly)
 
       nodes.forEach(node => {
         node.syncCheckState(this.checkedValue)
       })
     },
-    syncActivePath() {
+    syncActivePath () {
       const { store, multiple, activePath, checkedValue } = this
 
       if (!isEmpty(activePath)) {
@@ -212,10 +212,10 @@ export default {
         this.menus = [store.getNodes()]
       }
     },
-    expandNodes(nodes) {
+    expandNodes (nodes) {
       nodes.forEach(node => this.handleExpand(node, true /* silent */))
     },
-    calculateCheckedNodePaths() {
+    calculateCheckedNodePaths () {
       const { checkedValue, multiple } = this
       const checkedValues = multiple
         ? coerceTruthyValueToArray(checkedValue)
@@ -225,7 +225,7 @@ export default {
         return checkedNode ? checkedNode.pathNodes : []
       })
     },
-    handleKeyDown(e) {
+    handleKeyDown (e) {
       const { target, keyCode } = e
 
       switch (keyCode) {
@@ -261,7 +261,7 @@ export default {
         default:
       }
     },
-    handleExpand(node, silent) {
+    handleExpand (node, silent) {
       const { activePath } = this
       const { level } = node
       const path = activePath.slice(0, level - 1)
@@ -284,10 +284,10 @@ export default {
         }
       }
     },
-    handleCheckChange(value) {
+    handleCheckChange (value) {
       this.checkedValue = value
     },
-    lazyLoad(node, onFullfiled) {
+    lazyLoad (node, onFullfiled) {
       const { config } = this
       if (!node) {
         node = node || { root: true, level: 0 }
@@ -330,11 +330,11 @@ export default {
     /**
      * public methods
     */
-    calculateMultiCheckedValue() {
+    calculateMultiCheckedValue () {
       this.checkedValue = this.getCheckedNodes(this.leafOnly)
         .map(node => node.getValueByOption())
     },
-    scrollIntoView() {
+    scrollIntoView () {
       if (this.$isServer) return
 
       const menus = this.$refs.menu || []
@@ -348,14 +348,14 @@ export default {
         }
       })
     },
-    getNodeByValue(val) {
+    getNodeByValue (val) {
       return this.store.getNodeByValue(val)
     },
-    getFlattedNodes(leafOnly) {
+    getFlattedNodes (leafOnly) {
       const cached = !this.config.lazy
       return this.store.getFlattedNodes(leafOnly, cached)
     },
-    getCheckedNodes(leafOnly) {
+    getCheckedNodes (leafOnly) {
       const { checkedValue, multiple } = this
       if (multiple) {
         const nodes = this.getFlattedNodes(leafOnly)
@@ -366,7 +366,7 @@ export default {
           : [this.getNodeByValue(checkedValue)]
       }
     },
-    clearCheckedNodes() {
+    clearCheckedNodes () {
       const { config, leafOnly } = this
       const { multiple, emitPath } = config
       if (multiple) {

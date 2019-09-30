@@ -26,7 +26,7 @@ export default {
     to: {},
     replace: Boolean
   },
-  data() {
+  data () {
     return {
       separator: '',
       separatorClass: ''
@@ -35,7 +35,7 @@ export default {
 
   inject: ['elBreadcrumb'],
 
-  mounted() {
+  mounted () {
     this.separator = this.elBreadcrumb.separator
     this.separatorClass = this.elBreadcrumb.separatorClass
     const link = this.$refs.link

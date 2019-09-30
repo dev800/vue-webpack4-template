@@ -35,7 +35,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       hover: false,
       translate: 0,
@@ -48,11 +48,11 @@ export default {
   },
 
   computed: {
-    parentDirection() {
+    parentDirection () {
       return this.$parent.direction
     },
 
-    itemStyle() {
+    itemStyle () {
       const translateType = this.parentDirection === 'vertical' ? 'translateY' : 'translateX'
       const value = `${translateType}(${this.translate}px) scale(${this.scale})`
       const style = {
@@ -62,16 +62,16 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.$parent && this.$parent.updateItems()
   },
 
-  destroyed() {
+  destroyed () {
     this.$parent && this.$parent.updateItems()
   },
 
   methods: {
-    processIndex(index, activeIndex, length) {
+    processIndex (index, activeIndex, length) {
       if (activeIndex === 0 && index === length - 1) {
         return -1
       } else if (activeIndex === length - 1 && index === 0) {
@@ -84,7 +84,7 @@ export default {
       return index
     },
 
-    calcCardTranslate(index, activeIndex) {
+    calcCardTranslate (index, activeIndex) {
       const parentWidth = this.$parent.$el.offsetWidth
       if (this.inStage) {
         return parentWidth * ((2 - CARD_SCALE) * (index - activeIndex) + 1) / 4
@@ -95,12 +95,12 @@ export default {
       }
     },
 
-    calcTranslate(index, activeIndex, isVertical) {
+    calcTranslate (index, activeIndex, isVertical) {
       const distance = this.$parent.$el[isVertical ? 'offsetHeight' : 'offsetWidth']
       return distance * (index - activeIndex)
     },
 
-    translateItem(index, activeIndex, oldIndex) {
+    translateItem (index, activeIndex, oldIndex) {
       const parentType = this.$parent.type
       const parentDirection = this.parentDirection
       const length = this.$parent.items.length
@@ -126,7 +126,7 @@ export default {
       this.ready = true
     },
 
-    handleItemClick() {
+    handleItemClick () {
       const parent = this.$parent
       if (parent && parent.type === 'card') {
         const index = parent.items.indexOf(this)

@@ -61,7 +61,7 @@ export default {
   name: 'FmSwitch',
   mixins: [Focus('input'), Migrating, emitter],
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     }
   },
@@ -114,21 +114,21 @@ export default {
     },
     id: String
   },
-  data() {
+  data () {
     return {
       coreWidth: this.width
     }
   },
   computed: {
-    checked() {
+    checked () {
       return this.value === this.activeValue
     },
-    switchDisabled() {
-      return this.disabled || (this.elForm || {}).disabled
+    switchDisabled () {
+      return this.disabled || (this.fmForm || {}).disabled
     }
   },
   watch: {
-    checked() {
+    checked () {
       this.$refs.input.checked = this.checked
       if (this.activeColor || this.inactiveColor) {
         this.setBackgroundColor()
@@ -138,12 +138,12 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     if (!~[this.activeValue, this.inactiveValue].indexOf(this.value)) {
       this.$emit('input', this.inactiveValue)
     }
   },
-  mounted() {
+  mounted () {
     /* istanbul ignore if */
     this.coreWidth = this.width || 40
     if (this.activeColor || this.inactiveColor) {
@@ -152,7 +152,7 @@ export default {
     this.$refs.input.checked = this.checked
   },
   methods: {
-    handleChange(event) {
+    handleChange (event) {
       const val = this.checked ? this.inactiveValue : this.activeValue
       this.$emit('input', val)
       this.$emit('change', val)
@@ -162,15 +162,15 @@ export default {
         this.$refs.input.checked = this.checked
       })
     },
-    setBackgroundColor() {
+    setBackgroundColor () {
       const newColor = this.checked ? this.activeColor : this.inactiveColor
       this.$refs.core.style.borderColor = newColor
       this.$refs.core.style.backgroundColor = newColor
     },
-    switchValue() {
+    switchValue () {
       !this.switchDisabled && this.handleChange()
     },
-    getMigratingConfig() {
+    getMigratingConfig () {
       return {
         props: {
           'on-color': 'on-color is renamed to active-color.',

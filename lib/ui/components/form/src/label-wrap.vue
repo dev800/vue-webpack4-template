@@ -6,37 +6,37 @@ export default {
     updateAll: Boolean
   },
 
-  inject: ['elForm', 'elFormItem'],
+  inject: ['fmForm', 'fmFormItem'],
 
-  data() {
+  data () {
     return {
       computedWidth: 0
     }
   },
 
   watch: {
-    computedWidth(val, oldVal) {
+    computedWidth (val, oldVal) {
       if (this.updateAll) {
-        this.elForm.registerLabelWidth(val, oldVal)
-        this.elFormItem.updateComputedLabelWidth(val)
+        this.fmForm.registerLabelWidth(val, oldVal)
+        this.fmFormItem.updateComputedLabelWidth(val)
       }
     }
   },
 
-  mounted() {
+  mounted () {
     this.updateLabelWidth('update')
   },
 
-  updated() {
+  updated () {
     this.updateLabelWidth('update')
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     this.updateLabelWidth('remove')
   },
 
   methods: {
-    getLabelWidth() {
+    getLabelWidth () {
       if (this.$el && this.$el.firstFmementChild) {
         const computedWidth = window.getComputedStyle(this.$el.firstFmementChild).width
         return Math.ceil(parseFloat(computedWidth))
@@ -44,22 +44,22 @@ export default {
         return 0
       }
     },
-    updateLabelWidth(action = 'update') {
+    updateLabelWidth (action = 'update') {
       if (this.$slots.default && this.isAutoWidth && this.$el.firstFmementChild) {
         if (action === 'update') {
           this.computedWidth = this.getLabelWidth()
         } else if (action === 'remove') {
-          this.elForm.deregisterLabelWidth(this.computedWidth)
+          this.fmForm.deregisterLabelWidth(this.computedWidth)
         }
       }
     }
   },
 
-  render() {
+  render () {
     const slots = this.$slots.default
     if (!slots) return null
     if (this.isAutoWidth) {
-      const autoLabelWidth = this.elForm.autoLabelWidth
+      const autoLabelWidth = this.fmForm.autoLabelWidth
       const style = {}
       if (autoLabelWidth && autoLabelWidth !== 'auto') {
         const marginLeft = parseInt(autoLabelWidth, 10) - this.computedWidth
@@ -68,7 +68,7 @@ export default {
         }
       }
       return (<div class="fm-form-item__labfm-wrap" style={style}>
-        { slots }
+        {slots}
       </div>)
     } else {
       return slots[0]

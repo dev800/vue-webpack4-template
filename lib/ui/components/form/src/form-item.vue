@@ -2,12 +2,12 @@
   <div
     class="fm-form-item"
     :class="[{
-               'fm-form-item--feedback': elForm && elForm.statusIcon,
+               'fm-form-item--feedback': fmForm && fmForm.statusIcon,
                'is-error': validateState === 'error',
                'is-validating': validateState === 'validating',
                'is-success': validateState === 'success',
                'is-required': isRequired || required,
-               'is-no-asterisk': elForm && elForm.hideRequiredAsterisk
+               'is-no-asterisk': fmForm && fmForm.hideRequiredAsterisk
              },
              sizeClass ? 'fm-form-item--' + sizeClass : ''
     ]"
@@ -41,7 +41,7 @@
             :class="{
               'fm-form-item__error--inline': typeof inlineMessage === 'boolean'
                 ? inlineMessage
-                : (elForm && elForm.inlineMessage || false)
+                : (fmForm && fmForm.inlineMessage || false)
             }"
           >
             {{ validateMessage }}
@@ -68,13 +68,13 @@ export default {
 
   mixins: [emitter],
 
-  provide() {
+  provide () {
     return {
-      elFormItem: this
+      fmFormItem: this
     }
   },
 
-  inject: ['elForm'],
+  inject: ['fmForm'],
 
   props: {
     label: String,
@@ -98,7 +98,7 @@ export default {
     },
     size: String
   },
-  data() {
+  data () {
     return {
       validateState: '',
       validateMessage: '',
@@ -109,10 +109,10 @@ export default {
     }
   },
   computed: {
-    labelFor() {
+    labelFor () {
       return this.for || this.prop
     },
-    labelStyle() {
+    labelStyle () {
       const ret = {}
       if (this.form.labelPosition === 'top') return ret
       const labelWidth = this.labelWidth || this.form.labelWidth
@@ -121,7 +121,7 @@ export default {
       }
       return ret
     },
-    contentStyle() {
+    contentStyle () {
       const ret = {}
       const label = this.label
       if (this.form.labelPosition === 'top' || this.form.inline) return ret
@@ -131,14 +131,14 @@ export default {
         if (this.labelWidth === 'auto') {
           ret.marginLeft = this.computedLabelWidth
         } else if (this.form.labelWidth === 'auto') {
-          ret.marginLeft = this.elForm.autoLabelWidth
+          ret.marginLeft = this.fmForm.autoLabelWidth
         }
       } else {
         ret.marginLeft = labelWidth
       }
       return ret
     },
-    form() {
+    form () {
       let parent = this.$parent
       let parentName = parent.$options.componentName
       while (parentName !== 'FmForm') {
@@ -150,7 +150,7 @@ export default {
       }
       return parent
     },
-    fieldValue() {
+    fieldValue () {
       const model = this.form.model
       if (!model || !this.prop) { return }
 
@@ -161,7 +161,7 @@ export default {
 
       return getPropByPath(model, path, true).v
     },
-    isRequired() {
+    isRequired () {
       const rules = this.getRules()
       let isRequired = false
 
@@ -176,29 +176,29 @@ export default {
       }
       return isRequired
     },
-    _formSize() {
-      return this.elForm.size
+    _formSize () {
+      return this.fmForm.size
     },
-    elFormItemSize() {
+    fmFormItemSize () {
       return this.size || this._formSize
     },
-    sizeClass() {
-      return this.elFormItemSize || (this.$ELEMENT || {}).size
+    sizeClass () {
+      return this.fmFormItemSize || (this.$ELEMENT || {}).size
     }
   },
   watch: {
     error: {
       immediate: true,
-      handler(value) {
+      handler (value) {
         this.validateMessage = value
         this.validateState = value ? 'error' : ''
       }
     },
-    validateStatus(value) {
+    validateStatus (value) {
       this.validateState = value
     }
   },
-  mounted() {
+  mounted () {
     if (this.prop) {
       this.dispatch('FmForm', 'el.form.addField', [this])
 
@@ -213,11 +213,11 @@ export default {
       this.addValidateEvents()
     }
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.dispatch('FmForm', 'el.form.removeField', [this])
   },
   methods: {
-    validate(trigger, callback = noop) {
+    validate (trigger, callback = noop) {
       this.validateDisabled = false
       const rules = this.getFilteredRule(trigger)
       if ((!rules || rules.length === 0) && this.required === undefined) {
@@ -245,15 +245,15 @@ export default {
         this.validateMessage = errors ? errors[0].message : ''
 
         callback(this.validateMessage, invalidFields)
-        this.elForm && this.elForm.$emit('validate', this.prop, !errors, this.validateMessage || null)
+        this.fmForm && this.fmForm.$emit('validate', this.prop, !errors, this.validateMessage || null)
       })
     },
-    clearValidate() {
+    clearValidate () {
       this.validateState = ''
       this.validateMessage = ''
       this.validateDisabled = false
     },
-    resetField() {
+    resetField () {
       this.validateState = ''
       this.validateMessage = ''
 
@@ -280,7 +280,7 @@ export default {
 
       this.broadcast('FmTimeSelect', 'fieldReset', this.initialValue)
     },
-    getRules() {
+    getRules () {
       let formRules = this.form.rules
       const selfRules = this.rules
       const requiredRule = this.required !== undefined ? { required: !!this.required } : []
@@ -290,7 +290,7 @@ export default {
 
       return [].concat(selfRules || formRules || []).concat(requiredRule)
     },
-    getFilteredRule(trigger) {
+    getFilteredRule (trigger) {
       const rules = this.getRules()
 
       return rules.filter(rule => {
@@ -302,10 +302,10 @@ export default {
         }
       }).map(rule => objectAssign({}, rule))
     },
-    onFieldBlur() {
+    onFieldBlur () {
       this.validate('blur')
     },
-    onFieldChange() {
+    onFieldChange () {
       if (this.validateDisabled) {
         this.validateDisabled = false
         return
@@ -313,10 +313,10 @@ export default {
 
       this.validate('change')
     },
-    updateComputedLabelWidth(width) {
+    updateComputedLabelWidth (width) {
       this.computedLabelWidth = width ? `${width}px` : ''
     },
-    addValidateEvents() {
+    addValidateEvents () {
       const rules = this.getRules()
 
       if (rules.length || this.required !== undefined) {
@@ -324,7 +324,7 @@ export default {
         this.$on('el.form.change', this.onFieldChange)
       }
     },
-    removeValidateEvents() {
+    removeValidateEvents () {
       this.$off()
     }
   }

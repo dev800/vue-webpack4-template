@@ -37,7 +37,7 @@
 import ImageViewer from './image-viewer'
 import Locale from '../../../js/mixins/locale'
 import { on, off, getScrollContainer, isInContainer } from '../../../js/utils/dom'
-import { isString, isHtmlFmement } from '../../../js/utils/types'
+import { isString, isHtmlElement } from '../../../js/utils/types'
 import { throttle } from 'throttle-debounce'
 
 const isSupportObjectFit = () => document.documentFmement.style.objectFit !== undefined
@@ -169,7 +169,7 @@ export default {
       const { scrollContainer } = this
       let _scrollContainer = null
 
-      if (isHtmlFmement(scrollContainer)) {
+      if (isHtmlElement(scrollContainer)) {
         _scrollContainer = scrollContainer
       } else if (isString(scrollContainer)) {
         _scrollContainer = document.querySelector(scrollContainer)

@@ -34,7 +34,7 @@
 import FmScrollbar from '../../scrollbar'
 import scrollIntoView from '../../../js/utils/scroll-into-view'
 
-const parseTime = function(time) {
+const parseTime = function (time) {
   const values = (time || '').split(':')
   if (values.length >= 2) {
     const hours = parseInt(values[0], 10)
@@ -49,7 +49,7 @@ const parseTime = function(time) {
   return null
 }
 
-const compareTime = function(time1, time2) {
+const compareTime = function (time1, time2) {
   const value1 = parseTime(time1)
   const value2 = parseTime(time2)
 
@@ -63,11 +63,11 @@ const compareTime = function(time1, time2) {
   return minutes1 > minutes2 ? 1 : -1
 }
 
-const formatTime = function(time) {
+const formatTime = function (time) {
   return (time.hours < 10 ? '0' + time.hours : time.hours) + ':' + (time.minutes < 10 ? '0' + time.minutes : time.minutes)
 }
 
-const nextTime = function(time, step) {
+const nextTime = function (time, step) {
   const timeValue = parseTime(time)
   const stepValue = parseTime(step)
 
@@ -88,7 +88,7 @@ const nextTime = function(time, step) {
 export default {
   components: { FmScrollbar },
 
-  data() {
+  data () {
     return {
       popperClass: '',
       start: '09:00',
@@ -104,7 +104,7 @@ export default {
   },
 
   computed: {
-    items() {
+    items () {
       const start = this.start
       const end = this.end
       const step = this.step
@@ -117,7 +117,7 @@ export default {
           result.push({
             value: current,
             disabled: compareTime(current, this.minTime || '-1:-1') <= 0 ||
-                compareTime(current, this.maxTime || '100:100') >= 0
+              compareTime(current, this.maxTime || '100:100') >= 0
           })
           current = nextTime(current, step)
         }
@@ -128,36 +128,36 @@ export default {
   },
 
   watch: {
-    value(val) {
+    value (val) {
       if (!val) return
       this.$nextTick(() => this.scrollToOption())
     }
   },
 
   methods: {
-    handleClick(item) {
+    handleClick (item) {
       if (!item.disabled) {
         this.$emit('pick', item.value)
       }
     },
 
-    handleClear() {
+    handleClear () {
       this.$emit('pick', null)
     },
 
-    scrollToOption(selector = '.selected') {
+    scrollToOption (selector = '.selected') {
       const menu = this.$refs.popper.querySelector('.fm-picker-panel__content')
       scrollIntoView(menu, menu.querySelector(selector))
     },
 
-    handleMenuEnter() {
+    handleMenuEnter () {
       const selected = this.items.map(item => item.value).indexOf(this.value) !== -1
       const hasDefault = this.items.map(item => item.value).indexOf(this.defaultValue) !== -1
       const option = (selected && '.selected') || (hasDefault && '.default') || '.time-select-item:not(.disabled)'
       this.$nextTick(() => this.scrollToOption(option))
     },
 
-    scrollDown(step) {
+    scrollDown (step) {
       const items = this.items
       const length = items.length
       let total = items.length
@@ -171,11 +171,11 @@ export default {
       }
     },
 
-    isValidValue(date) {
+    isValidValue (date) {
       return this.items.filter(item => !item.disabled).map(item => item.value).indexOf(date) !== -1
     },
 
-    handleKeydown(event) {
+    handleKeydown (event) {
       const keyCode = event.keyCode
       if (keyCode === 38 || keyCode === 40) {
         const mapping = { 40: 1, 38: -1 }

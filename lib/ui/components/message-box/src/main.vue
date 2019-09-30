@@ -164,7 +164,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       uid: 1,
       title: undefined,
@@ -199,17 +199,17 @@ export default {
   },
 
   computed: {
-    icon() {
+    icon () {
       const { type, iconClass } = this
       return (
         iconClass || (type && typeMap[type] ? `fm-icon-${typeMap[type]}` : '')
       )
     },
 
-    confirmButtonClasses() {
+    confirmButtonClasses () {
       return `fm-button--primary ${this.confirmButtonClass}`
     },
-    cancelButtonClasses() {
+    cancelButtonClasses () {
       return `${this.cancelButtonClass}`
     }
   },
@@ -217,7 +217,7 @@ export default {
   watch: {
     inputValue: {
       immediate: true,
-      handler(val) {
+      handler (val) {
         this.$nextTick(_ => {
           if (this.$type === 'prompt' && val !== null) {
             this.validate()
@@ -226,7 +226,7 @@ export default {
       }
     },
 
-    visible(val) {
+    visible (val) {
       if (val) {
         this.uid++
         if (this.$type === 'alert' || this.$type === 'confirm') {
@@ -257,7 +257,7 @@ export default {
     }
   },
 
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
       if (this.closeOnHashChange) {
         window.addEventListener('hashchange', this.close)
@@ -265,7 +265,7 @@ export default {
     })
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     if (this.closeOnHashChange) {
       window.removeEventListener('hashchange', this.close)
     }
@@ -275,7 +275,7 @@ export default {
   },
 
   methods: {
-    getSafeClose() {
+    getSafeClose () {
       const currentId = this.uid
       return () => {
         this.$nextTick(() => {
@@ -283,7 +283,7 @@ export default {
         })
       }
     },
-    doClose() {
+    doClose () {
       if (!this.visible) return
       this.visible = false
       this._closing = true
@@ -300,19 +300,19 @@ export default {
       })
     },
 
-    handleWrapperClick() {
+    handleWrapperClick () {
       if (this.closeOnClickModal) {
         this.handleAction(this.distinguishCancelAndClose ? 'close' : 'cancel')
       }
     },
 
-    handleInputEnter() {
+    handleInputEnter () {
       if (this.inputType !== 'textarea') {
         return this.handleAction('confirm')
       }
     },
 
-    handleAction(action) {
+    handleAction (action) {
       if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
         return
       }
@@ -325,7 +325,7 @@ export default {
       }
     },
 
-    validate() {
+    validate () {
       if (this.$type === 'prompt') {
         const inputPattern = this.inputPattern
         if (inputPattern && !inputPattern.test(this.inputValue || '')) {
@@ -354,18 +354,18 @@ export default {
       removeClass(this.getInputFmement(), 'invalid')
       return true
     },
-    getFirstFocus() {
+    getFirstFocus () {
       const btn = this.$el.querySelector('.fm-message-box__btns .fm-button')
       const title = this.$el.querySelector(
         '.fm-message-box__btns .fm-message-box__title'
       )
       return btn || title
     },
-    getInputFmement() {
+    getInputFmement () {
       const inputRefs = this.$refs.input.$refs
       return inputRefs.input || inputRefs.textarea
     },
-    handleClose() {
+    handleClose () {
       this.handleAction('close')
     }
   }

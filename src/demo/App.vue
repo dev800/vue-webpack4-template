@@ -38,12 +38,10 @@ export default {
     'fm-footer': FmFooter,
     'fm-main': FmMain
   },
-  data() {
-    return {
-    }
+  data () {
+    return {}
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 

@@ -39,7 +39,7 @@ const clearDate = (date) => {
   return new Date(date.getFullYear(), date.getMonth())
 }
 
-const getMonthTimestamp = function(time) {
+const getMonthTimestamp = function (time) {
   if (typeof time === 'number' || typeof time === 'string') {
     return clearDate(new Date(time)).getTime()
   } else if (time instanceof Date) {
@@ -61,14 +61,14 @@ export default {
 
     maxDate: {},
     defaultValue: {
-      validator(val) {
+      validator (val) {
         // null or valid Date Object
         return val === null || isDate(val) || (Array.isArray(val) && val.every(isDate))
       }
     },
     date: {},
     rangeState: {
-      default() {
+      default () {
         return {
           endDate: null,
           selecting: false
@@ -77,7 +77,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       months: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
       tableRows: [[], [], []],
@@ -87,7 +87,7 @@ export default {
   },
 
   computed: {
-    rows() {
+    rows () {
       // TODO: refactory rows / getCellClasses
       const rows = this.tableRows
       const disabledDate = this.disabledDate
@@ -127,17 +127,17 @@ export default {
   },
 
   watch: {
-    'rangeState.endDate'(newVal) {
+    'rangeState.endDate' (newVal) {
       this.markRange(this.minDate, newVal)
     },
 
-    minDate(newVal, oldVal) {
+    minDate (newVal, oldVal) {
       if (getMonthTimestamp(newVal) !== getMonthTimestamp(oldVal)) {
         this.markRange(this.minDate, this.maxDate)
       }
     },
 
-    maxDate(newVal, oldVal) {
+    maxDate (newVal, oldVal) {
       if (getMonthTimestamp(newVal) !== getMonthTimestamp(oldVal)) {
         this.markRange(this.minDate, this.maxDate)
       }
@@ -145,11 +145,11 @@ export default {
   },
 
   methods: {
-    cellMatchesDate(cell, date) {
+    cellMatchesDate (cell, date) {
       const value = new Date(date)
       return this.date.getFullYear() === value.getFullYear() && Number(cell.text) === value.getMonth()
     },
-    getCellStyle(cell) {
+    getCellStyle (cell) {
       const style = {}
       const year = this.date.getFullYear()
       const today = new Date()
@@ -175,11 +175,11 @@ export default {
       }
       return style
     },
-    getMonthOfCell(month) {
+    getMonthOfCell (month) {
       const year = this.date.getFullYear()
       return new Date(year, month, 1)
     },
-    markRange(minDate, maxDate) {
+    markRange (minDate, maxDate) {
       minDate = getMonthTimestamp(minDate)
       maxDate = getMonthTimestamp(maxDate) || minDate;
       [minDate, maxDate] = [Math.min(minDate, maxDate), Math.max(minDate, maxDate)]
@@ -197,7 +197,7 @@ export default {
         }
       }
     },
-    handleMouseMove(event) {
+    handleMouseMove (event) {
       if (!this.rangeState.selecting) return
 
       let target = event.target
@@ -229,7 +229,7 @@ export default {
         })
       }
     },
-    handleMonthTableClick(event) {
+    handleMonthTableClick (event) {
       let target = event.target
       if (target.tagName === 'A') {
         target = target.parentNode.parentNode

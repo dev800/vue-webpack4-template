@@ -44,10 +44,10 @@ export default {
   mixins: [Emitter],
 
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     },
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
@@ -57,21 +57,21 @@ export default {
     disabled: Boolean,
     name: String
   },
-  data() {
+  data () {
     return {
       focus: false
     }
   },
   computed: {
     value: {
-      get() {
+      get () {
         return this._radioGroup.value
       },
-      set(value) {
+      set (value) {
         this._radioGroup.$emit('input', value)
       }
     },
-    _radioGroup() {
+    _radioGroup () {
       let parent = this.$parent
       while (parent) {
         if (parent.$options.componentName !== 'FmRadioGroup') {
@@ -82,7 +82,7 @@ export default {
       }
       return false
     },
-    activeStyle() {
+    activeStyle () {
       return {
         backgroundColor: this._radioGroup.fill || '',
         borderColor: this._radioGroup.fill || '',
@@ -90,22 +90,22 @@ export default {
         color: this._radioGroup.textColor || ''
       }
     },
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize
+    _fmFormItemSize () {
+      return (this.fmFormItem || {}).fmFormItemSize
     },
-    size() {
-      return this._radioGroup.radioGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size
+    size () {
+      return this._radioGroup.radioGroupSize || this._fmFormItemSize || (this.$ELEMENT || {}).size
     },
-    isDisabled() {
-      return this.disabled || this._radioGroup.disabled || (this.elForm || {}).disabled
+    isDisabled () {
+      return this.disabled || this._radioGroup.disabled || (this.fmForm || {}).disabled
     },
-    tabIndex() {
+    tabIndex () {
       return (this.isDisabled || (this._radioGroup && this.value !== this.label)) ? -1 : 0
     }
   },
 
   methods: {
-    handleChange() {
+    handleChange () {
       this.$nextTick(() => {
         this.dispatch('FmRadioGroup', 'handleChange', this.value)
       })

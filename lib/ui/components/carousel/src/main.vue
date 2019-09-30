@@ -104,13 +104,13 @@ export default {
     direction: {
       type: String,
       default: 'horizontal',
-      validator(val) {
+      validator (val) {
         return ['horizontal', 'vertical'].indexOf(val) !== -1
       }
     }
   },
 
-  data() {
+  data () {
     return {
       items: [],
       activeIndex: -1,
@@ -121,15 +121,15 @@ export default {
   },
 
   computed: {
-    arrowDisplay() {
+    arrowDisplay () {
       return this.arrow !== 'never' && this.direction !== 'vertical'
     },
 
-    hasLabel() {
+    hasLabel () {
       return this.items.some(item => item.label.toString().length > 0)
     },
 
-    carouselClasses() {
+    carouselClasses () {
       const classes = ['fm-carousel', 'fm-carousfm--' + this.direction]
       if (this.type === 'card') {
         classes.push('fm-carousfm--card')
@@ -137,7 +137,7 @@ export default {
       return classes
     },
 
-    indicatorsClasses() {
+    indicatorsClasses () {
       const classes = ['fm-carousel__indicators', 'fm-carousel__indicators--' + this.direction]
       if (this.hasLabel) {
         classes.push('fm-carousel__indicators--labels')
@@ -150,27 +150,27 @@ export default {
   },
 
   watch: {
-    items(val) {
+    items (val) {
       if (val.length > 0) this.setActiveItem(this.initialIndex)
     },
 
-    activeIndex(val, oldVal) {
+    activeIndex (val, oldVal) {
       this.resetItemPosition(oldVal)
       if (oldVal > -1) {
         this.$emit('change', val, oldVal)
       }
     },
 
-    autoplay(val) {
+    autoplay (val) {
       val ? this.startTimer() : this.pauseTimer()
     },
 
-    loop() {
+    loop () {
       this.setActiveItem(this.activeIndex)
     }
   },
 
-  created() {
+  created () {
     this.throttledArrowClick = throttle(300, true, index => {
       this.setActiveItem(index)
     })
@@ -179,7 +179,7 @@ export default {
     })
   },
 
-  mounted() {
+  mounted () {
     this.updateItems()
     this.$nextTick(() => {
       addResizeListener(this.$el, this.resetItemPosition)
@@ -190,35 +190,35 @@ export default {
     })
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     if (this.$el) removeResizeListener(this.$el, this.resetItemPosition)
     this.pauseTimer()
   },
 
   methods: {
-    handleMouseEnter() {
+    handleMouseEnter () {
       this.hover = true
       this.pauseTimer()
     },
 
-    handleMouseLeave() {
+    handleMouseLeave () {
       this.hover = false
       this.startTimer()
     },
 
-    itemInStage(item, index) {
+    itemInStage (item, index) {
       const length = this.items.length
-      if (index === length - 1 && item.inStage && this.items[0].active ||
+      if ((index === length - 1 && item.inStage && this.items[0].active) ||
         (item.inStage && this.items[index + 1] && this.items[index + 1].active)) {
         return 'left'
-      } else if (index === 0 && item.inStage && this.items[length - 1].active ||
+      } else if ((index === 0 && item.inStage && this.items[length - 1].active) ||
         (item.inStage && this.items[index - 1] && this.items[index - 1].active)) {
         return 'right'
       }
       return false
     },
 
-    handleButtonEnter(arrow) {
+    handleButtonEnter (arrow) {
       if (this.direction === 'vertical') return
       this.items.forEach((item, index) => {
         if (arrow === this.itemInStage(item, index)) {
@@ -227,24 +227,24 @@ export default {
       })
     },
 
-    handleButtonLeave() {
+    handleButtonLeave () {
       if (this.direction === 'vertical') return
       this.items.forEach(item => {
         item.hover = false
       })
     },
 
-    updateItems() {
+    updateItems () {
       this.items = this.$children.filter(child => child.$options.name === 'FmCarouselItem')
     },
 
-    resetItemPosition(oldIndex) {
+    resetItemPosition (oldIndex) {
       this.items.forEach((item, index) => {
         item.translateItem(index, this.activeIndex, oldIndex)
       })
     },
 
-    playSlides() {
+    playSlides () {
       if (this.activeIndex < this.items.length - 1) {
         this.activeIndex++
       } else if (this.loop) {
@@ -252,19 +252,19 @@ export default {
       }
     },
 
-    pauseTimer() {
+    pauseTimer () {
       if (this.timer) {
         clearInterval(this.timer)
         this.timer = null
       }
     },
 
-    startTimer() {
+    startTimer () {
       if (this.interval <= 0 || !this.autoplay || this.timer) return
       this.timer = setInterval(this.playSlides, this.interval)
     },
 
-    setActiveItem(index) {
+    setActiveItem (index) {
       if (typeof index === 'string') {
         const filteredItems = this.items.filter(item => item.name === index)
         if (filteredItems.length > 0) {
@@ -290,19 +290,19 @@ export default {
       }
     },
 
-    prev() {
+    prev () {
       this.setActiveItem(this.activeIndex - 1)
     },
 
-    next() {
+    next () {
       this.setActiveItem(this.activeIndex + 1)
     },
 
-    handleIndicatorClick(index) {
+    handleIndicatorClick (index) {
       this.activeIndex = index
     },
 
-    handleIndicatorHover(index) {
+    handleIndicatorHover (index) {
       if (this.trigger === 'hover' && index !== this.activeIndex) {
         this.activeIndex = index
       }

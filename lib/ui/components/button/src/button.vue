@@ -25,7 +25,8 @@
       v-if="icon && !loading"
       :class="icon"
     />
-    <span v-if="$slots.default"><slot /></span>
+    <span v-if="$slots.default">
+      <slot /></span>
   </button>
 </template>
 <script>
@@ -33,10 +34,10 @@ export default {
   name: 'FmButton',
 
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     },
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
@@ -67,19 +68,19 @@ export default {
   },
 
   computed: {
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize
+    _fmFormItemSize () {
+      return (this.fmFormItem || {}).fmFormItemSize
     },
-    buttonSize() {
-      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size
+    buttonSize () {
+      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
     },
-    buttonDisabled() {
-      return this.disabled || (this.elForm || {}).disabled
+    buttonDisabled () {
+      return this.disabled || (this.fmForm || {}).disabled
     }
   },
 
   methods: {
-    handleClick(evt) {
+    handleClick (evt) {
       this.$emit('click', evt)
     }
   }

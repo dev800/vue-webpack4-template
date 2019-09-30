@@ -91,12 +91,12 @@ export default {
     value: [Date, String, Number],
     range: {
       type: Array,
-      validator(range) {
+      validator (range) {
         if (Array.isArray(range)) {
           return range.length === 2 && range.every(
             item => typeof item === 'string' ||
-            typeof item === 'number' ||
-            item instanceof Date)
+              typeof item === 'number' ||
+              item instanceof Date)
         } else {
           return true
         }
@@ -108,13 +108,13 @@ export default {
     }
   },
 
-  provide() {
+  provide () {
     return {
       elCalendar: this
     }
   },
 
-  data() {
+  data () {
     return {
       selectedDay: '',
       now: new Date()
@@ -122,48 +122,48 @@ export default {
   },
 
   computed: {
-    prevMonthDatePrefix() {
+    prevMonthDatePrefix () {
       const temp = new Date(this.date.getTime())
       temp.setDate(0)
       return fecha.format(temp, 'yyyy-MM')
     },
 
-    curMonthDatePrefix() {
+    curMonthDatePrefix () {
       return fecha.format(this.date, 'yyyy-MM')
     },
 
-    nextMonthDatePrefix() {
+    nextMonthDatePrefix () {
       const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1)
       return fecha.format(temp, 'yyyy-MM')
     },
 
-    formatedDate() {
+    formatedDate () {
       return fecha.format(this.date, 'yyyy-MM-dd')
     },
 
-    i18nDate() {
+    i18nDate () {
       const year = this.date.getFullYear()
       const month = this.date.getMonth() + 1
       return `${year} ${this.t('el.datepicker.year')} ${this.t('el.datepicker.month' + month)}`
     },
 
-    formatedToday() {
+    formatedToday () {
       return fecha.format(this.now, 'yyyy-MM-dd')
     },
 
     realSelectedDay: {
-      get() {
+      get () {
         if (!this.value) return this.selectedDay
         return this.formatedDate
       },
-      set(val) {
+      set (val) {
         this.selectedDay = val
         const date = new Date(val)
         this.$emit('input', date)
       }
     },
 
-    date() {
+    date () {
       if (!this.value) {
         if (this.realSelectedDay) {
           const d = this.selectedDay.split('-')
@@ -178,7 +178,7 @@ export default {
     },
 
     // if range is valid, we get a two-digit array
-    validatedRange() {
+    validatedRange () {
       let range = this.range
       if (!range) return []
       range = range.reduce((prev, val, index) => {
@@ -236,7 +236,7 @@ export default {
       return []
     },
 
-    realFirstDayOfWeek() {
+    realFirstDayOfWeek () {
       if (this.firstDayOfWeek < 1 || this.firstDayOfWeek > 6) {
         return 0
       }
@@ -245,11 +245,11 @@ export default {
   },
 
   methods: {
-    pickDay(day) {
+    pickDay (day) {
       this.realSelectedDay = day
     },
 
-    selectDate(type) {
+    selectDate (type) {
       if (validTypes.indexOf(type) === -1) {
         throw new Error(`invalid type ${type}`)
       }
@@ -266,14 +266,14 @@ export default {
       this.pickDay(day)
     },
 
-    toDate(val) {
+    toDate (val) {
       if (!val) {
         throw new Error('invalid val')
       }
       return val instanceof Date ? val : new Date(val)
     },
 
-    rangeValidator(date, isStart) {
+    rangeValidator (date, isStart) {
       const firstDayOfWeek = this.realFirstDayOfWeek
       const expected = isStart ? firstDayOfWeek : (firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1)
       const message = `${isStart ? 'start' : 'end'} of range should be ${weekDays[expected]}.`

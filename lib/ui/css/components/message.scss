@@ -79,7 +79,7 @@
     }
   }
 
-  @include e(closeBtn) {
+  @include e(close-btn) {
     position: absolute;
     top: 50%;
     right: 15px;

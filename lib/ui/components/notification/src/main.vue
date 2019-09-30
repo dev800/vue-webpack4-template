@@ -38,7 +38,7 @@
         </div>
         <div
           v-if="showClose"
-          class="fm-notification__closeBtn fm-icon-close"
+          class="fm-notification__close-btn fm-icon-close"
           @click.stop="close"
         />
       </div>
@@ -55,7 +55,7 @@ const typeMap = {
 }
 
 export default {
-  data() {
+  data () {
     return {
       visible: false,
       title: '',
@@ -76,19 +76,19 @@ export default {
   },
 
   computed: {
-    typeClass() {
+    typeClass () {
       return this.type && typeMap[this.type] ? `fm-icon-${typeMap[this.type]}` : ''
     },
 
-    horizontalClass() {
+    horizontalClass () {
       return this.position.indexOf('right') > -1 ? 'right' : 'left'
     },
 
-    verticalProperty() {
+    verticalProperty () {
       return /^top-/.test(this.position) ? 'top' : 'bottom'
     },
 
-    positionStyle() {
+    positionStyle () {
       return {
         [this.verticalProperty]: `${this.verticalOffset}px`
       }
@@ -96,14 +96,14 @@ export default {
   },
 
   watch: {
-    closed(newVal) {
+    closed (newVal) {
       if (newVal) {
         this.visible = false
         this.$el.addEventListener('transitionend', this.destroyFmement)
       }
     }
   },
-  mounted() {
+  mounted () {
     if (this.duration > 0) {
       this.timer = setTimeout(() => {
         if (!this.closed) {
@@ -113,35 +113,35 @@ export default {
     }
     document.addEventListener('keydown', this.keydown)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     document.removeEventListener('keydown', this.keydown)
   },
 
   methods: {
-    destroyFmement() {
+    destroyFmement () {
       this.$el.removeEventListener('transitionend', this.destroyFmement)
       this.$destroy(true)
       this.$el.parentNode.removeChild(this.$el)
     },
 
-    click() {
+    click () {
       if (typeof this.onClick === 'function') {
         this.onClick()
       }
     },
 
-    close() {
+    close () {
       this.closed = true
       if (typeof this.onClose === 'function') {
         this.onClose()
       }
     },
 
-    clearTimer() {
+    clearTimer () {
       clearTimeout(this.timer)
     },
 
-    startTimer() {
+    startTimer () {
       if (this.duration > 0) {
         this.timer = setTimeout(() => {
           if (!this.closed) {
@@ -150,7 +150,7 @@ export default {
         }, this.duration)
       }
     },
-    keydown(e) {
+    keydown (e) {
       if (e.keyCode === 46 || e.keyCode === 8) {
         this.clearTimer() // detele 取消倒计时
       } else if (e.keyCode === 27) { // esc关闭消息

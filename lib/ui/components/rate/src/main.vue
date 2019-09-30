@@ -50,7 +50,7 @@ export default {
   mixins: [Migrating],
 
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     }
   },
@@ -74,7 +74,7 @@ export default {
     },
     colors: {
       type: [Array, Object],
-      default() {
+      default () {
         return ['#F7BA2A', '#F7BA2A', '#F7BA2A']
       }
     },
@@ -88,7 +88,7 @@ export default {
     },
     iconClasses: {
       type: [Array, Object],
-      default() {
+      default () {
         return ['fm-icon-star-on', 'fm-icon-star-on', 'fm-icon-star-on']
       }
     },
@@ -122,7 +122,7 @@ export default {
     },
     texts: {
       type: Array,
-      default() {
+      default () {
         return ['极差', '失望', '一般', '满意', '惊喜']
       }
     },
@@ -132,7 +132,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       pointerAtLeftHalf: true,
       currentValue: this.value,
@@ -141,7 +141,7 @@ export default {
   },
 
   computed: {
-    text() {
+    text () {
       let result = ''
       if (this.showScore) {
         result = this.scoreTemplate.replace(/\{\s*value\s*\}/, this.rateDisabled
@@ -153,7 +153,7 @@ export default {
       return result
     },
 
-    decimalStyle() {
+    decimalStyle () {
       let width = ''
       if (this.rateDisabled) {
         width = `${this.valueDecimal}%`
@@ -166,11 +166,11 @@ export default {
       }
     },
 
-    valueDecimal() {
+    valueDecimal () {
       return this.value * 100 - Math.floor(this.value) * 100
     },
 
-    classMap() {
+    classMap () {
       return Array.isArray(this.iconClasses)
         ? {
           [this.lowThreshold]: this.iconClasses[0],
@@ -179,19 +179,19 @@ export default {
         } : this.iconClasses
     },
 
-    decimalIconClass() {
+    decimalIconClass () {
       return this.getValueFromMap(this.value, this.classMap)
     },
 
-    voidClass() {
+    voidClass () {
       return this.rateDisabled ? this.disabledVoidIconClass : this.voidIconClass
     },
 
-    activeClass() {
+    activeClass () {
       return this.getValueFromMap(this.currentValue, this.classMap)
     },
 
-    colorMap() {
+    colorMap () {
       return Array.isArray(this.colors)
         ? {
           [this.lowThreshold]: this.colors[0],
@@ -200,11 +200,11 @@ export default {
         } : this.colors
     },
 
-    activeColor() {
+    activeColor () {
       return this.getValueFromMap(this.currentValue, this.colorMap)
     },
 
-    classes() {
+    classes () {
       const result = []
       let i = 0
       let threshold = this.currentValue
@@ -220,26 +220,26 @@ export default {
       return result
     },
 
-    rateDisabled() {
-      return this.disabled || (this.elForm || {}).disabled
+    rateDisabled () {
+      return this.disabled || (this.fmForm || {}).disabled
     }
   },
 
   watch: {
-    value(val) {
+    value (val) {
       this.currentValue = val
       this.pointerAtLeftHalf = this.value !== Math.floor(this.value)
     }
   },
 
-  created() {
+  created () {
     if (!this.value) {
       this.$emit('input', 0)
     }
   },
 
   methods: {
-    getMigratingConfig() {
+    getMigratingConfig () {
       return {
         props: {
           'text-template': 'text-template is renamed to score-template.'
@@ -247,7 +247,7 @@ export default {
       }
     },
 
-    getValueFromMap(value, map) {
+    getValueFromMap (value, map) {
       const matchedKeys = Object.keys(map)
         .filter(key => {
           const val = map[key]
@@ -259,24 +259,24 @@ export default {
       return isObject(matchedValue) ? matchedValue.value : (matchedValue || '')
     },
 
-    showDecimalIcon(item) {
+    showDecimalIcon (item) {
       const showWhenDisabled = this.rateDisabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value
       /* istanbul ignore next */
       const showWhenAllowHalf = this.allowHalf &&
-          this.pointerAtLeftHalf &&
-          item - 0.5 <= this.currentValue &&
-          item > this.currentValue
+        this.pointerAtLeftHalf &&
+        item - 0.5 <= this.currentValue &&
+        item > this.currentValue
       return showWhenDisabled || showWhenAllowHalf
     },
 
-    getIconStyle(item) {
+    getIconStyle (item) {
       const voidColor = this.rateDisabled ? this.disabledVoidColor : this.voidColor
       return {
         color: item <= this.currentValue ? this.activeColor : voidColor
       }
     },
 
-    selectValue(value) {
+    selectValue (value) {
       if (this.rateDisabled) {
         return
       }
@@ -289,7 +289,7 @@ export default {
       }
     },
 
-    handleKey(e) {
+    handleKey (e) {
       if (this.rateDisabled) {
         return
       }
@@ -319,7 +319,7 @@ export default {
       this.$emit('change', currentValue)
     },
 
-    setCurrentValue(value, event) {
+    setCurrentValue (value, event) {
       if (this.rateDisabled) {
         return
       }
@@ -340,7 +340,7 @@ export default {
       this.hoverIndex = value
     },
 
-    resetCurrentValue() {
+    resetCurrentValue () {
       if (this.rateDisabled) {
         return
       }

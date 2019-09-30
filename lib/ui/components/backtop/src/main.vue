@@ -43,7 +43,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       el: null,
       container: null,
@@ -52,26 +52,26 @@ export default {
   },
 
   computed: {
-    styleBottom() {
+    styleBottom () {
       return `${this.bottom}px`
     },
-    styleRight() {
+    styleRight () {
       return `${this.right}px`
     }
   },
 
-  mounted() {
+  mounted () {
     this.init()
     this.throttledScrollHandler = throttle(300, this.onScroll)
     this.container.addEventListener('scroll', this.throttledScrollHandler)
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     this.container.removeEventListener('scroll', this.throttledScrollHandler)
   },
 
   methods: {
-    init() {
+    init () {
       this.container = document
       this.el = document.documentFmement
       if (this.target) {
@@ -82,15 +82,15 @@ export default {
         this.container = this.el
       }
     },
-    onScroll() {
+    onScroll () {
       const scrollTop = this.el.scrollTop
       this.visible = scrollTop >= this.visibilityHeight
     },
-    handleClick(e) {
+    handleClick (e) {
       this.scrollToTop()
       this.$emit('click', e)
     },
-    scrollToTop() {
+    scrollToTop () {
       const el = this.el
       const beginTime = Date.now()
       const beginValue = el.scrollTop

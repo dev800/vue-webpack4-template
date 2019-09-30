@@ -40,7 +40,7 @@
       </slot>
       <i
         v-if="showClose"
-        class="fm-message__closeBtn fm-icon-close"
+        class="fm-message__close-btn fm-icon-close"
         @click="close"
       />
     </div>
@@ -56,7 +56,7 @@ const typeMap = {
 }
 
 export default {
-  data() {
+  data () {
     return {
       visible: false,
       message: '',
@@ -75,12 +75,12 @@ export default {
   },
 
   computed: {
-    typeClass() {
+    typeClass () {
       return this.type && !this.iconClass
         ? `fm-message__icon fm-icon-${typeMap[this.type]}`
         : ''
     },
-    positionStyle() {
+    positionStyle () {
       return {
         top: `${this.verticalOffset}px`
       }
@@ -88,38 +88,38 @@ export default {
   },
 
   watch: {
-    closed(newVal) {
+    closed (newVal) {
       if (newVal) {
         this.visible = false
       }
     }
   },
-  mounted() {
+  mounted () {
     this.startTimer()
     document.addEventListener('keydown', this.keydown)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     document.removeEventListener('keydown', this.keydown)
   },
 
   methods: {
-    handleAfterLeave() {
+    handleAfterLeave () {
       this.$destroy(true)
       this.$el.parentNode.removeChild(this.$el)
     },
 
-    close() {
+    close () {
       this.closed = true
       if (typeof this.onClose === 'function') {
         this.onClose(this)
       }
     },
 
-    clearTimer() {
+    clearTimer () {
       clearTimeout(this.timer)
     },
 
-    startTimer() {
+    startTimer () {
       if (this.duration > 0) {
         this.timer = setTimeout(() => {
           if (!this.closed) {
@@ -128,8 +128,9 @@ export default {
         }, this.duration)
       }
     },
-    keydown(e) {
-      if (e.keyCode === 27) { // esc关闭消息
+    keydown (e) {
+      if (e.keyCode === 27) {
+        // esc关闭消息
         if (!this.closed) {
           this.close()
         }

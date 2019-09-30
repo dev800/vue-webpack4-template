@@ -33,7 +33,7 @@ export default {
     vertical: Boolean
   },
 
-  data() {
+  data () {
     return {
       thumbLeft: 0,
       thumbTop: 0
@@ -41,19 +41,19 @@ export default {
   },
 
   computed: {
-    hueValue() {
+    hueValue () {
       const hue = this.color.get('hue')
       return hue
     }
   },
 
   watch: {
-    hueValue() {
+    hueValue () {
       this.update()
     }
   },
 
-  mounted() {
+  mounted () {
     const { bar, thumb } = this.$refs
 
     const dragConfig = {
@@ -71,7 +71,7 @@ export default {
   },
 
   methods: {
-    handleClick(event) {
+    handleClick (event) {
       const thumb = this.$refs.thumb
       const target = event.target
 
@@ -80,7 +80,7 @@ export default {
       }
     },
 
-    handleDrag(event) {
+    handleDrag (event) {
       const rect = this.$el.getBoundingClientRect()
       const { thumb } = this.$refs
       let hue
@@ -102,7 +102,7 @@ export default {
       this.color.set('hue', hue)
     },
 
-    getThumbLeft() {
+    getThumbLeft () {
       if (this.vertical) return 0
       const el = this.$el
       const hue = this.color.get('hue')
@@ -112,7 +112,7 @@ export default {
       return Math.round(hue * (el.offsetWidth - thumb.offsetWidth / 2) / 360)
     },
 
-    getThumbTop() {
+    getThumbTop () {
       if (!this.vertical) return 0
       const el = this.$el
       const hue = this.color.get('hue')
@@ -122,7 +122,7 @@ export default {
       return Math.round(hue * (el.offsetHeight - thumb.offsetHeight / 2) / 360)
     },
 
-    update() {
+    update () {
       this.thumbLeft = this.getThumbLeft()
       this.thumbTop = this.getThumbTop()
     }

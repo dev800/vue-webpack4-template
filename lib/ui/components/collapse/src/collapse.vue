@@ -17,43 +17,43 @@ export default {
     accordion: Boolean,
     value: {
       type: [Array, String, Number],
-      default() {
+      default () {
         return []
       }
     }
   },
 
-  data() {
+  data () {
     return {
       activeNames: [].concat(this.value)
     }
   },
 
-  provide() {
+  provide () {
     return {
       collapse: this
     }
   },
 
   watch: {
-    value(value) {
+    value (value) {
       this.activeNames = [].concat(value)
     }
   },
 
-  created() {
+  created () {
     this.$on('item-click', this.handleItemClick)
   },
 
   methods: {
-    setActiveNames(activeNames) {
+    setActiveNames (activeNames) {
       activeNames = [].concat(activeNames)
       const value = this.accordion ? activeNames[0] : activeNames
       this.activeNames = activeNames
       this.$emit('input', value)
       this.$emit('change', value)
     },
-    handleItemClick(item) {
+    handleItemClick (item) {
       if (this.accordion) {
         this.setActiveNames(
           (this.activeNames[0] || this.activeNames[0] === 0) &&

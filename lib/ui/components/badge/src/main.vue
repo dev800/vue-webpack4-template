@@ -29,14 +29,14 @@ export default {
     hidden: Boolean,
     type: {
       type: String,
-      validator(val) {
+      validator (val) {
         return ['primary', 'success', 'warning', 'info', 'danger'].indexOf(val) > -1
       }
     }
   },
 
   computed: {
-    content() {
+    content () {
       if (this.isDot) return
 
       const value = this.value

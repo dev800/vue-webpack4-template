@@ -188,16 +188,16 @@ export default {
   componentName: 'FmSelect',
 
   inject: {
-    elForm: {
+    fmForm: {
       default: ''
     },
 
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
 
-  provide() {
+  provide () {
     return {
       select: this
     }
@@ -216,9 +216,9 @@ export default {
     /** @Deprecated in next major version */
     autoComplete: {
       type: String,
-      validator(val) {
+      validator (val) {
         process.env.NODE_ENV !== 'production' &&
-            console.warn('[Fmement Warn][Select]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.')
+          console.warn('[Fmement Warn][Select]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.')
         return true
       }
     },
@@ -243,7 +243,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default() {
+      default () {
         return t('el.select.placeholder')
       }
     },
@@ -260,7 +260,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       options: [],
       cachedOptions: [],
@@ -288,34 +288,34 @@ export default {
   },
 
   computed: {
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize
+    _fmFormItemSize () {
+      return (this.fmFormItem || {}).fmFormItemSize
     },
 
-    readonly() {
+    readonly () {
       return !this.filterable || this.multiple || (!isIE() && !isEdge() && !this.visible)
     },
 
-    showClose() {
+    showClose () {
       const hasValue = this.multiple
         ? Array.isArray(this.value) && this.value.length > 0
         : this.value !== undefined && this.value !== null && this.value !== ''
       const criteria = this.clearable &&
-          !this.selectDisabled &&
-          this.inputHovering &&
-          hasValue
+        !this.selectDisabled &&
+        this.inputHovering &&
+        hasValue
       return criteria
     },
 
-    iconClass() {
+    iconClass () {
       return this.remote && this.filterable ? '' : (this.visible ? 'arrow-up is-reverse' : 'arrow-up')
     },
 
-    debounce() {
+    debounce () {
       return this.remote ? 300 : 0
     },
 
-    emptyText() {
+    emptyText () {
       if (this.loading) {
         return this.loadingText || this.t('el.select.loading')
       } else {
@@ -330,21 +330,21 @@ export default {
       return null
     },
 
-    showNewOption() {
+    showNewOption () {
       const hasExistingOption = this.options.filter(option => !option.created)
         .some(option => option.currentLabel === this.query)
       return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption
     },
 
-    selectSize() {
-      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size
+    selectSize () {
+      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
     },
 
-    selectDisabled() {
-      return this.disabled || (this.elForm || {}).disabled
+    selectDisabled () {
+      return this.disabled || (this.fmForm || {}).disabled
     },
 
-    collapseTagSize() {
+    collapseTagSize () {
       return ['small', 'mini'].indexOf(this.selectSize) > -1
         ? 'mini'
         : 'small'
@@ -362,17 +362,17 @@ export default {
   directives: { Clickoutside },
 
   watch: {
-    selectDisabled() {
+    selectDisabled () {
       this.$nextTick(() => {
         this.resetInputHeight()
       })
     },
 
-    placeholder(val) {
+    placeholder (val) {
       this.cachedPlaceHolder = this.currentPlaceholder = val
     },
 
-    value(val, oldVal) {
+    value (val, oldVal) {
       if (this.multiple) {
         this.resetInputHeight()
         if ((val && val.length > 0) || (this.$refs.input && this.query !== '')) {
@@ -394,7 +394,7 @@ export default {
       }
     },
 
-    visible(val) {
+    visible (val) {
       if (!val) {
         this.broadcast('FmSelectDropdown', 'destroyPopper')
         if (this.$refs.input) {
@@ -408,15 +408,15 @@ export default {
         this.resetHoverIndex()
         this.$nextTick(() => {
           if (this.$refs.input &&
-              this.$refs.input.value === '' &&
-              this.selected.length === 0) {
+            this.$refs.input.value === '' &&
+            this.selected.length === 0) {
             this.currentPlaceholder = this.cachedPlaceHolder
           }
         })
         if (!this.multiple) {
           if (this.selected) {
             if (this.filterable && this.allowCreate &&
-                this.createdSelected && this.createdLabel) {
+              this.createdSelected && this.createdLabel) {
               this.selectedLabel = this.createdLabel
             } else {
               this.selectedLabel = this.selected.currentLabel
@@ -451,7 +451,7 @@ export default {
       this.$emit('visible-change', val)
     },
 
-    options() {
+    options () {
       if (this.$isServer) return
       this.$nextTick(() => {
         this.broadcast('FmSelectDropdown', 'updatePopper')
@@ -469,7 +469,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder
     if (this.multiple && !Array.isArray(this.value)) {
       this.$emit('input', [])
@@ -490,7 +490,7 @@ export default {
     this.$on('setSelected', this.setSelected)
   },
 
-  mounted() {
+  mounted () {
     if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
       this.currentPlaceholder = ''
     }
@@ -517,12 +517,12 @@ export default {
     this.setSelected()
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize)
   },
 
   methods: {
-    handleComposition(event) {
+    handleComposition (event) {
       const text = event.target.value
       if (event.type === 'compositionend') {
         this.isOnComposition = false
@@ -532,11 +532,11 @@ export default {
         this.isOnComposition = !isKorean(lastCharacter)
       }
     },
-    handleQueryChange(val) {
+    handleQueryChange (val) {
       if (this.previousQuery === val || this.isOnComposition) return
       if (
         this.previousQuery === null &&
-          (typeof this.filterMethod === 'function' || typeof this.remoteMethod === 'function')
+        (typeof this.filterMethod === 'function' || typeof this.remoteMethod === 'function')
       ) {
         this.previousQuery = val
         return
@@ -570,7 +570,7 @@ export default {
       }
     },
 
-    scrollToOption(option) {
+    scrollToOption (option) {
       const target = Array.isArray(option) && option[0] ? option[0].$el : option.$el
       if (this.$refs.popper && target) {
         const menu = this.$refs.popper.$el.querySelector('.fm-select-dropdown__wrap')
@@ -579,17 +579,17 @@ export default {
       this.$refs.scrollbar && this.$refs.scrollbar.handleScroll()
     },
 
-    handleMenuEnter() {
+    handleMenuEnter () {
       this.$nextTick(() => this.scrollToOption(this.selected))
     },
 
-    emitChange(val) {
+    emitChange (val) {
       if (!valueEquals(this.value, val)) {
         this.$emit('change', val)
       }
     },
 
-    getOption(value) {
+    getOption (value) {
       let option
       const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]'
       const isNull = Object.prototype.toString.call(value).toLowerCase() === '[object null]'
@@ -618,7 +618,7 @@ export default {
       return newOption
     },
 
-    setSelected() {
+    setSelected () {
       if (!this.multiple) {
         const option = this.getOption(this.value)
         if (option.created) {
@@ -644,7 +644,7 @@ export default {
       })
     },
 
-    handleFocus(event) {
+    handleFocus (event) {
       if (!this.softFocus) {
         if (this.automaticDropdown || this.filterable) {
           this.visible = true
@@ -658,12 +658,12 @@ export default {
       }
     },
 
-    blur() {
+    blur () {
       this.visible = false
       this.$refs.reference.blur()
     },
 
-    handleBlur(event) {
+    handleBlur (event) {
       setTimeout(() => {
         if (this.isSilentBlur) {
           this.isSilentBlur = false
@@ -674,19 +674,19 @@ export default {
       this.softFocus = false
     },
 
-    handleClearClick(event) {
+    handleClearClick (event) {
       this.deleteSelected(event)
     },
 
-    doDestroy() {
+    doDestroy () {
       this.$refs.popper && this.$refs.popper.doDestroy()
     },
 
-    handleClose() {
+    handleClose () {
       this.visible = false
     },
 
-    toggleLastOptionHitState(hit) {
+    toggleLastOptionHitState (hit) {
       if (!Array.isArray(this.selected)) return
       const option = this.selected[this.selected.length - 1]
       if (!option) return
@@ -700,7 +700,7 @@ export default {
       return option.hitState
     },
 
-    deletePrevTag(e) {
+    deletePrevTag (e) {
       if (e.target.value.length <= 0 && !this.toggleLastOptionHitState()) {
         const value = this.value.slice()
         value.pop()
@@ -709,19 +709,19 @@ export default {
       }
     },
 
-    managePlaceholder() {
+    managePlaceholder () {
       if (this.currentPlaceholder !== '') {
         this.currentPlaceholder = this.$refs.input.value ? '' : this.cachedPlaceHolder
       }
     },
 
-    resetInputState(e) {
+    resetInputState (e) {
       if (e.keyCode !== 8) this.toggleLastOptionHitState(false)
       this.inputLength = this.$refs.input.value.length * 15 + 20
       this.resetInputHeight()
     },
 
-    resetInputHeight() {
+    resetInputHeight () {
       if (this.collapseTags && !this.filterable) return
       this.$nextTick(() => {
         if (!this.$refs.reference) return
@@ -741,7 +741,7 @@ export default {
       })
     },
 
-    resetHoverIndex() {
+    resetHoverIndex () {
       setTimeout(() => {
         if (!this.multiple) {
           this.hoverIndex = this.options.indexOf(this.selected)
@@ -755,7 +755,7 @@ export default {
       }, 300)
     },
 
-    handleOptionSelect(option, byClick) {
+    handleOptionSelect (option, byClick) {
       if (this.multiple) {
         const value = (this.value || []).slice()
         const optionIndex = this.getValueIndex(value, option.value)
@@ -785,7 +785,7 @@ export default {
       })
     },
 
-    setSoftFocus() {
+    setSoftFocus () {
       this.softFocus = true
       const input = this.$refs.input || this.$refs.reference
       if (input) {
@@ -793,7 +793,7 @@ export default {
       }
     },
 
-    getValueIndex(arr = [], value) {
+    getValueIndex (arr = [], value) {
       const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]'
       if (!isObject) {
         return arr.indexOf(value)
@@ -811,7 +811,7 @@ export default {
       }
     },
 
-    toggleMenu() {
+    toggleMenu () {
       if (!this.selectDisabled) {
         if (this.menuVisibleOnFocus) {
           this.menuVisibleOnFocus = false
@@ -824,7 +824,7 @@ export default {
       }
     },
 
-    selectOption() {
+    selectOption () {
       if (!this.visible) {
         this.toggleMenu()
       } else {
@@ -834,7 +834,7 @@ export default {
       }
     },
 
-    deleteSelected(event) {
+    deleteSelected (event) {
       event.stopPropagation()
       const value = this.multiple ? [] : ''
       this.$emit('input', value)
@@ -843,7 +843,7 @@ export default {
       this.$emit('clear')
     },
 
-    deleteTag(event, tag) {
+    deleteTag (event, tag) {
       const index = this.selected.indexOf(tag)
       if (index > -1 && !this.selectDisabled) {
         const value = this.value.slice()
@@ -855,14 +855,14 @@ export default {
       event.stopPropagation()
     },
 
-    onInputChange() {
+    onInputChange () {
       if (this.filterable && this.query !== this.selectedLabel) {
         this.query = this.selectedLabel
         this.handleQueryChange(this.query)
       }
     },
 
-    onOptionDestroy(index) {
+    onOptionDestroy (index) {
       if (index > -1) {
         this.optionsCount--
         this.filteredOptionsCount--
@@ -870,16 +870,16 @@ export default {
       }
     },
 
-    resetInputWidth() {
+    resetInputWidth () {
       this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width
     },
 
-    handleResize() {
+    handleResize () {
       this.resetInputWidth()
       if (this.multiple) this.resetInputHeight()
     },
 
-    checkDefaultFirstOption() {
+    checkDefaultFirstOption () {
       this.hoverIndex = -1
       // highlight the created option
       let hasCreated = false
@@ -909,7 +909,7 @@ export default {
       }
     },
 
-    getValueKey(item) {
+    getValueKey (item) {
       if (Object.prototype.toString.call(item.value).toLowerCase() !== '[object object]') {
         return item.value
       } else {

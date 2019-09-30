@@ -92,7 +92,7 @@ export default {
     disabledDate: {},
     value: {},
     defaultValue: {
-      validator(val) {
+      validator (val) {
         // null or valid Date Object
         return val === null || (val instanceof Date && isDate(val))
       }
@@ -101,13 +101,13 @@ export default {
   },
 
   computed: {
-    startYear() {
+    startYear () {
       return Math.floor(this.date.getFullYear() / 10) * 10
     }
   },
 
   methods: {
-    getCellStyle(year) {
+    getCellStyle (year) {
       const style = {}
       const today = new Date()
 
@@ -121,7 +121,7 @@ export default {
       return style
     },
 
-    handleYearTableClick(event) {
+    handleYearTableClick (event) {
       const target = event.target
       if (target.tagName === 'A') {
         if (hasClass(target.parentNode, 'disabled')) return

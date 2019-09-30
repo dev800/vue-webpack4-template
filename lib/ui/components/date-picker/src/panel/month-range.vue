@@ -124,7 +124,7 @@ export default {
   components: { MonthTable, FmInput, FmButton },
   mixins: [Locale],
 
-  data() {
+  data () {
     return {
       popperClass: '',
       value: [],
@@ -150,33 +150,33 @@ export default {
   },
 
   computed: {
-    btnDisabled() {
+    btnDisabled () {
       return !(this.minDate && this.maxDate && !this.selecting && this.isValidValue([this.minDate, this.maxDate]))
     },
 
-    leftLabel() {
+    leftLabel () {
       return this.leftDate.getFullYear() + ' ' + this.t('el.datepicker.year')
     },
 
-    rightLabel() {
+    rightLabel () {
       return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year')
     },
 
-    leftYear() {
+    leftYear () {
       return this.leftDate.getFullYear()
     },
 
-    rightYear() {
+    rightYear () {
       return this.rightDate.getFullYear() === this.leftDate.getFullYear() ? this.leftDate.getFullYear() + 1 : this.rightDate.getFullYear()
     },
 
-    enableYearArrow() {
+    enableYearArrow () {
       return this.unlinkPanels && this.rightYear > this.leftYear + 1
     }
   },
 
   watch: {
-    value(newVal) {
+    value (newVal) {
       if (!newVal) {
         this.minDate = null
         this.maxDate = null
@@ -201,7 +201,7 @@ export default {
       }
     },
 
-    defaultValue(val) {
+    defaultValue (val) {
       if (!Array.isArray(this.value)) {
         const [left, right] = calcDefaultValue(val)
         this.leftDate = left
@@ -213,7 +213,7 @@ export default {
   },
 
   methods: {
-    handleClear() {
+    handleClear () {
       this.minDate = null
       this.maxDate = null
       this.leftDate = calcDefaultValue(this.defaultValue)[0]
@@ -221,13 +221,13 @@ export default {
       this.$emit('pick', null)
     },
 
-    handleChangeRange(val) {
+    handleChangeRange (val) {
       this.minDate = val.minDate
       this.maxDate = val.maxDate
       this.rangeState = val.rangeState
     },
 
-    handleRangePick(val, close = true) {
+    handleRangePick (val, close = true) {
       const defaultTime = this.defaultTime || []
       const minDate = modifyWithTimeString(val.minDate, defaultTime[0])
       const maxDate = modifyWithTimeString(val.maxDate, defaultTime[1])
@@ -247,21 +247,21 @@ export default {
       this.handleConfirm()
     },
 
-    handleShortcutClick(shortcut) {
+    handleShortcutClick (shortcut) {
       if (shortcut.onClick) {
         shortcut.onClick(this)
       }
     },
 
     // leftPrev*, rightNext* need to take care of `unlinkPanels`
-    leftPrevYear() {
+    leftPrevYear () {
       this.leftDate = prevYear(this.leftDate)
       if (!this.unlinkPanels) {
         this.rightDate = prevYear(this.rightDate)
       }
     },
 
-    rightNextYear() {
+    rightNextYear () {
       if (!this.unlinkPanels) {
         this.leftDate = nextYear(this.leftDate)
       }
@@ -269,32 +269,28 @@ export default {
     },
 
     // leftNext*, rightPrev* are called when `unlinkPanels` is true
-    leftNextYear() {
+    leftNextYear () {
       this.leftDate = nextYear(this.leftDate)
     },
 
-    rightPrevYear() {
+    rightPrevYear () {
       this.rightDate = prevYear(this.rightDate)
     },
 
-    handleConfirm(visible = false) {
+    handleConfirm (visible = false) {
       if (this.isValidValue([this.minDate, this.maxDate])) {
         this.$emit('pick', [this.minDate, this.maxDate], visible)
       }
     },
 
-    isValidValue(value) {
+    isValidValue (value) {
       return Array.isArray(value) &&
-          value && value[0] && value[1] &&
-          isDate(value[0]) && isDate(value[1]) &&
-          value[0].getTime() <= value[1].getTime() && (
-        typeof this.disabledDate === 'function'
-          ? !this.disabledDate(value[0]) && !this.disabledDate(value[1])
-          : true
-      )
+        value && value[0] && value[1] &&
+        isDate(value[0]) && isDate(value[1]) &&
+        value[0].getTime() <= value[1].getTime() && (typeof this.disabledDate === 'function' ? !this.disabledDate(value[0]) && !this.disabledDate(value[1]) : true)
     },
 
-    resetView() {
+    resetView () {
       // NOTE: this is a hack to reset {min, max}Date on picker open.
       // TODO: correct way of doing so is to refactor {min, max}Date to be dependent on value and internal selection state
       //       an alternative would be resetView whenever picker becomes visible, should also investigate date-panel's resetView

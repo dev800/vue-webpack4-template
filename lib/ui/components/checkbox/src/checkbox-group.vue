@@ -9,7 +9,7 @@ export default {
   mixins: [Emitter],
 
   inject: {
-    elFormItem: {
+    fmFormItem: {
       default: ''
     }
   },
@@ -25,16 +25,16 @@ export default {
   },
 
   computed: {
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize
+    _fmFormItemSize () {
+      return (this.fmFormItem || {}).fmFormItemSize
     },
-    checkboxGroupSize() {
-      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size
+    checkboxGroupSize () {
+      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
     }
   },
 
   watch: {
-    value(value) {
+    value (value) {
       this.dispatch('FmFormItem', 'el.form.change', [value])
     }
   }
