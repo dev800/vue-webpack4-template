@@ -71,7 +71,7 @@
                 />
               </span>
             </span>
-            <span class="fm-icon-arrow-right" />
+            <span class="fm-icon-ios-arrow-right" />
             <span class="fm-date-range-picker__editors-wrap is-right">
               <span class="fm-date-range-picker__time-picker-wrap">
                 <fm-input
@@ -119,7 +119,7 @@
               />
               <button
                 type="button"
-                class="fm-picker-panel__icon-btn fm-icon-arrow-left"
+                class="fm-picker-panel__icon-btn fm-icon-ios-arrow-left"
                 @click="leftPrevMonth"
               />
               <button
@@ -135,7 +135,7 @@
                 type="button"
                 :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="fm-picker-panel__icon-btn fm-icon-arrow-right"
+                class="fm-picker-panel__icon-btn fm-icon-ios-arrow-right"
                 @click="leftNextMonth"
               />
               <div>{{ leftLabel }}</div>
@@ -169,7 +169,7 @@
                 type="button"
                 :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="fm-picker-panel__icon-btn fm-icon-arrow-left"
+                class="fm-picker-panel__icon-btn fm-icon-ios-arrow-left"
                 @click="rightPrevMonth"
               />
               <button
@@ -179,7 +179,7 @@
               />
               <button
                 type="button"
-                class="fm-picker-panel__icon-btn fm-icon-arrow-right"
+                class="fm-picker-panel__icon-btn fm-icon-ios-arrow-right"
                 @click="rightNextMonth"
               />
               <div>{{ rightLabel }}</div>

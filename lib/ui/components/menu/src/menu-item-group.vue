@@ -30,13 +30,13 @@ export default {
       default: null
     }
   },
-  data() {
+  data () {
     return {
       paddingLeft: 20
     }
   },
   computed: {
-    levelPadding() {
+    levelPadding () {
       let padding = 20
       let parent = this.$parent
       if (this.rootMenu.collapse) return 20

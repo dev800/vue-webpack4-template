@@ -73,11 +73,11 @@
       >
         <i
           v-repeat-click="decrease"
-          class="fm-time-spinner__arrow fm-icon-arrow-up"
+          class="fm-time-spinner__arrow fm-icon-ios-arrow-up"
         />
         <i
           v-repeat-click="increase"
-          class="fm-time-spinner__arrow fm-icon-arrow-down"
+          class="fm-time-spinner__arrow fm-icon-ios-arrow-down"
         />
         <ul
           ref="hours"
@@ -99,11 +99,11 @@
       >
         <i
           v-repeat-click="decrease"
-          class="fm-time-spinner__arrow fm-icon-arrow-up"
+          class="fm-time-spinner__arrow fm-icon-ios-arrow-up"
         />
         <i
           v-repeat-click="increase"
-          class="fm-time-spinner__arrow fm-icon-arrow-down"
+          class="fm-time-spinner__arrow fm-icon-ios-arrow-down"
         />
         <ul
           ref="minutes"
@@ -126,11 +126,11 @@
       >
         <i
           v-repeat-click="decrease"
-          class="fm-time-spinner__arrow fm-icon-arrow-up"
+          class="fm-time-spinner__arrow fm-icon-ios-arrow-up"
         />
         <i
           v-repeat-click="increase"
-          class="fm-time-spinner__arrow fm-icon-arrow-down"
+          class="fm-time-spinner__arrow fm-icon-ios-arrow-down"
         />
         <ul
           ref="seconds"

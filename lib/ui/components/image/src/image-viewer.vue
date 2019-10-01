@@ -19,14 +19,14 @@
           :class="{ 'is-disabled': !infinite && isFirst }"
           @click="prev"
         >
-          <i class="fm-icon-arrow-left" />
+          <i class="fm-icon-ios-arrow-left" />
         </span>
         <span
           class="fm-image-viewer__btn fm-image-viewer__next"
           :class="{ 'is-disabled': !infinite && isLast }"
           @click="next"
         >
-          <i class="fm-icon-arrow-right" />
+          <i class="fm-icon-ios-arrow-right" />
         </span>
       </template>
       <!-- ACTIONS -->

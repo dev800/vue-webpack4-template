@@ -10,27 +10,27 @@ export default {
   components: {
     'fm-menu-collapse-transition': {
       functional: true,
-      render(createFmement, context) {
+      render (createFmement, context) {
         const data = {
           props: {
             mode: 'out-in'
           },
           on: {
-            beforeEnter(el) {
+            beforeEnter (el) {
               el.style.opacity = 0.2
             },
 
-            enter(el) {
+            enter (el) {
               addClass(el, 'fm-opacity-transition')
               el.style.opacity = 1
             },
 
-            afterEnter(el) {
+            afterEnter (el) {
               removeClass(el, 'fm-opacity-transition')
               el.style.opacity = ''
             },
 
-            beforeLeave(el) {
+            beforeLeave (el) {
               if (!el.dataset) el.dataset = {}
 
               if (hasClass(el, 'fm-menu--collapse')) {
@@ -49,7 +49,7 @@ export default {
               el.style.overflow = 'hidden'
             },
 
-            leave(el) {
+            leave (el) {
               addClass(el, 'horizontal-collapse-transition')
               el.style.width = el.dataset.scrollWidth + 'px'
             }
@@ -73,7 +73,7 @@ export default {
     },
     defaultOpeneds: {
       type: Array,
-      default: function() {
+      default: function () {
         return null
       }
     },
@@ -101,7 +101,7 @@ export default {
       default: true
     }
   },
-  data() {
+  data () {
     return {
       activeIndex: this.defaultActive,
       openedMenus: (this.defaultOpeneds && !this.collapse) ? this.defaultOpeneds.slice(0) : [],
@@ -110,33 +110,33 @@ export default {
     }
   },
   computed: {
-    hoverBackground() {
+    hoverBackground () {
       return this.backgroundColor ? this.mixColor(this.backgroundColor, 0.2) : ''
     },
-    isMenuPopup() {
+    isMenuPopup () {
       return this.mode === 'horizontal' || (this.mode === 'vertical' && this.collapse)
     }
   },
   watch: {
-    defaultActive(value) {
+    defaultActive (value) {
       if (!this.items[value]) {
         this.activeIndex = null
       }
       this.updateActiveIndex(value)
     },
 
-    defaultOpeneds(value) {
+    defaultOpeneds (value) {
       if (!this.collapse) {
         this.openedMenus = value
       }
     },
 
-    collapse(value) {
+    collapse (value) {
       if (value) this.openedMenus = []
       this.broadcast('FmSubmenu', 'toggle-collapse', value)
     }
   },
-  mounted() {
+  mounted () {
     this.initOpenedMenu()
     this.$on('item-click', this.handleItemClick)
     this.$on('submenu-click', this.handleSubmenuClick)
@@ -146,7 +146,7 @@ export default {
     this.$watch('items', this.updateActiveIndex)
   },
   methods: {
-    updateActiveIndex(val) {
+    updateActiveIndex (val) {
       const item = this.items[val] || this.items[this.activeIndex] || this.items[this.defaultActive]
       if (item) {
         this.activeIndex = item.index
@@ -156,14 +156,14 @@ export default {
       }
     },
 
-    getMigratingConfig() {
+    getMigratingConfig () {
       return {
         props: {
           theme: 'theme is removed.'
         }
       }
     },
-    getColorChannels(color) {
+    getColorChannels (color) {
       color = color.replace('#', '')
       if (/^[0-9a-fA-F]{3}$/.test(color)) {
         color = color.split('')
@@ -186,7 +186,7 @@ export default {
         }
       }
     },
-    mixColor(color, percent) {
+    mixColor (color, percent) {
       let { red, green, blue } = this.getColorChannels(color)
       if (percent > 0) { // shade given color
         red *= 1 - percent
@@ -199,19 +199,19 @@ export default {
       }
       return `rgb(${Math.round(red)}, ${Math.round(green)}, ${Math.round(blue)})`
     },
-    addItem(item) {
+    addItem (item) {
       this.$set(this.items, item.index, item)
     },
-    removeItem(item) {
+    removeItem (item) {
       delete this.items[item.index]
     },
-    addSubmenu(item) {
+    addSubmenu (item) {
       this.$set(this.submenus, item.index, item)
     },
-    removeSubmenu(item) {
+    removeSubmenu (item) {
       delete this.submenus[item.index]
     },
-    openMenu(index, indexPath) {
+    openMenu (index, indexPath) {
       const openedMenus = this.openedMenus
       if (openedMenus.indexOf(index) !== -1) return
       // 将不在该菜单路径下的其余菜单收起
@@ -223,13 +223,13 @@ export default {
       }
       this.openedMenus.push(index)
     },
-    closeMenu(index) {
+    closeMenu (index) {
       const i = this.openedMenus.indexOf(index)
       if (i !== -1) {
         this.openedMenus.splice(i, 1)
       }
     },
-    handleSubmenuClick(submenu) {
+    handleSubmenuClick (submenu) {
       const { index, indexPath } = submenu
       const isOpened = this.openedMenus.indexOf(index) !== -1
 
@@ -241,7 +241,7 @@ export default {
         this.$emit('open', index, indexPath)
       }
     },
-    handleItemClick(item) {
+    handleItemClick (item) {
       const { index, indexPath } = item
       const oldActiveIndex = this.activeIndex
       const hasIndex = item.index !== null
@@ -265,7 +265,7 @@ export default {
     },
     // 初始化展开菜单
     // initialize opened menu
-    initOpenedMenu() {
+    initOpenedMenu () {
       const index = this.activeIndex
       const activeItem = this.items[index]
       if (!activeItem || this.mode === 'horizontal' || this.collapse) return
@@ -279,7 +279,7 @@ export default {
         submenu && this.openMenu(index, submenu.indexPath)
       })
     },
-    routeToItem(item, onError) {
+    routeToItem (item, onError) {
       const route = item.route || item.index
       try {
         this.$router.push(route, () => { }, onError)
@@ -287,16 +287,16 @@ export default {
         console.error(e)
       }
     },
-    open(index) {
+    open (index) {
       const { indexPath } = this.submenus[index.toString()]
       indexPath.forEach(i => this.openMenu(i, indexPath))
     },
-    close(index) {
+    close (index) {
       this.closeMenu(index)
     }
   },
 
-  render(h) {
+  render (h) {
     const component = (
       <ul
         role="menubar"
@@ -325,7 +325,7 @@ export default {
 
   componentName: 'FmMenu',
 
-  provide() {
+  provide () {
     return {
       rootMenu: this
     }

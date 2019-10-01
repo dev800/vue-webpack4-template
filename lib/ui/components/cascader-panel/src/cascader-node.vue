@@ -174,7 +174,7 @@ export default {
 
     renderExpandIcon (h) {
       return (
-        <i class="fm-icon-arrow-right fm-cascader-node__postfix"></i>
+        <i class="fm-icon-ios-arrow-right fm-cascader-node__postfix"></i>
       )
     },
 

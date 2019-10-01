@@ -4,7 +4,7 @@ function load (path) {
 
 const routes = [
   { path: '/', component: load('home') },
-  { path: '/*', component: load('errors/not-found') }
+  { path: '/*', component: load('errors/NotFound') }
 ]
 
 export {

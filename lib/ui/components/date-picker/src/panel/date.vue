@@ -82,7 +82,7 @@
               v-show="currentView === 'date'"
               type="button"
               :aria-label="t(`el.datepicker.prevMonth`)"
-              class="fm-picker-panel__icon-btn fm-date-picker__prev-btn fm-icon-arrow-left"
+              class="fm-picker-panel__icon-btn fm-date-picker__prev-btn fm-icon-ios-arrow-left"
               @click="prevMonth"
             />
             <span
@@ -107,7 +107,7 @@
               v-show="currentView === 'date'"
               type="button"
               :aria-label="t(`el.datepicker.nextMonth`)"
-              class="fm-picker-panel__icon-btn fm-date-picker__next-btn fm-icon-arrow-right"
+              class="fm-picker-panel__icon-btn fm-date-picker__next-btn fm-icon-ios-arrow-right"
               @click="nextMonth"
             />
           </div>

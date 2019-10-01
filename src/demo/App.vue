@@ -1,16 +1,16 @@
 <template>
-  <fm-container>
-    <fm-aside width="200px">
+  <fm-container class="x-app">
+    <fm-aside width="200px" class="app__aside">
       <x-app-aside />
     </fm-aside>
     <fm-container>
-      <fm-header height="52px">
+      <fm-header height="52px" class="app__header">
         <x-app-header />
       </fm-header>
-      <fm-main>
+      <fm-main class="app__main">
         <RouterView />
       </fm-main>
-      <fm-footer>
+      <fm-footer class="app_footer">
         <x-app-footer />
       </fm-footer>
     </fm-container>
@@ -48,4 +48,18 @@ export default {
 <style lang="scss">
 @import '~/lib/ui/css/index.scss';
 @import './css/index.scss';
+
+.x-app {
+  .app_ {
+    &_aside {
+      min-height: 100vh;
+      background: #545c64;
+
+      .fm-menu {
+        border-right: none;
+        background: none;
+      }
+    }
+  }
+}
 </style>

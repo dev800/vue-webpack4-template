@@ -37,7 +37,7 @@
           key="arrow-down"
           :class="[
             'fm-input__icon',
-            'fm-icon-arrow-down',
+            'fm-icon-ios-arrow-down',
             dropDownVisible && 'is-reverse'
           ]"
           @click.stop="toggleDropDownVisible()"

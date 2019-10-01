@@ -53,32 +53,32 @@ export default {
     },
     route: {
       type: [String, Object],
-      default: function() {
+      default: function () {
         return null
       }
     },
     disabled: Boolean
   },
   computed: {
-    active() {
+    active () {
       return this.index === this.rootMenu.activeIndex
     },
-    hoverBackground() {
+    hoverBackground () {
       return this.rootMenu.hoverBackground
     },
-    backgroundColor() {
+    backgroundColor () {
       return this.rootMenu.backgroundColor || ''
     },
-    activeTextColor() {
+    activeTextColor () {
       return this.rootMenu.activeTextColor || ''
     },
-    textColor() {
+    textColor () {
       return this.rootMenu.textColor || ''
     },
-    mode() {
+    mode () {
       return this.rootMenu.mode
     },
-    itemStyle() {
+    itemStyle () {
       const style = {
         color: this.active ? this.activeTextColor : this.textColor
       }
@@ -89,28 +89,28 @@ export default {
       }
       return style
     },
-    isNested() {
+    isNested () {
       return this.parentMenu !== this.rootMenu
     }
   },
-  mounted() {
+  mounted () {
     this.parentMenu.addItem(this)
     this.rootMenu.addItem(this)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.parentMenu.removeItem(this)
     this.rootMenu.removeItem(this)
   },
   methods: {
-    onMouseEnter() {
+    onMouseEnter () {
       if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return
       this.$el.style.backgroundColor = this.hoverBackground
     },
-    onMouseLeave() {
+    onMouseLeave () {
       if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return
       this.$el.style.backgroundColor = this.backgroundColor
     },
-    handleClick() {
+    handleClick () {
       if (!this.disabled) {
         this.dispatch('FmMenu', 'item-click', this)
         this.$emit('click', this)

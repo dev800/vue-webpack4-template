@@ -12,7 +12,7 @@
   list-style: none;
   cursor: pointer;
   position: relative;
-  transition: border-color .3s, background-color .3s, color .3s;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
   box-sizing: border-box;
   white-space: nowrap;
 
@@ -38,7 +38,7 @@
 }
 
 @include b(menu) {
-  border-right: solid 1px #e6e6e6;
+  border-right: solid 1px $--menu-border-color;
   list-style: none;
   position: relative;
   margin: 0;
@@ -46,7 +46,7 @@
   background-color: $--menu-background-color;
   @include utils-clearfix;
   &.fm-menu--horizontal {
-    border-bottom: solid 1px #e6e6e6;
+    border-bottom: solid 1px $--menu-border-color;
   }
 
   @include m(horizontal) {
@@ -65,7 +65,7 @@
       }
 
       &:not(.is-disabled):hover,
-      &:not(.is-disabled):focus{
+      &:not(.is-disabled):focus {
         background-color: #fff;
       }
     }
@@ -97,7 +97,7 @@
           background-color: #fff;
         }
       }
-      & .fm-submenu__icon-arrow {
+      & .fm-submenu__icon-ios-arrow {
         position: static;
         vertical-align: middle;
         margin-left: 8px;
@@ -140,7 +140,7 @@
         width: 24px;
         text-align: center;
       }
-      .fm-submenu__icon-arrow {
+      .fm-submenu__icon-ios-arrow {
         display: none;
       }
       span {
@@ -174,7 +174,7 @@
       }
 
       &.is-opened {
-        > .fm-submenu__title .fm-submenu__icon-arrow {
+        > .fm-submenu__title .fm-submenu__icon-ios-arrow {
           transform: none;
         }
       }
@@ -236,12 +236,12 @@
     padding: 0 45px;
     min-width: 200px;
   }
-  @include e(icon-arrow) {
+  @include e(icon-ios-arrow) {
     position: absolute;
     top: 50%;
     right: 20px;
     margin-top: -7px;
-    transition: transform .3s;
+    transition: transform 0.3s;
     font-size: 12px;
   }
   @include when(active) {
@@ -250,7 +250,7 @@
     }
   }
   @include when(opened) {
-    > .fm-submenu__title .fm-submenu__icon-arrow {
+    > .fm-submenu__title .fm-submenu__icon-ios-arrow {
       transform: rotateZ(180deg);
     }
   }
@@ -283,7 +283,7 @@
   }
 }
 
-.horizontal-collapse-transition .fm-submenu__title .fm-submenu__icon-arrow {
-  transition: .2s;
+.horizontal-collapse-transition .fm-submenu__title .fm-submenu__icon-ios-arrow {
+  transition: 0.2s;
   opacity: 0;
 }

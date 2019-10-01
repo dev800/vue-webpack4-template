@@ -228,8 +228,8 @@ export default {
     } = this
     const scrollBtn = scrollable
       ? [
-        <span class={['fm-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="fm-icon-arrow-left"></i></span>,
-        <span class={['fm-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="fm-icon-arrow-right"></i></span>
+        <span class={['fm-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="fm-icon-ios-arrow-left"></i></span>,
+        <span class={['fm-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="fm-icon-ios-arrow-right"></i></span>
       ] : null
 
     const tabs = this._l(panes, (pane, index) => {

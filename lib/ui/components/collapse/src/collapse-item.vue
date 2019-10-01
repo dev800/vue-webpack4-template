@@ -27,7 +27,7 @@
           {{ title }}
         </slot>
         <i
-          class="fm-collapse-item__arrow fm-icon-arrow-right"
+          class="fm-collapse-item__arrow fm-icon-ios-arrow-right"
           :class="{'is-active': isActive}"
         />
       </div>

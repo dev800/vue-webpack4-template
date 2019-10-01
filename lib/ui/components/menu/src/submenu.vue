@@ -53,7 +53,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       popperJS: null,
       timeout: null,
@@ -64,18 +64,18 @@ export default {
   },
   computed: {
     // popper option
-    appendToBody() {
+    appendToBody () {
       return this.popperAppendToBody === undefined
         ? this.isFirstLevel
         : this.popperAppendToBody
     },
-    menuTransitionName() {
+    menuTransitionName () {
       return this.rootMenu.collapse ? 'fm-zoom-in-left' : 'fm-zoom-in-top'
     },
-    opened() {
+    opened () {
       return this.rootMenu.openedMenus.indexOf(this.index) > -1
     },
-    active() {
+    active () {
       let isActive = false
       const submenus = this.submenus
       const items = this.items
@@ -94,25 +94,25 @@ export default {
 
       return isActive
     },
-    hoverBackground() {
+    hoverBackground () {
       return this.rootMenu.hoverBackground
     },
-    backgroundColor() {
+    backgroundColor () {
       return this.rootMenu.backgroundColor || ''
     },
-    activeTextColor() {
+    activeTextColor () {
       return this.rootMenu.activeTextColor || ''
     },
-    textColor() {
+    textColor () {
       return this.rootMenu.textColor || ''
     },
-    mode() {
+    mode () {
       return this.rootMenu.mode
     },
-    isMenuPopup() {
+    isMenuPopup () {
       return this.rootMenu.isMenuPopup
     },
-    titleStyle() {
+    titleStyle () {
       if (this.mode !== 'horizontal') {
         return {
           color: this.textColor
@@ -127,7 +127,7 @@ export default {
           : this.textColor
       }
     },
-    isFirstLevel() {
+    isFirstLevel () {
       let isFirstLevel = true
       let parent = this.$parent
       while (parent && parent !== this.rootMenu) {
@@ -142,7 +142,7 @@ export default {
     }
   },
   watch: {
-    opened(val) {
+    opened (val) {
       if (this.isMenuPopup) {
         this.$nextTick(_ => {
           this.updatePopper()
@@ -150,7 +150,7 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     this.$on('toggle-collapse', this.handleCollapseToggle)
     this.$on('mouse-enter-child', () => {
       this.mouseInChild = true
@@ -161,55 +161,55 @@ export default {
       clearTimeout(this.timeout)
     })
   },
-  mounted() {
+  mounted () {
     this.parentMenu.addSubmenu(this)
     this.rootMenu.addSubmenu(this)
     this.initPopper()
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.parentMenu.removeSubmenu(this)
     this.rootMenu.removeSubmenu(this)
   },
   methods: {
-    handleCollapseToggle(value) {
+    handleCollapseToggle (value) {
       if (value) {
         this.initPopper()
       } else {
         this.doDestroy()
       }
     },
-    addItem(item) {
+    addItem (item) {
       this.$set(this.items, item.index, item)
     },
-    removeItem(item) {
+    removeItem (item) {
       delete this.items[item.index]
     },
-    addSubmenu(item) {
+    addSubmenu (item) {
       this.$set(this.submenus, item.index, item)
     },
-    removeSubmenu(item) {
+    removeSubmenu (item) {
       delete this.submenus[item.index]
     },
-    handleClick() {
+    handleClick () {
       const { rootMenu, disabled } = this
       if (
         (rootMenu.menuTrigger === 'hover' && rootMenu.mode === 'horizontal') ||
-          (rootMenu.collapse && rootMenu.mode === 'vertical') ||
-          disabled
+        (rootMenu.collapse && rootMenu.mode === 'vertical') ||
+        disabled
       ) {
         return
       }
       this.dispatch('FmMenu', 'submenu-click', this)
     },
-    handleMouseenter(event, showTimeout = this.showTimeout) {
+    handleMouseenter (event, showTimeout = this.showTimeout) {
       if (!('ActiveXObject' in window) && event.type === 'focus' && !event.relatedTarget) {
         return
       }
       const { rootMenu, disabled } = this
       if (
         (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
-          (!rootMenu.collapse && rootMenu.mode === 'vertical') ||
-          disabled
+        (!rootMenu.collapse && rootMenu.mode === 'vertical') ||
+        disabled
       ) {
         return
       }
@@ -223,11 +223,11 @@ export default {
         this.$parent.$el.dispatchEvent(new MouseEvent('mouseenter'))
       }
     },
-    handleMouseleave(deepDispatch = false) {
+    handleMouseleave (deepDispatch = false) {
       const { rootMenu } = this
       if (
         (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
-          (!rootMenu.collapse && rootMenu.mode === 'vertical')
+        (!rootMenu.collapse && rootMenu.mode === 'vertical')
       ) {
         return
       }
@@ -243,28 +243,28 @@ export default {
         }
       }
     },
-    handleTitleMouseenter() {
+    handleTitleMouseenter () {
       if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return
       const title = this.$refs['submenu-title']
       title && (title.style.backgroundColor = this.rootMenu.hoverBackground)
     },
-    handleTitleMouseleave() {
+    handleTitleMouseleave () {
       if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return
       const title = this.$refs['submenu-title']
       title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '')
     },
-    updatePlacement() {
+    updatePlacement () {
       this.currentPlacement = this.mode === 'horizontal' && this.isFirstLevel
         ? 'bottom-start'
         : 'right-start'
     },
-    initPopper() {
+    initPopper () {
       this.referenceFmm = this.$el
       this.popperFmm = this.$refs.menu
       this.updatePlacement()
     }
   },
-  render(h) {
+  render (h) {
     const {
       active,
       opened,
@@ -313,9 +313,9 @@ export default {
     )
 
     const submenuTitleIcon = (
-      rootMenu.mode === 'horizontal' && isFirstLevel ||
-        rootMenu.mode === 'vertical' && !rootMenu.collapse
-    ) ? 'fm-icon-arrow-down' : 'fm-icon-arrow-right'
+      (rootMenu.mode === 'horizontal' && isFirstLevel) ||
+      (rootMenu.mode === 'vertical' && !rootMenu.collapse)
+    ) ? 'fm-icon-ios-arrow-down' : 'fm-icon-ios-arrow-right'
 
     return (
       <li
@@ -341,7 +341,7 @@ export default {
           style={[paddingStyle, titleStyle, { backgroundColor }]}
         >
           {$slots.title}
-          <i class={['fm-submenu__icon-arrow', submenuTitleIcon]}></i>
+          <i class={['fm-submenu__icon-ios-arrow', submenuTitleIcon]}></i>
         </div>
         {this.isMenuPopup ? popupMenu : inlineMenu}
       </li>

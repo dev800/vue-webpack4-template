@@ -32,7 +32,7 @@
       </span>
       <span
         v-show="value || showPanelColor"
-        class="fm-color-picker__icon fm-icon-arrow-down"
+        class="fm-color-picker__icon fm-icon-ios-arrow-down"
       />
     </div>
     <picker-dropdown
