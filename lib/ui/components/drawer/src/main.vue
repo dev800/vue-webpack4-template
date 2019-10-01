@@ -85,7 +85,7 @@ export default {
     direction: {
       type: String,
       default: 'rtl',
-      validator(val) {
+      validator (val) {
         return ['ltr', 'rtl', 'ttb', 'btt'].indexOf(val) !== -1
       }
     },
@@ -109,18 +109,18 @@ export default {
       default: true
     }
   },
-  data() {
+  data () {
     return {
       closed: false
     }
   },
   computed: {
-    isHorizontal() {
+    isHorizontal () {
       return this.direction === 'rtl' || this.direction === 'ltr'
     }
   },
   watch: {
-    visible(val) {
+    visible (val) {
       if (val) {
         this.closed = false
         this.$emit('open')
@@ -132,26 +132,26 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     if (this.visible) {
       this.rendered = true
       this.open()
     }
   },
-  destroyed() {
+  destroyed () {
     // if appendToBody is true, remove DOM node after destroy
     if (this.appendToBody && this.$el && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el)
     }
   },
   methods: {
-    afterEnter() {
+    afterEnter () {
       this.$emit('opened')
     },
-    afterLeave() {
+    afterLeave () {
       this.$emit('closed')
     },
-    hide(cancel) {
+    hide (cancel) {
       if (cancel !== false) {
         this.$emit('update:visible', false)
         this.$emit('close')
@@ -161,12 +161,12 @@ export default {
         this.closed = true
       }
     },
-    handleWrapperClick() {
+    handleWrapperClick () {
       if (this.wrapperClosable) {
         this.closeDrawer()
       }
     },
-    closeDrawer() {
+    closeDrawer () {
       if (typeof this.beforeClose === 'function') {
         this.beforeClose(this.hide)
       } else {

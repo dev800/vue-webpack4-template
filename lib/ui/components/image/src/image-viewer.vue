@@ -106,15 +106,15 @@ export default {
     },
     onSwitch: {
       type: Function,
-      default: () => {}
+      default: () => { }
     },
     onClose: {
       type: Function,
-      default: () => {}
+      default: () => { }
     }
   },
 
-  data() {
+  data () {
     return {
       index: 0,
       isShow: false,
@@ -131,19 +131,19 @@ export default {
     }
   },
   computed: {
-    isSingle() {
+    isSingle () {
       return this.urlList.length <= 1
     },
-    isFirst() {
+    isFirst () {
       return this.index === 0
     },
-    isLast() {
+    isLast () {
       return this.index === this.urlList.length - 1
     },
-    currentImg() {
+    currentImg () {
       return this.urlList[this.index]
     },
-    imgStyle() {
+    imgStyle () {
       const { scale, deg, offsetX, offsetY, enableTransition } = this.transform
       const style = {
         transform: `scale(${scale}) rotate(${deg}deg)`,
@@ -159,12 +159,12 @@ export default {
   },
   watch: {
     index: {
-      handler: function(val) {
+      handler: function (val) {
         this.reset()
         this.onSwitch(val)
       }
     },
-    currentImg(val) {
+    currentImg (val) {
       this.$nextTick(_ => {
         const $img = this.$refs.img[0]
         if (!$img.complete) {
@@ -173,15 +173,15 @@ export default {
       })
     }
   },
-  mounted() {
+  mounted () {
     this.deviceSupportInstall()
   },
   methods: {
-    hide() {
+    hide () {
       this.deviceSupportUninstall()
       this.onClose()
     },
-    deviceSupportInstall() {
+    deviceSupportInstall () {
       this._keyDownHandler = rafThrottle(e => {
         const keyCode = e.keyCode
         switch (keyCode) {
@@ -228,20 +228,20 @@ export default {
       on(document, 'keydown', this._keyDownHandler)
       on(document, mousewheelEventName, this._mouseWheelHandler)
     },
-    deviceSupportUninstall() {
+    deviceSupportUninstall () {
       off(document, 'keydown', this._keyDownHandler)
       off(document, mousewheelEventName, this._mouseWheelHandler)
       this._keyDownHandler = null
       this._mouseWheelHandler = null
     },
-    handleImgLoad(e) {
+    handleImgLoad (e) {
       this.loading = false
     },
-    handleImgError(e) {
+    handleImgError (e) {
       this.loading = false
       e.target.alt = '加载失败'
     },
-    handleMouseDown(e) {
+    handleMouseDown (e) {
       if (this.loading || e.button !== 0) return
 
       const { offsetX, offsetY } = this.transform
@@ -258,7 +258,7 @@ export default {
 
       e.preventDefault()
     },
-    reset() {
+    reset () {
       this.transform = {
         scale: 1,
         deg: 0,
@@ -267,7 +267,7 @@ export default {
         enableTransition: false
       }
     },
-    toggleMode() {
+    toggleMode () {
       if (this.loading) return
 
       const modeNames = Object.keys(Mode)
@@ -277,17 +277,17 @@ export default {
       this.mode = Mode[modeNames[nextIndex]]
       this.reset()
     },
-    prev() {
+    prev () {
       if (this.isFirst && !this.infinite) return
       const len = this.urlList.length
       this.index = (this.index - 1 + len) % len
     },
-    next() {
+    next () {
       if (this.isLast && !this.infinite) return
       const len = this.urlList.length
       this.index = (this.index + 1) % len
     },
-    handleActions(action, options = {}) {
+    handleActions (action, options = {}) {
       if (this.loading) return
       const { zoomRate, rotateDeg, enableTransition } = {
         zoomRate: 0.2,

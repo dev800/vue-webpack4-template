@@ -22,18 +22,18 @@ export default {
       default: ''
     }
   },
-  data() {
+  data () {
     return {
       dragover: false
     }
   },
   methods: {
-    onDragover() {
+    onDragover () {
       if (!this.disabled) {
         this.dragover = true
       }
     },
-    onDrop(e) {
+    onDrop (e) {
       if (this.disabled || !this.uploader) return
       const accept = this.uploader.accept
       this.dragover = false

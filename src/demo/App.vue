@@ -1,16 +1,22 @@
 <template>
   <fm-container class="x-app">
-    <fm-aside width="200px" class="app__aside">
+    <fm-aside
+      width="200px"
+      class="app__aside"
+    >
       <x-app-aside />
     </fm-aside>
     <fm-container>
-      <fm-header height="52px" class="app__header">
+      <fm-header
+        height="52px"
+        class="app__header"
+      >
         <x-app-header />
       </fm-header>
       <fm-main class="app__main">
         <RouterView />
       </fm-main>
-      <fm-footer class="app_footer">
+      <fm-footer class="app__footer">
         <x-app-footer />
       </fm-footer>
     </fm-container>

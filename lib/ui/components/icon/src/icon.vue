@@ -16,10 +16,10 @@ export default {
     color: { type: String, default: null }
   },
   computed: {
-    classes() {
+    classes () {
       return [prefixCls, `fm-icon-${this.type}`]
     },
-    styles() {
+    styles () {
       const style = {}
 
       if (this.size) {
@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    handleClick(event) {
+    handleClick (event) {
       this.$emit('click', event)
     }
   }

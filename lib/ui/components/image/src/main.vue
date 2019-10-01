@@ -75,7 +75,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       loading: true,
       error: false,
@@ -87,7 +87,7 @@ export default {
   },
 
   computed: {
-    imageStyle() {
+    imageStyle () {
       const { fit } = this
       if (!this.$isServer && fit) {
         return isSupportObjectFit()
@@ -96,25 +96,25 @@ export default {
       }
       return {}
     },
-    alignCenter() {
+    alignCenter () {
       return !this.$isServer && !isSupportObjectFit() && this.fit !== ObjectFit.FILL
     },
-    preview() {
+    preview () {
       const { previewSrcList } = this
       return Array.isArray(previewSrcList) && previewSrcList.length > 0
     }
   },
 
   watch: {
-    src(val) {
+    src (val) {
       this.show && this.loadImage()
     },
-    show(val) {
+    show (val) {
       val && this.loadImage()
     }
   },
 
-  mounted() {
+  mounted () {
     if (this.lazy) {
       this.addLazyLoadListener()
     } else {
@@ -122,12 +122,12 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     this.lazy && this.removeLazyLoadListener()
   },
 
   methods: {
-    loadImage() {
+    loadImage () {
       if (this.$isServer) return
 
       // reset status
@@ -147,23 +147,23 @@ export default {
         })
       img.src = this.src
     },
-    handleLoad(e, img) {
+    handleLoad (e, img) {
       this.imageWidth = img.width
       this.imageHeight = img.height
       this.loading = false
     },
-    handleError(e) {
+    handleError (e) {
       this.loading = false
       this.error = true
       this.$emit('error', e)
     },
-    handleLazyLoad() {
+    handleLazyLoad () {
       if (isInContainer(this.$el, this._scrollContainer)) {
         this.show = true
         this.removeLazyLoadListener()
       }
     },
-    addLazyLoadListener() {
+    addLazyLoadListener () {
       if (this.$isServer) return
 
       const { scrollContainer } = this
@@ -184,7 +184,7 @@ export default {
         this.handleLazyLoad()
       }
     },
-    removeLazyLoadListener() {
+    removeLazyLoadListener () {
       const { _scrollContainer, _lazyLoadHandler } = this
 
       if (this.$isServer || !_scrollContainer || !_lazyLoadHandler) return
@@ -196,7 +196,7 @@ export default {
     /**
        * simulate object-fit behavior to compatible with IE11 and other browsers which not support object-fit
        */
-    getImageStyle(fit) {
+    getImageStyle (fit) {
       const { imageWidth, imageHeight } = this
       const {
         clientWidth: containerWidth,
@@ -223,10 +223,10 @@ export default {
           return {}
       }
     },
-    clickHandler() {
+    clickHandler () {
       this.showViewer = true
     },
-    closeViewer() {
+    closeViewer () {
       this.showViewer = false
     }
   }

@@ -27,7 +27,7 @@ export default {
   props: {
     title: {
       type: String,
-      default() {
+      default () {
         return t('el.pageHeader.title')
       }
     },

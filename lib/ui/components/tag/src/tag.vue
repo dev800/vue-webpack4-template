@@ -12,26 +12,26 @@ export default {
     effect: {
       type: String,
       default: 'light',
-      validator(val) {
+      validator (val) {
         return ['dark', 'light', 'plain'].indexOf(val) !== -1
       }
     }
   },
   computed: {
-    tagSize() {
+    tagSize () {
       return this.size || (this.$ELEMENT || {}).size
     }
   },
   methods: {
-    handleClose(event) {
+    handleClose (event) {
       event.stopPropagation()
       this.$emit('close', event)
     },
-    handleClick(event) {
+    handleClick (event) {
       this.$emit('click', event)
     }
   },
-  render(h) {
+  render (h) {
     const { type, tagSize, hit, effect } = this
     const classes = [
       'fm-tag',
@@ -42,17 +42,17 @@ export default {
     ]
     const tagFm = (
       <span
-        class={ classes }
+        class={classes}
         style={{ backgroundColor: this.color }}
-        on-click={ this.handleClick }>
-        { this.$slots.default }
+        on-click={this.handleClick}>
+        {this.$slots.default}
         {
-          this.closable && <i class="fm-tag__close fm-icon-close" on-click={ this.handleClose }></i>
+          this.closable && <i class="fm-tag__close fm-icon-close" on-click={this.handleClose}></i>
         }
       </span>
     )
 
-    return this.disableTransitions ? tagFm : <transition name="fm-zoom-in-center">{ tagFm }</transition>
+    return this.disableTransitions ? tagFm : <transition name="fm-zoom-in-center">{tagFm}</transition>
   }
 }
 </script>

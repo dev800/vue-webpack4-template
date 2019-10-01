@@ -23,10 +23,11 @@
       <slot />
     </span>
 
-    <template v-if="$slots.icon"><slot
-      v-if="$slots.icon"
-      name="icon"
-    /></template>
+    <template v-if="$slots.icon">
+      <slot
+        v-if="$slots.icon"
+        name="icon"
+      /></template>
   </a>
 </template>
 
@@ -50,7 +51,7 @@ export default {
   },
 
   methods: {
-    handleClick(event) {
+    handleClick (event) {
       if (!this.disabled) {
         if (!this.href) {
           this.$emit('click', event)

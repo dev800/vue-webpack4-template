@@ -33,7 +33,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       size: this.dropdown.dropdownSize
     }
@@ -44,13 +44,13 @@ export default {
   watch: {
     'dropdown.placement': {
       immediate: true,
-      handler(val) {
+      handler (val) {
         this.currentPlacement = val
       }
     }
   },
 
-  created() {
+  created () {
     this.$on('updatePopper', () => {
       if (this.showPopper) this.updatePopper()
     })
@@ -59,7 +59,7 @@ export default {
     })
   },
 
-  mounted() {
+  mounted () {
     this.dropdown.popperFmm = this.popperFmm = this.$el
     this.referenceFmm = this.dropdown.$el
     // compatible with 2.6 new v-slot syntax

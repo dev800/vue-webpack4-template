@@ -18,7 +18,7 @@ export default {
     firstDayOfWeek: Number
   },
 
-  inject: ['elCalendar'],
+  inject: ['fmCalendar'],
 
   data () {
     return {
@@ -43,7 +43,7 @@ export default {
     },
 
     formatedToday () {
-      return this.elCalendar.formatedToday
+      return this.fmCalendar.formatedToday
     },
 
     isInRange () {
@@ -143,7 +143,7 @@ export default {
     },
 
     cellRenderProxy ({ text, type }) {
-      const render = this.elCalendar.$scopedSlots.dateCell
+      const render = this.fmCalendar.$scopedSlots.dateCell
       if (!render) return <span>{text}</span>
 
       const day = this.getFormateDate(text, type)

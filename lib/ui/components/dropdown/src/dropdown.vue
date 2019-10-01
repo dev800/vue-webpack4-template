@@ -20,7 +20,7 @@ export default {
 
   mixins: [Emitter, Migrating],
 
-  provide() {
+  provide () {
     return {
       dropdown: this
     }
@@ -62,7 +62,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       timeout: null,
       visible: false,
@@ -76,17 +76,17 @@ export default {
   },
 
   computed: {
-    dropdownSize() {
+    dropdownSize () {
       return this.size || (this.$ELEMENT || {}).size
     }
   },
 
   watch: {
-    visible(val) {
+    visible (val) {
       this.broadcast('FmDropdownMenu', 'visible', val)
       this.$emit('visible-change', val)
     },
-    focusing(val) {
+    focusing (val) {
       const selfDefine = this.$el.querySelector('.fm-dropdown-selfdefine')
       if (selfDefine) { // 自定义
         if (val) {
@@ -98,26 +98,26 @@ export default {
     }
   },
 
-  mounted() {
+  mounted () {
     this.$on('menu-item-click', this.handleMenuItemClick)
   },
 
   methods: {
-    getMigratingConfig() {
+    getMigratingConfig () {
       return {
         props: {
           'menu-align': 'menu-align is renamed to placement.'
         }
       }
     },
-    show() {
+    show () {
       if (this.triggerFmm.disabled) return
       clearTimeout(this.timeout)
       this.timeout = setTimeout(() => {
         this.visible = true
       }, this.trigger === 'click' ? 0 : this.showTimeout)
     },
-    hide() {
+    hide () {
       if (this.triggerFmm.disabled) return
       this.removeTabindex()
       if (this.tabindex >= 0) {
@@ -128,7 +128,7 @@ export default {
         this.visible = false
       }, this.trigger === 'click' ? 0 : this.hideTimeout)
     },
-    handleClick() {
+    handleClick () {
       if (this.triggerFmm.disabled) return
       if (this.visible) {
         this.hide()
@@ -136,7 +136,7 @@ export default {
         this.show()
       }
     },
-    handleTriggerKeyDown(ev) {
+    handleTriggerKeyDown (ev) {
       const keyCode = ev.keyCode
       if ([38, 40].indexOf(keyCode) > -1) { // up/down
         this.removeTabindex()
@@ -150,7 +150,7 @@ export default {
         this.hide()
       }
     },
-    handleItemKeyDown(ev) {
+    handleItemKeyDown (ev) {
       const keyCode = ev.keyCode
       const target = ev.target
       const currentIndex = this.menuItemsArray.indexOf(target)
@@ -178,17 +178,17 @@ export default {
         this.triggerFmmFocus()
       }
     },
-    resetTabindex(ele) { // 下次tab时组件聚焦元素
+    resetTabindex (ele) { // 下次tab时组件聚焦元素
       this.removeTabindex()
       ele.setAttribute('tabindex', '0') // 下次期望的聚焦元素
     },
-    removeTabindex() {
+    removeTabindex () {
       this.triggerFmm.setAttribute('tabindex', '-1')
       this.menuItemsArray.forEach((item) => {
         item.setAttribute('tabindex', '-1')
       })
     },
-    initAria() {
+    initAria () {
       this.dropdownFmm.setAttribute('id', this.listId)
       this.triggerFmm.setAttribute('aria-haspopup', 'list')
       this.triggerFmm.setAttribute('aria-controls', this.listId)
@@ -199,7 +199,7 @@ export default {
         this.triggerFmm.setAttribute('class', (this.triggerFmm.getAttribute('class') || '') + ' fm-dropdown-selfdefine') // 控制
       }
     },
-    initEvent() {
+    initEvent () {
       const { trigger, show, hide, handleClick, splitButton, handleTriggerKeyDown, handleItemKeyDown } = this
       this.triggerFmm = splitButton
         ? this.$refs.trigger.$el
@@ -230,16 +230,16 @@ export default {
         this.triggerFmm.addEventListener('click', handleClick)
       }
     },
-    handleMenuItemClick(command, instance) {
+    handleMenuItemClick (command, instance) {
       if (this.hideOnClick) {
         this.visible = false
       }
       this.$emit('command', command, instance)
     },
-    triggerFmmFocus() {
+    triggerFmmFocus () {
       this.triggerFmm.focus && this.triggerFmm.focus()
     },
-    initDomOperation() {
+    initDomOperation () {
       this.dropdownFmm = this.popperFmm
       this.menuItems = this.dropdownFmm.querySelectorAll("[tabindex='-1']")
       this.menuItemsArray = [].slice.call(this.menuItems)
@@ -249,7 +249,7 @@ export default {
     }
   },
 
-  render(h) {
+  render (h) {
     const { hide, splitButton, type, dropdownSize } = this
 
     const handleMainButtonClick = (event) => {

@@ -32,7 +32,7 @@ export default {
   },
 
   methods: {
-    handleClick(e) {
+    handleClick (e) {
       this.dispatch('FmDropdown', 'menu-item-click', [this.command, this])
     }
   }

@@ -32,13 +32,11 @@
           <i class="fm-icon-document" />{{ file.name }}
         </a>
         <label class="fm-upload-list__item-status-label">
-          <i
-            :class="{
+          <i :class="{
               'fm-icon-upload-success': true,
               'fm-icon-circle-check': listType === 'text',
               'fm-icon-check': ['picture-card', 'picture'].indexOf(listType) > -1
-            }"
-          />
+            }" />
         </label>
         <i
           v-if="!disabled"
@@ -48,7 +46,8 @@
         <i
           v-if="!disabled"
           class="fm-icon-close-tip"
-        >{{ t('el.upload.deleteTip') }}</i> <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
+        >{{ t('el.upload.deleteTip') }}</i>
+        <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
         <fm-progress
           v-if="file.status === 'uploading'"
           :type="listType === 'picture-card' ? 'circle' : 'line'"
@@ -92,7 +91,7 @@ export default {
   props: {
     files: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
@@ -104,16 +103,16 @@ export default {
     listType: String
   },
 
-  data() {
+  data () {
     return {
       focusing: false
     }
   },
   methods: {
-    parsePercentage(val) {
+    parsePercentage (val) {
       return parseInt(val, 10)
     },
-    handleClick(file) {
+    handleClick (file) {
       this.handlePreview && this.handlePreview(file)
     }
   }

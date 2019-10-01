@@ -12,7 +12,7 @@
              sizeClass ? 'fm-form-item--' + sizeClass : ''
     ]"
   >
-    <labfm-wrap
+    <label-wrap
       :is-auto-width="labelStyle && labelStyle.width === 'auto'"
       :update-all="form.labelWidth === 'auto'"
     >
@@ -24,7 +24,7 @@
       >
         <slot name="label">{{ label + form.labelSuffix }}</slot>
       </label>
-    </labfm-wrap>
+    </label-wrap>
     <div
       class="fm-form-item__content"
       :style="contentStyle"
@@ -56,7 +56,7 @@ import AsyncValidator from 'async-validator'
 import emitter from '../../../js/mixins/emitter'
 import objectAssign from '../../../js/utils/merge'
 import { noop, getPropByPath } from '../../../js/utils/util'
-import LabelWrap from './labfm-wrap'
+import LabelWrap from './label-wrap'
 export default {
   name: 'FmFormItem',
 

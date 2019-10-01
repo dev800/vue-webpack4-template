@@ -2,7 +2,7 @@
 import TabBar from './tab-bar'
 import { addResizeListener, removeResizeListener } from '../../../js/utils/resize-event'
 
-function noop() {}
+function noop () { }
 const firstUpperCase = str => {
   return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
 }
@@ -32,7 +32,7 @@ export default {
     stretch: Boolean
   },
 
-  data() {
+  data () {
     return {
       scrollable: false,
       navOffset: 0,
@@ -42,22 +42,22 @@ export default {
   },
 
   computed: {
-    navStyle() {
+    navStyle () {
       const dir = ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'X' : 'Y'
       return {
         transform: `translate${dir}(-${this.navOffset}px)`
       }
     },
-    sizeName() {
+    sizeName () {
       return ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'width' : 'height'
     }
   },
 
-  updated() {
+  updated () {
     this.update()
   },
 
-  mounted() {
+  mounted () {
     addResizeListener(this.$el, this.update)
     document.addEventListener('visibilitychange', this.visibilityChangeHandler)
     window.addEventListener('blur', this.windowBlurHandler)
@@ -67,7 +67,7 @@ export default {
     }, 0)
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     if (this.$el && this.update) removeResizeListener(this.$el, this.update)
     document.removeEventListener('visibilitychange', this.visibilityChangeHandler)
     window.removeEventListener('blur', this.windowBlurHandler)
@@ -75,7 +75,7 @@ export default {
   },
 
   methods: {
-    scrollPrev() {
+    scrollPrev () {
       const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`]
       const currentOffset = this.navOffset
 
@@ -87,7 +87,7 @@ export default {
 
       this.navOffset = newOffset
     },
-    scrollNext() {
+    scrollNext () {
       const navSize = this.$refs.nav[`offset${firstUpperCase(this.sizeName)}`]
       const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`]
       const currentOffset = this.navOffset
@@ -100,7 +100,7 @@ export default {
 
       this.navOffset = newOffset
     },
-    scrollToActiveTab() {
+    scrollToActiveTab () {
       if (!this.scrollable) return
       const nav = this.$refs.nav
       const activeTab = this.$el.querySelector('.is-active')
@@ -133,7 +133,7 @@ export default {
       newOffset = Math.max(newOffset, 0)
       this.navOffset = Math.min(newOffset, maxOffset)
     },
-    update() {
+    update () {
       if (!this.$refs.nav) return
       const sizeName = this.sizeName
       const navSize = this.$refs.nav[`offset${firstUpperCase(sizeName)}`]
@@ -155,7 +155,7 @@ export default {
         }
       }
     },
-    changeTab(e) {
+    changeTab (e) {
       const keyCode = e.keyCode
       let nextIndex
       let currentIndex, tabList
@@ -182,15 +182,15 @@ export default {
       tabList[nextIndex].click() // 选中下一个tab
       this.setFocus()
     },
-    setFocus() {
+    setFocus () {
       if (this.focusable) {
         this.isFocus = true
       }
     },
-    removeFocus() {
+    removeFocus () {
       this.isFocus = false
     },
-    visibilityChangeHandler() {
+    visibilityChangeHandler () {
       const visibility = document.visibilityState
       if (visibility === 'hidden') {
         this.focusable = false
@@ -200,17 +200,17 @@ export default {
         }, 50)
       }
     },
-    windowBlurHandler() {
+    windowBlurHandler () {
       this.focusable = false
     },
-    windowFocusHandler() {
+    windowFocusHandler () {
       setTimeout(() => {
         this.focusable = true
       }, 50)
     }
   },
 
-  render(h) {
+  render (h) {
     const {
       type,
       panes,
@@ -258,12 +258,12 @@ export default {
           key={`tab-${tabName}`}
           aria-controls={`pane-${tabName}`}
           role="tab"
-          aria-selected={ pane.active }
+          aria-selected={pane.active}
           ref="tabs"
           tabindex={tabindex}
           refInFor
-          on-focus={ () => { setFocus() }}
-          on-blur ={ () => { removeFocus() }}
+          on-focus={() => { setFocus() }}
+          on-blur={() => { removeFocus() }}
           on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev) }}
           on-keydown={(ev) => { if (closable && (ev.keyCode === 46 || ev.keyCode === 8)) { onTabRemove(pane, ev) } }}
         >
@@ -281,7 +281,7 @@ export default {
             ref="nav"
             style={navStyle}
             role="tablist"
-            on-keydown={ changeTab }
+            on-keydown={changeTab}
           >
             {!type ? <tab-bar tabs={panes}></tab-bar> : null}
             {tabs}

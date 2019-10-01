@@ -75,12 +75,12 @@ export default {
   },
 
   computed: {
-    tooltipId() {
+    tooltipId () {
       return `fm-popover-${generateId()}`
     }
   },
   watch: {
-    showPopper(val) {
+    showPopper (val) {
       if (this.disabled) {
         return
       }
@@ -88,7 +88,7 @@ export default {
     }
   },
 
-  mounted() {
+  mounted () {
     let reference = this.referenceFmm = this.reference || this.$refs.reference
     const popper = this.popper || this.$refs.popper
 
@@ -139,15 +139,15 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     this.cleanup()
   },
 
-  deactivated() {
+  deactivated () {
     this.cleanup()
   },
 
-  destroyed() {
+  destroyed () {
     const reference = this.reference
 
     off(reference, 'click', this.doToggle)
@@ -163,27 +163,27 @@ export default {
   },
 
   methods: {
-    doToggle() {
+    doToggle () {
       this.showPopper = !this.showPopper
     },
-    doShow() {
+    doShow () {
       this.showPopper = true
     },
-    doClose() {
+    doClose () {
       this.showPopper = false
     },
-    handleFocus() {
+    handleFocus () {
       addClass(this.referenceFmm, 'focusing')
       if (this.trigger === 'click' || this.trigger === 'focus') this.showPopper = true
     },
-    handleClick() {
+    handleClick () {
       removeClass(this.referenceFmm, 'focusing')
     },
-    handleBlur() {
+    handleBlur () {
       removeClass(this.referenceFmm, 'focusing')
       if (this.trigger === 'click' || this.trigger === 'focus') this.showPopper = false
     },
-    handleMouseEnter() {
+    handleMouseEnter () {
       clearTimeout(this._timer)
       if (this.openDelay) {
         this._timer = setTimeout(() => {
@@ -193,12 +193,12 @@ export default {
         this.showPopper = true
       }
     },
-    handleKeydown(ev) {
+    handleKeydown (ev) {
       if (ev.keyCode === 27 && this.trigger !== 'manual') { // esc
         this.doClose()
       }
     },
-    handleMouseLeave() {
+    handleMouseLeave () {
       clearTimeout(this._timer)
       if (this.closeDelay) {
         this._timer = setTimeout(() => {
@@ -208,7 +208,7 @@ export default {
         this.showPopper = false
       }
     },
-    handleDocumentClick(e) {
+    handleDocumentClick (e) {
       let reference = this.reference || this.$refs.reference
       const popper = this.popper || this.$refs.popper
 
@@ -223,14 +223,14 @@ export default {
         popper.contains(e.target)) return
       this.showPopper = false
     },
-    handleAfterEnter() {
+    handleAfterEnter () {
       this.$emit('after-enter')
     },
-    handleAfterLeave() {
+    handleAfterLeave () {
       this.$emit('after-leave')
       this.doDestroy()
     },
-    cleanup() {
+    cleanup () {
       if (this.openDelay || this.closeDelay) {
         clearTimeout(this._timer)
       }

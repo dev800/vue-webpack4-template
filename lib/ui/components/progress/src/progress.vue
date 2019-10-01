@@ -117,23 +117,23 @@ export default {
     format: Function
   },
   computed: {
-    barStyle() {
+    barStyle () {
       const style = {}
       style.width = this.percentage + '%'
       style.backgroundColor = this.getCurrentColor(this.percentage)
       return style
     },
-    relativeStrokeWidth() {
+    relativeStrokeWidth () {
       return (this.strokeWidth / this.width * 100).toFixed(1)
     },
-    radius() {
+    radius () {
       if (this.type === 'circle' || this.type === 'dashboard') {
         return parseInt(50 - parseFloat(this.relativeStrokeWidth) / 2, 10)
       } else {
         return 0
       }
     },
-    trackPath() {
+    trackPath () {
       const radius = this.radius
       const isDashboard = this.type === 'dashboard'
       return `
@@ -143,30 +143,30 @@ export default {
           a ${radius} ${radius} 0 1 1 0 ${isDashboard ? '' : '-'}${radius * 2}
           `
     },
-    perimeter() {
+    perimeter () {
       return 2 * Math.PI * this.radius
     },
-    rate() {
+    rate () {
       return this.type === 'dashboard' ? 0.75 : 1
     },
-    strokeDashoffset() {
+    strokeDashoffset () {
       const offset = -1 * this.perimeter * (1 - this.rate) / 2
       return `${offset}px`
     },
-    trailPathStyle() {
+    trailPathStyle () {
       return {
         strokeDasharray: `${(this.perimeter * this.rate)}px, ${this.perimeter}px`,
         strokeDashoffset: this.strokeDashoffset
       }
     },
-    circlePathStyle() {
+    circlePathStyle () {
       return {
         strokeDasharray: `${this.perimeter * this.rate * (this.percentage / 100)}px, ${this.perimeter}px`,
         strokeDashoffset: this.strokeDashoffset,
         transition: 'stroke-dasharray 0.6s ease 0s, stroke 0.6s ease'
       }
     },
-    stroke() {
+    stroke () {
       let ret
       if (this.color) {
         ret = this.getCurrentColor(this.percentage)
@@ -187,7 +187,7 @@ export default {
       }
       return ret
     },
-    iconClass() {
+    iconClass () {
       if (this.status === 'warning') {
         return 'fm-icon-warning'
       }
@@ -197,12 +197,12 @@ export default {
         return this.status === 'success' ? 'fm-icon-check' : 'fm-icon-close'
       }
     },
-    progressTextSize() {
+    progressTextSize () {
       return this.type === 'line'
         ? 12 + this.strokeWidth * 0.4
         : this.width * 0.111111 + 2
     },
-    content() {
+    content () {
       if (typeof this.format === 'function') {
         return this.format(this.percentage) || ''
       } else {
@@ -211,7 +211,7 @@ export default {
     }
   },
   methods: {
-    getCurrentColor(percentage) {
+    getCurrentColor (percentage) {
       if (typeof this.color === 'function') {
         return this.color(percentage)
       } else if (typeof this.color === 'string') {
@@ -220,7 +220,7 @@ export default {
         return this.getLevelColor(percentage)
       }
     },
-    getLevelColor(percentage) {
+    getLevelColor (percentage) {
       const colorArray = this.getColorArray().sort((a, b) => a.percentage - b.percentage)
 
       for (let i = 0; i < colorArray.length; i++) {
@@ -230,7 +230,7 @@ export default {
       }
       return colorArray[colorArray.length - 1].color
     },
-    getColorArray() {
+    getColorArray () {
       const color = this.color
       const span = 100 / color.length
       return color.map((seriesColor, index) => {

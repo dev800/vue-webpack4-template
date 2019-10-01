@@ -110,7 +110,7 @@ export default {
 
   provide () {
     return {
-      elCalendar: this
+      fmCalendar: this
     }
   },
 

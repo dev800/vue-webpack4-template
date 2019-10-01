@@ -67,7 +67,7 @@ export default {
           style.marginLeft = marginLeft + 'px'
         }
       }
-      return (<div class="fm-form-item__labfm-wrap" style={style}>
+      return (<div class="fm-form-item__label-wrap" style={style}>
         {slots}
       </div>)
     } else {

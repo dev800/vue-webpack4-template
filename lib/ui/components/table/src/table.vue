@@ -279,7 +279,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default: function() {
+      default: function () {
         return []
       }
     },
@@ -360,7 +360,7 @@ export default {
 
     treeProps: {
       type: Object,
-      default() {
+      default () {
         return {
           hasChildren: 'hasChildren',
           children: 'children'
@@ -374,7 +374,7 @@ export default {
   },
 
   methods: {
-    getMigratingConfig() {
+    getMigratingConfig () {
       return {
         events: {
           expand: 'expand is renamed to expand-change'
@@ -382,44 +382,44 @@ export default {
       }
     },
 
-    setCurrentRow(row) {
+    setCurrentRow (row) {
       this.store.commit('setCurrentRow', row)
     },
 
-    toggleRowSelection(row, selected) {
+    toggleRowSelection (row, selected) {
       this.store.toggleRowSelection(row, selected, false)
       this.store.updateAllSelected()
     },
 
-    toggleRowExpansion(row, expanded) {
+    toggleRowExpansion (row, expanded) {
       this.store.toggleRowExpansionAdapter(row, expanded)
     },
 
-    clearSelection() {
+    clearSelection () {
       this.store.clearSelection()
     },
 
-    clearFilter(columnKeys) {
+    clearFilter (columnKeys) {
       this.store.clearFilter(columnKeys)
     },
 
-    clearSort() {
+    clearSort () {
       this.store.clearSort()
     },
 
-    handleMouseLeave() {
+    handleMouseLeave () {
       this.store.commit('setHoverRow', null)
       if (this.hoverState) this.hoverState = null
     },
 
-    updateScrollY() {
+    updateScrollY () {
       const changed = this.layout.updateScrollY()
       if (changed) {
         this.layout.updateColumnsWidth()
       }
     },
 
-    handleFixedMousewheel(event, data) {
+    handleFixedMousewheel (event, data) {
       const bodyWrapper = this.bodyWrapper
       if (Math.abs(data.spinY) > 0) {
         const currentScrollTop = bodyWrapper.scrollTop
@@ -435,7 +435,7 @@ export default {
       }
     },
 
-    handleHeaderFooterMousewheel(event, data) {
+    handleHeaderFooterMousewheel (event, data) {
       const { pixelX, pixelY } = data
       if (Math.abs(pixelX) >= Math.abs(pixelY)) {
         this.bodyWrapper.scrollLeft += data.pixelX / 5
@@ -443,7 +443,7 @@ export default {
     },
 
     // TODO 使用 CSS transform
-    syncPostion: throttle(20, function() {
+    syncPostion: throttle(20, function () {
       const { scrollLeft, scrollTop, offsetWidth, scrollWidth } = this.bodyWrapper
       const { headerWrapper, footerWrapper, fixedBodyWrapper, rightFixedBodyWrapper } = this.$refs
       if (headerWrapper) headerWrapper.scrollLeft = scrollLeft
@@ -460,21 +460,21 @@ export default {
       }
     }),
 
-    bindEvents() {
+    bindEvents () {
       this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true })
       if (this.fit) {
         addResizeListener(this.$el, this.resizeListener)
       }
     },
 
-    unbindEvents() {
+    unbindEvents () {
       this.bodyWrapper.removeEventListener('scroll', this.syncPostion, { passive: true })
       if (this.fit) {
         removeResizeListener(this.$el, this.resizeListener)
       }
     },
 
-    resizeListener() {
+    resizeListener () {
       if (!this.$ready) return
       let shouldUpdateLayout = false
       const el = this.$el
@@ -497,45 +497,45 @@ export default {
       }
     },
 
-    doLayout() {
+    doLayout () {
       if (this.shouldUpdateHeight) {
         this.layout.updateFmsHeight()
       }
       this.layout.updateColumnsWidth()
     },
 
-    sort(prop, order) {
+    sort (prop, order) {
       this.store.commit('sort', { prop, order })
     },
 
-    toggleAllSelection() {
+    toggleAllSelection () {
       this.store.commit('toggleAllSelection')
     }
 
   },
 
   computed: {
-    tableSize() {
+    tableSize () {
       return this.size || (this.$ELEMENT || {}).size
     },
 
-    bodyWrapper() {
+    bodyWrapper () {
       return this.$refs.bodyWrapper
     },
 
-    shouldUpdateHeight() {
+    shouldUpdateHeight () {
       return this.height ||
-          this.maxHeight ||
-          this.fixedColumns.length > 0 ||
-          this.rightFixedColumns.length > 0
+        this.maxHeight ||
+        this.fixedColumns.length > 0 ||
+        this.rightFixedColumns.length > 0
     },
 
-    bodyWidth() {
+    bodyWidth () {
       const { bodyWidth, scrollY, gutterWidth } = this.layout
       return bodyWidth ? bodyWidth - (scrollY ? gutterWidth : 0) + 'px' : ''
     },
 
-    bodyHeight() {
+    bodyHeight () {
       const { headerHeight = 0, bodyHeight, footerHeight = 0 } = this.layout
       if (this.height) {
         return {
@@ -552,7 +552,7 @@ export default {
       return {}
     },
 
-    fixedBodyHeight() {
+    fixedBodyHeight () {
       if (this.height) {
         return {
           height: this.layout.fixedBodyHeight ? this.layout.fixedBodyHeight + 'px' : ''
@@ -573,7 +573,7 @@ export default {
       return {}
     },
 
-    fixedHeight() {
+    fixedHeight () {
       if (this.maxHeight) {
         if (this.showSummary) {
           return {
@@ -595,7 +595,7 @@ export default {
       }
     },
 
-    emptyBlockStyle() {
+    emptyBlockStyle () {
       if (this.data && this.data.length) return null
       let height = '100%'
       if (this.layout.appendHeight) {
@@ -619,21 +619,21 @@ export default {
   watch: {
     height: {
       immediate: true,
-      handler(value) {
+      handler (value) {
         this.layout.setHeight(value)
       }
     },
 
     maxHeight: {
       immediate: true,
-      handler(value) {
+      handler (value) {
         this.layout.setMaxHeight(value)
       }
     },
 
     currentRowKey: {
       immediate: true,
-      handler(value) {
+      handler (value) {
         if (!this.rowKey) return
         this.store.setCurrentRowKey(value)
       }
@@ -641,14 +641,14 @@ export default {
 
     data: {
       immediate: true,
-      handler(value) {
+      handler (value) {
         this.store.commit('setData', value)
       }
     },
 
     expandRowKeys: {
       immediate: true,
-      handler(newVal) {
+      handler (newVal) {
         if (newVal) {
           this.store.setExpandRowKeysAdapter(newVal)
         }
@@ -656,12 +656,12 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.tableId = 'fm-table_' + tableIdSeed++
     this.debouncedUpdateLayout = debounce(50, () => this.doLayout())
   },
 
-  mounted() {
+  mounted () {
     this.bindEvents()
     this.store.updateColumns()
     this.doLayout()
@@ -685,11 +685,11 @@ export default {
     this.$ready = true
   },
 
-  destroyed() {
+  destroyed () {
     this.unbindEvents()
   },
 
-  data() {
+  data () {
     const { hasChildren = 'hasChildren', children = 'children' } = this.treeProps
     this.store = createStore(this, {
       rowKey: this.rowKey,

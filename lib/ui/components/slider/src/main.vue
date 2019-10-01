@@ -264,8 +264,8 @@ export default {
     value (val, oldVal) {
       if (this.dragging ||
         (Array.isArray(val) &&
-        Array.isArray(oldVal) &&
-        val.every((item, index) => item === oldVal[index])) {
+          Array.isArray(oldVal) &&
+          val.every((item, index) => item === oldVal[index])) {
         return
       }
       this.setValues()

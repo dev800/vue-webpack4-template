@@ -9,13 +9,13 @@ export default {
     }
   },
 
-  provide() {
+  provide () {
     return {
       timeline: this
     }
   },
 
-  render() {
+  render () {
     const reverse = this.reverse
     const classes = {
       'fm-timeline': true,
@@ -25,8 +25,8 @@ export default {
     if (reverse) {
       slots = slots.reverse()
     }
-    return (<ul class={ classes }>
-      { slots }
+    return (<ul class={classes}>
+      {slots}
     </ul>)
   }
 }

@@ -21,7 +21,7 @@
     >
     <span
       v-if="inactiveIconClass || inactiveText"
-      :class="['fm-switch__label', 'fm-switch__labfm--left', !checked ? 'is-active' : '']"
+      :class="['fm-switch__label', 'fm-switch__label--left', !checked ? 'is-active' : '']"
     >
       <i
         v-if="inactiveIconClass"
@@ -39,7 +39,7 @@
     />
     <span
       v-if="activeIconClass || activeText"
-      :class="['fm-switch__label', 'fm-switch__labfm--right', checked ? 'is-active' : '']"
+      :class="['fm-switch__label', 'fm-switch__label--right', checked ? 'is-active' : '']"
     >
       <i
         v-if="activeIconClass"

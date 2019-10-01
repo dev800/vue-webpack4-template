@@ -91,7 +91,7 @@ export default {
           required: true
         }
       },
-      render(h) {
+      render (h) {
         const parent = this.$parent
         const tree = parent.tree
         const node = this.node
@@ -101,7 +101,7 @@ export default {
             ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
             : tree.$scopedSlots.default
               ? tree.$scopedSlots.default({ node, data })
-              : <span class="fm-tree-node__label">{ node.label }</span>
+              : <span class="fm-tree-node__label">{node.label}</span>
         )
       }
     }
@@ -111,7 +111,7 @@ export default {
 
   props: {
     node: {
-      default() {
+      default () {
         return {}
       }
     },
@@ -127,7 +127,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       tree: null,
       expanded: false,
@@ -138,15 +138,15 @@ export default {
   },
 
   watch: {
-    'node.indeterminate'(val) {
+    'node.indeterminate' (val) {
       this.handleSelectChange(this.node.checked, val)
     },
 
-    'node.checked'(val) {
+    'node.checked' (val) {
       this.handleSelectChange(val, this.node.indeterminate)
     },
 
-    'node.expanded'(val) {
+    'node.expanded' (val) {
       this.$nextTick(() => this.expanded = val)
       if (val) {
         this.childNodeRendered = true
@@ -154,7 +154,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     const parent = this.$parent
 
     if (parent.isTree) {
@@ -190,11 +190,11 @@ export default {
   },
 
   methods: {
-    getNodeKey(node) {
+    getNodeKey (node) {
       return getNodeKey(this.tree.nodeKey, node.data)
     },
 
-    handleSelectChange(checked, indeterminate) {
+    handleSelectChange (checked, indeterminate) {
       if (this.oldChecked !== checked && this.oldIndeterminate !== indeterminate) {
         this.tree.$emit('check-change', this.node.data, checked, indeterminate)
       }
@@ -202,7 +202,7 @@ export default {
       this.indeterminate = indeterminate
     },
 
-    handleClick() {
+    handleClick () {
       const store = this.tree.store
       store.setCurrentNode(this.node)
       this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode)
@@ -218,7 +218,7 @@ export default {
       this.tree.$emit('node-click', this.node.data, this.node, this)
     },
 
-    handleContextMenu(event) {
+    handleContextMenu (event) {
       if (this.tree._events['node-contextmenu'] && this.tree._events['node-contextmenu'].length > 0) {
         event.stopPropagation()
         event.preventDefault()
@@ -226,7 +226,7 @@ export default {
       this.tree.$emit('node-contextmenu', event, this.node.data, this.node, this)
     },
 
-    handleExpandIconClick() {
+    handleExpandIconClick () {
       if (this.node.isLeaf) return
       if (this.expanded) {
         this.tree.$emit('node-collapse', this.node.data, this.node, this)
@@ -237,7 +237,7 @@ export default {
       }
     },
 
-    handleCheckChange(value, ev) {
+    handleCheckChange (value, ev) {
       this.node.setChecked(ev.target.checked, !this.tree.checkStrictly)
       this.$nextTick(() => {
         const store = this.tree.store
@@ -250,27 +250,27 @@ export default {
       })
     },
 
-    handleChildNodeExpand(nodeData, node, instance) {
+    handleChildNodeExpand (nodeData, node, instance) {
       this.broadcast('FmTreeNode', 'tree-node-expand', node)
       this.tree.$emit('node-expand', nodeData, node, instance)
     },
 
-    handleDragStart(event) {
+    handleDragStart (event) {
       if (!this.tree.draggable) return
       this.tree.$emit('tree-node-drag-start', event, this)
     },
 
-    handleDragOver(event) {
+    handleDragOver (event) {
       if (!this.tree.draggable) return
       this.tree.$emit('tree-node-drag-over', event, this)
       event.preventDefault()
     },
 
-    handleDrop(event) {
+    handleDrop (event) {
       event.preventDefault()
     },
 
-    handleDragEnd(event) {
+    handleDragEnd (event) {
       if (!this.tree.draggable) return
       this.tree.$emit('tree-node-drag-end', event, this)
     }

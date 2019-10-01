@@ -56,7 +56,7 @@ export default {
     disabled: Boolean
   },
 
-  data() {
+  data () {
     return {
       current: null,
       showPrevMore: false,
@@ -67,7 +67,7 @@ export default {
   },
 
   computed: {
-    pagers() {
+    pagers () {
       const pagerCount = this.pagerCount
       const halfPagerCount = (pagerCount - 1) / 2
 
@@ -117,17 +117,17 @@ export default {
   },
 
   watch: {
-    showPrevMore(val) {
+    showPrevMore (val) {
       if (!val) this.quickprevIconClass = 'fm-icon-more'
     },
 
-    showNextMore(val) {
+    showNextMore (val) {
       if (!val) this.quicknextIconClass = 'fm-icon-more'
     }
   },
 
   methods: {
-    onPagerClick(event) {
+    onPagerClick (event) {
       const target = event.target
       if (target.tagName === 'UL' || this.disabled) {
         return
@@ -162,7 +162,7 @@ export default {
       }
     },
 
-    onMouseenter(direction) {
+    onMouseenter (direction) {
       if (this.disabled) return
       if (direction === 'left') {
         this.quickprevIconClass = 'fm-icon-d-arrow-left'

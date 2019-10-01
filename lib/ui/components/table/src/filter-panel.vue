@@ -96,7 +96,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       table: null,
       cell: null,
@@ -105,15 +105,15 @@ export default {
   },
 
   computed: {
-    filters() {
+    filters () {
       return this.column && this.column.filters
     },
 
     filterValue: {
-      get() {
+      get () {
         return (this.column.filteredValue || [])[0]
       },
-      set(value) {
+      set (value) {
         if (this.filteredValue) {
           if ((typeof value !== 'undefined') && (value !== null)) {
             this.filteredValue.splice(0, 1, value)
@@ -125,20 +125,20 @@ export default {
     },
 
     filteredValue: {
-      get() {
+      get () {
         if (this.column) {
           return this.column.filteredValue || []
         }
         return []
       },
-      set(value) {
+      set (value) {
         if (this.column) {
           this.column.filteredValue = value
         }
       }
     },
 
-    multiple() {
+    multiple () {
       if (this.column) {
         return this.column.filterMultiple
       }
@@ -146,14 +146,14 @@ export default {
     }
   },
   watch: {
-    showPopper(val) {
+    showPopper (val) {
       if (val === true && parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
         this.popperJS._popper.style.zIndex = PopupManager.nextZIndex()
       }
     }
   },
 
-  mounted() {
+  mounted () {
     this.popperFmm = this.$el
     this.referenceFmm = this.cell
     this.table.bodyWrapper.addEventListener('scroll', () => {
@@ -171,28 +171,28 @@ export default {
   },
 
   methods: {
-    isActive(filter) {
+    isActive (filter) {
       return filter.value === this.filterValue
     },
 
-    handleOutsideClick() {
+    handleOutsideClick () {
       setTimeout(() => {
         this.showPopper = false
       }, 16)
     },
 
-    handleConfirm() {
+    handleConfirm () {
       this.confirmFilter(this.filteredValue)
       this.handleOutsideClick()
     },
 
-    handleReset() {
+    handleReset () {
       this.filteredValue = []
       this.confirmFilter(this.filteredValue)
       this.handleOutsideClick()
     },
 
-    handleSelect(filterValue) {
+    handleSelect (filterValue) {
       this.filterValue = filterValue
 
       if ((typeof filterValue !== 'undefined') && (filterValue !== null)) {
@@ -204,7 +204,7 @@ export default {
       this.handleOutsideClick()
     },
 
-    confirmFilter(filteredValue) {
+    confirmFilter (filteredValue) {
       this.table.store.commit('filterChange', {
         column: this.column,
         values: filteredValue

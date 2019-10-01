@@ -2,7 +2,7 @@
   <form
     class="fm-form"
     :class="[
-      labelPosition ? 'fm-form--labfm-' + labelPosition : '',
+      labelPosition ? 'fm-form--label-' + labelPosition : '',
       { 'fm-form--inline': inline }
     ]"
   >

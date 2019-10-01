@@ -18,7 +18,7 @@ export default {
 
   computed: {
     barStyle: {
-      get() {
+      get () {
         const style = {}
         let offset = 0
         let tabSize = 0

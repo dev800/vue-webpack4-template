@@ -32,33 +32,33 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       visible: true
     }
   },
 
   watch: {
-    disabled(val) {
+    disabled (val) {
       this.broadcast('FmOption', 'handleGroupDisabled', val)
     }
   },
 
-  created() {
+  created () {
     this.$on('queryChange', this.queryChange)
   },
 
-  mounted() {
+  mounted () {
     if (this.disabled) {
       this.broadcast('FmOption', 'handleGroupDisabled', this.disabled)
     }
   },
 
   methods: {
-    queryChange() {
+    queryChange () {
       this.visible = this.$children &&
-          Array.isArray(this.$children) &&
-          this.$children.some(option => option.visible === true)
+        Array.isArray(this.$children) &&
+        this.$children.some(option => option.visible === true)
     }
   }
 }

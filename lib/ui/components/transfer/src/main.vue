@@ -65,19 +65,19 @@ export default {
   props: {
     data: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
     titles: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
     buttonTexts: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
@@ -88,33 +88,33 @@ export default {
     filterMethod: Function,
     leftDefaultChecked: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
     rightDefaultChecked: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
     renderContent: Function,
     value: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
     format: {
       type: Object,
-      default() {
+      default () {
         return {}
       }
     },
     filterable: Boolean,
     props: {
       type: Object,
-      default() {
+      default () {
         return {
           label: 'label',
           key: 'key',
@@ -128,7 +128,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       leftChecked: [],
       rightChecked: []
@@ -136,16 +136,16 @@ export default {
   },
 
   computed: {
-    dataObj() {
+    dataObj () {
       const key = this.props.key
       return this.data.reduce((o, cur) => (o[cur[key]] = cur) && o, {})
     },
 
-    sourceData() {
+    sourceData () {
       return this.data.filter(item => this.value.indexOf(item[this.props.key]) === -1)
     },
 
-    targetData() {
+    targetData () {
       if (this.targetOrder === 'original') {
         return this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1)
       } else {
@@ -159,19 +159,19 @@ export default {
       }
     },
 
-    hasButtonTexts() {
+    hasButtonTexts () {
       return this.buttonTexts.length === 2
     }
   },
 
   watch: {
-    value(val) {
+    value (val) {
       this.dispatch('FmFormItem', 'el.form.change', val)
     }
   },
 
   methods: {
-    getMigratingConfig() {
+    getMigratingConfig () {
       return {
         props: {
           'footer-format': 'footer-format is renamed to format.'
@@ -179,19 +179,19 @@ export default {
       }
     },
 
-    onSourceCheckedChange(val, movedKeys) {
+    onSourceCheckedChange (val, movedKeys) {
       this.leftChecked = val
       if (movedKeys === undefined) return
       this.$emit('left-check-change', val, movedKeys)
     },
 
-    onTargetCheckedChange(val, movedKeys) {
+    onTargetCheckedChange (val, movedKeys) {
       this.rightChecked = val
       if (movedKeys === undefined) return
       this.$emit('right-check-change', val, movedKeys)
     },
 
-    addToLeft() {
+    addToLeft () {
       const currentValue = this.value.slice()
       this.rightChecked.forEach(item => {
         const index = currentValue.indexOf(item)
@@ -203,7 +203,7 @@ export default {
       this.$emit('change', currentValue, 'left', this.rightChecked)
     },
 
-    addToRight() {
+    addToRight () {
       let currentValue = this.value.slice()
       const itemsToBeMoved = []
       const key = this.props.key
@@ -211,7 +211,7 @@ export default {
         const itemKey = item[key]
         if (
           this.leftChecked.indexOf(itemKey) > -1 &&
-            this.value.indexOf(itemKey) === -1
+          this.value.indexOf(itemKey) === -1
         ) {
           itemsToBeMoved.push(itemKey)
         }
@@ -223,7 +223,7 @@ export default {
       this.$emit('change', currentValue, 'right', this.leftChecked)
     },
 
-    clearQuery(which) {
+    clearQuery (which) {
       if (which === 'left') {
         this.$refs.leftPanel.query = ''
       } else if (which === 'right') {

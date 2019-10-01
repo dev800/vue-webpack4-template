@@ -90,7 +90,7 @@ export default {
     status: String
   },
 
-  data() {
+  data () {
     return {
       index: -1,
       lineStyle: {},
@@ -99,34 +99,34 @@ export default {
   },
 
   computed: {
-    currentStatus() {
+    currentStatus () {
       return this.status || this.internalStatus
     },
-    prevStatus() {
+    prevStatus () {
       const prevStep = this.$parent.steps[this.index - 1]
       return prevStep ? prevStep.currentStatus : 'wait'
     },
-    isCenter() {
+    isCenter () {
       return this.$parent.alignCenter
     },
-    isVertical() {
+    isVertical () {
       return this.$parent.direction === 'vertical'
     },
-    isSimple() {
+    isSimple () {
       return this.$parent.simple
     },
-    isLast() {
+    isLast () {
       const parent = this.$parent
       return parent.steps[parent.steps.length - 1] === this
     },
-    stepsCount() {
+    stepsCount () {
       return this.$parent.steps.length
     },
-    space() {
+    space () {
       const { isSimple, $parent: { space } } = this
       return isSimple ? '' : space
     },
-    style: function() {
+    style: function () {
       const style = {}
       const parent = this.$parent
       const len = parent.steps.length
@@ -148,11 +148,11 @@ export default {
     }
   },
 
-  beforeCreate() {
+  beforeCreate () {
     this.$parent.steps.push(this)
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     const steps = this.$parent.steps
     const index = steps.indexOf(this)
     if (index >= 0) {
@@ -160,7 +160,7 @@ export default {
     }
   },
 
-  mounted() {
+  mounted () {
     const unwatch = this.$watch('index', val => {
       this.$watch('$parent.active', this.updateStatus, { immediate: true })
       this.$watch('$parent.processStatus', () => {
@@ -172,7 +172,7 @@ export default {
   },
 
   methods: {
-    updateStatus(val) {
+    updateStatus (val) {
       const prevChild = this.$parent.$children[this.index - 1]
 
       if (val > this.index) {
@@ -186,7 +186,7 @@ export default {
       if (prevChild) prevChild.calcProgress(this.internalStatus)
     },
 
-    calcProgress(status) {
+    calcProgress (status) {
       let step = 100
       const style = {}
 

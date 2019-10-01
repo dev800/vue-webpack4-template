@@ -23,13 +23,13 @@ export default {
     stretch: Boolean
   },
 
-  provide() {
+  provide () {
     return {
       rootTabs: this
     }
   },
 
-  data() {
+  data () {
     return {
       currentName: this.value || this.activeName,
       panes: []
@@ -37,13 +37,13 @@ export default {
   },
 
   watch: {
-    activeName(value) {
+    activeName (value) {
       this.setCurrentName(value)
     },
-    value(value) {
+    value (value) {
       this.setCurrentName(value)
     },
-    currentName(value) {
+    currentName (value) {
       if (this.$refs.nav) {
         this.$nextTick(() => {
           this.$refs.nav.$nextTick(_ => {
@@ -54,7 +54,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     if (!this.currentName) {
       this.setCurrentName('0')
     }
@@ -62,19 +62,19 @@ export default {
     this.$on('tab-nav-update', this.calcPaneInstances.bind(null, true))
   },
 
-  mounted() {
+  mounted () {
     this.calcPaneInstances()
   },
 
-  updated() {
+  updated () {
     this.calcPaneInstances()
   },
 
   methods: {
-    calcPaneInstances(isForceUpdate = false) {
+    calcPaneInstances (isForceUpdate = false) {
       if (this.$slots.default) {
         const paneSlots = this.$slots.default.filter(vnode => vnode.tag &&
-            vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'FmTabPane')
+          vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'FmTabPane')
         // update indeed
         const panes = paneSlots.map(({ componentInstance }) => componentInstance)
         const panesChanged = !(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]))
@@ -85,22 +85,22 @@ export default {
         this.panes = []
       }
     },
-    handleTabClick(tab, tabName, event) {
+    handleTabClick (tab, tabName, event) {
       if (tab.disabled) return
       this.setCurrentName(tabName)
       this.$emit('tab-click', tab, event)
     },
-    handleTabRemove(pane, ev) {
+    handleTabRemove (pane, ev) {
       if (pane.disabled) return
       ev.stopPropagation()
       this.$emit('edit', pane.name, 'remove')
       this.$emit('tab-remove', pane.name)
     },
-    handleTabAdd() {
+    handleTabAdd () {
       this.$emit('edit', null, 'add')
       this.$emit('tab-add')
     },
-    setCurrentName(value) {
+    setCurrentName (value) {
       const changeCurrentName = () => {
         this.currentName = value
         this.$emit('input', value)
@@ -125,7 +125,7 @@ export default {
     }
   },
 
-  render(h) {
+  render (h) {
     const {
       type,
       handleTabClick,
@@ -143,9 +143,9 @@ export default {
       ? (
         <span
           class="fm-tabs__new-tab"
-          on-click={ handleTabAdd }
+          on-click={handleTabAdd}
           tabindex="0"
-          on-keydown={ (ev) => { if (ev.keyCode === 13) { handleTabAdd() } } }
+          on-keydown={(ev) => { if (ev.keyCode === 13) { handleTabAdd() } }}
         >
           <i class="fm-icon-plus"></i>
         </span>
@@ -167,7 +167,7 @@ export default {
     const header = (
       <div class={['fm-tabs__header', `is-${tabPosition}`]}>
         {newButton}
-        <tab-nav { ...navData }></tab-nav>
+        <tab-nav {...navData}></tab-nav>
       </div>
     )
     const panels = (
@@ -183,7 +183,7 @@ export default {
         [`fm-tabs--${tabPosition}`]: true,
         'fm-tabs--border-card': type === 'border-card'
       }}>
-        { tabPosition !== 'bottom' ? [header, panels] : [panels, header] }
+        {tabPosition !== 'bottom' ? [header, panels] : [panels, header]}
       </div>
     )
   }

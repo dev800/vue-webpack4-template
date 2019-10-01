@@ -83,7 +83,7 @@ export default {
       props: {
         option: Object
       },
-      render(h) {
+      render (h) {
         const getParent = vm => {
           if (vm.$options.componentName === 'FmTransferPanel') {
             return vm
@@ -99,7 +99,7 @@ export default {
           ? panel.renderContent(h, this.option)
           : transfer.$scopedSlots.default
             ? transfer.$scopedSlots.default({ option: this.option })
-            : <span>{ this.option[panel.labelProp] || this.option[panel.keyProp] }</span>
+            : <span>{this.option[panel.labelProp] || this.option[panel.keyProp]}</span>
       }
     }
   },
@@ -110,7 +110,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
@@ -124,7 +124,7 @@ export default {
     props: Object
   },
 
-  data() {
+  data () {
     return {
       checked: [],
       allChecked: false,
@@ -135,7 +135,7 @@ export default {
   },
 
   computed: {
-    filteredData() {
+    filteredData () {
       return this.data.filter(item => {
         if (typeof this.filterMethod === 'function') {
           return this.filterMethod(this.query, item)
@@ -146,11 +146,11 @@ export default {
       })
     },
 
-    checkableData() {
+    checkableData () {
       return this.filteredData.filter(item => !item[this.disabledProp])
     },
 
-    checkedSummary() {
+    checkedSummary () {
       const checkedLength = this.checked.length
       const dataLength = this.data.length
       const { noChecked, hasChecked } = this.format
@@ -163,40 +163,40 @@ export default {
       }
     },
 
-    isIndeterminate() {
+    isIndeterminate () {
       const checkedLength = this.checked.length
       return checkedLength > 0 && checkedLength < this.checkableData.length
     },
 
-    hasNoMatch() {
+    hasNoMatch () {
       return this.query.length > 0 && this.filteredData.length === 0
     },
 
-    inputIcon() {
+    inputIcon () {
       return this.query.length > 0 && this.inputHover
         ? 'circle-close'
         : 'search'
     },
 
-    labelProp() {
+    labelProp () {
       return this.props.label || 'label'
     },
 
-    keyProp() {
+    keyProp () {
       return this.props.key || 'key'
     },
 
-    disabledProp() {
+    disabledProp () {
       return this.props.disabled || 'disabled'
     },
 
-    hasFooter() {
+    hasFooter () {
       return !!this.$slots.default
     }
   },
 
   watch: {
-    checked(val, oldVal) {
+    checked (val, oldVal) {
       this.updateAllChecked()
       if (this.checkChangeByUser) {
         const movedKeys = val.concat(oldVal)
@@ -208,7 +208,7 @@ export default {
       }
     },
 
-    data() {
+    data () {
       const checked = []
       const filteredDataKeys = this.filteredData.map(item => item[this.keyProp])
       this.checked.forEach(item => {
@@ -220,15 +220,15 @@ export default {
       this.checked = checked
     },
 
-    checkableData() {
+    checkableData () {
       this.updateAllChecked()
     },
 
     defaultChecked: {
       immediate: true,
-      handler(val, oldVal) {
+      handler (val, oldVal) {
         if (oldVal && val.length === oldVal.length &&
-            val.every(item => oldVal.indexOf(item) > -1)) return
+          val.every(item => oldVal.indexOf(item) > -1)) return
         const checked = []
         const checkableDataKeys = this.checkableData.map(item => item[this.keyProp])
         val.forEach(item => {
@@ -243,19 +243,19 @@ export default {
   },
 
   methods: {
-    updateAllChecked() {
+    updateAllChecked () {
       const checkableDataKeys = this.checkableData.map(item => item[this.keyProp])
       this.allChecked = checkableDataKeys.length > 0 &&
-          checkableDataKeys.every(item => this.checked.indexOf(item) > -1)
+        checkableDataKeys.every(item => this.checked.indexOf(item) > -1)
     },
 
-    handleAllCheckedChange(value) {
+    handleAllCheckedChange (value) {
       this.checked = value
         ? this.checkableData.map(item => item[this.keyProp])
         : []
     },
 
-    clearQuery() {
+    clearQuery () {
       if (this.inputIcon === 'circle-close') {
         this.query = ''
       }
