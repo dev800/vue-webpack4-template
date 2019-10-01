@@ -57,7 +57,7 @@ export default {
     emptyText: {
       type: String,
       default () {
-        return t('el.tree.emptyText')
+        return t('fm.tree.emptyText')
       }
     },
     renderAfterExpand: {

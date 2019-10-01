@@ -134,7 +134,7 @@ export default {
         this.setBackgroundColor()
       }
       if (this.validateEvent) {
-        this.dispatch('FmFormItem', 'el.form.change', [this.value])
+        this.dispatch('FmFormItem', 'fm.form.change', [this.value])
       }
     }
   },

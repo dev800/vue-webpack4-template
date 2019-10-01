@@ -244,7 +244,7 @@ export default {
     placeholder: {
       type: String,
       default () {
-        return t('el.select.placeholder')
+        return t('fm.select.placeholder')
       }
     },
     defaultFirstOption: Boolean,
@@ -317,14 +317,14 @@ export default {
 
     emptyText () {
       if (this.loading) {
-        return this.loadingText || this.t('el.select.loading')
+        return this.loadingText || this.t('fm.select.loading')
       } else {
         if (this.remote && this.query === '' && this.options.length === 0) return false
         if (this.filterable && this.query && this.options.length > 0 && this.filteredOptionsCount === 0) {
-          return this.noMatchText || this.t('el.select.noMatch')
+          return this.noMatchText || this.t('fm.select.noMatch')
         }
         if (this.options.length === 0) {
-          return this.noDataText || this.t('el.select.noData')
+          return this.noDataText || this.t('fm.select.noData')
         }
       }
       return null
@@ -390,7 +390,7 @@ export default {
         this.inputLength = 20
       }
       if (!valueEquals(val, oldVal)) {
-        this.dispatch('FmFormItem', 'el.form.change', val)
+        this.dispatch('FmFormItem', 'fm.form.change', val)
       }
     },
 

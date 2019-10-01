@@ -11,7 +11,7 @@
       name="error"
     >
       <div class="fm-image__error">
-        {{ t('el.image.error') }}
+        {{ t('fm.image.error') }}
       </div>
     </slot>
     <img

@@ -25,6 +25,14 @@ module.exports = {
     'generator-star-spacing': 'off',
     'no-case-declarations': 'off',
     'no-unused-vars': 'off',
+    'no-useless-escape': 'off',
+    'no-useless-call': 'off',
+    'no-return-assign': 'off',
+    'vue/no-side-effects-in-computed-properties': 'off',
+    'vue/no-v-html': 'off',
+    'vue/no-use-v-if-with-v-for': 'off',
+    'vue/valid-v-model': 'off',
+    'standard/no-callback-literal': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

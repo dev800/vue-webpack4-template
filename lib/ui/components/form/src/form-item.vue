@@ -200,7 +200,7 @@ export default {
   },
   mounted () {
     if (this.prop) {
-      this.dispatch('FmForm', 'el.form.addField', [this])
+      this.dispatch('FmForm', 'fm.form.addField', [this])
 
       let initialValue = this.fieldValue
       if (Array.isArray(initialValue)) {
@@ -214,7 +214,7 @@ export default {
     }
   },
   beforeDestroy () {
-    this.dispatch('FmForm', 'el.form.removeField', [this])
+    this.dispatch('FmForm', 'fm.form.removeField', [this])
   },
   methods: {
     validate (trigger, callback = noop) {
@@ -320,8 +320,8 @@ export default {
       const rules = this.getRules()
 
       if (rules.length || this.required !== undefined) {
-        this.$on('el.form.blur', this.onFieldBlur)
-        this.$on('el.form.change', this.onFieldChange)
+        this.$on('fm.form.blur', this.onFieldBlur)
+        this.$on('fm.form.change', this.onFieldChange)
       }
     },
     removeValidateEvents () {

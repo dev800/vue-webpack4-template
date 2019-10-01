@@ -308,7 +308,7 @@ export default {
     value (val) {
       this.$nextTick(this.resizeTextarea)
       if (this.validateEvent) {
-        this.dispatch('FmFormItem', 'el.form.change', [val])
+        this.dispatch('FmFormItem', 'fm.form.change', [val])
       }
     },
     // native input value is set explicitly
@@ -365,7 +365,7 @@ export default {
       this.focused = false
       this.$emit('blur', event)
       if (this.validateEvent) {
-        this.dispatch('FmFormItem', 'el.form.blur', [this.value])
+        this.dispatch('FmFormItem', 'fm.form.blur', [this.value])
       }
     },
     select () {

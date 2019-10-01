@@ -61,7 +61,7 @@
         :style="emptyBlockStyle"
       >
         <span class="fm-table__empty-text">
-          <slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot>
+          <slot name="empty">{{ emptyText || t('fm.table.emptyText') }}</slot>
         </span>
       </div>
       <div
@@ -82,7 +82,7 @@
       <table-footer
         :store="store"
         :border="border"
-        :sum-text="sumText || t('el.table.sumText')"
+        :sum-text="sumText || t('fm.table.sumText')"
         :summary-method="summaryMethod"
         :default-sort="defaultSort"
         :style="{
@@ -149,7 +149,7 @@
         <table-footer
           fixed="left"
           :border="border"
-          :sum-text="sumText || t('el.table.sumText')"
+          :sum-text="sumText || t('fm.table.sumText')"
           :summary-method="summaryMethod"
           :store="store"
           :style="{
@@ -218,7 +218,7 @@
         <table-footer
           fixed="right"
           :border="border"
-          :sum-text="sumText || t('el.table.sumText')"
+          :sum-text="sumText || t('fm.table.sumText')"
           :summary-method="summaryMethod"
           :store="store"
           :style="{
@@ -245,7 +245,6 @@
 </template>
 
 <script type="text/babel">
-import FmCheckbox from '../../checkbox'
 import { debounce, throttle } from 'throttle-debounce'
 import { addResizeListener, removeResizeListener } from '../../../js/utils/resize-event'
 import Mousewheel from '../../../js/directives/mousewheel'
@@ -270,8 +269,7 @@ export default {
   components: {
     TableHeader,
     TableFooter,
-    TableBody,
-    FmCheckbox
+    TableBody
   },
 
   mixins: [Locale, Migrating],

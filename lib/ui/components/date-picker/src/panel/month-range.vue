@@ -105,8 +105,6 @@ import {
 import Clickoutside from '../../../js/utils/clickoutside'
 import Locale from '../../../js/mixins/locale'
 import MonthTable from '../basic/month-table'
-import FmInput from '../../input'
-import FmButton from '../../button'
 
 const calcDefaultValue = (defaultValue) => {
   if (Array.isArray(defaultValue)) {
@@ -121,7 +119,7 @@ export default {
 
   directives: { Clickoutside },
 
-  components: { MonthTable, FmInput, FmButton },
+  components: { MonthTable },
   mixins: [Locale],
 
   data () {
@@ -155,11 +153,11 @@ export default {
     },
 
     leftLabel () {
-      return this.leftDate.getFullYear() + ' ' + this.t('el.datepicker.year')
+      return this.leftDate.getFullYear() + ' ' + this.t('fm.datepicker.year')
     },
 
     rightLabel () {
-      return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year')
+      return this.rightDate.getFullYear() + ' ' + this.t('fm.datepicker.year')
     },
 
     leftYear () {

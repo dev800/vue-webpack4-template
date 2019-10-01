@@ -46,7 +46,7 @@
         <i
           v-if="!disabled"
           class="fm-icon-close-tip"
-        >{{ t('el.upload.deleteTip') }}</i>
+        >{{ t('fm.upload.deleteTip') }}</i>
         <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
         <fm-progress
           v-if="file.status === 'uploading'"

@@ -122,7 +122,7 @@ export default {
     destroyOnClose: Boolean
   },
 
-  data() {
+  data () {
     return {
       closed: false,
       key: 0
@@ -130,7 +130,7 @@ export default {
   },
 
   computed: {
-    style() {
+    style () {
       const style = {}
       if (!this.fullscreen) {
         style.marginTop = this.top
@@ -143,7 +143,7 @@ export default {
   },
 
   watch: {
-    visible(val) {
+    visible (val) {
       if (val) {
         this.closed = false
         this.$emit('open')
@@ -166,7 +166,7 @@ export default {
     }
   },
 
-  mounted() {
+  mounted () {
     if (this.visible) {
       this.rendered = true
       this.open()
@@ -176,7 +176,7 @@ export default {
     }
   },
 
-  destroyed() {
+  destroyed () {
     // if appendToBody is true, remove DOM node after destroy
     if (this.appendToBody && this.$el && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el)
@@ -184,39 +184,39 @@ export default {
   },
 
   methods: {
-    getMigratingConfig() {
+    getMigratingConfig () {
       return {
         props: {
           size: 'size is removed.'
         }
       }
     },
-    handleWrapperClick() {
+    handleWrapperClick () {
       if (!this.closeOnClickModal) return
       this.handleClose()
     },
-    handleClose() {
+    handleClose () {
       if (typeof this.beforeClose === 'function') {
         this.beforeClose(this.hide)
       } else {
         this.hide()
       }
     },
-    hide(cancel) {
+    hide (cancel) {
       if (cancel !== false) {
         this.$emit('update:visible', false)
         this.$emit('close')
         this.closed = true
       }
     },
-    updatePopper() {
+    updatePopper () {
       this.broadcast('FmSelectDropdown', 'updatePopper')
       this.broadcast('FmDropdownMenu', 'updatePopper')
     },
-    afterEnter() {
+    afterEnter () {
       this.$emit('opened')
     },
-    afterLeave() {
+    afterLeave () {
       this.$emit('closed')
     }
   }

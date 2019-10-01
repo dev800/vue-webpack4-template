@@ -41,7 +41,7 @@
                   ref="minInput"
                   size="small"
                   :disabled="rangeState.selecting"
-                  :placeholder="t('el.datepicker.startDate')"
+                  :placeholder="t('fm.datepicker.startDate')"
                   class="fm-date-range-picker__editor"
                   :value="minVisibleDate"
                   @input="val => handleDateInput(val, 'min')"
@@ -56,7 +56,7 @@
                   size="small"
                   class="fm-date-range-picker__editor"
                   :disabled="rangeState.selecting"
-                  :placeholder="t('el.datepicker.startTime')"
+                  :placeholder="t('fm.datepicker.startTime')"
                   :value="minVisibleTime"
                   @focus="minTimePickerVisible = true"
                   @input="val => handleTimeInput(val, 'min')"
@@ -78,7 +78,7 @@
                   size="small"
                   class="fm-date-range-picker__editor"
                   :disabled="rangeState.selecting"
-                  :placeholder="t('el.datepicker.endDate')"
+                  :placeholder="t('fm.datepicker.endDate')"
                   :value="maxVisibleDate"
                   :readonly="!minDate"
                   @input="val => handleDateInput(val, 'max')"
@@ -93,7 +93,7 @@
                   size="small"
                   class="fm-date-range-picker__editor"
                   :disabled="rangeState.selecting"
-                  :placeholder="t('el.datepicker.endTime')"
+                  :placeholder="t('fm.datepicker.endTime')"
                   :value="maxVisibleTime"
                   :readonly="!minDate"
                   @focus="minDate && (maxTimePickerVisible = true)"
@@ -210,7 +210,7 @@
           class="fm-picker-panel__link-btn"
           @click="handleClear"
         >
-          {{ t('el.datepicker.clear') }}
+          {{ t('fm.datepicker.clear') }}
         </fm-button>
         <fm-button
           plain
@@ -219,7 +219,7 @@
           :disabled="btnDisabled"
           @click="handleConfirm(false)"
         >
-          {{ t('el.datepicker.confirm') }}
+          {{ t('fm.datepicker.confirm') }}
         </fm-button>
       </div>
     </div>
@@ -310,11 +310,11 @@ export default {
     },
 
     leftLabel () {
-      return this.leftDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${this.leftDate.getMonth() + 1}`)
+      return this.leftDate.getFullYear() + ' ' + this.t('fm.datepicker.year') + ' ' + this.t(`el.datepicker.month${this.leftDate.getMonth() + 1}`)
     },
 
     rightLabel () {
-      return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${this.rightDate.getMonth() + 1}`)
+      return this.rightDate.getFullYear() + ' ' + this.t('fm.datepicker.year') + ' ' + this.t(`el.datepicker.month${this.rightDate.getMonth() + 1}`)
     },
 
     leftYear () {
@@ -612,7 +612,7 @@ export default {
         this.minTimePickerVisible = visible
       }
 
-      if (!this.maxDate || this.maxDate && this.maxDate.getTime() < this.minDate.getTime()) {
+      if (!this.maxDate || (this.maxDate && this.maxDate.getTime() < this.minDate.getTime())) {
         this.maxDate = new Date(this.minDate)
       }
     },

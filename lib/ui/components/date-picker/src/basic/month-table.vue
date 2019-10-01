@@ -15,7 +15,7 @@
           :class="getCellStyle(cell)"
         >
           <div>
-            <a class="cell">{{ t('el.datepicker.months.' + months[cell.text]) }}</a>
+            <a class="cell">{{ t('fm.datepicker.months.' + months[cell.text]) }}</a>
           </div>
         </td>
       </tr>

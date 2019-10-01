@@ -10,13 +10,13 @@
     <tbody>
       <tr>
         <th v-if="showWeekNumber">
-          {{ t('el.datepicker.week') }}
+          {{ t('fm.datepicker.week') }}
         </th>
         <th
           v-for="(week, key) in WEEKS"
           :key="key"
         >
-          {{ t('el.datepicker.weeks.' + week) }}
+          {{ t('fm.datepicker.weeks.' + week) }}
         </th>
       </tr>
       <tr

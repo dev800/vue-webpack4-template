@@ -38,7 +38,7 @@
           >
             <span class="fm-date-picker__editor-wrap">
               <fm-input
-                :placeholder="t('el.datepicker.selectDate')"
+                :placeholder="t('fm.datepicker.selectDate')"
                 :value="visibleDate"
                 size="small"
                 @input="val => userInputDate = val"
@@ -51,7 +51,7 @@
             >
               <fm-input
                 ref="input"
-                :placeholder="t('el.datepicker.selectTime')"
+                :placeholder="t('fm.datepicker.selectTime')"
                 :value="visibleTime"
                 size="small"
                 @focus="timePickerVisible = true"
@@ -155,7 +155,7 @@
           class="fm-picker-panel__link-btn"
           @click="changeToNow"
         >
-          {{ t('el.datepicker.now') }}
+          {{ t('fm.datepicker.now') }}
         </fm-button>
         <fm-button
           plain
@@ -163,7 +163,7 @@
           class="fm-picker-panel__link-btn"
           @click="confirm"
         >
-          {{ t('el.datepicker.confirm') }}
+          {{ t('fm.datepicker.confirm') }}
         </fm-button>
       </div>
     </div>
@@ -271,7 +271,7 @@ export default {
     },
 
     yearLabel () {
-      const yearTranslation = this.t('el.datepicker.year')
+      const yearTranslation = this.t('fm.datepicker.year')
       if (this.currentView === 'year') {
         const startYear = Math.floor(this.year / 10) * 10
         if (yearTranslation) {

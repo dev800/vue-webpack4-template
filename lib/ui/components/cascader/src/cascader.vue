@@ -125,7 +125,7 @@
             name="empty"
           >
             <li class="fm-cascader__empty-text">
-              {{ t('el.cascader.noMatch') }}
+              {{ t('fm.cascader.noMatch') }}
             </li>
           </slot>
         </fm-scrollbar>
@@ -225,7 +225,7 @@ export default {
     size: String,
     placeholder: {
       type: String,
-      default: () => t('el.cascader.placeholder')
+      default: () => t('fm.cascader.placeholder')
     },
     disabled: Boolean,
     clearable: Boolean,
@@ -345,7 +345,7 @@ export default {
 
         this.$emit('input', val)
         this.$emit('change', val)
-        this.dispatch('FmFormItem', 'el.form.change', [val])
+        this.dispatch('FmFormItem', 'fm.form.change', [val])
       }
     },
     options: {

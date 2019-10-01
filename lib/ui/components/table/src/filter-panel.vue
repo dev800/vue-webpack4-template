@@ -28,10 +28,10 @@
           :disabled="filteredValue.length === 0"
           @click="handleConfirm"
         >
-          {{ t('el.table.confirmFilter') }}
+          {{ t('fm.table.confirmFilter') }}
         </button>
         <button @click="handleReset">
-          {{ t('el.table.resetFilter') }}
+          {{ t('fm.table.resetFilter') }}
         </button>
       </div>
     </div>
@@ -47,7 +47,7 @@
           :class="{ 'is-active': filterValue === undefined || filterValue === null }"
           @click="handleSelect(null)"
         >
-          {{ t('el.table.clearFilter') }}
+          {{ t('fm.table.clearFilter') }}
         </li>
         <li
           v-for="filter in filters"

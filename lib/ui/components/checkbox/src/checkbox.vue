@@ -136,6 +136,8 @@ export default {
         return this.model.indexOf(this.label) > -1
       } else if (this.model !== null && this.model !== undefined) {
         return this.model === this.trueLabel
+      } else {
+        return false
       }
     },
 
@@ -184,7 +186,7 @@ export default {
 
   watch: {
     value (value) {
-      this.dispatch('FmFormItem', 'el.form.change', value)
+      this.dispatch('FmFormItem', 'fm.form.change', value)
     }
   },
 

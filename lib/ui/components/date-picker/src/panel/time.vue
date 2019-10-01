@@ -28,7 +28,7 @@
           class="fm-time-panel__btn cancel"
           @click="handleCancel"
         >
-          {{ t('el.datepicker.cancel') }}
+          {{ t('fm.datepicker.cancel') }}
         </button>
         <button
           type="button"
@@ -36,7 +36,7 @@
           :class="{confirm: !disabled}"
           @click="handleConfirm()"
         >
-          {{ t('el.datepicker.confirm') }}
+          {{ t('fm.datepicker.confirm') }}
         </button>
       </div>
     </div>

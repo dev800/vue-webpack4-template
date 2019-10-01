@@ -11,7 +11,7 @@
       <div class="fm-time-range-picker__content">
         <div class="fm-time-range-picker__cell">
           <div class="fm-time-range-picker__header">
-            {{ t('el.datepicker.startTime') }}
+            {{ t('fm.datepicker.startTime') }}
           </div>
           <div
             :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
@@ -30,7 +30,7 @@
         </div>
         <div class="fm-time-range-picker__cell">
           <div class="fm-time-range-picker__header">
-            {{ t('el.datepicker.endTime') }}
+            {{ t('fm.datepicker.endTime') }}
           </div>
           <div
             :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
@@ -54,7 +54,7 @@
           class="fm-time-panel__btn cancel"
           @click="handleCancel()"
         >
-          {{ t('el.datepicker.cancel') }}
+          {{ t('fm.datepicker.cancel') }}
         </button>
         <button
           type="button"
@@ -62,7 +62,7 @@
           :disabled="btnDisabled"
           @click="handleConfirm()"
         >
-          {{ t('el.datepicker.confirm') }}
+          {{ t('fm.datepicker.confirm') }}
         </button>
       </div>
     </div>

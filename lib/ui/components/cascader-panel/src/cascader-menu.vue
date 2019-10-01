@@ -76,7 +76,7 @@ export default {
 
     renderEmptyText (h) {
       return (
-        <div class="fm-cascader-menu__empty-text">{this.t('el.cascader.noData')}</div>
+        <div class="fm-cascader-menu__empty-text">{this.t('fm.cascader.noData')}</div>
       )
     },
     renderNodeList (h) {

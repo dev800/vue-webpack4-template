@@ -102,7 +102,7 @@ export default {
     },
 
     formatValue () {
-      return this.enableFormat && this.$parent.formatTooltip(this.value) || this.value
+      return (this.enableFormat && this.$parent.formatTooltip(this.value)) || this.value
     },
 
     wrapperStyle () {

@@ -165,14 +165,14 @@ export default {
       const value = this.color.value
       this.$emit('input', value)
       this.$emit('change', value)
-      this.dispatch('FmFormItem', 'el.form.change', value)
+      this.dispatch('FmFormItem', 'fm.form.change', value)
       this.showPicker = false
     },
     clearValue () {
       this.$emit('input', null)
       this.$emit('change', null)
       if (this.value !== null) {
-        this.dispatch('FmFormItem', 'el.form.change', null)
+        this.dispatch('FmFormItem', 'fm.form.change', null)
       }
       this.showPanelColor = false
       this.showPicker = false

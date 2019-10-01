@@ -45,7 +45,7 @@
           class="fm-color-dropdown__link-btn"
           @click="$emit('clear')"
         >
-          {{ t('el.colorpicker.clear') }}
+          {{ t('fm.colorpicker.clear') }}
         </fm-button>
         <fm-button
           plain
@@ -53,7 +53,7 @@
           class="fm-color-dropdown__btn"
           @click="confirmValue"
         >
-          {{ t('el.colorpicker.confirm') }}
+          {{ t('fm.colorpicker.confirm') }}
         </fm-button>
       </div>
     </div>

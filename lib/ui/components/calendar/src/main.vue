@@ -14,21 +14,21 @@
             size="mini"
             @click="selectDate('prev-month')"
           >
-            {{ t('el.datepicker.prevMonth') }}
+            {{ t('fm.datepicker.prevMonth') }}
           </fm-button>
           <fm-button
             type="plain"
             size="mini"
             @click="selectDate('today')"
           >
-            {{ t('el.datepicker.today') }}
+            {{ t('fm.datepicker.today') }}
           </fm-button>
           <fm-button
             type="plain"
             size="mini"
             @click="selectDate('next-month')"
           >
-            {{ t('el.datepicker.nextMonth') }}
+            {{ t('fm.datepicker.nextMonth') }}
           </fm-button>
         </fm-button-group>
       </div>
@@ -144,7 +144,7 @@ export default {
     i18nDate () {
       const year = this.date.getFullYear()
       const month = this.date.getMonth() + 1
-      return `${year} ${this.t('el.datepicker.year')} ${this.t('el.datepicker.month' + month)}`
+      return `${year} ${this.t('fm.datepicker.year')} ${this.t('fm.datepicker.month' + month)}`
     },
 
     formatedToday () {

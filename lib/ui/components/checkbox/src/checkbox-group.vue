@@ -35,7 +35,7 @@ export default {
 
   watch: {
     value (value) {
-      this.dispatch('FmFormItem', 'el.form.change', [value])
+      this.dispatch('FmFormItem', 'fm.form.change', [value])
     }
   }
 }

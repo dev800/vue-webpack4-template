@@ -47,8 +47,7 @@
         :tooltip-class="tooltipClass"
       />
       <div
-        v-for="(item, key) in stops"
-        v-if="showStops"
+        v-for="(item, key) in stopsOfShow"
         :key="key"
         class="fm-slider__stop"
         :style="getStopStyle(item)"
@@ -173,6 +172,14 @@ export default {
   },
 
   computed: {
+    stopsOfShow () {
+      if (this.showStops) {
+        return this.stops
+      } else {
+        return []
+      }
+    },
+
     stops () {
       if (!this.showStops || this.min > this.max) return []
       if (this.step === 0) {
@@ -265,7 +272,7 @@ export default {
       if (this.dragging ||
         (Array.isArray(val) &&
           Array.isArray(oldVal) &&
-          val.every((item, index) => item === oldVal[index])) {
+          val.every((item, index) => item === oldVal[index]))) {
         return
       }
       this.setValues()
@@ -362,7 +369,7 @@ export default {
           this.firstValue = val[0]
           this.secondValue = val[1]
           if (this.valueChanged()) {
-            this.dispatch('FmFormItem', 'el.form.change', [this.minValue, this.maxValue])
+            this.dispatch('FmFormItem', 'fm.form.change', [this.minValue, this.maxValue])
             this.oldValue = val.slice()
           }
         }
@@ -374,7 +381,7 @@ export default {
         } else {
           this.firstValue = val
           if (this.valueChanged()) {
-            this.dispatch('FmFormItem', 'el.form.change', val)
+            this.dispatch('FmFormItem', 'fm.form.change', val)
             this.oldValue = val
           }
         }

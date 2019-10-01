@@ -47,13 +47,13 @@
         v-show="hasNoMatch"
         class="fm-transfer-panel__empty"
       >
-        {{ t('el.transfer.noMatch') }}
+        {{ t('fm.transfer.noMatch') }}
       </p>
       <p
         v-show="data.length === 0 && !hasNoMatch"
         class="fm-transfer-panel__empty"
       >
-        {{ t('el.transfer.noData') }}
+        {{ t('fm.transfer.noData') }}
       </p>
     </div>
     <p
