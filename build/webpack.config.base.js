@@ -19,7 +19,6 @@ module.exports = {
       '~': ROOT_PATH,
       '@': utils.resolve('src'),
       'static': utils.resolve('static'),
-      'node_modules': utils.resolve('node_modules'),
     }
   },
 
