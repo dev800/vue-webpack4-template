@@ -12,15 +12,6 @@ module.exports = merge(baseConfig, {
   mode: 'production',
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendor",
-          chunks: "all",
-        },
-      },
-    },
   },
   devtool: 'cheap-source-map',
   output: {

@@ -2,7 +2,6 @@
 [class*=" fm-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: "fmfont" !important;
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -14,4 +13,17 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  &.is-link,
+  & a {
+    font-weight: bold;
+    text-decoration: none;
+    transition: $--color-transition-base;
+    color: $--color-text-primary;
+
+    &:hover {
+      color: $--color-primary;
+      cursor: pointer;
+    }
+  }
 }

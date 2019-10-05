@@ -23,10 +23,9 @@ module.exports = {
   },
 
   devtool: 'source-map',
-  entry: generateEntries => {
-    return {
-      demo: ['@/demo/index.js'],
-    }
+  entry: {
+    'app/demo': ['@/demo/index.js'],
+    'app/admin': ['@/admin/index.js'],
   },
   output: {
     publicPath: '/',
@@ -36,7 +35,15 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+          minSize: 0, // 文件大小为0字节以上才抽离
+          minChunks: 2, // 被引用过两次才抽离
+        },
+      },
     },
   },
   module: {
@@ -69,8 +76,17 @@ module.exports = {
   plugins: [
     // https://github.com/jantimon/html-webpack-plugin/tree/master/examples
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: 'demo.html',
       template: 'src/demo/index.html',
+      chunksSortMode: "manual",
+      chunks: ['vendors', 'app/demo'],
+      inject: true
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'admin.html',
+      template: 'src/admin/index.html',
+      chunksSortMode: "manual",
+      chunks: ['vendors', 'app/admin'],
       inject: true
     }),
     new ManifestPlugin(),

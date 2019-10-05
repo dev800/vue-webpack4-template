@@ -94,6 +94,13 @@ export default {
 
       return isActive
     },
+    hoverTextColor () {
+      if (this.active) {
+        return this.rootMenu.mixColor(this.activeTextColor, 0.12)
+      } else {
+        return this.rootMenu.mixColor(this.textColor, 0.12)
+      }
+    },
     hoverBackground () {
       return this.rootMenu.hoverBackground
     },
@@ -246,12 +253,26 @@ export default {
     handleTitleMouseenter () {
       if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return
       const title = this.$refs['submenu-title']
-      title && (title.style.backgroundColor = this.rootMenu.hoverBackground)
+
+      if (title) {
+        title.style.backgroundColor = this.rootMenu.hoverBackground
+      } else {
+        this.$el.style.color = this.hoverTextColor
+      }
     },
     handleTitleMouseleave () {
       if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return
       const title = this.$refs['submenu-title']
-      title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '')
+
+      if (title) {
+        title.style.backgroundColor = this.rootMenu.backgroundColor || ''
+      } else {
+        if (this.active) {
+          this.$el.style.color = this.activeTextColor
+        } else {
+          this.$el.style.color = this.textColor
+        }
+      }
     },
     updatePlacement () {
       this.currentPlacement = this.mode === 'horizontal' && this.isFirstLevel
@@ -283,20 +304,18 @@ export default {
 
     const popupMenu = (
       <transition name={menuTransitionName}>
-        <div
+        <ul
           ref="menu"
           v-show={opened}
           class={[`fm-menu--${mode}`, popperClass]}
           on-mouseenter={($event) => this.handleMouseenter($event, 100)}
           on-mouseleave={() => this.handleMouseleave(true)}
-          on-focus={($event) => this.handleMouseenter($event, 100)}>
-          <ul
-            role="menu"
-            class={['fm-menu fm-menu--popup', `fm-menu--popup-${currentPlacement}`]}
-            style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
-            {$slots.default}
-          </ul>
-        </div>
+          on-focus={($event) => this.handleMouseenter($event, 100)}
+          role="menu"
+          class={['fm-menu fm-menu--popup', `fm-menu--popup-${currentPlacement}`]}
+          style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
+          {$slots.default}
+        </ul>
       </transition>
     )
 

@@ -63,6 +63,13 @@ export default {
     active () {
       return this.index === this.rootMenu.activeIndex
     },
+    hoverTextColor () {
+      if (this.active) {
+        return this.rootMenu.mixColor(this.activeTextColor, 0.12)
+      } else {
+        return this.rootMenu.mixColor(this.textColor, 0.12)
+      }
+    },
     hoverBackground () {
       return this.rootMenu.hoverBackground
     },
@@ -105,10 +112,17 @@ export default {
     onMouseEnter () {
       if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return
       this.$el.style.backgroundColor = this.hoverBackground
+      this.$el.style.color = this.hoverTextColor
     },
     onMouseLeave () {
       if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return
       this.$el.style.backgroundColor = this.backgroundColor
+
+      if (this.active) {
+        this.$el.style.color = this.activeTextColor
+      } else {
+        this.$el.style.color = this.textColor
+      }
     },
     handleClick () {
       if (!this.disabled) {

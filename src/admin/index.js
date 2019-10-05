@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import FarmerUI from '~/lib/ui/js/index.js'
-import store from './js/store/index.js'
 
 const appDOM = document.querySelector('#app')
 
@@ -11,8 +10,6 @@ if (appDOM) {
   Vue.config.devtools = process.env.NODE_ENV === 'development' // 去掉注释来打开Vue调试工具
   Vue.use(VueRouter)
   Vue.use(FarmerUI)
-
-  Vue.prototype.$store = store
 
   const router = new VueRouter({
     // mode: 'history',

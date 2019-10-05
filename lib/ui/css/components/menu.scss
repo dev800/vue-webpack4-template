@@ -143,6 +143,7 @@
       .fm-submenu__icon-ios-arrow {
         display: none;
       }
+      text-align: center;
       span {
         height: 0;
         width: 0;
@@ -168,7 +169,6 @@
         top: 0;
         left: 100%;
         z-index: 10;
-        border: 1px solid $--border-color-light;
         border-radius: $--border-radius-small;
         box-shadow: $--box-shadow-light;
       }

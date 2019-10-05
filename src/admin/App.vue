@@ -1,6 +1,9 @@
 <template>
   <fm-container class="x-app">
-    <fm-aside :class="['app__aside', {'app__aside-collapse': uiAsideMenu.collapse}]">
+    <fm-aside
+      width="200px"
+      class="app__aside"
+    >
       <x-app-aside />
     </fm-aside>
     <fm-container>
@@ -21,8 +24,6 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-
 import XAppAside from './components/app/aside'
 import XAppFooter from './components/app/footer'
 import XAppHeader from './components/app/header'
@@ -43,11 +44,6 @@ export default {
     'fm-footer': FmFooter,
     'fm-main': FmMain
   },
-  computed: {
-    ...mapState('ui', {
-      uiAsideMenu: state => state.asideMenu
-    })
-  },
   data () {
     return {}
   },
@@ -62,19 +58,13 @@ export default {
 .x-app {
   .app_ {
     &_aside {
-      height: 100vh;
-      background: #191a23;
-      width: 200px !important;
+      min-height: 100vh;
+      background: #545c64;
 
       .fm-menu {
         border-right: none;
         background: none;
       }
-    }
-
-    &_aside-collapse {
-      width: auto !important;
-      overflow: initial;
     }
   }
 }

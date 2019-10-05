@@ -1,5 +1,5 @@
 function load (path) {
-  return () => import(/* webpackPrefetch: true */ `@/demo/pages/${path}`)
+  return () => import(/* webpackPrefetch: true */ `@/admin/pages/${path}`)
 }
 
 const routes = [

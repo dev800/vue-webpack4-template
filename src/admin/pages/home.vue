@@ -47,16 +47,6 @@ export default {
     return {
     }
   },
-  beforeCreate () {
-    console.log('before create')
-  },
-  created () {
-    console.log('create...')
-  },
-  beforeMount () {
-    console.log('before mount...')
-    // NProgress.configure({ showSpinner: false })
-  },
   mounted () {
     console.log('mounted...')
     // NProgress.configure({ showSpinner: false })
