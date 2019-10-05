@@ -5,9 +5,7 @@ const state = {
     // 模式(horizontal / vertical)：默认: vertical
     mode: 'vertical',
     // 是否折叠
-    collapse: false,
-    // 是否开启折叠动画
-    collapseTransition: false
+    collapse: false
   }
 }
 

@@ -7,58 +7,7 @@ import { addClass, removeClass, hasClass } from '../../../js/utils/dom'
 export default {
   name: 'FmMenu',
 
-  components: {
-    'fm-menu-collapse-transition': {
-      functional: true,
-      render (createFmement, context) {
-        const data = {
-          props: {
-            mode: 'out-in'
-          },
-          on: {
-            beforeEnter (el) {
-              el.style.opacity = 0.2
-            },
-
-            enter (el) {
-              addClass(el, 'fm-opacity-transition')
-              el.style.opacity = 1
-            },
-
-            afterEnter (el) {
-              removeClass(el, 'fm-opacity-transition')
-              el.style.opacity = ''
-            },
-
-            beforeLeave (el) {
-              if (!el.dataset) el.dataset = {}
-
-              if (hasClass(el, 'fm-menu--collapse')) {
-                removeClass(el, 'fm-menu--collapse')
-                el.dataset.oldOverflow = el.style.overflow
-                el.dataset.scrollWidth = el.clientWidth
-                addClass(el, 'fm-menu--collapse')
-              } else {
-                addClass(el, 'fm-menu--collapse')
-                el.dataset.oldOverflow = el.style.overflow
-                el.dataset.scrollWidth = el.clientWidth
-                removeClass(el, 'fm-menu--collapse')
-              }
-
-              el.style.width = el.scrollWidth + 'px'
-              el.style.overflow = 'hidden'
-            },
-
-            leave (el) {
-              addClass(el, 'horizontal-collapse-transition')
-              el.style.width = el.dataset.scrollWidth + 'px'
-            }
-          }
-        }
-        return createFmement('transition', data, context.children)
-      }
-    }
-  },
+  components: {},
 
   mixins: [emitter, Migrating],
 
@@ -95,10 +44,6 @@ export default {
     activeTextColor: {
       type: String,
       default: null
-    },
-    collapseTransition: {
-      type: Boolean,
-      default: true
     }
   },
   data () {
@@ -312,15 +257,7 @@ export default {
       </ul>
     )
 
-    if (this.collapseTransition) {
-      return (
-        <fm-menu-collapse-transition>
-          {component}
-        </fm-menu-collapse-transition>
-      )
-    } else {
-      return component
-    }
+    return component
   },
 
   componentName: 'FmMenu',

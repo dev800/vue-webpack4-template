@@ -72,7 +72,7 @@
 </template>
 
 <script type="text/jsx">
-import FmCollapseTransition from '../../../js/transitions/collapse-transition'
+import FmCollapseTransition from '../../collapse-transition'
 import FmCheckbox from '../../checkbox'
 import emitter from '../../../js/mixins/emitter'
 import { getNodeKey } from './model/util'

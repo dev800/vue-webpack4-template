@@ -22,7 +22,7 @@
       <div slot="content">
         <slot name="title" />
       </div>
-      <div style="position: absolute;left: 0;top: 0;height: 100%;width: 100%;display: inline-block;box-sizing: border-box;padding: 0 20px;">
+      <div style="position: absolute; left: 0; top: 0; height: 100%; width: 100%; display: inline-block;box-sizing: border-box; padding: 0 20px;">
         <slot />
       </div>
     </fm-tooltip>

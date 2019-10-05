@@ -27,11 +27,26 @@
         value="progress stop"
         @click="onStopProgress"
       >
+
+      <fm-button @click="show = !show">
+        Toggle render
+      </fm-button>
+
     </div>
-    <img
+    <!-- <img
       src="~/static/img/logo.png"
       class="animated bounceIn infinite"
     >
+ -->
+    <transition
+      enter-active-class="animated slideInDown"
+      leave-active-class="animated slideOutUp"
+    >
+      <img
+        src="~/static/img/logo.png"
+        v-if="show"
+      >
+    </transition>
   </div>
 </template>
 
@@ -45,6 +60,7 @@ export default {
   },
   data () {
     return {
+      show: true
     }
   },
   beforeCreate () {

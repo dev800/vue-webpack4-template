@@ -49,7 +49,7 @@
   </div>
 </template>
 <script>
-import FmCollapseTransition from '../../../js/transitions/collapse-transition'
+import FmCollapseTransition from '../../collapse-transition'
 import Emitter from '../../../js/mixins/emitter'
 import { generateId } from '../../../js/utils/util'
 

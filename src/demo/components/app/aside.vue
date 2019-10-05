@@ -6,7 +6,6 @@
     active-text-color="#ffd04b"
     :mode="uiAsideMenu.mode"
     :collapse="uiAsideMenu.collapse"
-    :collapse-transition="uiAsideMenu.collapseTransition"
     @open="onMenuOpen"
     @close="onMenuClose"
   >
