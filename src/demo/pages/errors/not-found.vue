@@ -1,5 +1,5 @@
 <template>
-  <div class="x-error-404">
+  <div class="x-error error_404">
     not found
   </div>
 </template>

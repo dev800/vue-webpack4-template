@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 
 import FmIcon from '~/lib/ui/components/icon'
 import FmBreadcrumb from '~/lib/ui/components/breadcrumb'
@@ -27,9 +27,9 @@ import FmBreadcrumbItem from '~/lib/ui/components/breadcrumb-item'
 
 export default {
   components: {
-    'fm-icon': FmIcon,
-    'fm-breadcrumb': FmBreadcrumb,
-    'fm-breadcrumb-item': FmBreadcrumbItem
+    FmIcon,
+    FmBreadcrumb,
+    FmBreadcrumbItem
   },
   computed: {
     ...mapState('ui', {
@@ -37,11 +37,8 @@ export default {
     })
   },
   methods: {
-    ...mapActions('ui', {
-      uiAsideMenuCollapseToggle: 'asideMenuCollapseToggle'
-    }),
     onClickCollapseToggle (e) {
-      this.uiAsideMenuCollapseToggle()
+      this.$store.dispatch('ui/asideMenuCollapseToggle')
     }
   }
 }

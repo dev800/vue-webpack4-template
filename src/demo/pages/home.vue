@@ -56,7 +56,7 @@ import FmButton from '~/lib/ui/components/button'
 
 export default {
   components: {
-    'fm-button': FmButton
+    FmButton
   },
   data () {
     return {

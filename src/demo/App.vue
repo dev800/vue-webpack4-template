@@ -1,8 +1,6 @@
 <template>
   <fm-container class="x-app">
-    <fm-aside :class="['app__aside', {'app__aside-collapse': uiAsideMenu.collapse}]">
-      <x-app-aside />
-    </fm-aside>
+    <x-app-aside />
     <fm-container>
       <fm-header
         height="52px"
@@ -27,21 +25,19 @@ import XAppAside from './components/app/aside'
 import XAppFooter from './components/app/footer'
 import XAppHeader from './components/app/header'
 import FmHeader from '~/lib/ui/components/header'
-import FmAside from '~/lib/ui/components/aside'
 import FmContainer from '~/lib/ui/components/container'
 import FmFooter from '~/lib/ui/components/footer'
 import FmMain from '~/lib/ui/components/main'
 
 export default {
   components: {
-    'x-app-aside': XAppAside,
-    'x-app-footer': XAppFooter,
-    'x-app-header': XAppHeader,
-    'fm-header': FmHeader,
-    'fm-aside': FmAside,
-    'fm-container': FmContainer,
-    'fm-footer': FmFooter,
-    'fm-main': FmMain
+    XAppAside,
+    XAppFooter,
+    XAppHeader,
+    FmHeader,
+    FmContainer,
+    FmFooter,
+    FmMain
   },
   computed: {
     ...mapState('ui', {
@@ -58,24 +54,4 @@ export default {
 <style lang="scss">
 @import '~/lib/ui/css/index.scss';
 @import './css/index.scss';
-
-.x-app {
-  .app_ {
-    &_aside {
-      height: 100vh;
-      background: #191a23;
-      width: 200px !important;
-
-      .fm-menu {
-        border-right: none;
-        background: none;
-      }
-    }
-
-    &_aside-collapse {
-      width: auto !important;
-      overflow: initial;
-    }
-  }
-}
 </style>
