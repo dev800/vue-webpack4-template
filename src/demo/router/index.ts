@@ -3,7 +3,7 @@ function load (path: String) {
 }
 
 const routes = [
-  { path: '/', component: load('home') },
+  { path: '/', component: load('index') },
   { path: '/*', component: load('errors/not-found') }
 ]
 
