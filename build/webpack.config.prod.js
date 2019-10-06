@@ -17,7 +17,7 @@ module.exports = merge(baseConfig, {
   output: {
     publicPath: '/',
     filename: 'js/[name].[contenthash].js',
-    chunkFilename: 'js/[name].chunk.[chunkhash].js',
+    chunkFilename: 'js/[name].chunk.[contenthash].js',
     path: `${ROOT_PATH}/dist`
   },
   module: {
@@ -50,7 +50,7 @@ module.exports = merge(baseConfig, {
           options: {
             limit: 8192,
             name (file) {
-              return '[path][name].[hash].[ext]';
+              return '[path][name].[contenthash].[ext]';
             }
           }
         }
@@ -59,8 +59,8 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css',
-      chunkFilename: 'css/[id].[hash].css'
+      filename: 'css/[name].[contenthash].css',
+      chunkFilename: 'css/[id].[contenthash].css'
     })
   ]
 })

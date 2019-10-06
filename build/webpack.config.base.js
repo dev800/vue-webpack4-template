@@ -24,7 +24,7 @@ module.exports = {
 
   devtool: 'source-map',
   entry: {
-    'app/demo': ['@/demo/index.js'],
+    'app/demo': ['@/demo/index.ts'],
     'app/admin': ['@/admin/index.js'],
   },
   output: {
@@ -35,16 +35,26 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
       cacheGroups: {
-        commons: {
+        vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all",
-          minSize: 0, // 文件大小为0字节以上才抽离
-          minChunks: 2, // 被引用过两次才抽离
+          priority: -10
         },
-      },
-    },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
   },
   module: {
     rules: [
@@ -68,6 +78,13 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
+        }
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader'
         }
       }
     ]
