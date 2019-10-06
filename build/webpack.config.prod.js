@@ -2,8 +2,8 @@
 
 const path = require('path')
 const TerserJSPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 const ROOT_PATH = path.resolve(__dirname, '../')

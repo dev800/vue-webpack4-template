@@ -8,6 +8,7 @@
   border-radius: $--border-radius-base;
   line-height: 30px;
   margin: 5px 0;
+  position: absolute;
 
   @include e((body, body-wrapper)) {
     &::after {
@@ -98,7 +99,7 @@
   }
 }
 
-.fm-picker-panel *[slot=sidebar],
+.fm-picker-panel *[slot="sidebar"],
 .fm-picker-panel__sidebar {
   position: absolute;
   top: 0;
@@ -111,7 +112,7 @@
   overflow: auto;
 }
 
-.fm-picker-panel *[slot=sidebar] + .fm-picker-panel__body,
+.fm-picker-panel *[slot="sidebar"] + .fm-picker-panel__body,
 .fm-picker-panel__sidebar + .fm-picker-panel__body {
   margin-left: 110px;
 }

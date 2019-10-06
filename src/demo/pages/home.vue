@@ -2,6 +2,7 @@
   <div class="x-page-home">
     <div>
       <fm-date-picker
+        v-model="valueDatatime"
         type="datetime"
         placeholder="选择日期时间"
       >
@@ -61,6 +62,7 @@ export default {
   },
   data () {
     return {
+      valueDatatime: '',
       show: true
     }
   },
