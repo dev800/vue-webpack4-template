@@ -1,4 +1,4 @@
-function load (path) {
+function load (path: String) {
   return () => import(/* webpackPrefetch: true */ `@/demo/pages/${path}`)
 }
 
