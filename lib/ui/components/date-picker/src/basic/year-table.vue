@@ -77,9 +77,9 @@
 </template>
 
 <script type="text/babel">
-import { hasClass } from '../../../js/utils/dom'
-import { isDate, range, nextDate, getDayCountOfYear } from '../../../js/utils/date-util'
-import { arrayFindIndex, coerceTruthyValueToArray } from '../../../js/utils/util'
+import { hasClass } from '../../../../js/utils/dom'
+import { isDate, range, nextDate, getDayCountOfYear } from '../../../../js/utils/date-util'
+import { arrayFindIndex, coerceTruthyValueToArray } from '../../../../js/utils/util'
 
 const datesInYear = year => {
   const numOfDays = getDayCountOfYear(year)

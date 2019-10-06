@@ -9,8 +9,9 @@ if (appDOM) {
   const App = require('./App').default
 
   Vue.config.devtools = process.env.NODE_ENV === 'development' // 去掉注释来打开Vue调试工具
+
   Vue.use(VueRouter)
-  Vue.use(FarmerUI)
+  Vue.use(FarmerUI, { locale: 'en' })
 
   Vue.prototype.$store = store
 

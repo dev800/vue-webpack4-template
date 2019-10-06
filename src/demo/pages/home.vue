@@ -1,6 +1,11 @@
 <template>
   <div class="x-page-home">
     <div>
+      <fm-date-picker
+        type="datetime"
+        placeholder="选择日期时间"
+      >
+      </fm-date-picker>
       <fm-button
         size="small"
         type="danger"
@@ -31,13 +36,7 @@
       <fm-button @click="show = !show">
         Toggle render
       </fm-button>
-
     </div>
-    <!-- <img
-      src="~/static/img/logo.png"
-      class="animated bounceIn infinite"
-    >
- -->
     <transition
       enter-active-class="animated slideInDown"
       leave-active-class="animated slideOutUp"
@@ -53,10 +52,12 @@
 <script>
 import NProgress from 'nprogress'
 import FmButton from '~/lib/ui/components/button'
+import FmDatePicker from '~/lib/ui/components/date-picker'
 
 export default {
   components: {
-    FmButton
+    FmButton,
+    FmDatePicker
   },
   data () {
     return {

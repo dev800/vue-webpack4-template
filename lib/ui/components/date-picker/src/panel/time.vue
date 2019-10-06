@@ -44,8 +44,8 @@
 </template>
 
 <script type="text/babel">
-import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from '../../../js/utils/date-util'
-import Locale from '../../../js/mixins/locale'
+import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from '../../../../js/utils/date-util'
+import Locale from '../../../../js/mixins/locale'
 import TimeSpinner from '../basic/time-spinner'
 
 export default {

@@ -29,6 +29,7 @@ module.exports = merge(baseConfig, {
             loader: MiniCssExtractPlugin.loader
           },
           'css-loader?sourceMap',
+          'postcss-loader?sourceMap',
           'sass-loader?sourceMap'
         ]
       },

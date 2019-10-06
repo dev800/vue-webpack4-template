@@ -1,7 +1,7 @@
 <template>
   <fm-container class="x-app">
     <x-app-aside />
-    <fm-container>
+    <fm-container class="app__container">
       <fm-header
         height="52px"
         class="app__header"

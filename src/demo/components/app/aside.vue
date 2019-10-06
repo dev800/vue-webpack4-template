@@ -1,7 +1,7 @@
 <template>
   <fm-aside :class="['app__aside', {'app__aside-collapse': uiAsideMenu.collapse}]">
     <div class="app__aside-logo">Vue</div>
-    <fm-scrollbar class="app__aside-scrollbar">
+    <div class="app__aside-scroller">
       <fm-menu
         default-active="2"
         background-color="#191a23"
@@ -56,7 +56,7 @@
           <span slot="title">页面</span>
         </fm-menu-item>
       </fm-menu>
-    </fm-scrollbar>
+    </div>
   </fm-aside>
 </template>
 
@@ -64,7 +64,6 @@
 import { mapState } from 'vuex'
 
 import FmAside from '~/lib/ui/components/aside'
-import FmScrollbar from '~/lib/ui/components/scrollbar'
 import FmMenu from '~/lib/ui/components/menu'
 import FmSubmenu from '~/lib/ui/components/submenu'
 import FmMenuItem from '~/lib/ui/components/menu-item'
@@ -72,7 +71,6 @@ import FmMenuItemGroup from '~/lib/ui/components/menu-item-group'
 
 export default {
   components: {
-    FmScrollbar,
     FmAside,
     FmMenu,
     FmSubmenu,
@@ -105,6 +103,7 @@ export default {
       height: 100vh;
       background: #191a23;
       width: 200px !important;
+      transition: width 0.28s;
 
       .fm-menu {
         border-right: none;
@@ -113,7 +112,7 @@ export default {
     }
 
     &_aside-collapse {
-      width: auto !important;
+      width: 64px !important;
       overflow: initial;
     }
 
@@ -126,8 +125,9 @@ export default {
       text-align: center;
     }
 
-    &_aside-scrollbar {
+    &_aside-scroller {
       height: calc(100vh - 64px);
+      overflow-y: auto;
     }
   }
 }

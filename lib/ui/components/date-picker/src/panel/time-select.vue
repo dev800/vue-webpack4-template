@@ -31,8 +31,8 @@
 </template>
 
 <script type="text/babel">
-import FmScrollbar from '../../scrollbar'
-import scrollIntoView from '../../../js/utils/scroll-into-view'
+import FmScrollbar from '../../../scrollbar'
+import scrollIntoView from '../../../../js/utils/scroll-into-view'
 
 const parseTime = function (time) {
   const values = (time || '').split(':')

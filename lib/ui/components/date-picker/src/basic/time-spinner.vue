@@ -151,9 +151,9 @@
 </template>
 
 <script type="text/babel">
-import { getRangeHours, getRangeMinutes, modifyTime } from '../../../js/utils/date-util'
-import FmScrollbar from '../../scrollbar'
-import RepeatClick from '../../../js/directives/repeat-click'
+import { getRangeHours, getRangeMinutes, modifyTime } from '../../../../js/utils/date-util'
+import FmScrollbar from '../../../scrollbar'
+import RepeatClick from '../../../../js/directives/repeat-click'
 
 export default {
   components: { FmScrollbar },

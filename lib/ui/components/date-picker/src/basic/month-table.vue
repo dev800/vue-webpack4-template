@@ -24,10 +24,10 @@
 </template>
 
 <script type="text/babel">
-import Locale from '../../../js/mixins/locale'
-import { isDate, range, getDayCountOfMonth, nextDate } from '../../../js/utils/date-util'
-import { hasClass } from '../../../js/utils/dom'
-import { arrayFindIndex, coerceTruthyValueToArray, arrayFind } from '../../../js/utils/util'
+import Locale from '../../../../js/mixins/locale'
+import { isDate, range, getDayCountOfMonth, nextDate } from '../../../../js/utils/date-util'
+import { hasClass } from '../../../../js/utils/dom'
+import { arrayFindIndex, coerceTruthyValueToArray, arrayFind } from '../../../../js/utils/util'
 
 const datesInMonth = (year, month) => {
   const numOfDays = getDayCountOfMonth(year, month)
