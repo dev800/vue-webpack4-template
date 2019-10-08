@@ -1,0 +1,13 @@
+.u-page {
+  .page_ {
+    &_title {
+      border-bottom: 1px solid #ccc;
+
+      h1 {
+        &:first-child {
+          margin-top: 0.24em;
+        }
+      }
+    }
+  }
+}

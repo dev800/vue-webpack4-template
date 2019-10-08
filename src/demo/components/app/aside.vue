@@ -101,13 +101,18 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../css/variables.scss';
+
 .x-app {
   .app_ {
     &_aside {
       height: 100vh;
+      width: $---aside-width !important;
       background: #191a23;
-      width: 200px !important;
       transition: width 0.28s;
+      position: fixed;
+      top: 0;
+      left: 0;
 
       .ui-menu {
         border-right: none;

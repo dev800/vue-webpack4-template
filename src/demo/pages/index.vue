@@ -1,6 +1,56 @@
 <template>
-  <div class="x-page-home">
+  <div class="u-page page_index">
+    <div class="page__title">
+      <h1>UI库</h1>
+    </div>
+    <div class="u-partials">
+      <div class="partial__title">
+        <h2>组件</h2>
+      </div>
+      <div class="partial__subtitle">
+        <h3>基础组件</h3>
+      </div>
+      <div class="partial__content">
+        <div class="u-buttons-container">
+          <ui-button>Layout 布局</ui-button>
+          <ui-button>Container 布局容器</ui-button>
+          <ui-button>Color 色彩</ui-button>
+          <ui-button>Typography 字体</ui-button>
+          <ui-button>Border 边框</ui-button>
+          <ui-button>Icon 图标</ui-button>
+          <ui-button>Button 按钮</ui-button>
+          <ui-button>Link 文字链接</ui-button>
+        </div>
+      </div>
+      <div class="partial__subtitle">
+        <h3>表单组件</h3>
+      </div>
+      <div class="partial__content">
+        <div class="u-buttons-container">
+          <ui-button>Radio 单选框</ui-button>
+          <ui-button>Checkbox 多选框</ui-button>
+          <ui-button>Input 输入框</ui-button>
+          <ui-button>InputNumber 计数器</ui-button>
+          <ui-button>Select 选择器</ui-button>
+          <ui-button>Cascader 级联选择器</ui-button>
+          <ui-button>Switch 开关</ui-button>
+          <ui-button>Slider 滑块</ui-button>
+          <ui-button>TimePicker 时间选择器</ui-button>
+          <ui-button>DatePicker 日期选择器</ui-button>
+          <ui-button>DateTimePicker 日期时间选择器</ui-button>
+          <ui-button>Upload 上传</ui-button>
+          <ui-button>Rate 评分</ui-button>
+          <ui-button>ColorPicker 颜色选择器</ui-button>
+          <ui-button>Transfer 穿梭框</ui-button>
+          <ui-button>Form 表单</ui-button>
+        </div>
+      </div>
+    </div>
     <div>
+      <ui-input-number
+        v-model="number"
+        :step="2"
+      ></ui-input-number>
       <ui-rate
         :allow-half="false"
         v-model="rateValue"
@@ -102,6 +152,7 @@
 <script>
 import NProgress from 'nprogress'
 import UiButton from '~/lib/ui/components/button'
+import UiInputNumber from '~/lib/ui/components/input-number'
 import UiRate from '~/lib/ui/components/rate'
 import UiProgress from '~/lib/ui/components/progress'
 import UiPagination from '~/lib/ui/components/pagination'
@@ -110,6 +161,7 @@ import UiDatePicker from '~/lib/ui/components/date-picker'
 export default {
   components: {
     UiButton,
+    UiInputNumber,
     UiRate,
     UiProgress,
     UiPagination,
@@ -117,6 +169,7 @@ export default {
   },
   data () {
     return {
+      number: 0,
       rateValue: 3.5,
       fullscreenLoading: false,
       valueDatatime: '',

@@ -53,5 +53,14 @@ export default {
 
 <style lang="scss">
 @import '~/lib/ui/css/index.scss';
+@import './css/variables.scss';
 @import './css/index.scss';
+
+.x-app {
+  .app_ {
+    &_container {
+      margin-left: $---aside-width;
+    }
+  }
+}
 </style>
