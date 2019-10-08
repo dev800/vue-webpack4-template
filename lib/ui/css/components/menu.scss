@@ -45,14 +45,14 @@
   padding-left: 0;
   background-color: $--menu-background-color;
   @include utils-clearfix;
-  &.fm-menu--horizontal {
+  &.ui-menu--horizontal {
     border-bottom: solid 1px $--menu-border-color;
   }
 
   @include m(horizontal) {
     border-right: none;
 
-    & > .fm-menu-item {
+    & > .ui-menu-item {
       float: left;
       height: 60px;
       line-height: 60px;
@@ -71,25 +71,25 @@
       }
     }
 
-    & > .fm-submenu {
+    & > .ui-submenu {
       float: left;
 
       &:focus,
       &:hover {
         outline: none;
-        .fm-submenu__title {
+        .ui-submenu__title {
           color: $--color-text-primary;
         }
       }
 
       &.is-active {
-        .fm-submenu__title {
+        .ui-submenu__title {
           border-bottom: 2px solid $--color-primary;
           color: $--color-text-primary;
         }
       }
 
-      & .fm-submenu__title {
+      & .ui-submenu__title {
         height: 60px;
         line-height: 60px;
         border-bottom: 2px solid transparent;
@@ -99,16 +99,16 @@
           background-color: #fff;
         }
       }
-      & .fm-submenu__icon-ios-arrow {
+      & .ui-submenu__icon-ios-arrow {
         position: static;
         vertical-align: middle;
         margin-left: 8px;
         margin-top: -3px;
       }
     }
-    & .fm-menu {
-      & .fm-menu-item,
-      & .fm-submenu__title {
+    & .ui-menu {
+      & .ui-menu-item,
+      & .ui-submenu__title {
         background-color: $--color-white;
         float: none;
         height: 36px;
@@ -116,17 +116,17 @@
         padding: 0 10px;
         color: $--color-text-secondary;
       }
-      & .fm-menu-item.is-active,
-      & .fm-submenu.is-active > .fm-submenu__title {
+      & .ui-menu-item.is-active,
+      & .ui-submenu.is-active > .ui-submenu__title {
         color: $--color-text-primary;
       }
     }
-    & .fm-menu-item:not(.is-disabled):hover,
-    & .fm-menu-item:not(.is-disabled):focus {
+    & .ui-menu-item:not(.is-disabled):hover,
+    & .ui-menu-item:not(.is-disabled):focus {
       outline: none;
       color: $--color-text-primary;
     }
-    & > .fm-menu-item.is-active {
+    & > .ui-menu-item.is-active {
       border-bottom: 2px solid $--color-primary;
       color: $--color-text-primary;
     }
@@ -134,8 +134,8 @@
   @include m(collapse) {
     width: 64px;
 
-    > .fm-menu-item,
-    > .fm-submenu > .fm-submenu__title {
+    > .ui-menu-item,
+    > .ui-submenu > .ui-submenu__title {
       .svg-icon {
         margin: 0;
         vertical-align: middle;
@@ -143,7 +143,7 @@
         text-align: center;
       }
 
-      .fm-submenu__icon-ios-arrow {
+      .ui-submenu__icon-ios-arrow {
         display: none;
       }
 
@@ -156,17 +156,17 @@
       }
     }
 
-    > .fm-menu-item.is-active i {
+    > .ui-menu-item.is-active i {
       color: inherit;
     }
 
-    .fm-menu .fm-submenu {
+    .ui-menu .ui-submenu {
       min-width: 200px;
     }
 
-    .fm-submenu {
+    .ui-submenu {
       position: relative;
-      & .fm-menu {
+      & .ui-menu {
         position: absolute;
         margin-left: 5px;
         top: 0;
@@ -177,7 +177,7 @@
       }
 
       &.is-opened {
-        > .fm-submenu__title .fm-submenu__icon-ios-arrow {
+        > .ui-submenu__title .ui-submenu__icon-ios-arrow {
           transform: none;
         }
       }
@@ -230,10 +230,10 @@
       background-color: $--menu-item-hover-fill;
     }
   }
-  & .fm-menu {
+  & .ui-menu {
     border: none;
   }
-  & .fm-menu-item {
+  & .ui-menu-item {
     height: 50px;
     line-height: 50px;
     padding: 0 45px;
@@ -248,18 +248,18 @@
     font-size: 12px;
   }
   @include when(active) {
-    .fm-submenu__title {
+    .ui-submenu__title {
       border-bottom-color: $--color-primary;
     }
   }
   @include when(opened) {
-    > .fm-submenu__title .fm-submenu__icon-ios-arrow {
+    > .ui-submenu__title .ui-submenu__icon-ios-arrow {
       transform: rotateZ(180deg);
     }
   }
   @include when(disabled) {
-    .fm-submenu__title,
-    .fm-menu-item {
+    .ui-submenu__title,
+    .ui-menu-item {
       opacity: 0.25;
       cursor: not-allowed;
       background: none !important;
@@ -285,7 +285,7 @@
   }
 }
 
-.horizontal-collapse-transition .fm-submenu__title .fm-submenu__icon-ios-arrow {
+.horizontal-collapse-transition .ui-submenu__title .ui-submenu__icon-ios-arrow {
   transition: 0.2s;
   opacity: 0;
 }

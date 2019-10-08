@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fm-switch"
+    class="ui-switch"
     :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
     role="switch"
     :aria-checked="checked"
@@ -10,7 +10,7 @@
     <input
       :id="id"
       ref="input"
-      class="fm-switch__input"
+      class="ui-switch__input"
       type="checkbox"
       :name="name"
       :true-value="activeValue"
@@ -21,7 +21,7 @@
     >
     <span
       v-if="inactiveIconClass || inactiveText"
-      :class="['fm-switch__label', 'fm-switch__label--left', !checked ? 'is-active' : '']"
+      :class="['ui-switch__label', 'ui-switch__label--left', !checked ? 'is-active' : '']"
     >
       <svg-icon
         v-if="inactiveIconClass"
@@ -34,12 +34,12 @@
     </span>
     <span
       ref="core"
-      class="fm-switch__core"
+      class="ui-switch__core"
       :style="{ 'width': coreWidth + 'px' }"
     />
     <span
       v-if="activeIconClass || activeText"
-      :class="['fm-switch__label', 'fm-switch__label--right', checked ? 'is-active' : '']"
+      :class="['ui-switch__label', 'ui-switch__label--right', checked ? 'is-active' : '']"
     >
       <svg-icon
         v-if="activeIconClass"
@@ -58,10 +58,10 @@ import Focus from '../../../js/mixins/focus'
 import Migrating from '../../../js/mixins/migrating'
 
 export default {
-  name: 'FmSwitch',
+  name: 'UiSwitch',
   mixins: [Focus('input'), Migrating, emitter],
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     }
   },
@@ -124,7 +124,7 @@ export default {
       return this.value === this.activeValue
     },
     switchDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     }
   },
   watch: {
@@ -134,7 +134,7 @@ export default {
         this.setBackgroundColor()
       }
       if (this.validateEvent) {
-        this.dispatch('FmFormItem', 'fm.form.change', [this.value])
+        this.dispatch('UiFormItem', 'ui.form.change', [this.value])
       }
     }
   },

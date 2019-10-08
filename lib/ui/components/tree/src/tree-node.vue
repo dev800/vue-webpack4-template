@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="node.visible"
-    class="fm-tree-node"
+    class="ui-tree-node"
     :class="{
       'is-expanded': expanded,
       'is-current': node.isCurrent,
@@ -24,18 +24,18 @@
     @drop.stop="handleDrop"
   >
     <div
-      class="fm-tree-node__content"
+      class="ui-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }"
     >
       <span
         :class="[
           { 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded },
-          'fm-tree-node__expand-icon',
-          tree.iconClass ? tree.iconClass : 'fm-icon-caret-right'
+          'ui-tree-node__expand-icon',
+          tree.iconClass ? tree.iconClass : 'ui-icon-caret-right'
         ]"
         @click.stop="handleExpandIconClick"
       />
-      <fm-checkbox
+      <ui-checkbox
         v-if="showCheckbox"
         v-model="node.checked"
         :indeterminate="node.indeterminate"
@@ -45,19 +45,19 @@
       />
       <span
         v-if="node.loading"
-        class="fm-tree-node__loading-icon fm-icon-loading"
+        class="ui-tree-node__loading-icon ui-icon-loading"
       />
       <node-content :node="node" />
     </div>
-    <fm-collapse-transition>
+    <ui-collapse-transition>
       <div
         v-if="!renderAfterExpand || childNodeRendered"
         v-show="expanded"
-        class="fm-tree-node__children"
+        class="ui-tree-node__children"
         role="group"
         :aria-expanded="expanded"
       >
-        <fm-tree-node
+        <ui-tree-node
           v-for="child in node.childNodes"
           :key="getNodeKey(child)"
           :render-content="renderContent"
@@ -67,24 +67,24 @@
           @node-expand="handleChildNodeExpand"
         />
       </div>
-    </fm-collapse-transition>
+    </ui-collapse-transition>
   </div>
 </template>
 
 <script type="text/jsx">
-import FmCollapseTransition from '../../collapse-transition'
-import FmCheckbox from '../../checkbox'
+import UiCollapseTransition from '../../collapse-transition'
+import UiCheckbox from '../../checkbox'
 import emitter from '../../../js/mixins/emitter'
 import { getNodeKey } from './model/util'
 
 export default {
-  name: 'FmTreeNode',
+  name: 'UiTreeNode',
 
-  componentName: 'FmTreeNode',
+  componentName: 'UiTreeNode',
 
   components: {
-    FmCollapseTransition,
-    FmCheckbox,
+    UiCollapseTransition,
+    UiCheckbox,
     NodeContent: {
       props: {
         node: {
@@ -101,7 +101,7 @@ export default {
             ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
             : tree.$scopedSlots.default
               ? tree.$scopedSlots.default({ node, data })
-              : <span class="fm-tree-node__label">{node.label}</span>
+              : <span class="ui-tree-node__label">{node.label}</span>
         )
       }
     }
@@ -251,7 +251,7 @@ export default {
     },
 
     handleChildNodeExpand (nodeData, node, instance) {
-      this.broadcast('FmTreeNode', 'tree-node-expand', node)
+      this.broadcast('UiTreeNode', 'tree-node-expand', node)
       this.tree.$emit('node-expand', nodeData, node, instance)
     },
 

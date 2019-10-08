@@ -12,20 +12,20 @@ npm i element-steps -D
 ## Usage
 ```javascript
 import Vue from 'vue'
-import FmStep from 'element-steps'
+import UiStep from 'element-steps'
 import 'element-theme-chalk/dist/step.css'
 
-Vue.use(FmStep)
+Vue.use(UiStep)
 ```
 
 or
 
 ```javascript
 import Vue from 'vue'
-import { FmSteps, FmStep } from 'element-steps'
+import { UiSteps, UiStep } from 'element-steps'
 
-Vue.component('fm-steps', FmSteps)
-Vue.component('fm-step', FmStep)
+Vue.component('ui-steps', UiSteps)
+Vue.component('ui-step', UiStep)
 ```
 
 ### Steps Attributes
@@ -44,7 +44,7 @@ Vue.component('fm-step', FmStep)
 |---------- |-------- |---------- |-------------  |-------- |
 | title | 标题 | string | — | — |
 | description | 描述性文字 | string | — | — |
-| icon | 图标 | Fmement Icon 提供的图标，如果要使用自定义图标可以通过 slot 方式写入 | string | — |
+| icon | 图标 | Uiement Icon 提供的图标，如果要使用自定义图标可以通过 slot 方式写入 | string | — |
 
 ### Step Slot
 | name | 说明  |

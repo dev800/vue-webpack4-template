@@ -9,15 +9,15 @@
         v-show="!disabled && showPopper"
         :id="tooltipId"
         ref="popper"
-        class="fm-popover fm-popper"
-        :class="[popperClass, content && 'fm-popover--plain']"
+        class="ui-popover ui-popper"
+        :class="[popperClass, content && 'ui-popover--plain']"
         :style="{ width: width + 'px' }"
         role="tooltip"
         :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
       >
         <div
           v-if="title"
-          class="fm-popover__title"
+          class="ui-popover__title"
           v-text="title"
         />
         <slot>{{ content }}</slot>
@@ -33,7 +33,7 @@ import { on, off, addClass, removeClass } from '../../../js/utils/dom'
 import { generateId } from '../../../js/utils/util'
 
 export default {
-  name: 'FmPopover',
+  name: 'UiPopover',
 
   mixins: [Popper],
 
@@ -76,7 +76,7 @@ export default {
 
   computed: {
     tooltipId () {
-      return `fm-popover-${generateId()}`
+      return `ui-popover-${generateId()}`
     }
   },
   watch: {
@@ -89,15 +89,15 @@ export default {
   },
 
   mounted () {
-    let reference = this.referenceFmm = this.reference || this.$refs.reference
+    let reference = this.referenceUim = this.reference || this.$refs.reference
     const popper = this.popper || this.$refs.popper
 
     if (!reference && this.$slots.reference && this.$slots.reference[0]) {
-      reference = this.referenceFmm = this.$slots.reference[0].elm
+      reference = this.referenceUim = this.$slots.reference[0].elm
     }
     // 可访问性
     if (reference) {
-      addClass(reference, 'fm-popover__reference')
+      addClass(reference, 'ui-popover__reference')
       reference.setAttribute('aria-describedby', this.tooltipId)
       reference.setAttribute('tabindex', this.tabindex) // tab序列
       popper.setAttribute('tabindex', 0)
@@ -127,7 +127,7 @@ export default {
       on(popper, 'mouseleave', this.handleMouseLeave)
     } else if (this.trigger === 'focus') {
       if (this.tabindex < 0) {
-        console.warn('[Fmement Warn][Popover]a negative taindex means that the element cannot be focused by tab key')
+        console.warn('[Uiement Warn][Popover]a negative taindex means that the element cannot be focused by tab key')
       }
       if (reference.querySelector('input, textarea')) {
         on(reference, 'focusin', this.doShow)
@@ -173,14 +173,14 @@ export default {
       this.showPopper = false
     },
     handleFocus () {
-      addClass(this.referenceFmm, 'focusing')
+      addClass(this.referenceUim, 'focusing')
       if (this.trigger === 'click' || this.trigger === 'focus') this.showPopper = true
     },
     handleClick () {
-      removeClass(this.referenceFmm, 'focusing')
+      removeClass(this.referenceUim, 'focusing')
     },
     handleBlur () {
-      removeClass(this.referenceFmm, 'focusing')
+      removeClass(this.referenceUim, 'focusing')
       if (this.trigger === 'click' || this.trigger === 'focus') this.showPopper = false
     },
     handleMouseEnter () {
@@ -213,7 +213,7 @@ export default {
       const popper = this.popper || this.$refs.popper
 
       if (!reference && this.$slots.reference && this.$slots.reference[0]) {
-        reference = this.referenceFmm = this.$slots.reference[0].elm
+        reference = this.referenceUim = this.$slots.reference[0].elm
       }
       if (!this.$el ||
         !reference ||

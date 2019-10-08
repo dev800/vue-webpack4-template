@@ -13,7 +13,7 @@
   margin: 5px 0;
 
   @include when(multiple) {
-    & .fm-select-dropdown__item.selected {
+    & .ui-select-dropdown__item.selected {
       color: $--select-option-selected-font-color;
       background-color: $--select-dropdown-background;
 
@@ -34,7 +34,7 @@
     }
   }
 
-  .fm-scrollbar.is-empty .fm-select-dropdown__list{
+  .ui-scrollbar.is-empty .ui-select-dropdown__list{
     padding: 0;
   }
 }

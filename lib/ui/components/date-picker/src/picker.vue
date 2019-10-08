@@ -1,9 +1,9 @@
 <template>
-  <fm-input
+  <ui-input
     v-if="!ranged"
     v-clickoutside="handleClose"
-    class="fm-date-editor"
-    :class="'fm-date-editor--' + type"
+    class="ui-date-editor"
+    :class="'ui-date-editor--' + type"
     :readonly="!editable || readonly || type === 'dates' || type === 'week'"
     :disabled="pickerDisabled"
     :size="pickerSize"
@@ -22,26 +22,26 @@
   >
     <svg-icon
       slot="prefix"
-      class="fm-input__icon"
+      class="ui-input__icon"
       :icon-class="triggerIconClass"
       @click="handleFocus"
     ></svg-icon>
     <svg-icon
       v-if="haveTrigger"
       slot="suffix"
-      class="fm-input__icon"
+      class="ui-input__icon"
       :icon-class="showClose ? '' + clearIcon : ''"
       @click="handleClickIcon"
     ></svg-icon>
-  </fm-input>
+  </ui-input>
   <div
     v-else
     ref="reference"
     v-clickoutside="handleClose"
-    class="fm-date-editor fm-range-editor fm-input__inner"
+    class="ui-date-editor ui-range-editor ui-input__inner"
     :class="[
-      'fm-date-editor--' + type,
-      pickerSize ? `fm-range-editor--${ pickerSize }` : '',
+      'ui-date-editor--' + type,
+      pickerSize ? `ui-range-editor--${ pickerSize }` : '',
       pickerDisabled ? 'is-disabled' : '',
       pickerVisible ? 'is-active' : ''
     ]"
@@ -51,7 +51,7 @@
     @keydown="handleKeydown"
   >
     <svg-icon
-      class="fm-input__icon fm-range__icon"
+      class="ui-input__icon ui-range__icon"
       :icon-class="triggerIconClass"
     ></svg-icon>
     <input
@@ -62,13 +62,13 @@
       v-bind="firstInputId"
       :readonly="!editable || readonly"
       :name="name && name[0]"
-      class="fm-range-input"
+      class="ui-range-input"
       @input="handleStartInput"
       @change="handleStartChange"
       @focus="handleFocus"
     >
     <slot name="range-separator">
-      <span class="fm-range-separator">{{ rangeSeparator }}</span>
+      <span class="ui-range-separator">{{ rangeSeparator }}</span>
     </slot>
     <input
       autocomplete="off"
@@ -78,14 +78,14 @@
       v-bind="secondInputId"
       :readonly="!editable || readonly"
       :name="name && name[1]"
-      class="fm-range-input"
+      class="ui-range-input"
       @input="handleEndInput"
       @change="handleEndChange"
       @focus="handleFocus"
     >
     <svg-icon
       v-if="haveTrigger"
-      class="fm-input__icon fm-range__close-icon"
+      class="ui-input__icon ui-range__close-icon"
       :icon-class="showClose ? '' + clearIcon : ''"
       @click="handleClickIcon"
     ></svg-icon>
@@ -98,7 +98,7 @@ import Clickoutside from '../../../js/utils/clickoutside'
 import { formatDate, parseDate, isDateObject, getWeekNumber } from '../../../js/utils/date-util'
 import Popper from '../../../js/utils/vue-popper'
 import Emitter from '../../../js/mixins/emitter'
-import FmInput from '../../input'
+import UiInput from '../../input'
 import merge from '../../../js/utils/merge'
 
 const NewPopper = {
@@ -341,16 +341,16 @@ const validator = function (val) {
 
 export default {
 
-  components: { FmInput },
+  components: { UiInput },
 
   directives: { Clickoutside },
   mixins: [Emitter, NewPopper],
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -508,16 +508,16 @@ export default {
       return Array.isArray(this.value) ? this.value.map(val => new Date(val)) : new Date(this.value)
     },
 
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
 
     pickerSize () {
-      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      return this.size || this._uiFormItemSize || (this.$ELEMENT || {}).size
     },
 
     pickerDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     },
 
     firstInputId () {
@@ -554,7 +554,7 @@ export default {
         this.emitChange(this.value)
         this.userInput = null
         if (this.validateEvent) {
-          this.dispatch('FmFormItem', 'fm.form.blur')
+          this.dispatch('UiFormItem', 'ui.form.blur')
         }
         this.$emit('blur', this)
         this.blur()
@@ -576,7 +576,7 @@ export default {
     },
     value (val, oldVal) {
       if (!valueEquals(val, oldVal) && !this.pickerVisible && this.validateEvent) {
-        this.dispatch('FmFormItem', 'fm.form.change', val)
+        this.dispatch('UiFormItem', 'ui.form.change', val)
       }
     }
   },
@@ -762,7 +762,7 @@ export default {
         } else {
           // user may change focus between two input
           setTimeout(() => {
-            if (this.refInput.indexOf(document.activeFmement) === -1) {
+            if (this.refInput.indexOf(document.activeUiement) === -1) {
               this.pickerVisible = false
               this.blur()
               event.stopPropagation()
@@ -834,7 +834,7 @@ export default {
       this.picker.defaultValue = this.defaultValue
       this.picker.defaultTime = this.defaultTime
       this.picker.popperClass = this.popperClass
-      this.popperFmm = this.picker.$el
+      this.popperUim = this.picker.$el
       this.picker.width = this.reference.getBoundingClientRect().width
       this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange'
       this.picker.selectionMode = this.selectionMode
@@ -911,7 +911,7 @@ export default {
         this.$emit('change', val)
         this.valueOnOpen = val
         if (this.validateEvent) {
-          this.dispatch('FmFormItem', 'fm.form.change', val)
+          this.dispatch('UiFormItem', 'ui.form.change', val)
         }
       }
     },

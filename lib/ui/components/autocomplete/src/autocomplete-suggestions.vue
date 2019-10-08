@@ -1,19 +1,19 @@
 <template>
   <transition
-    name="fm-zoom-in-top"
+    name="ui-zoom-in-top"
     @after-leave="doDestroy"
   >
     <div
       v-show="showPopper"
-      class="fm-autocomplete-suggestion fm-popper"
+      class="ui-autocomplete-suggestion ui-popper"
       :class="{ 'is-loading': !parent.hideLoading && parent.loading }"
       :style="{ width: dropdownWidth }"
       role="region"
     >
-      <fm-scrollbar
+      <ui-scrollbar
         tag="ul"
-        wrap-class="fm-autocomplete-suggestion__wrap"
-        view-class="fm-autocomplete-suggestion__list"
+        wrap-class="ui-autocomplete-suggestion__wrap"
+        view-class="ui-autocomplete-suggestion__list"
       >
         <li v-if="!parent.hideLoading && parent.loading">
           <svg-icon
@@ -22,20 +22,20 @@
           ></svg-icon>
         </li>
         <slot v-else />
-      </fm-scrollbar>
+      </ui-scrollbar>
     </div>
   </transition>
 </template>
 <script>
 import Popper from '../../../js/utils/vue-popper'
 import Emitter from '../../../js/mixins/emitter'
-import FmScrollbar from '../../scrollbar'
+import UiScrollbar from '../../scrollbar'
 
 export default {
-  components: { FmScrollbar },
+  components: { UiScrollbar },
   mixins: [Popper, Emitter],
 
-  componentName: 'FmAutocompleteSuggestions',
+  componentName: 'UiAutocompleteSuggestions',
 
   props: {
     options: {
@@ -66,9 +66,9 @@ export default {
   },
 
   mounted () {
-    this.$parent.popperFmm = this.popperFmm = this.$el
-    this.referenceFmm = this.$parent.$refs.input.$refs.input
-    this.referenceList = this.$el.querySelector('.fm-autocomplete-suggestion__list')
+    this.$parent.popperUim = this.popperUim = this.$el
+    this.referenceUim = this.$parent.$refs.input.$refs.input
+    this.referenceList = this.$el.querySelector('.ui-autocomplete-suggestion__list')
     this.referenceList.setAttribute('role', 'listbox')
     this.referenceList.setAttribute('id', this.id)
   },
@@ -82,7 +82,7 @@ export default {
 
   methods: {
     select (item) {
-      this.dispatch('FmAutocomplete', 'item-click', item)
+      this.dispatch('UiAutocomplete', 'item-click', item)
     }
   }
 }

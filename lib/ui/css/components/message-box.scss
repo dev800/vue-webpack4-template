@@ -60,12 +60,12 @@
     font-size: $--message-close-size;
     cursor: pointer;
 
-    .fm-message-box__close {
+    .ui-message-box__close {
       color: $--color-info;
     }
 
     &:focus, &:hover {
-      .fm-message-box__close {
+      .ui-message-box__close {
         color: $--color-primary;
       }
     }
@@ -101,24 +101,24 @@
       padding-left: 1px;
     }
 
-    + .fm-message-box__message {
+    + .ui-message-box__message {
       padding-left: 36px;
       padding-right: 12px;
     }
 
-    &.fm-icon-success {
+    &.ui-icon-success {
       color: $--messagebox-success-color;
     }
 
-    &.fm-icon-info {
+    &.ui-icon-info {
       color: $--messagebox-info-color;
     }
 
-    &.fm-icon-warning {
+    &.ui-icon-warning {
       color: $--messagebox-warning-color;
     }
 
-    &.fm-icon-error {
+    &.ui-icon-error {
       color: $--messagebox-danger-color;
     }
   }

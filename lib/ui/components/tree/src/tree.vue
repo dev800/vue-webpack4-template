@@ -1,15 +1,15 @@
 <template>
   <div
-    class="fm-tree"
+    class="ui-tree"
     :class="{
-      'fm-tree--highlight-current': highlightCurrent,
+      'ui-tree--highlight-current': highlightCurrent,
       'is-dragging': !!dragState.draggingNode,
       'is-drop-not-allow': !dragState.allowDrop,
       'is-drop-inner': dragState.dropType === 'inner'
     }"
     role="tree"
   >
-    <fm-tree-node
+    <ui-tree-node
       v-for="child in root.childNodes"
       :key="getNodeKey(child)"
       :node="child"
@@ -21,14 +21,14 @@
     />
     <div
       v-if="isEmpty"
-      class="fm-tree__empty-block"
+      class="ui-tree__empty-block"
     >
-      <span class="fm-tree__empty-text">{{ emptyText }}</span>
+      <span class="ui-tree__empty-text">{{ emptyText }}</span>
     </div>
     <div
       v-show="dragState.showDropIndicator"
       ref="dropIndicator"
-      class="fm-tree__drop-indicator"
+      class="ui-tree__drop-indicator"
     />
   </div>
 </template>
@@ -36,16 +36,16 @@
 <script>
 import TreeStore from './model/tree-store'
 import { getNodeKey, findNearestComponent } from './model/util'
-import FmTreeNode from './tree-node.vue'
+import UiTreeNode from './tree-node.vue'
 import { t } from '../../../js/locale'
 import emitter from '../../../js/mixins/emitter'
 import { addClass, removeClass } from '../../../js/utils/dom'
 
 export default {
-  name: 'FmTree',
+  name: 'UiTree',
 
   components: {
-    FmTreeNode
+    UiTreeNode
   },
 
   mixins: [emitter],
@@ -57,7 +57,7 @@ export default {
     emptyText: {
       type: String,
       default () {
-        return t('fm.tree.emptyText')
+        return t('ui.tree.emptyText')
       }
     },
     renderAfterExpand: {
@@ -219,7 +219,7 @@ export default {
     })
 
     this.$on('tree-node-drag-over', (event, treeNode) => {
-      const dropNode = findNearestComponent(event.target, 'FmTreeNode')
+      const dropNode = findNearestComponent(event.target, 'UiTreeNode')
       const oldDropNode = dragState.dropNode
       if (oldDropNode && oldDropNode !== dropNode) {
         removeClass(oldDropNode.$el, 'is-drop-inner')
@@ -282,7 +282,7 @@ export default {
         dropType = 'none'
       }
 
-      const iconPosition = dropNode.$el.querySelector('.fm-tree-node__expand-icon').getBoundingClientRect()
+      const iconPosition = dropNode.$el.querySelector('.ui-tree-node__expand-icon').getBoundingClientRect()
       const dropIndicator = this.$refs.dropIndicator
       if (dropType === 'before') {
         indicatorTop = iconPosition.top - treePosition.top
@@ -448,7 +448,7 @@ export default {
     },
 
     handleNodeExpand (nodeData, node, instance) {
-      this.broadcast('FmTreeNode', 'tree-node-expand', node)
+      this.broadcast('UiTreeNode', 'tree-node-expand', node)
       this.$emit('node-expand', nodeData, node, instance)
     },
 
@@ -470,7 +470,7 @@ export default {
 
     handleKeydown (ev) {
       const currentItem = ev.target
-      if (currentItem.className.indexOf('fm-tree-node') === -1) return
+      if (currentItem.className.indexOf('ui-tree-node') === -1) return
       const keyCode = ev.keyCode
       this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]')
       const currentIndex = this.treeItemArray.indexOf(currentItem)

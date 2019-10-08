@@ -2,58 +2,71 @@
   <div class="x-page-home">
     <div>
       <!-- <div v-loading="true">你好吗？？？</div> -->
-      <fm-progress :percentage="50"></fm-progress>
-      <fm-progress
+      <ui-pagination
+        :page-size="20"
+        :pager-count="11"
+        layout="prev, pager, next"
+        :total="1000"
+      >
+      </ui-pagination>
+      <ui-progress :percentage="50"></ui-progress>
+      <ui-progress
         :percentage="100"
         :format="format"
-      ></fm-progress>
-      <fm-progress
+      ></ui-progress>
+      <ui-progress
         :percentage="100"
         status="success"
-      ></fm-progress>
-      <fm-progress
+      ></ui-progress>
+      <ui-progress
         :percentage="100"
         status="warning"
-      ></fm-progress>
-      <fm-progress
+      ></ui-progress>
+      <ui-progress
         :percentage="50"
         status="exception"
-      ></fm-progress>
-      <fm-button
+      ></ui-progress>
+      <ui-button
         plain
         @click="openNotify"
       >
         可自动关闭的通知
-      </fm-button>
+      </ui-button>
       <svg-icon
         icon-class="solid-loading"
         class="animated spin infinite"
       />
-      <fm-date-picker
+      <ui-date-picker
+        v-model="valueDatatime"
+        type="date"
+        placeholder="选择日期"
+      >
+      </ui-date-picker>
+      <ui-date-picker
         v-model="valueDatatime"
         type="datetime"
         placeholder="选择日期时间"
       >
-      </fm-date-picker>
-      <fm-button
+      </ui-date-picker>
+      <ui-button
         size="small"
         type="danger"
         @click="onShowMessage"
       >
         UI测试
-      </fm-button>
-      <fm-button
+      </ui-button>
+      <ui-button
         size="small"
         type="danger"
       >
         UI测试
-      </fm-button>
-      <fm-button
+      </ui-button>
+      <ui-button
         type="primary"
         :loading="true"
       >
         UI大测试加载中...
-      </fm-button>
+      </ui-button>
       <input
         type="button"
         value="progress start"
@@ -65,9 +78,9 @@
         @click="onStopProgress"
       >
 
-      <fm-button @click="show = !show">
+      <ui-button @click="show = !show">
         Toggle render
-      </fm-button>
+      </ui-button>
     </div>
     <transition
       enter-active-class="animated slideInDown"
@@ -83,15 +96,17 @@
 
 <script>
 import NProgress from 'nprogress'
-import FmButton from '~/lib/ui/components/button'
-import FmProgress from '~/lib/ui/components/progress'
-import FmDatePicker from '~/lib/ui/components/date-picker'
+import UiButton from '~/lib/ui/components/button'
+import UiProgress from '~/lib/ui/components/progress'
+import UiPagination from '~/lib/ui/components/pagination'
+import UiDatePicker from '~/lib/ui/components/date-picker'
 
 export default {
   components: {
-    FmButton,
-    FmProgress,
-    FmDatePicker
+    UiButton,
+    UiProgress,
+    UiPagination,
+    UiDatePicker
   },
   data () {
     return {

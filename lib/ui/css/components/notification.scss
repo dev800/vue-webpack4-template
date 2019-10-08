@@ -87,7 +87,7 @@
   }
 }
 
-.fm-notification-fade-enter {
+.ui-notification-fade-enter {
   &.right {
     right: 0;
     transform: translateX(100%);
@@ -99,6 +99,6 @@
   }
 }
 
-.fm-notification-fade-leave-active {
+.ui-notification-fade-leave-active {
   opacity: 0;
 }

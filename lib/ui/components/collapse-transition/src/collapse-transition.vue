@@ -70,7 +70,7 @@ export function removeClass (el, cls) {
   }
 }
 export default {
-  name: 'FmCollapseTransition',
+  name: 'UiCollapseTransition',
   methods: {
     beforeEnter (el) {
       addClass(el, 'collapse-transition')

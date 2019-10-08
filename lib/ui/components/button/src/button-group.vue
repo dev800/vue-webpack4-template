@@ -1,10 +1,10 @@
 <template>
-  <div class="fm-button-group">
+  <div class="ui-button-group">
     <slot />
   </div>
 </template>
 <script>
 export default {
-  name: 'FmButtonGroup'
+  name: 'UiButtonGroup'
 }
 </script>

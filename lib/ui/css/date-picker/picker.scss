@@ -7,34 +7,34 @@
   display: inline-block;
   text-align: left;
 
-  &.fm-input,
-  &.fm-input__inner {
+  &.ui-input,
+  &.ui-input__inner {
     width: 220px;
   }
 
   @include m((monthrange)) {
-    &.fm-input,
-    &.fm-input__inner {
+    &.ui-input,
+    &.ui-input__inner {
       width: 300px;
     }
   }
 
   @include m((daterange, timerange)) {
-    &.fm-input,
-    &.fm-input__inner {
+    &.ui-input,
+    &.ui-input__inner {
       width: 350px;
     }
   }
 
   @include m(datetimerange) {
-    &.fm-input,
-    &.fm-input__inner {
+    &.ui-input,
+    &.ui-input__inner {
       width: 400px;
     }
   }
 
   @include m(dates) {
-    .fm-input__inner {
+    .ui-input__inner {
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -44,7 +44,7 @@
     cursor: pointer;
   }
 
-  .fm-range__icon {
+  .ui-range__icon {
     font-size: 14px;
     margin-left: -5px;
     color: $--color-text-placeholder;
@@ -52,7 +52,7 @@
     line-height: 32px;
   }
 
-  .fm-range-input {
+  .ui-range-input {
     appearance: none;
     border: none;
     outline: none;
@@ -70,7 +70,7 @@
     }
   }
 
-  .fm-range-separator {
+  .ui-range-separator {
     display: inline-block;
     height: 100%;
     padding: 0 5px;
@@ -82,7 +82,7 @@
     color: $--color-text-primary;
   }
 
-  .fm-range__close-icon {
+  .ui-range__close-icon {
     font-size: 14px;
     color: $--color-text-placeholder;
     width: 25px;
@@ -93,13 +93,13 @@
 }
 
 @include b(range-editor) {
-  &.fm-input__inner {
+  &.ui-input__inner {
     display: inline-flex;
     align-items: center;
     padding: 3px 10px;
   }
 
-  .fm-range-input {
+  .ui-range-input {
     line-height: 1;
   }
 
@@ -112,61 +112,61 @@
   }
 
   @include m(medium) {
-    &.fm-input__inner {
+    &.ui-input__inner {
       height: $--input-medium-height;
     }
 
-    .fm-range-separator {
+    .ui-range-separator {
       line-height: 28px;
       font-size: $--input-medium-font-size;
     }
 
-    .fm-range-input {
+    .ui-range-input {
       font-size: $--input-medium-font-size;
     }
 
-    .fm-range__icon,
-    .fm-range__close-icon {
+    .ui-range__icon,
+    .ui-range__close-icon {
       line-height: 28px;
     }
   }
 
   @include m(small) {
-    &.fm-input__inner {
+    &.ui-input__inner {
       height: $--input-small-height;
     }
 
-    .fm-range-separator {
+    .ui-range-separator {
       line-height: 24px;
       font-size: $--input-small-font-size;
     }
 
-    .fm-range-input {
+    .ui-range-input {
       font-size: $--input-small-font-size;
     }
 
-    .fm-range__icon,
-    .fm-range__close-icon {
+    .ui-range__icon,
+    .ui-range__close-icon {
       line-height: 24px;
     }
   }
 
   @include m(mini) {
-    &.fm-input__inner {
+    &.ui-input__inner {
       height: $--input-mini-height;
     }
 
-    .fm-range-separator {
+    .ui-range-separator {
       line-height: 20px;
       font-size: $--input-mini-font-size;
     }
 
-    .fm-range-input {
+    .ui-range-input {
       font-size: $--input-mini-font-size;
     }
 
-    .fm-range__icon,
-    .fm-range__close-icon {
+    .ui-range__icon,
+    .ui-range__close-icon {
       line-height: 20px;
     }
   }
@@ -190,7 +190,7 @@
       }
     }
 
-    .fm-range-separator {
+    .ui-range-separator {
       color: $--input-disabled-color;
     }
   }

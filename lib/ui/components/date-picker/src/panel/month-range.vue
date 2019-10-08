@@ -1,40 +1,40 @@
 <template>
   <transition
-    name="fm-zoom-in-top"
+    name="ui-zoom-in-top"
     @after-leave="$emit('dodestroy')"
   >
     <div
       v-show="visible"
-      class="fm-picker-panel fm-date-range-picker fm-popper"
+      class="ui-picker-panel ui-date-range-picker ui-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts
       }, popperClass]"
     >
-      <div class="fm-picker-panel__body-wrapper">
+      <div class="ui-picker-panel__body-wrapper">
         <slot
           name="sidebar"
-          class="fm-picker-panel__sidebar"
+          class="ui-picker-panel__sidebar"
         />
         <div
           v-if="shortcuts"
-          class="fm-picker-panel__sidebar"
+          class="ui-picker-panel__sidebar"
         >
           <button
             v-for="(shortcut, key) in shortcuts"
             :key="key"
             type="button"
-            class="fm-picker-panel__shortcut"
+            class="ui-picker-panel__shortcut"
             @click="handleShortcutClick(shortcut)"
           >
             {{ shortcut.text }}
           </button>
         </div>
-        <div class="fm-picker-panel__body">
-          <div class="fm-picker-panel__content fm-date-range-picker__content is-left">
-            <div class="fm-date-range-picker__header">
+        <div class="ui-picker-panel__body">
+          <div class="ui-picker-panel__content ui-date-range-picker__content is-left">
+            <div class="ui-date-range-picker__header">
               <button
                 type="button"
-                class="fm-picker-panel__icon-btn fm-icon-d-arrow-left"
+                class="ui-picker-panel__icon-btn ui-icon-d-arrow-left"
                 @click="leftPrevYear"
               />
               <button
@@ -42,7 +42,7 @@
                 type="button"
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="fm-picker-panel__icon-btn fm-icon-d-arrow-right"
+                class="ui-picker-panel__icon-btn ui-icon-d-arrow-right"
                 @click="leftNextYear"
               />
               <div>{{ leftLabel }}</div>
@@ -59,19 +59,19 @@
               @pick="handleRangePick"
             />
           </div>
-          <div class="fm-picker-panel__content fm-date-range-picker__content is-right">
-            <div class="fm-date-range-picker__header">
+          <div class="ui-picker-panel__content ui-date-range-picker__content is-right">
+            <div class="ui-date-range-picker__header">
               <button
                 v-if="unlinkPanels"
                 type="button"
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="fm-picker-panel__icon-btn fm-icon-d-arrow-left"
+                class="ui-picker-panel__icon-btn ui-icon-d-arrow-left"
                 @click="rightPrevYear"
               />
               <button
                 type="button"
-                class="fm-picker-panel__icon-btn fm-icon-d-arrow-right"
+                class="ui-picker-panel__icon-btn ui-icon-d-arrow-right"
                 @click="rightNextYear"
               />
               <div>{{ rightLabel }}</div>
@@ -153,11 +153,11 @@ export default {
     },
 
     leftLabel () {
-      return this.leftDate.getFullYear() + ' ' + this.t('fm.datepicker.year')
+      return this.leftDate.getFullYear() + ' ' + this.t('ui.datepicker.year')
     },
 
     rightLabel () {
-      return this.rightDate.getFullYear() + ' ' + this.t('fm.datepicker.year')
+      return this.rightDate.getFullYear() + ' ' + this.t('ui.datepicker.year')
     },
 
     leftYear () {
@@ -236,7 +236,7 @@ export default {
       this.maxDate = maxDate
       this.minDate = minDate
 
-      // workaround for https://github.com/FmemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
+      // workaround for https://github.com/UiemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
       setTimeout(() => {
         this.maxDate = maxDate
         this.minDate = minDate

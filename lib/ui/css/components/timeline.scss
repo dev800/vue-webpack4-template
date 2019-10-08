@@ -6,8 +6,8 @@
   font-size: $--font-size-base;
   list-style: none;
 
-  & .fm-timeline-item:last-child {
-    & .fm-timeline-item__tail {
+  & .ui-timeline-item:last-child {
+    & .ui-timeline-item__tail {
       display: none;
     }
   }

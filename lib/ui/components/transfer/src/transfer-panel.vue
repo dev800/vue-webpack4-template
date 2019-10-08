@@ -1,21 +1,21 @@
 <template>
-  <div class="fm-transfer-panel">
-    <p class="fm-transfer-panel__header">
-      <fm-checkbox
+  <div class="ui-transfer-panel">
+    <p class="ui-transfer-panel__header">
+      <ui-checkbox
         v-model="allChecked"
         :indeterminate="isIndeterminate"
         @change="handleAllCheckedChange"
       >
         {{ title }}
         <span>{{ checkedSummary }}</span>
-      </fm-checkbox>
+      </ui-checkbox>
     </p>
 
-    <div :class="['fm-transfer-panel__body', hasFooter ? 'is-with-footer' : '']">
-      <fm-input
+    <div :class="['ui-transfer-panel__body', hasFooter ? 'is-with-footer' : '']">
+      <ui-input
         v-if="filterable"
         v-model="query"
-        class="fm-transfer-panel__filter"
+        class="ui-transfer-panel__filter"
         size="small"
         :placeholder="placeholder"
         @mouseenter.native="inputHover = true"
@@ -23,43 +23,43 @@
       >
         <svg-icon
           slot="prefix"
-          :class="['fm-input__icon']"
+          :class="['ui-input__icon']"
           :icon-class="inputIcon"
           @click="clearQuery"
         />
-      </fm-input>
-      <fm-checkbox-group
+      </ui-input>
+      <ui-checkbox-group
         v-show="!hasNoMatch && data.length > 0"
         v-model="checked"
         :class="{ 'is-filterable': filterable }"
-        class="fm-transfer-panel__list"
+        class="ui-transfer-panel__list"
       >
-        <fm-checkbox
+        <ui-checkbox
           v-for="item in filteredData"
           :key="item[keyProp]"
-          class="fm-transfer-panel__item"
+          class="ui-transfer-panel__item"
           :label="item[keyProp]"
           :disabled="item[disabledProp]"
         >
           <option-content :option="item" />
-        </fm-checkbox>
-      </fm-checkbox-group>
+        </ui-checkbox>
+      </ui-checkbox-group>
       <p
         v-show="hasNoMatch"
-        class="fm-transfer-panel__empty"
+        class="ui-transfer-panel__empty"
       >
-        {{ t('fm.transfer.noMatch') }}
+        {{ t('ui.transfer.noMatch') }}
       </p>
       <p
         v-show="data.length === 0 && !hasNoMatch"
-        class="fm-transfer-panel__empty"
+        class="ui-transfer-panel__empty"
       >
-        {{ t('fm.transfer.noData') }}
+        {{ t('ui.transfer.noData') }}
       </p>
     </div>
     <p
       v-if="hasFooter"
-      class="fm-transfer-panel__footer"
+      class="ui-transfer-panel__footer"
     >
       <slot />
     </p>
@@ -67,26 +67,26 @@
 </template>
 
 <script>
-import FmCheckboxGroup from '../../checkbox-group'
-import FmCheckbox from '../../checkbox'
-import FmInput from '../../input'
+import UiCheckboxGroup from '../../checkbox-group'
+import UiCheckbox from '../../checkbox'
+import UiInput from '../../input'
 import Locale from '../../../js/mixins/locale'
 
 export default {
 
-  name: 'FmTransferPanel',
+  name: 'UiTransferPanel',
 
   components: {
-    FmCheckboxGroup,
-    FmCheckbox,
-    FmInput,
+    UiCheckboxGroup,
+    UiCheckbox,
+    UiInput,
     OptionContent: {
       props: {
         option: Object
       },
       render (h) {
         const getParent = vm => {
-          if (vm.$options.componentName === 'FmTransferPanel') {
+          if (vm.$options.componentName === 'UiTransferPanel') {
             return vm
           } else if (vm.$parent) {
             return getParent(vm.$parent)
@@ -106,7 +106,7 @@ export default {
   },
   mixins: [Locale],
 
-  componentName: 'FmTransferPanel',
+  componentName: 'UiTransferPanel',
 
   props: {
     data: {

@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'FmAvatar',
+  name: 'UiAvatar',
 
   props: {
     size: {
@@ -39,18 +39,18 @@ export default {
   computed: {
     avatarClass () {
       const { size, icon, shape } = this
-      const classList = ['fm-avatar']
+      const classList = ['ui-avatar']
 
       if (size && typeof size === 'string') {
-        classList.push(`fm-avatar--${size}`)
+        classList.push(`ui-avatar--${size}`)
       }
 
       if (icon) {
-        classList.push('fm-avatar--icon')
+        classList.push('ui-avatar--icon')
       }
 
       if (shape) {
-        classList.push(`fm-avatar--${shape}`)
+        classList.push(`ui-avatar--${shape}`)
       }
 
       return classList.join(' ')

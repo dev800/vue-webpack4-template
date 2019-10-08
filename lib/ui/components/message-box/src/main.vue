@@ -2,7 +2,7 @@
   <transition name="msgbox-fade">
     <div
       v-show="visible"
-      class="fm-message-box__wrapper"
+      class="ui-message-box__wrapper"
       tabindex="-1"
       role="dialog"
       aria-modal="true"
@@ -10,43 +10,43 @@
       @click.self="handleWrapperClick"
     >
       <div
-        class="fm-message-box"
-        :class="[customClass, center && 'fm-message-box--center']"
+        class="ui-message-box"
+        :class="[customClass, center && 'ui-message-box--center']"
       >
         <div
           v-if="title !== null"
-          class="fm-message-box__header"
+          class="ui-message-box__header"
         >
-          <div class="fm-message-box__title">
+          <div class="ui-message-box__title">
             <div
               v-if="icon && center"
-              :class="['fm-message-box__status', icon]"
+              :class="['ui-message-box__status', icon]"
             />
             <span>{{ title }}</span>
           </div>
           <button
             v-if="showClose"
             type="button"
-            class="fm-message-box__headerbtn"
+            class="ui-message-box__headerbtn"
             aria-label="Close"
             @click="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
             @keydown.enter="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
           >
             <svg-icon
-              class="fm-message-box__close"
+              class="ui-message-box__close"
               icon-class="solid-times"
             ></svg-icon>
           </button>
         </div>
-        <div class="fm-message-box__content">
-          <div class="fm-message-box__container">
+        <div class="ui-message-box__content">
+          <div class="ui-message-box__container">
             <div
               v-if="icon && !center && message !== ''"
-              :class="['fm-message-box__status', icon]"
+              :class="['ui-message-box__status', icon]"
             />
             <div
               v-if="message !== ''"
-              class="fm-message-box__message"
+              class="ui-message-box__message"
             >
               <slot>
                 <p v-if="!dangerouslyUseHTMLString">
@@ -61,9 +61,9 @@
           </div>
           <div
             v-show="showInput"
-            class="fm-message-box__input"
+            class="ui-message-box__input"
           >
-            <fm-input
+            <ui-input
               ref="input"
               v-model="inputValue"
               :type="inputType"
@@ -71,15 +71,15 @@
               @keydown.enter.native="handleInputEnter"
             />
             <div
-              class="fm-message-box__errormsg"
+              class="ui-message-box__errormsg"
               :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }"
             >
               {{ editorErrorMessage }}
             </div>
           </div>
         </div>
-        <div class="fm-message-box__btns">
-          <fm-button
+        <div class="ui-message-box__btns">
+          <ui-button
             v-if="showCancelButton"
             :loading="cancelButtonLoading"
             :class="[ cancelButtonClasses ]"
@@ -88,9 +88,9 @@
             @click.native="handleAction('cancel')"
             @keydown.enter="handleAction('cancel')"
           >
-            {{ cancelButtonText || t('fm.messagebox.cancel') }}
-          </fm-button>
-          <fm-button
+            {{ cancelButtonText || t('ui.messagebox.cancel') }}
+          </ui-button>
+          <ui-button
             v-show="showConfirmButton"
             ref="confirm"
             :loading="confirmButtonLoading"
@@ -100,8 +100,8 @@
             @click.native="handleAction('confirm')"
             @keydown.enter="handleAction('confirm')"
           >
-            {{ confirmButtonText || t('fm.messagebox.confirm') }}
-          </fm-button>
+            {{ confirmButtonText || t('ui.messagebox.confirm') }}
+          </ui-button>
         </div>
       </div>
     </div>
@@ -111,8 +111,8 @@
 <script type="text/babel">
 import Popup from '../../../js/utils/popup'
 import Locale from '../../../js/mixins/locale'
-import FmInput from '../../input'
-import FmButton from '../../button'
+import UiInput from '../../input'
+import UiButton from '../../button'
 import { addClass, removeClass } from '../../../js/utils/dom'
 import { t } from '../../../js/locale'
 import Dialog from '../../../js/utils/aria-dialog'
@@ -127,8 +127,8 @@ const typeMap = {
 
 export default {
   components: {
-    FmInput,
-    FmButton
+    UiInput,
+    UiButton
   },
   mixins: [Popup, Locale],
 
@@ -205,12 +205,12 @@ export default {
     icon () {
       const { type, iconClass } = this
       return (
-        iconClass || (type && typeMap[type] ? `fm-icon-${typeMap[type]}` : '')
+        iconClass || (type && typeMap[type] ? `ui-icon-${typeMap[type]}` : '')
       )
     },
 
     confirmButtonClasses () {
-      return `fm-button--primary ${this.confirmButtonClass}`
+      return `ui-button--primary ${this.confirmButtonClass}`
     },
     cancelButtonClasses () {
       return `${this.cancelButtonClass}`
@@ -237,7 +237,7 @@ export default {
             this.$refs.confirm.$el.focus()
           })
         }
-        this.focusAfterClosed = document.activeFmement
+        this.focusAfterClosed = document.activeUiement
         messageBox = new Dialog(
           this.$el,
           this.focusAfterClosed,
@@ -250,12 +250,12 @@ export default {
       if (val) {
         setTimeout(() => {
           if (this.$refs.input && this.$refs.input.$el) {
-            this.getInputFmement().focus()
+            this.getInputUiement().focus()
           }
         }, 500)
       } else {
         this.editorErrorMessage = ''
-        removeClass(this.getInputFmement(), 'invalid')
+        removeClass(this.getInputUiement(), 'invalid')
       }
     }
   },
@@ -333,8 +333,8 @@ export default {
         const inputPattern = this.inputPattern
         if (inputPattern && !inputPattern.test(this.inputValue || '')) {
           this.editorErrorMessage =
-            this.inputErrorMessage || t('fm.messagebox.error')
-          addClass(this.getInputFmement(), 'invalid')
+            this.inputErrorMessage || t('ui.messagebox.error')
+          addClass(this.getInputUiement(), 'invalid')
           return false
         }
         const inputValidator = this.inputValidator
@@ -342,29 +342,29 @@ export default {
           const validateResult = inputValidator(this.inputValue)
           if (validateResult === false) {
             this.editorErrorMessage =
-              this.inputErrorMessage || t('fm.messagebox.error')
-            addClass(this.getInputFmement(), 'invalid')
+              this.inputErrorMessage || t('ui.messagebox.error')
+            addClass(this.getInputUiement(), 'invalid')
             return false
           }
           if (typeof validateResult === 'string') {
             this.editorErrorMessage = validateResult
-            addClass(this.getInputFmement(), 'invalid')
+            addClass(this.getInputUiement(), 'invalid')
             return false
           }
         }
       }
       this.editorErrorMessage = ''
-      removeClass(this.getInputFmement(), 'invalid')
+      removeClass(this.getInputUiement(), 'invalid')
       return true
     },
     getFirstFocus () {
-      const btn = this.$el.querySelector('.fm-message-box__btns .fm-button')
+      const btn = this.$el.querySelector('.ui-message-box__btns .ui-button')
       const title = this.$el.querySelector(
-        '.fm-message-box__btns .fm-message-box__title'
+        '.ui-message-box__btns .ui-message-box__title'
       )
       return btn || title
     },
-    getInputFmement () {
+    getInputUiement () {
       const inputRefs = this.$refs.input.$refs
       return inputRefs.input || inputRefs.textarea
     },

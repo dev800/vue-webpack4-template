@@ -1,8 +1,8 @@
 <template>
   <label
-    class="fm-radio-button"
+    class="ui-radio-button"
     :class="[
-      size ? 'fm-radio-button--' + size : '',
+      size ? 'ui-radio-button--' + size : '',
       { 'is-active': value === label },
       { 'is-disabled': isDisabled },
       { 'is-focus': focus }
@@ -15,7 +15,7 @@
   >
     <input
       v-model="value"
-      class="fm-radio-button__orig-radio"
+      class="ui-radio-button__orig-radio"
       :value="label"
       type="radio"
       :name="name"
@@ -26,7 +26,7 @@
       @blur="focus = false"
     >
     <span
-      class="fm-radio-button__inner"
+      class="ui-radio-button__inner"
       :style="value === label ? activeStyle : null"
       @keydown.stop
     >
@@ -39,15 +39,15 @@
 import Emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmRadioButton',
+  name: 'UiRadioButton',
 
   mixins: [Emitter],
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -74,7 +74,7 @@ export default {
     _radioGroup () {
       let parent = this.$parent
       while (parent) {
-        if (parent.$options.componentName !== 'FmRadioGroup') {
+        if (parent.$options.componentName !== 'UiRadioGroup') {
           parent = parent.$parent
         } else {
           return parent
@@ -90,14 +90,14 @@ export default {
         color: this._radioGroup.textColor || ''
       }
     },
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
     size () {
-      return this._radioGroup.radioGroupSize || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      return this._radioGroup.radioGroupSize || this._uiFormItemSize || (this.$ELEMENT || {}).size
     },
     isDisabled () {
-      return this.disabled || this._radioGroup.disabled || (this.fmForm || {}).disabled
+      return this.disabled || this._radioGroup.disabled || (this.uiForm || {}).disabled
     },
     tabIndex () {
       return (this.isDisabled || (this._radioGroup && this.value !== this.label)) ? -1 : 0
@@ -107,7 +107,7 @@ export default {
   methods: {
     handleChange () {
       this.$nextTick(() => {
-        this.dispatch('FmRadioGroup', 'handleChange', this.value)
+        this.dispatch('UiRadioGroup', 'handleChange', this.value)
       })
     }
   }

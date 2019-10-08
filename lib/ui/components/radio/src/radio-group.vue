@@ -1,7 +1,7 @@
 <template>
   <component
     :is="_elTag"
-    class="fm-radio-group"
+    class="ui-radio-group"
     role="radiogroup"
     @keydown="handleKeydown"
   >
@@ -18,12 +18,12 @@ const keyCode = Object.freeze({
   DOWN: 40
 })
 export default {
-  name: 'FmRadioGroup',
+  name: 'UiRadioGroup',
 
-  componentName: 'FmRadioGroup',
+  componentName: 'UiRadioGroup',
 
   inject: {
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -39,19 +39,19 @@ export default {
   },
 
   computed: {
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
     _elTag () {
       return (this.$vnode.data || {}).tag || 'div'
     },
     radioGroupSize () {
-      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      return this.size || this._uiFormItemSize || (this.$ELEMENT || {}).size
     }
   },
   watch: {
     value (value) {
-      this.dispatch('FmFormItem', 'fm.form.change', [this.value])
+      this.dispatch('UiFormItem', 'ui.form.change', [this.value])
     }
   },
 

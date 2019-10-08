@@ -1,6 +1,6 @@
 <template>
   <li
-    class="fm-menu-item"
+    class="ui-menu-item"
     role="menuitem"
     tabindex="-1"
     :style="[paddingStyle, itemStyle, { backgroundColor }]"
@@ -14,8 +14,8 @@
     @blur="onMouseLeave"
     @mouseleave="onMouseLeave"
   >
-    <fm-tooltip
-      v-if="parentMenu.$options.componentName === 'FmMenu' && rootMenu.collapse && $slots.title"
+    <ui-tooltip
+      v-if="parentMenu.$options.componentName === 'UiMenu' && rootMenu.collapse && $slots.title"
       effect="dark"
       placement="right"
     >
@@ -25,7 +25,7 @@
       <div style="position: absolute; left: 0; top: 0; height: 100%; width: 100%; display: inline-block;box-sizing: border-box; padding: 0 20px;">
         <slot />
       </div>
-    </fm-tooltip>
+    </ui-tooltip>
     <template v-else>
       <slot />
       <slot name="title" />
@@ -34,15 +34,15 @@
 </template>
 <script>
 import Menu from './menu-mixin'
-import FmTooltip from '../../tooltip'
+import UiTooltip from '../../tooltip'
 import Emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmMenuItem',
+  name: 'UiMenuItem',
 
-  componentName: 'FmMenuItem',
+  componentName: 'UiMenuItem',
 
-  components: { FmTooltip },
+  components: { UiTooltip },
 
   mixins: [Menu, Emitter],
 
@@ -126,7 +126,7 @@ export default {
     },
     handleClick () {
       if (!this.disabled) {
-        this.dispatch('FmMenu', 'item-click', this)
+        this.dispatch('UiMenu', 'item-click', this)
         this.$emit('click', this)
       }
     }

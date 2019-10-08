@@ -26,15 +26,15 @@
     &.disabled {
       cursor: default;
 
-      .fm-slider__bar {
+      .ui-slider__bar {
         background-color: $--slider-disable-color;
       }
 
-      .fm-slider__button {
+      .ui-slider__button {
         border-color: $--slider-disable-color;
       }
 
-      .fm-slider__button-wrapper {
+      .ui-slider__button-wrapper {
         &:hover,
         &.hover {
           cursor: not-allowed;
@@ -45,7 +45,7 @@
         }
       }
 
-      .fm-slider__button {
+      .ui-slider__button {
         &:hover,
         &.hover,
         &.dragging {
@@ -69,15 +69,15 @@
     margin-top: 3px;
     width: 130px;
 
-    &.fm-input-number--mini {
+    &.ui-input-number--mini {
       margin-top: 5px;
     }
 
-    &.fm-input-number--medium {
+    &.ui-input-number--medium {
       margin-top: 0;
     }
 
-    &.fm-input-number--large {
+    &.ui-input-number--large {
       margin-top: -2px;
     }
   }
@@ -103,7 +103,7 @@
     line-height: normal;
     @include utils-vertical-center;
 
-    .fm-tooltip {
+    .ui-tooltip {
       vertical-align: middle;
       display: inline-block;
     }
@@ -169,40 +169,40 @@
 
   @include when(vertical) {
     position: relative;
-    .fm-slider__runway {
+    .ui-slider__runway {
       width: $--slider-height;
       height: 100%;
       margin: 0 16px;
     }
-    .fm-slider__bar {
+    .ui-slider__bar {
       width: $--slider-height;
       height: auto;
       border-radius: 0 0 3px 3px;
     }
-    .fm-slider__button-wrapper {
+    .ui-slider__button-wrapper {
       top: auto;
       left: $--slider-button-wrapper-offset;
       transform: translateY(50%);
     }
-    .fm-slider__stop {
+    .ui-slider__stop {
       transform: translateY(50%);
     }
-    &.fm-slider--with-input {
+    &.ui-slider--with-input {
       padding-bottom: #{$--input-medium-height + 22px};
-      .fm-slider__input {
+      .ui-slider__input {
         overflow: visible;
         float: none;
         position: absolute;
         bottom: 22px;
         width: 36px;
         margin-top: 15px;
-        .fm-input__inner {
+        .ui-input__inner {
           text-align: center;
           padding-left: 5px;
           padding-right: 5px;
         }
-        .fm-input-number__decrease,
-        .fm-input-number__increase
+        .ui-input-number__decrease,
+        .ui-input-number__increase
         {
           top: $--input-small-height;
           margin-top: -1px;
@@ -211,29 +211,29 @@
           box-sizing: border-box;
           transition: $--border-transition-base;
         }
-        .fm-input-number__decrease {
+        .ui-input-number__decrease {
           width: 18px;
           right: 18px;
           border-bottom-left-radius: $--input-border-radius;
         }
-        .fm-input-number__increase {
+        .ui-input-number__increase {
           width: 19px;
           border-bottom-right-radius: $--input-border-radius;
-          & ~ .fm-input .fm-input__inner {
+          & ~ .ui-input .ui-input__inner {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
           }
         }
         &:hover {
-          .fm-input-number__decrease,
-          .fm-input-number__increase
+          .ui-input-number__decrease,
+          .ui-input-number__increase
           {
             border-color: $--input-hover-border;
           }
         }
         &:active {
-          .fm-input-number__decrease,
-          .fm-input-number__increase
+          .ui-input-number__decrease,
+          .ui-input-number__increase
           {
             border-color: $--input-focus-border;
           }

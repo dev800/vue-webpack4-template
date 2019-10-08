@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="fm-pager"
+    class="ui-pager"
     @click="onPagerClick"
   >
     <li
@@ -12,11 +12,13 @@
     </li>
     <li
       v-if="showPrevMore"
-      class="fm-icon more btn-quickprev"
-      :class="[quickprevIconClass, { disabled }]"
+      class="ui-icon more btn-quick-prev"
+      :class="[{ disabled }]"
       @mouseenter="onMouseenter('left')"
-      @mouseleave="quickprevIconClass = 'fm-icon-more'"
-    />
+      @mouseleave="quickPrevIconClass = 'solid-ellipsis-h'"
+    >
+      <svg-icon :icon-class="quickPrevIconClass" />
+    </li>
     <li
       v-for="pager in pagers"
       :key="pager"
@@ -27,11 +29,13 @@
     </li>
     <li
       v-if="showNextMore"
-      class="fm-icon more btn-quicknext"
-      :class="[quicknextIconClass, { disabled }]"
+      class="ui-icon more btn-quick-next"
+      :class="[{ disabled }]"
       @mouseenter="onMouseenter('right')"
-      @mouseleave="quicknextIconClass = 'fm-icon-more'"
-    />
+      @mouseleave="quickNextIconClass = 'solid-ellipsis-h'"
+    >
+      <svg-icon :icon-class="quickNextIconClass" />
+    </li>
     <li
       v-if="pageCount > 1"
       :class="{ active: currentPage === pageCount, disabled }"
@@ -44,7 +48,7 @@
 
 <script type="text/babel">
 export default {
-  name: 'FmPager',
+  name: 'UiPager',
 
   props: {
     currentPage: Number,
@@ -61,8 +65,8 @@ export default {
       current: null,
       showPrevMore: false,
       showNextMore: false,
-      quicknextIconClass: 'fm-icon-more',
-      quickprevIconClass: 'fm-icon-more'
+      quickNextIconClass: 'solid-ellipsis-h',
+      quickPrevIconClass: 'solid-ellipsis-h'
     }
   },
 
@@ -118,19 +122,24 @@ export default {
 
   watch: {
     showPrevMore (val) {
-      if (!val) this.quickprevIconClass = 'fm-icon-more'
+      if (!val) this.quickPrevIconClass = 'solid-ellipsis-h'
     },
 
     showNextMore (val) {
-      if (!val) this.quicknextIconClass = 'fm-icon-more'
+      if (!val) this.quickNextIconClass = 'solid-ellipsis-h'
     }
   },
 
   methods: {
     onPagerClick (event) {
-      const target = event.target
+      let target = event.target
+
       if (target.tagName === 'UL' || this.disabled) {
         return
+      }
+
+      if (target.tagName === 'svg') {
+        target = target.parentElement
       }
 
       let newPage = Number(event.target.textContent)
@@ -139,9 +148,9 @@ export default {
       const pagerCountOffset = this.pagerCount - 2
 
       if (target.className.indexOf('more') !== -1) {
-        if (target.className.indexOf('quickprev') !== -1) {
+        if (target.className.indexOf('quick-prev') !== -1) {
           newPage = currentPage - pagerCountOffset
-        } else if (target.className.indexOf('quicknext') !== -1) {
+        } else if (target.className.indexOf('quick-next') !== -1) {
           newPage = currentPage + pagerCountOffset
         }
       }
@@ -165,9 +174,9 @@ export default {
     onMouseenter (direction) {
       if (this.disabled) return
       if (direction === 'left') {
-        this.quickprevIconClass = 'fm-icon-d-arrow-left'
+        this.quickPrevIconClass = 'solid-angle-double-left'
       } else {
-        this.quicknextIconClass = 'fm-icon-d-arrow-right'
+        this.quickNextIconClass = 'solid-angle-double-right'
       }
     }
   }

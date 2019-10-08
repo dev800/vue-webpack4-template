@@ -1,44 +1,44 @@
 <template>
   <transition
-    name="fm-zoom-in-top"
+    name="ui-zoom-in-top"
     @after-enter="handleEnter"
     @after-leave="handleLeave"
   >
     <div
       v-show="visible"
-      class="fm-picker-panel fm-date-picker fm-popper"
+      class="ui-picker-panel ui-date-picker ui-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
       }, popperClass]"
     >
-      <div class="fm-picker-panel__body-wrapper">
+      <div class="ui-picker-panel__body-wrapper">
         <slot
           name="sidebar"
-          class="fm-picker-panel__sidebar"
+          class="ui-picker-panel__sidebar"
         />
         <div
           v-if="shortcuts"
-          class="fm-picker-panel__sidebar"
+          class="ui-picker-panel__sidebar"
         >
           <button
             v-for="(shortcut, key) in shortcuts"
             :key="key"
             type="button"
-            class="fm-picker-panel__shortcut"
+            class="ui-picker-panel__shortcut"
             @click="handleShortcutClick(shortcut)"
           >
             {{ shortcut.text }}
           </button>
         </div>
-        <div class="fm-picker-panel__body">
+        <div class="ui-picker-panel__body">
           <div
             v-if="showTime"
-            class="fm-date-picker__time-header"
+            class="ui-date-picker__time-header"
           >
-            <span class="fm-date-picker__editor-wrap">
-              <fm-input
-                :placeholder="t('fm.datepicker.selectDate')"
+            <span class="ui-date-picker__editor-wrap">
+              <ui-input
+                :placeholder="t('ui.datepicker.selectDate')"
                 :value="visibleDate"
                 size="small"
                 @input="val => userInputDate = val"
@@ -47,11 +47,11 @@
             </span>
             <span
               v-clickoutside="handleTimePickClose"
-              class="fm-date-picker__editor-wrap"
+              class="ui-date-picker__editor-wrap"
             >
-              <fm-input
+              <ui-input
                 ref="input"
-                :placeholder="t('fm.datepicker.selectTime')"
+                :placeholder="t('ui.datepicker.selectTime')"
                 :value="visibleTime"
                 size="small"
                 @focus="timePickerVisible = true"
@@ -69,50 +69,50 @@
           </div>
           <div
             v-show="currentView !== 'time'"
-            class="fm-date-picker__header"
-            :class="{ 'fm-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
+            class="ui-date-picker__header"
+            :class="{ 'ui-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
           >
-            <button
-              type="button"
-              :aria-label="t(`el.datepicker.prevYear`)"
-              class="fm-picker-panel__icon-btn fm-date-picker__prev-btn fm-icon-d-arrow-left"
+            <svg-icon
+              :aria-label="t(`ui.datepicker.prevYear`)"
+              class="ui-picker-panel__icon-btn ui-date-picker__prev-btn"
+              icon-class="solid-angle-double-left"
               @click="prevYear"
             />
-            <button
+            <svg-icon
               v-show="currentView === 'date'"
-              type="button"
-              :aria-label="t(`el.datepicker.prevMonth`)"
-              class="fm-picker-panel__icon-btn fm-date-picker__prev-btn fm-icon-ios-arrow-left"
+              :aria-label="t(`ui.datepicker.prevMonth`)"
+              class="ui-picker-panel__icon-btn ui-date-picker__prev-btn"
+              icon-class="solid-angle-left"
               @click="prevMonth"
             />
             <span
               role="button"
-              class="fm-date-picker__header-label"
+              class="ui-date-picker__header-label"
               @click="showYearPicker"
             >{{ yearLabel }}</span>
             <span
               v-show="currentView === 'date'"
               role="button"
-              class="fm-date-picker__header-label"
+              class="ui-date-picker__header-label"
               :class="{ active: currentView === 'month' }"
               @click="showMonthPicker"
-            >{{ t(`el.datepicker.month${ month + 1 }`) }}</span>
-            <button
-              type="button"
-              :aria-label="t(`el.datepicker.nextYear`)"
-              class="fm-picker-panel__icon-btn fm-date-picker__next-btn fm-icon-d-arrow-right"
+            >{{ t(`ui.datepicker.month${ month + 1 }`) }}</span>
+            <svg-icon
+              :aria-label="t(`ui.datepicker.nextYear`)"
+              class="ui-picker-panel__icon-btn ui-date-picker__next-btn"
+              icon-class="solid-angle-double-right"
               @click="nextYear"
             />
-            <button
+            <svg-icon
               v-show="currentView === 'date'"
-              type="button"
-              :aria-label="t(`el.datepicker.nextMonth`)"
-              class="fm-picker-panel__icon-btn fm-date-picker__next-btn fm-icon-ios-arrow-right"
+              :aria-label="t(`ui.datepicker.nextMonth`)"
+              class="ui-picker-panel__icon-btn ui-date-picker__next-btn"
+              icon-class="solid-angle-right"
               @click="nextMonth"
             />
           </div>
 
-          <div class="fm-picker-panel__content">
+          <div class="ui-picker-panel__content">
             <date-table
               v-show="currentView === 'date'"
               :selection-mode="selectionMode"
@@ -146,25 +146,25 @@
 
       <div
         v-show="footerVisible && currentView === 'date'"
-        class="fm-picker-panel__footer"
+        class="ui-picker-panel__footer"
       >
-        <fm-button
+        <ui-button
           v-show="selectionMode !== 'dates'"
           size="mini"
           type="text"
-          class="fm-picker-panel__link-btn"
+          class="ui-picker-panel__link-btn"
           @click="changeToNow"
         >
-          {{ t('fm.datepicker.now') }}
-        </fm-button>
-        <fm-button
+          {{ t('ui.datepicker.now') }}
+        </ui-button>
+        <ui-button
           plain
           size="mini"
-          class="fm-picker-panel__link-btn"
+          class="ui-picker-panel__link-btn"
           @click="confirm"
         >
-          {{ t('fm.datepicker.confirm') }}
-        </fm-button>
+          {{ t('ui.datepicker.confirm') }}
+        </ui-button>
       </div>
     </div>
   </transition>
@@ -192,8 +192,8 @@ import {
 } from '../../../../js/utils/date-util'
 import Clickoutside from '../../../../js/utils/clickoutside'
 import Locale from '../../../../js/mixins/locale'
-import FmInput from '../../../input'
-import FmButton from '../../../button'
+import UiInput from '../../../input'
+import UiButton from '../../../button'
 import TimePicker from './time'
 import YearTable from '../basic/year-table'
 import MonthTable from '../basic/month-table'
@@ -204,7 +204,7 @@ export default {
   directives: { Clickoutside },
 
   components: {
-    TimePicker, YearTable, MonthTable, DateTable, FmInput, FmButton
+    TimePicker, YearTable, MonthTable, DateTable, UiInput, UiButton
   },
   mixins: [Locale],
 
@@ -271,7 +271,7 @@ export default {
     },
 
     yearLabel () {
-      const yearTranslation = this.t('fm.datepicker.year')
+      const yearTranslation = this.t('ui.datepicker.year')
       if (this.currentView === 'year') {
         const startYear = Math.floor(this.year / 10) * 10
         if (yearTranslation) {
@@ -304,9 +304,9 @@ export default {
       /* istanbul ignore if */
       if (!val) return
       this.$nextTick(_ => {
-        const inputFmm = this.$refs.input.$el
-        if (inputFmm) {
-          this.pickerWidth = inputFmm.getBoundingClientRect().width + 10
+        const inputUim = this.$refs.input.$el
+        if (inputUim) {
+          this.pickerWidth = inputUim.getBoundingClientRect().width + 10
         }
       })
     },

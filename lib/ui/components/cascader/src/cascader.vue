@@ -3,8 +3,8 @@
     ref="reference"
     v-clickoutside="() => toggleDropDownVisible(false)"
     :class="[
-      'fm-cascader',
-      realSize && `fm-cascader--${realSize}`,
+      'ui-cascader',
+      realSize && `ui-cascader--${realSize}`,
       { 'is-disabled': isDisabled }
     ]"
     @mouseenter="inputHover = true"
@@ -12,7 +12,7 @@
     @click="() => toggleDropDownVisible(readonly ? undefined : true)"
     @keydown="handleKeyDown"
   >
-    <fm-input
+    <ui-input
       ref="input"
       v-model="multiple ? presentText : inputValue"
       :size="realSize"
@@ -30,7 +30,7 @@
           v-if="clearBtnVisible"
           key="clear"
           icon-class="regular-times-circle"
-          class="fm-input__icon"
+          class="ui-input__icon"
           @click.stop="handleClear"
         ></svg-icon>
         <svg-icon
@@ -38,19 +38,19 @@
           key="arrow-down"
           icon-class="solid-angle-down"
           :class="[
-            'fm-input__icon',
+            'ui-input__icon',
             dropDownVisible && 'is-reverse'
           ]"
           @click.stop="toggleDropDownVisible()"
         ></svg-icon>
       </template>
-    </fm-input>
+    </ui-input>
 
     <div
       v-if="multiple"
-      class="fm-cascader__tags"
+      class="ui-cascader__tags"
     >
-      <fm-tag
+      <ui-tag
         v-for="(tag, index) in presentTags"
         :key="tag.key"
         type="info"
@@ -61,12 +61,12 @@
         @close="deleteTag(index)"
       >
         <span>{{ tag.text }}</span>
-      </fm-tag>
+      </ui-tag>
       <input
         v-if="filterable && !isDisabled"
         v-model.trim="inputValue"
         type="text"
-        class="fm-cascader__search-input"
+        class="ui-cascader__search-input"
         :placeholder="presentTags.length ? '' : placeholder"
         @input="e => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
@@ -75,15 +75,15 @@
     </div>
 
     <transition
-      name="fm-zoom-in-top"
+      name="ui-zoom-in-top"
       @after-leave="handleDropdownLeave"
     >
       <div
         v-show="dropDownVisible"
         ref="popper"
-        :class="['fm-popper', 'fm-cascader__dropdown', popperClass]"
+        :class="['ui-popper', 'ui-cascader__dropdown', popperClass]"
       >
-        <fm-cascader-panel
+        <ui-cascader-panel
           v-show="!filtering"
           ref="panel"
           v-model="checkedValue"
@@ -94,13 +94,13 @@
           @expand-change="handleExpandChange"
           @close="toggleDropDownVisible(false)"
         />
-        <fm-scrollbar
+        <ui-scrollbar
           v-if="filterable"
           v-show="filtering"
           ref="suggestionPanel"
           tag="ul"
-          class="fm-cascader__suggestion-panel"
-          view-class="fm-cascader__suggestion-list"
+          class="ui-cascader__suggestion-panel"
+          view-class="ui-cascader__suggestion-list"
           @keydown.native="handleSuggestionKeyDown"
         >
           <template v-if="suggestions.length">
@@ -108,7 +108,7 @@
               v-for="(item, index) in suggestions"
               :key="item.uid"
               :class="[
-                'fm-cascader__suggestion-item',
+                'ui-cascader__suggestion-item',
                 item.checked && 'is-checked'
               ]"
               :tabindex="-1"
@@ -125,11 +125,11 @@
             v-else
             name="empty"
           >
-            <li class="fm-cascader__empty-text">
-              {{ t('fm.cascader.noMatch') }}
+            <li class="ui-cascader__empty-text">
+              {{ t('ui.cascader.noMatch') }}
             </li>
           </slot>
-        </fm-scrollbar>
+        </ui-scrollbar>
       </div>
     </transition>
   </div>
@@ -141,10 +141,10 @@ import Clickoutside from '../../../js/utils/clickoutside'
 import Emitter from '../../../js/mixins/emitter'
 import Locale from '../../../js/mixins/locale'
 import Migrating from '../../../js/mixins/migrating'
-import FmInput from '../../input'
-import FmTag from '../../tag'
-import FmScrollbar from '../../scrollbar'
-import FmCascaderPanel from '../../cascader-panel'
+import UiInput from '../../input'
+import UiTag from '../../tag'
+import UiScrollbar from '../../scrollbar'
+import UiCascaderPanel from '../../cascader-panel'
 import AriaUtils from '../../../js/utils/aria-utils'
 import { t } from '../../../js/locale'
 import { isEqual, isEmpty, kebabCase } from '../../../js/utils/util'
@@ -197,24 +197,24 @@ const InputSizeMap = {
 }
 
 export default {
-  name: 'FmCascader',
+  name: 'UiCascader',
 
   directives: { Clickoutside },
 
   components: {
-    FmInput,
-    FmTag,
-    FmScrollbar,
-    FmCascaderPanel
+    UiInput,
+    UiTag,
+    UiScrollbar,
+    UiCascaderPanel
   },
 
   mixins: [PopperMixin, Emitter, Locale, Migrating],
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -226,7 +226,7 @@ export default {
     size: String,
     placeholder: {
       type: String,
-      default: () => t('fm.cascader.placeholder')
+      default: () => t('ui.cascader.placeholder')
     },
     disabled: Boolean,
     clearable: Boolean,
@@ -270,8 +270,8 @@ export default {
 
   computed: {
     realSize () {
-      const _fmFormItemSize = (this.fmFormItem || {}).fmFormItemSize
-      return this.size || _fmFormItemSize || (this.$ELEMENT || {}).size
+      const _uiFormItemSize = (this.uiFormItem || {}).uiFormItemSize
+      return this.size || _uiFormItemSize || (this.$ELEMENT || {}).size
     },
     tagSize () {
       return ['small', 'mini'].indexOf(this.realSize) > -1
@@ -279,7 +279,7 @@ export default {
         : 'small'
     },
     isDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     },
     config () {
       const config = this.props || {}
@@ -346,7 +346,7 @@ export default {
 
         this.$emit('input', val)
         this.$emit('change', val)
-        this.dispatch('FmFormItem', 'fm.form.change', [val])
+        this.dispatch('UiFormItem', 'ui.form.change', [val])
       }
     },
     options: {
@@ -486,10 +486,10 @@ export default {
         let firstNode = null
 
         if (filtering && suggestionPanel) {
-          firstNode = suggestionPanel.$el.querySelector('.fm-cascader__suggestion-item')
+          firstNode = suggestionPanel.$el.querySelector('.ui-cascader__suggestion-item')
         } else {
-          const firstMenu = popper.querySelector('.fm-cascader-menu')
-          firstNode = firstMenu.querySelector('.fm-cascader-node[tabindex="-1"]')
+          const firstMenu = popper.querySelector('.ui-cascader-menu')
+          firstNode = firstMenu.querySelector('.ui-cascader-node[tabindex="-1"]')
         }
 
         if (firstNode) {
@@ -589,11 +589,11 @@ export default {
           target.click()
           break
         case KeyCode.up:
-          const prev = target.previousFmementSibling
+          const prev = target.previousUiementSibling
           prev && prev.focus()
           break
         case KeyCode.down:
-          const next = target.nextFmementSibling
+          const next = target.nextUiementSibling
           next && next.focus()
           break
         case KeyCode.esc:
@@ -642,15 +642,15 @@ export default {
       if (this.$isServer || !$el) return
 
       const { suggestionPanel } = this.$refs
-      const inputInner = $el.querySelector('.fm-input__inner')
+      const inputInner = $el.querySelector('.ui-input__inner')
 
       if (!inputInner) return
 
-      const tags = $el.querySelector('.fm-cascader__tags')
-      let suggestionPanelFm = null
+      const tags = $el.querySelector('.ui-cascader__tags')
+      let suggestionPanelUi = null
 
-      if (suggestionPanel && (suggestionPanelFm = suggestionPanel.$el)) {
-        const suggestionList = suggestionPanelFm.querySelector('.fm-cascader__suggestion-list')
+      if (suggestionPanel && (suggestionPanelUi = suggestionPanel.$el)) {
+        const suggestionList = suggestionPanelUi.querySelector('.ui-cascader__suggestion-list')
         suggestionList.style.minWidth = inputInner.offsetWidth + 'px'
       }
 

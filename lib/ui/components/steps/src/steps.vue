@@ -1,9 +1,9 @@
 <template>
   <div
-    class="fm-steps"
+    class="ui-steps"
     :class="[
-      !simple && 'fm-steps--' + direction,
-      simple && 'fm-steps--simple'
+      !simple && 'ui-steps--' + direction,
+      simple && 'ui-steps--simple'
     ]"
   >
     <slot />
@@ -14,7 +14,7 @@
 import Migrating from '../../../js/mixins/migrating'
 
 export default {
-  name: 'FmSteps',
+  name: 'UiSteps',
 
   mixins: [Migrating],
 

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fm-breadcrumb"
+    class="ui-breadcrumb"
     aria-label="Breadcrumb"
     role="navigation"
   >
@@ -9,7 +9,7 @@
 </template>
 <script>
 export default {
-  name: 'FmBreadcrumb',
+  name: 'UiBreadcrumb',
 
   props: {
     separator: {
@@ -24,12 +24,12 @@ export default {
 
   provide () {
     return {
-      fmBreadcrumb: this
+      uiBreadcrumb: this
     }
   },
 
   mounted () {
-    const items = this.$el.querySelectorAll('.fm-breadcrumb__item')
+    const items = this.$el.querySelectorAll('.ui-breadcrumb__item')
     if (items.length) {
       items[items.length - 1].setAttribute('aria-current', 'page')
     }

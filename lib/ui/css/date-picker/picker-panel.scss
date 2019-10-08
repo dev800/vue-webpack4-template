@@ -73,13 +73,18 @@
   }
 
   @include e(icon-btn) {
-    font-size: 12px;
+    font-size: 14px;
     color: $--datepicker-icon-color;
     border: 0;
     background: transparent;
     cursor: pointer;
     outline: none;
     margin-top: 8px;
+
+    &:last-child,
+    &:first-child {
+      margin-right: 12px;
+    }
 
     &:hover {
       color: $--datepicker-hover-font-color;
@@ -99,8 +104,8 @@
   }
 }
 
-.fm-picker-panel *[slot="sidebar"],
-.fm-picker-panel__sidebar {
+.ui-picker-panel *[slot="sidebar"],
+.ui-picker-panel__sidebar {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -112,7 +117,7 @@
   overflow: auto;
 }
 
-.fm-picker-panel *[slot="sidebar"] + .fm-picker-panel__body,
-.fm-picker-panel__sidebar + .fm-picker-panel__body {
+.ui-picker-panel *[slot="sidebar"] + .ui-picker-panel__body,
+.ui-picker-panel__sidebar + .ui-picker-panel__body {
   margin-left: 110px;
 }

@@ -1,7 +1,7 @@
 <template>
-  <span class="fm-spinner">
+  <span class="ui-spinner">
     <svg
-      class="fm-spinner-inner"
+      class="ui-spinner-inner"
       viewBox="0 0 50 50"
       :style="{ width: radius/2 + 'px', height: radius/2 + 'px' }"
     >
@@ -19,7 +19,7 @@
 </template>
 <script>
 export default {
-  name: 'FmSpinner',
+  name: 'UiSpinner',
   props: {
     type: String,
     radius: {

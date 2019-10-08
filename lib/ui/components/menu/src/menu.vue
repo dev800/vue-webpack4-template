@@ -5,7 +5,7 @@ import Menubar from '../../../js/utils/menu/aria-menubar'
 import { addClass, removeClass, hasClass } from '../../../js/utils/dom'
 
 export default {
-  name: 'FmMenu',
+  name: 'UiMenu',
 
   components: {},
 
@@ -78,7 +78,7 @@ export default {
 
     collapse (value) {
       if (value) this.openedMenus = []
-      this.broadcast('FmSubmenu', 'toggle-collapse', value)
+      this.broadcast('UiSubmenu', 'toggle-collapse', value)
     }
   },
   mounted () {
@@ -248,9 +248,9 @@ export default {
         key={+this.collapse}
         style={{ backgroundColor: this.backgroundColor || '' }}
         class={{
-          'fm-menu--horizontal': this.mode === 'horizontal',
-          'fm-menu--collapse': this.collapse,
-          'fm-menu': true
+          'ui-menu--horizontal': this.mode === 'horizontal',
+          'ui-menu--collapse': this.collapse,
+          'ui-menu': true
         }}
       >
         {this.$slots.default}
@@ -260,7 +260,7 @@ export default {
     return component
   },
 
-  componentName: 'FmMenu',
+  componentName: 'UiMenu',
 
   provide () {
     return {

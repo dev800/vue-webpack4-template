@@ -1,16 +1,16 @@
 <template>
   <div
     :class="[
-      type === 'textarea' ? 'fm-textarea' : 'fm-input',
-      inputSize ? 'fm-input--' + inputSize : '',
+      type === 'textarea' ? 'ui-textarea' : 'ui-input',
+      inputSize ? 'ui-input--' + inputSize : '',
       {
         'is-disabled': inputDisabled,
         'is-exceed': inputExceed,
-        'fm-input-group': $slots.prepend || $slots.append,
-        'fm-input-group--append': $slots.append,
-        'fm-input-group--prepend': $slots.prepend,
-        'fm-input--prefix': $slots.prefix || prefixIcon,
-        'fm-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
+        'ui-input-group': $slots.prepend || $slots.append,
+        'ui-input-group--append': $slots.append,
+        'ui-input-group--prepend': $slots.prepend,
+        'ui-input--prefix': $slots.prefix || prefixIcon,
+        'ui-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
       }
     ]"
     @mouseenter="hovering = true"
@@ -20,7 +20,7 @@
       <!-- 前置元素 -->
       <div
         v-if="$slots.prepend"
-        class="fm-input-group__prepend"
+        class="ui-input-group__prepend"
       >
         <slot name="prepend" />
       </div>
@@ -28,7 +28,7 @@
         v-if="type !== 'textarea'"
         ref="input"
         :tabindex="tabindex"
-        class="fm-input__inner"
+        class="ui-input__inner"
         v-bind="$attrs"
         :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
         :disabled="inputDisabled"
@@ -46,60 +46,60 @@
       <!-- 前置内容 -->
       <span
         v-if="$slots.prefix || prefixIcon"
-        class="fm-input__prefix"
+        class="ui-input__prefix"
       >
         <slot name="prefix" />
         <svg-icon
           v-if="prefixIcon"
-          class="fm-input__icon"
+          class="ui-input__icon"
           :icon-class="prefixIcon"
         ></svg-icon>
       </span>
       <!-- 后置内容 -->
       <span
         v-if="getSuffixVisible()"
-        class="fm-input__suffix"
+        class="ui-input__suffix"
       >
-        <span class="fm-input__suffix-inner">
+        <span class="ui-input__suffix-inner">
           <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
             <slot name="suffix" />
             <svg-icon
               v-if="suffixIcon"
-              class="fm-input__icon"
+              class="ui-input__icon"
               :icon-class="suffixIcon"
             ></svg-icon>
           </template>
           <svg-icon
             v-if="showClear"
-            class="fm-input__icon fm-input__clear"
+            class="ui-input__icon ui-input__clear"
             icon-class="regular-times-circle"
             @mousedown.prevent
             @click="clear"
           ></svg-icon>
           <svg-icon
             v-if="showPwdVisible"
-            class="fm-input__icon fm-input__clear"
+            class="ui-input__icon ui-input__clear"
             icon-class="regular-eye"
             @click="handlePasswordVisible"
           ></svg-icon>
           <span
             v-if="isWordLimitVisible"
-            class="fm-input__count"
+            class="ui-input__count"
           >
-            <span class="fm-input__count-inner">
+            <span class="ui-input__count-inner">
               {{ textLength }}/{{ upperLimit }}
             </span>
           </span>
         </span>
         <svg-icon
           v-if="validateState"
-          class="fm-input__icon"
+          class="ui-input__icon"
           icon-class="regular-eye"
           @click="handlePasswordVisible"
         ></svg-icon>
         <svg-icon
           v-if="validateState"
-          class="fm-input__icon fm-input__validate-icon"
+          class="ui-input__icon ui-input__validate-icon"
           :class="[this.validateState === 'validating' ? 'animated spin infinite' : '']"
           :icon-class="validateIcon"
         ></svg-icon>
@@ -107,7 +107,7 @@
       <!-- 后置元素 -->
       <div
         v-if="$slots.append"
-        class="fm-input-group__append"
+        class="ui-input-group__append"
       >
         <slot name="append" />
       </div>
@@ -116,7 +116,7 @@
       v-else
       ref="textarea"
       :tabindex="tabindex"
-      class="fm-textarea__inner"
+      class="ui-textarea__inner"
       v-bind="$attrs"
       :disabled="inputDisabled"
       :readonly="readonly"
@@ -133,7 +133,7 @@
     />
     <span
       v-if="isWordLimitVisible && type === 'textarea'"
-      class="fm-input__count"
+      class="ui-input__count"
     >{{ textLength }}/{{ upperLimit }}</span>
   </div>
 </template>
@@ -145,19 +145,19 @@ import merge from '../../../js/utils/merge'
 import { isKorean } from '../../../js/utils/shared'
 
 export default {
-  name: 'FmInput',
+  name: 'UiInput',
 
-  componentName: 'FmInput',
+  componentName: 'UiInput',
 
   mixins: [emitter, Migrating],
 
   inheritAttrs: false,
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -240,14 +240,14 @@ export default {
   },
 
   computed: {
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
     validateState () {
-      return this.fmFormItem ? this.fmFormItem.validateState : ''
+      return this.uiFormItem ? this.uiFormItem.validateState : ''
     },
     needStatusIcon () {
-      return this.fmForm ? this.fmForm.statusIcon : false
+      return this.uiForm ? this.uiForm.statusIcon : false
     },
     validateIcon () {
       return {
@@ -260,10 +260,10 @@ export default {
       return merge({}, this.textareaCalcStyle, { resize: this.resize })
     },
     inputSize () {
-      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      return this.size || this._uiFormItemSize || (this.$ELEMENT || {}).size
     },
     inputDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     },
     nativeInputValue () {
       return this.value === null || this.value === undefined
@@ -317,18 +317,18 @@ export default {
     value (val) {
       this.$nextTick(this.resizeTextarea)
       if (this.validateEvent) {
-        this.dispatch('FmFormItem', 'fm.form.change', [val])
+        this.dispatch('UiFormItem', 'ui.form.change', [val])
       }
     },
     // native input value is set explicitly
     // do not use v-model / :value in template
-    // see: https://github.com/FmemeFE/element/issues/14521
+    // see: https://github.com/UiemeFE/element/issues/14521
     nativeInputValue () {
       this.setNativeInputValue()
     },
     // when change between <input> and <textarea>,
     // update DOM dependent value and styles
-    // https://github.com/FmemeFE/element/issues/14857
+    // https://github.com/UiemeFE/element/issues/14857
     type () {
       this.$nextTick(() => {
         this.setNativeInputValue()
@@ -374,7 +374,7 @@ export default {
       this.focused = false
       this.$emit('blur', event)
       if (this.validateEvent) {
-        this.dispatch('FmFormItem', 'fm.form.blur', [this.value])
+        this.dispatch('UiFormItem', 'ui.form.blur', [this.value])
       }
     },
     select () {
@@ -425,17 +425,17 @@ export default {
     },
     handleInput (event) {
       // should not emit input during composition
-      // see: https://github.com/FmemeFE/element/issues/10516
+      // see: https://github.com/UiemeFE/element/issues/10516
       if (this.isComposing) return
 
-      // hack for https://github.com/FmemeFE/element/issues/8548
+      // hack for https://github.com/UiemeFE/element/issues/8548
       // should remove the following line when we don't support IE
       if (event.target.value === this.nativeInputValue) return
 
       this.$emit('input', event.target.value)
 
       // ensure native input value is controlled
-      // see: https://github.com/FmemeFE/element/issues/12850
+      // see: https://github.com/UiemeFE/element/issues/12850
       this.$nextTick(this.setNativeInputValue)
     },
     handleChange (event) {
@@ -443,7 +443,7 @@ export default {
     },
     calcIconOffset (place) {
       const elList = [].slice.call(
-        this.$el.querySelectorAll(`.fm-input__${place}`) || []
+        this.$el.querySelectorAll(`.ui-input__${place}`) || []
       )
       if (!elList.length) return
       let el = null
@@ -462,7 +462,7 @@ export default {
       const pendant = pendantMap[place]
       if (this.$slots[pendant]) {
         el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${
-          this.$el.querySelector(`.fm-input-group__${pendant}`).offsetWidth
+          this.$el.querySelector(`.ui-input-group__${pendant}`).offsetWidth
           }px)`
       } else {
         el.removeAttribute('style')

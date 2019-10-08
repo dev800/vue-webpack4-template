@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'fm-cascader-panel',
+      'ui-cascader-panel',
       border && 'is-bordered'
     ]"
     @keydown="handleKeyDown"
@@ -51,7 +51,7 @@ const isLeaf = el => !el.getAttribute('aria-owns')
 const getSibling = (el, distance) => {
   const { parentNode } = el
   if (parentNode) {
-    const siblings = parentNode.querySelectorAll('.fm-cascader-node[tabindex="-1"]')
+    const siblings = parentNode.querySelectorAll('.ui-cascader-node[tabindex="-1"]')
     const index = Array.prototype.indexOf.call(siblings, el)
     return siblings[index + distance] || null
   }
@@ -82,7 +82,7 @@ const checkNode = el => {
 }
 
 export default {
-  name: 'FmCascaderPanel',
+  name: 'UiCascaderPanel',
 
   components: {
     CascaderMenu
@@ -240,14 +240,14 @@ export default {
         case KeyCode.left:
           const preMenu = this.$refs.menu[getMenuIndex(target) - 1]
           if (preMenu) {
-            const expandedNode = preMenu.$el.querySelector('.fm-cascader-node[aria-expanded="true"]')
+            const expandedNode = preMenu.$el.querySelector('.ui-cascader-node[aria-expanded="true"]')
             focusNode(expandedNode)
           }
           break
         case KeyCode.right:
           const nextMenu = this.$refs.menu[getMenuIndex(target) + 1]
           if (nextMenu) {
-            const firstNode = nextMenu.$el.querySelector('.fm-cascader-node[tabindex="-1"]')
+            const firstNode = nextMenu.$el.querySelector('.ui-cascader-node[tabindex="-1"]')
             focusNode(firstNode)
           }
           break
@@ -339,11 +339,11 @@ export default {
 
       const menus = this.$refs.menu || []
       menus.forEach(menu => {
-        const menuFmement = menu.$el
-        if (menuFmement) {
-          const container = menuFmement.querySelector('.fm-scrollbar__wrap')
-          const activeNode = menuFmement.querySelector('.fm-cascader-node.is-active') ||
-            menuFmement.querySelector('.fm-cascader-node.in-active-path')
+        const menuUiement = menu.$el
+        if (menuUiement) {
+          const container = menuUiement.querySelector('.ui-scrollbar__wrap')
+          const activeNode = menuUiement.querySelector('.ui-cascader-node.is-active') ||
+            menuUiement.querySelector('.ui-cascader-node.in-active-path')
           scrollIntoView(container, activeNode)
         }
       })

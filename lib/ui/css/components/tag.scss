@@ -10,7 +10,7 @@
     border-color: $--tag-primary-color;
   }
 
-  .fm-tag__close {
+  .ui-tag__close {
     color: mix($--tag-primary-color, $--color-white, $fontColorWeight);
     &:hover {
       color: $--color-white;
@@ -18,7 +18,7 @@
     }
   }
 
-  &.fm-tag--info {
+  &.ui-tag--info {
     background-color: mix($--tag-info-color, $--color-white, $backgroundColorWeight);
     border-color: mix($--tag-info-color, $--color-white, $borderColorWeight);
     color: mix($--tag-info-color, $--color-white, $fontColorWeight);
@@ -27,7 +27,7 @@
       border-color: $--tag-info-color;
     }
 
-    .fm-tag__close {
+    .ui-tag__close {
       color: mix($--tag-info-color, $--color-white, $fontColorWeight);
       &:hover {
         color: $--color-white;
@@ -36,7 +36,7 @@
     }
   }
 
-  &.fm-tag--success {
+  &.ui-tag--success {
     background-color: mix($--tag-success-color, $--color-white, $backgroundColorWeight);
     border-color: mix($--tag-success-color, $--color-white, $borderColorWeight);
     color: mix($--tag-success-color, $--color-white, $fontColorWeight);
@@ -45,7 +45,7 @@
       border-color: $--tag-success-color;
     }
 
-    .fm-tag__close {
+    .ui-tag__close {
       color: mix($--tag-success-color, $--color-white, $fontColorWeight);
       &:hover {
         color: $--color-white;
@@ -54,7 +54,7 @@
     }
   }
 
-  &.fm-tag--warning {
+  &.ui-tag--warning {
     background-color: mix($--tag-warning-color, $--color-white, $backgroundColorWeight);
     border-color: mix($--tag-warning-color, $--color-white, $borderColorWeight);
     color: mix($--tag-warning-color, $--color-white, $fontColorWeight);
@@ -63,7 +63,7 @@
       border-color: $--tag-warning-color;
     }
 
-    .fm-tag__close {
+    .ui-tag__close {
       color: mix($--tag-warning-color, $--color-white, $fontColorWeight);
       &:hover {
         color: $--color-white;
@@ -72,7 +72,7 @@
     }
   }
 
-  &.fm-tag--danger {
+  &.ui-tag--danger {
     background-color: mix($--tag-danger-color, $--color-white, $backgroundColorWeight);
     border-color: mix($--tag-danger-color, $--color-white, $borderColorWeight);
     color: mix($--tag-danger-color, $--color-white, $fontColorWeight);
@@ -81,7 +81,7 @@
       border-color: $--tag-danger-color;
     }
 
-    .fm-tag__close {
+    .ui-tag__close {
       color: mix($--tag-danger-color, $--color-white, $fontColorWeight);
       &:hover {
         color: $--color-white;

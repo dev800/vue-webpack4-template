@@ -1,48 +1,48 @@
 <template>
   <transition
-    name="fm-zoom-in-top"
+    name="ui-zoom-in-top"
     @after-leave="$emit('dodestroy')"
   >
     <div
       v-show="visible"
-      class="fm-picker-panel fm-date-range-picker fm-popper"
+      class="ui-picker-panel ui-date-range-picker ui-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
       }, popperClass]"
     >
-      <div class="fm-picker-panel__body-wrapper">
+      <div class="ui-picker-panel__body-wrapper">
         <slot
           name="sidebar"
-          class="fm-picker-panel__sidebar"
+          class="ui-picker-panel__sidebar"
         />
         <div
           v-if="shortcuts"
-          class="fm-picker-panel__sidebar"
+          class="ui-picker-panel__sidebar"
         >
           <button
             v-for="(shortcut, key) in shortcuts"
             :key="key"
             type="button"
-            class="fm-picker-panel__shortcut"
+            class="ui-picker-panel__shortcut"
             @click="handleShortcutClick(shortcut)"
           >
             {{ shortcut.text }}
           </button>
         </div>
-        <div class="fm-picker-panel__body">
+        <div class="ui-picker-panel__body">
           <div
             v-if="showTime"
-            class="fm-date-range-picker__time-header"
+            class="ui-date-range-picker__time-header"
           >
-            <span class="fm-date-range-picker__editors-wrap">
-              <span class="fm-date-range-picker__time-picker-wrap">
-                <fm-input
+            <span class="ui-date-range-picker__editors-wrap">
+              <span class="ui-date-range-picker__time-picker-wrap">
+                <ui-input
                   ref="minInput"
                   size="small"
                   :disabled="rangeState.selecting"
-                  :placeholder="t('fm.datepicker.startDate')"
-                  class="fm-date-range-picker__editor"
+                  :placeholder="t('ui.datepicker.startDate')"
+                  class="ui-date-range-picker__editor"
                   :value="minVisibleDate"
                   @input="val => handleDateInput(val, 'min')"
                   @change="val => handleDateChange(val, 'min')"
@@ -50,13 +50,13 @@
               </span>
               <span
                 v-clickoutside="handleMinTimeClose"
-                class="fm-date-range-picker__time-picker-wrap"
+                class="ui-date-range-picker__time-picker-wrap"
               >
-                <fm-input
+                <ui-input
                   size="small"
-                  class="fm-date-range-picker__editor"
+                  class="ui-date-range-picker__editor"
                   :disabled="rangeState.selecting"
-                  :placeholder="t('fm.datepicker.startTime')"
+                  :placeholder="t('ui.datepicker.startTime')"
                   :value="minVisibleTime"
                   @focus="minTimePickerVisible = true"
                   @input="val => handleTimeInput(val, 'min')"
@@ -71,14 +71,14 @@
                 />
               </span>
             </span>
-            <span class="fm-icon-ios-arrow-right" />
-            <span class="fm-date-range-picker__editors-wrap is-right">
-              <span class="fm-date-range-picker__time-picker-wrap">
-                <fm-input
+            <svg-icon icon-class="solid-angle-right" />
+            <span class="ui-date-range-picker__editors-wrap is-right">
+              <span class="ui-date-range-picker__time-picker-wrap">
+                <ui-input
                   size="small"
-                  class="fm-date-range-picker__editor"
+                  class="ui-date-range-picker__editor"
                   :disabled="rangeState.selecting"
-                  :placeholder="t('fm.datepicker.endDate')"
+                  :placeholder="t('ui.datepicker.endDate')"
                   :value="maxVisibleDate"
                   :readonly="!minDate"
                   @input="val => handleDateInput(val, 'max')"
@@ -87,13 +87,13 @@
               </span>
               <span
                 v-clickoutside="handleMaxTimeClose"
-                class="fm-date-range-picker__time-picker-wrap"
+                class="ui-date-range-picker__time-picker-wrap"
               >
-                <fm-input
+                <ui-input
                   size="small"
-                  class="fm-date-range-picker__editor"
+                  class="ui-date-range-picker__editor"
                   :disabled="rangeState.selecting"
-                  :placeholder="t('fm.datepicker.endTime')"
+                  :placeholder="t('ui.datepicker.endTime')"
                   :value="maxVisibleTime"
                   :readonly="!minDate"
                   @focus="minDate && (maxTimePickerVisible = true)"
@@ -110,32 +110,32 @@
               </span>
             </span>
           </div>
-          <div class="fm-picker-panel__content fm-date-range-picker__content is-left">
-            <div class="fm-date-range-picker__header">
-              <button
-                type="button"
-                class="fm-picker-panel__icon-btn fm-icon-d-arrow-left"
+          <div class="ui-picker-panel__content ui-date-range-picker__content is-left">
+            <div class="ui-date-range-picker__header">
+              <svg-icon
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-double-left"
                 @click="leftPrevYear"
               />
-              <button
-                type="button"
-                class="fm-picker-panel__icon-btn fm-icon-ios-arrow-left"
+              <svg-icon
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-left"
                 @click="leftPrevMonth"
               />
-              <button
+              <svg-icon
                 v-if="unlinkPanels"
-                type="button"
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="fm-picker-panel__icon-btn fm-icon-d-arrow-right"
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-double-right"
                 @click="leftNextYear"
               />
-              <button
+              <svg-icon
                 v-if="unlinkPanels"
-                type="button"
                 :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="fm-picker-panel__icon-btn fm-icon-ios-arrow-right"
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-right"
                 @click="leftNextMonth"
               />
               <div>{{ leftLabel }}</div>
@@ -154,32 +154,32 @@
               @pick="handleRangePick"
             />
           </div>
-          <div class="fm-picker-panel__content fm-date-range-picker__content is-right">
-            <div class="fm-date-range-picker__header">
-              <button
+          <div class="ui-picker-panel__content ui-date-range-picker__content is-right">
+            <div class="ui-date-range-picker__header">
+              <svg-icon
                 v-if="unlinkPanels"
-                type="button"
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="fm-picker-panel__icon-btn fm-icon-d-arrow-left"
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-double-left"
                 @click="rightPrevYear"
               />
-              <button
+              <svg-icon
                 v-if="unlinkPanels"
-                type="button"
                 :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="fm-picker-panel__icon-btn fm-icon-ios-arrow-left"
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-left"
                 @click="rightPrevMonth"
               />
-              <button
-                type="button"
-                class="fm-picker-panel__icon-btn fm-icon-d-arrow-right"
+              <svg-icon
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-double-right"
                 @click="rightNextYear"
               />
-              <button
-                type="button"
-                class="fm-picker-panel__icon-btn fm-icon-ios-arrow-right"
+              <svg-icon
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-right"
                 @click="rightNextMonth"
               />
               <div>{{ rightLabel }}</div>
@@ -202,25 +202,25 @@
       </div>
       <div
         v-if="showTime"
-        class="fm-picker-panel__footer"
+        class="ui-picker-panel__footer"
       >
-        <fm-button
+        <ui-button
           size="mini"
           type="text"
-          class="fm-picker-panel__link-btn"
+          class="ui-picker-panel__link-btn"
           @click="handleClear"
         >
-          {{ t('fm.datepicker.clear') }}
-        </fm-button>
-        <fm-button
+          {{ t('ui.datepicker.clear') }}
+        </ui-button>
+        <ui-button
           plain
           size="mini"
-          class="fm-picker-panel__link-btn"
+          class="ui-picker-panel__link-btn"
           :disabled="btnDisabled"
           @click="handleConfirm(false)"
         >
-          {{ t('fm.datepicker.confirm') }}
-        </fm-button>
+          {{ t('ui.datepicker.confirm') }}
+        </ui-button>
       </div>
     </div>
   </transition>
@@ -246,8 +246,8 @@ import Clickoutside from '../../../../js/utils/clickoutside'
 import Locale from '../../../../js/mixins/locale'
 import TimePicker from './time'
 import DateTable from '../basic/date-table'
-import FmInput from '../../../input'
-import FmButton from '../../../button'
+import UiInput from '../../../input'
+import UiButton from '../../../button'
 
 const calcDefaultValue = (defaultValue) => {
   if (Array.isArray(defaultValue)) {
@@ -263,7 +263,7 @@ export default {
 
   directives: { Clickoutside },
 
-  components: { TimePicker, DateTable, FmInput, FmButton },
+  components: { TimePicker, DateTable, UiInput, UiButton },
   mixins: [Locale],
 
   data () {
@@ -310,11 +310,11 @@ export default {
     },
 
     leftLabel () {
-      return this.leftDate.getFullYear() + ' ' + this.t('fm.datepicker.year') + ' ' + this.t(`el.datepicker.month${this.leftDate.getMonth() + 1}`)
+      return this.leftDate.getFullYear() + ' ' + this.t('ui.datepicker.year') + ' ' + this.t(`ui.datepicker.month${this.leftDate.getMonth() + 1}`)
     },
 
     rightLabel () {
-      return this.rightDate.getFullYear() + ' ' + this.t('fm.datepicker.year') + ' ' + this.t(`el.datepicker.month${this.rightDate.getMonth() + 1}`)
+      return this.rightDate.getFullYear() + ' ' + this.t('ui.datepicker.year') + ' ' + this.t(`ui.datepicker.month${this.rightDate.getMonth() + 1}`)
     },
 
     leftYear () {
@@ -587,7 +587,7 @@ export default {
       this.maxDate = maxDate
       this.minDate = minDate
 
-      // workaround for https://github.com/FmemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
+      // workaround for https://github.com/UiemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
       setTimeout(() => {
         this.maxDate = maxDate
         this.minDate = minDate

@@ -1,9 +1,9 @@
 <template>
   <li
-    class="fm-dropdown-menu__item"
+    class="ui-dropdown-menu__item"
     :class="{
       'is-disabled': disabled,
-      'fm-dropdown-menu__item--divided': divided
+      'ui-dropdown-menu__item--divided': divided
     }"
     :aria-disabled="disabled"
     :tabindex="disabled ? null : -1"
@@ -20,7 +20,7 @@
 import Emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmDropdownItem',
+  name: 'UiDropdownItem',
 
   mixins: [Emitter],
 
@@ -33,7 +33,7 @@ export default {
 
   methods: {
     handleClick (e) {
-      this.dispatch('FmDropdown', 'menu-item-click', [this.command, this])
+      this.dispatch('UiDropdown', 'menu-item-click', [this.command, this])
     }
   }
 }

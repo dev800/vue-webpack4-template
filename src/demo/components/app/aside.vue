@@ -1,8 +1,8 @@
 <template>
-  <fm-aside :class="['app__aside', {'app__aside-collapse': uiAsideMenu.collapse}]">
+  <ui-aside :class="['app__aside', {'app__aside-collapse': uiAsideMenu.collapse}]">
     <div class="app__aside-logo">Vue</div>
     <div class="app__aside-scroller">
-      <fm-menu
+      <ui-menu
         default-active="2"
         background-color="#191a23"
         text-color="#fff"
@@ -12,74 +12,74 @@
         @open="onMenuOpen"
         @close="onMenuClose"
       >
-        <fm-submenu index="1">
+        <ui-submenu index="1">
           <template slot="title">
             <svg-icon icon-class="solid-th-large"></svg-icon>
             <span>组件</span>
           </template>
-          <fm-menu-item-group>
+          <ui-menu-item-group>
             <template slot="title">基础</template>
-            <fm-menu-item index="1-1">选项1</fm-menu-item>
-            <fm-menu-item index="1-2">选项2</fm-menu-item>
-          </fm-menu-item-group>
-          <fm-menu-item-group title="表单">
-            <fm-menu-item index="1-3">选项3</fm-menu-item>
-          </fm-menu-item-group>
-          <fm-submenu index="1-4">
+            <ui-menu-item index="1-1">选项1</ui-menu-item>
+            <ui-menu-item index="1-2">选项2</ui-menu-item>
+          </ui-menu-item-group>
+          <ui-menu-item-group title="表单">
+            <ui-menu-item index="1-3">选项3</ui-menu-item>
+          </ui-menu-item-group>
+          <ui-submenu index="1-4">
             <template slot="title">高级</template>
-            <fm-menu-item index="1-4-1">选项1</fm-menu-item>
-            <fm-menu-item index="1-4-1">选项1</fm-menu-item>
-            <fm-menu-item index="1-4-1">选项1</fm-menu-item>
-            <fm-menu-item index="1-4-1">选项1</fm-menu-item>
-            <fm-menu-item index="1-4-1">选项1</fm-menu-item>
-            <fm-menu-item index="1-4-1">选项1</fm-menu-item>
-            <fm-menu-item index="1-4-1">选项1</fm-menu-item>
-          </fm-submenu>
-          <fm-submenu index="1-5">
+            <ui-menu-item index="1-4-1">选项1</ui-menu-item>
+            <ui-menu-item index="1-4-1">选项1</ui-menu-item>
+            <ui-menu-item index="1-4-1">选项1</ui-menu-item>
+            <ui-menu-item index="1-4-1">选项1</ui-menu-item>
+            <ui-menu-item index="1-4-1">选项1</ui-menu-item>
+            <ui-menu-item index="1-4-1">选项1</ui-menu-item>
+            <ui-menu-item index="1-4-1">选项1</ui-menu-item>
+          </ui-submenu>
+          <ui-submenu index="1-5">
             <template slot="title">业务</template>
-            <fm-menu-item index="1-5-1">选项1</fm-menu-item>
-          </fm-submenu>
-        </fm-submenu>
-        <fm-menu-item index="2">
+            <ui-menu-item index="1-5-1">选项1</ui-menu-item>
+          </ui-submenu>
+        </ui-submenu>
+        <ui-menu-item index="2">
           <svg-icon icon-class="solid-snowboarding"></svg-icon>
           <span slot="title">技巧</span>
-        </fm-menu-item>
-        <fm-menu-item
+        </ui-menu-item>
+        <ui-menu-item
           index="3"
           disabled
         >
           <svg-icon icon-class="solid-frown"></svg-icon>
           <span slot="title">不可用</span>
-        </fm-menu-item>
-        <fm-menu-item index="3">
+        </ui-menu-item>
+        <ui-menu-item index="3">
           <svg-icon icon-class="solid-snowflake"></svg-icon>
           <span slot="title">页面</span>
-        </fm-menu-item>
-        <fm-menu-item index="4">
+        </ui-menu-item>
+        <ui-menu-item index="4">
           <svg-icon icon-class="solid-splotch"></svg-icon>
           <span slot="title">页面</span>
-        </fm-menu-item>
-      </fm-menu>
+        </ui-menu-item>
+      </ui-menu>
     </div>
-  </fm-aside>
+  </ui-aside>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 
-import FmAside from '~/lib/ui/components/aside'
-import FmMenu from '~/lib/ui/components/menu'
-import FmSubmenu from '~/lib/ui/components/submenu'
-import FmMenuItem from '~/lib/ui/components/menu-item'
-import FmMenuItemGroup from '~/lib/ui/components/menu-item-group'
+import UiAside from '~/lib/ui/components/aside'
+import UiMenu from '~/lib/ui/components/menu'
+import UiSubmenu from '~/lib/ui/components/submenu'
+import UiMenuItem from '~/lib/ui/components/menu-item'
+import UiMenuItemGroup from '~/lib/ui/components/menu-item-group'
 
 export default {
   components: {
-    FmAside,
-    FmMenu,
-    FmSubmenu,
-    FmMenuItem,
-    FmMenuItemGroup
+    UiAside,
+    UiMenu,
+    UiSubmenu,
+    UiMenuItem,
+    UiMenuItemGroup
   },
   computed: {
     ...mapState('ui', {
@@ -109,7 +109,7 @@ export default {
       width: 200px !important;
       transition: width 0.28s;
 
-      .fm-menu {
+      .ui-menu {
         border-right: none;
         background: none;
       }

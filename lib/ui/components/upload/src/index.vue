@@ -1,16 +1,16 @@
 <script>
 import UploadList from './upload-list'
 import Upload from './upload'
-import FmProgress from '../../progress'
+import UiProgress from '../../progress'
 import Migrating from '../../../js/mixins/migrating'
 
 function noop () { }
 
 export default {
-  name: 'FmUpload',
+  name: 'UiUpload',
 
   components: {
-    FmProgress,
+    UiProgress,
     UploadList,
     Upload
   },
@@ -24,7 +24,7 @@ export default {
   },
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     }
   },
@@ -117,7 +117,7 @@ export default {
 
   computed: {
     uploadDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     }
   },
 
@@ -129,7 +129,7 @@ export default {
             try {
               file.url = URL.createObjectURL(file.raw)
             } catch (err) {
-              console.error('[Fmement Error][Upload]', err)
+              console.error('[Uiement Error][Upload]', err)
             }
           }
           return file
@@ -172,7 +172,7 @@ export default {
         try {
           file.url = URL.createObjectURL(rawFile)
         } catch (err) {
-          console.error('[Fmement Error][Upload]', err)
+          console.error('[Uiement Error][Upload]', err)
           return
         }
       }

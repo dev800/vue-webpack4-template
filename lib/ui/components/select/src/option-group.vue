@@ -1,13 +1,13 @@
 <template>
   <ul
     v-show="visible"
-    class="fm-select-group__wrap"
+    class="ui-select-group__wrap"
   >
-    <li class="fm-select-group__title">
+    <li class="ui-select-group__title">
       {{ label }}
     </li>
     <li>
-      <ul class="fm-select-group">
+      <ul class="ui-select-group">
         <slot />
       </ul>
     </li>
@@ -19,10 +19,10 @@ import Emitter from '../../../js/mixins/emitter'
 
 export default {
 
-  name: 'FmOptionGroup',
+  name: 'UiOptionGroup',
   mixins: [Emitter],
 
-  componentName: 'FmOptionGroup',
+  componentName: 'UiOptionGroup',
 
   props: {
     label: String,
@@ -40,7 +40,7 @@ export default {
 
   watch: {
     disabled (val) {
-      this.broadcast('FmOption', 'handleGroupDisabled', val)
+      this.broadcast('UiOption', 'handleGroupDisabled', val)
     }
   },
 
@@ -50,7 +50,7 @@ export default {
 
   mounted () {
     if (this.disabled) {
-      this.broadcast('FmOption', 'handleGroupDisabled', this.disabled)
+      this.broadcast('UiOption', 'handleGroupDisabled', this.disabled)
     }
   },
 

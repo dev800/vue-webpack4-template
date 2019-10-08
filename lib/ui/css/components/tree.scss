@@ -38,13 +38,13 @@
   white-space: nowrap;
   outline: none;
   &:focus { /* focus */
-    > .fm-tree-node__content {
+    > .ui-tree-node__content {
       background-color: $--tree-node-hover-background-color;
     }
   }
 
   @include when(drop-inner) {
-    > .fm-tree-node__content .fm-tree-node__label {
+    > .ui-tree-node__content .ui-tree-node__label {
       background-color: $--color-primary;
       color: #fff;
     }
@@ -56,17 +56,17 @@
     height: 26px;
     cursor: pointer;
 
-    & > .fm-tree-node__expand-icon {
+    & > .ui-tree-node__expand-icon {
       padding: 6px;
     }
-    & > label.fm-checkbox {
+    & > label.ui-checkbox {
       margin-right: 8px;
     }
     &:hover {
       background-color: $--tree-node-hover-background-color;
     }
 
-    .fm-tree.is-dragging & {
+    .ui-tree.is-dragging & {
       cursor: move;
 
       & * {
@@ -74,7 +74,7 @@
       }
     }
 
-    .fm-tree.is-dragging.is-drop-not-allow & {
+    .ui-tree.is-dragging.is-drop-not-allow & {
       cursor: not-allowed;
     }
   }
@@ -107,16 +107,16 @@
     color: $--tree-expand-icon-color;
   }
 
-  & > .fm-tree-node__children {
+  & > .ui-tree-node__children {
     overflow: hidden;
     background-color: transparent;
   }
 
-  &.is-expanded > .fm-tree-node__children {
+  &.is-expanded > .ui-tree-node__children {
     display: block;
   }
 }
 
-.fm-tree--highlight-current .fm-tree-node.is-current > .fm-tree-node__content {
+.ui-tree--highlight-current .ui-tree-node.is-current > .ui-tree-node__content {
   background-color: mix($--color-white, $--color-primary, 92%);
 }

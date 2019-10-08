@@ -228,8 +228,8 @@ export default {
     } = this
     const scrollBtn = scrollable
       ? [
-        <span class={['fm-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><svg-icon icon-class="solid-angle-left"></svg-icon></span>,
-        <span class={['fm-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><svg-icon icon-class="solid-angle-right"></svg-icon></span>
+        <span class={['ui-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><svg-icon icon-class="solid-angle-left"></svg-icon></span>,
+        <span class={['ui-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><svg-icon icon-class="solid-angle-right"></svg-icon></span>
       ] : null
 
     const tabs = this._l(panes, (pane, index) => {
@@ -247,7 +247,7 @@ export default {
       return (
         <div
           class={{
-            'fm-tabs__item': true,
+            'ui-tabs__item': true,
             [`is-${this.rootTabs.tabPosition}`]: true,
             'is-active': pane.active,
             'is-disabled': pane.disabled,
@@ -273,11 +273,11 @@ export default {
       )
     })
     return (
-      <div class={['fm-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${this.rootTabs.tabPosition}`]}>
+      <div class={['ui-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${this.rootTabs.tabPosition}`]}>
         {scrollBtn}
-        <div class={['fm-tabs__nav-scroll']} ref="navScroll">
+        <div class={['ui-tabs__nav-scroll']} ref="navScroll">
           <div
-            class={['fm-tabs__nav', `is-${this.rootTabs.tabPosition}`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
+            class={['ui-tabs__nav', `is-${this.rootTabs.tabPosition}`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
             ref="nav"
             style={navStyle}
             role="tablist"

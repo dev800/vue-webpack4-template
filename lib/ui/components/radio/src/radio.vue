@@ -1,8 +1,8 @@
 <template>
   <label
-    class="fm-radio"
+    class="ui-radio"
     :class="[
-      border && radioSize ? 'fm-radio--' + radioSize : '',
+      border && radioSize ? 'ui-radio--' + radioSize : '',
       { 'is-disabled': isDisabled },
       { 'is-focus': focus },
       { 'is-bordered': border },
@@ -15,17 +15,17 @@
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
     <span
-      class="fm-radio__input"
+      class="ui-radio__input"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
       }"
     >
-      <span class="fm-radio__inner" />
+      <span class="ui-radio__inner" />
       <input
         ref="radio"
         v-model="model"
-        class="fm-radio__original"
+        class="ui-radio__original"
         :value="label"
         type="radio"
         aria-hidden="true"
@@ -38,7 +38,7 @@
       >
     </span>
     <span
-      class="fm-radio__label"
+      class="ui-radio__label"
       @keydown.stop
     >
       <slot />
@@ -50,21 +50,21 @@
 import Emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmRadio',
+  name: 'UiRadio',
 
   mixins: [Emitter],
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
 
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
 
-  componentName: 'FmRadio',
+  componentName: 'UiRadio',
 
   props: {
     value: {},
@@ -84,7 +84,7 @@ export default {
     isGroup () {
       let parent = this.$parent
       while (parent) {
-        if (parent.$options.componentName !== 'FmRadioGroup') {
+        if (parent.$options.componentName !== 'UiRadioGroup') {
           parent = parent.$parent
         } else {
           this._radioGroup = parent
@@ -99,26 +99,26 @@ export default {
       },
       set (val) {
         if (this.isGroup) {
-          this.dispatch('FmRadioGroup', 'input', [val])
+          this.dispatch('UiRadioGroup', 'input', [val])
         } else {
           this.$emit('input', val)
         }
         this.$refs.radio && (this.$refs.radio.checked = this.model === this.label)
       }
     },
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
     radioSize () {
-      const temRadioSize = this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      const temRadioSize = this.size || this._uiFormItemSize || (this.$ELEMENT || {}).size
       return this.isGroup
         ? this._radioGroup.radioGroupSize || temRadioSize
         : temRadioSize
     },
     isDisabled () {
       return this.isGroup
-        ? this._radioGroup.disabled || this.disabled || (this.fmForm || {}).disabled
-        : this.disabled || (this.fmForm || {}).disabled
+        ? this._radioGroup.disabled || this.disabled || (this.uiForm || {}).disabled
+        : this.disabled || (this.uiForm || {}).disabled
     },
     tabIndex () {
       return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0
@@ -129,7 +129,7 @@ export default {
     handleChange () {
       this.$nextTick(() => {
         this.$emit('change', this.model)
-        this.isGroup && this.dispatch('FmRadioGroup', 'handleChange', this.model)
+        this.isGroup && this.dispatch('UiRadioGroup', 'handleChange', this.model)
       })
     }
   }

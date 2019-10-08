@@ -9,14 +9,14 @@
   color: $--color-text-regular;
   font-size: $--font-size-base;
 
-  .fm-button-group {
+  .ui-button-group {
     display: block;
-    .fm-button {
+    .ui-button {
       float: none;
     }
   }
 
-  & .fm-dropdown__caret-button {
+  & .ui-dropdown__caret-button {
     padding-left: 5px;
     padding-right: 5px;
     position: relative;
@@ -35,7 +35,7 @@
       background: mix(white, transparent, 50%);
     }
 
-    &.fm-button--default::before {
+    &.ui-button--default::before {
       background: mix($--button-default-border-color, transparent, 50%);
     }
 
@@ -46,7 +46,7 @@
       }
     }
 
-    & .fm-dropdown__icon {
+    & .ui-dropdown__icon {
       padding-left: 0;
     }
   }
@@ -55,7 +55,7 @@
     margin: 0 3px;
   }
 
-  .fm-dropdown-selfdefine { // 自定义
+  .ui-dropdown-selfdefine { // 自定义
     &:focus:active, &:focus:not(.focusing) {
       outline-width: 0;
     }
@@ -123,7 +123,7 @@
       padding: 0 17px;
       font-size: 14px;
 
-      &.fm-dropdown-menu__item--divided {
+      &.ui-dropdown-menu__item--divided {
         $divided-offset: 6px;
         margin-top: $divided-offset;
 
@@ -143,7 +143,7 @@
       padding: 0 15px;
       font-size: 13px;
 
-      &.fm-dropdown-menu__item--divided {
+      &.ui-dropdown-menu__item--divided {
         $divided-offset: 4px;
         margin-top: $divided-offset;
 
@@ -163,7 +163,7 @@
       padding: 0 10px;
       font-size: 12px;
 
-      &.fm-dropdown-menu__item--divided {
+      &.ui-dropdown-menu__item--divided {
         $divided-offset: 3px;
         margin-top: $divided-offset;
 

@@ -1,14 +1,14 @@
 <script>
-import FmScrollbar from '../../scrollbar'
+import UiScrollbar from '../../scrollbar'
 import CascaderNode from './cascader-node.vue'
 import Locale from '../../../js/mixins/locale'
 import { generateId } from '../../../js/utils/util'
 
 export default {
-  name: 'FmCascaderMenu',
+  name: 'UiCascaderMenu',
 
   components: {
-    FmScrollbar,
+    UiScrollbar,
     CascaderNode
   },
 
@@ -76,7 +76,7 @@ export default {
 
     renderEmptyText (h) {
       return (
-        <div class="fm-cascader-menu__empty-text">{this.t('fm.cascader.noData')}</div>
+        <div class="ui-cascader-menu__empty-text">{this.t('ui.cascader.noData')}</div>
       )
     },
     renderNodeList (h) {
@@ -103,7 +103,7 @@ export default {
 
       return [
         ...nodes,
-        isHoverMenu ? <svg ref='hoverZone' class='fm-cascader-menu__hover-zone'></svg> : null
+        isHoverMenu ? <svg ref='hoverZone' class='ui-cascader-menu__hover-zone'></svg> : null
       ]
     }
   },
@@ -119,19 +119,19 @@ export default {
     }
 
     return (
-      <fm-scrollbar
+      <ui-scrollbar
         tag="ul"
         role="menu"
         id={menuId}
-        class="fm-cascader-menu"
-        wrap-class="fm-cascader-menu__wrap"
+        class="ui-cascader-menu"
+        wrap-class="ui-cascader-menu__wrap"
         view-class={{
-          'fm-cascader-menu__list': true,
+          'ui-cascader-menu__list': true,
           'is-empty': isEmpty
         }}
         {...events}>
         {isEmpty ? this.renderEmptyText(h) : this.renderNodeList(h)}
-      </fm-scrollbar>
+      </ui-scrollbar>
     )
   }
 }

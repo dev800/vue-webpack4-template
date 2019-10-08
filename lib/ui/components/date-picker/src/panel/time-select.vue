@@ -1,6 +1,6 @@
 <template>
   <transition
-    name="fm-zoom-in-top"
+    name="ui-zoom-in-top"
     @before-enter="handleMenuEnter"
     @after-leave="$emit('dodestroy')"
   >
@@ -9,11 +9,11 @@
       ref="popper"
       :style="{ width: width + 'px' }"
       :class="popperClass"
-      class="fm-picker-panel time-select fm-popper"
+      class="ui-picker-panel time-select ui-popper"
     >
-      <fm-scrollbar
+      <ui-scrollbar
         noresize
-        wrap-class="fm-picker-panel__content"
+        wrap-class="ui-picker-panel__content"
       >
         <div
           v-for="item in items"
@@ -25,13 +25,13 @@
         >
           {{ item.value }}
         </div>
-      </fm-scrollbar>
+      </ui-scrollbar>
     </div>
   </transition>
 </template>
 
 <script type="text/babel">
-import FmScrollbar from '../../../scrollbar'
+import UiScrollbar from '../../../scrollbar'
 import scrollIntoView from '../../../../js/utils/scroll-into-view'
 
 const parseTime = function (time) {
@@ -86,7 +86,7 @@ const nextTime = function (time, step) {
 }
 
 export default {
-  components: { FmScrollbar },
+  components: { UiScrollbar },
 
   data () {
     return {
@@ -146,7 +146,7 @@ export default {
     },
 
     scrollToOption (selector = '.selected') {
-      const menu = this.$refs.popper.querySelector('.fm-picker-panel__content')
+      const menu = this.$refs.popper.querySelector('.ui-picker-panel__content')
       scrollIntoView(menu, menu.querySelector(selector))
     },
 

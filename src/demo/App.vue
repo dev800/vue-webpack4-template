@@ -1,21 +1,21 @@
 <template>
-  <fm-container class="x-app">
+  <ui-container class="x-app">
     <x-app-aside />
-    <fm-container class="app__container">
-      <fm-header
+    <ui-container class="app__container">
+      <ui-header
         height="52px"
         class="app__header"
       >
         <x-app-header />
-      </fm-header>
-      <fm-main class="app__main">
+      </ui-header>
+      <ui-main class="app__main">
         <RouterView />
-      </fm-main>
-      <fm-footer class="app__footer">
+      </ui-main>
+      <ui-footer class="app__footer">
         <x-app-footer />
-      </fm-footer>
-    </fm-container>
-  </fm-container>
+      </ui-footer>
+    </ui-container>
+  </ui-container>
 </template>
 
 <script>
@@ -24,20 +24,20 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import XAppAside from './components/app/aside'
 import XAppFooter from './components/app/footer'
 import XAppHeader from './components/app/header'
-import FmHeader from '~/lib/ui/components/header'
-import FmContainer from '~/lib/ui/components/container'
-import FmFooter from '~/lib/ui/components/footer'
-import FmMain from '~/lib/ui/components/main'
+import UiHeader from '~/lib/ui/components/header'
+import UiContainer from '~/lib/ui/components/container'
+import UiFooter from '~/lib/ui/components/footer'
+import UiMain from '~/lib/ui/components/main'
 
 export default {
   components: {
     XAppAside,
     XAppFooter,
     XAppHeader,
-    FmHeader,
-    FmContainer,
-    FmFooter,
-    FmMain
+    UiHeader,
+    UiContainer,
+    UiFooter,
+    UiMain
   },
   computed: {
     ...mapState('ui', {

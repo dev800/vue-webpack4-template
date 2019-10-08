@@ -1,7 +1,7 @@
 <template>
   <li
     v-show="visible"
-    class="fm-select-dropdown__item"
+    class="ui-select-dropdown__item"
     :class="{
       'selected': itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
@@ -22,10 +22,10 @@ import { getValueByPath, escapeRegexpString } from '../../../js/utils/util'
 
 export default {
 
-  name: 'FmOption',
+  name: 'UiOption',
   mixins: [Emitter],
 
-  componentName: 'FmOption',
+  componentName: 'UiOption',
 
   inject: ['select'],
 
@@ -85,7 +85,7 @@ export default {
 
   watch: {
     currentLabel () {
-      if (!this.created && !this.select.remote) this.dispatch('FmSelect', 'setSelected')
+      if (!this.created && !this.select.remote) this.dispatch('UiSelect', 'setSelected')
     },
     value (val, oldVal) {
       const { remote, valueKey } = this.select
@@ -93,7 +93,7 @@ export default {
         if (valueKey && typeof val === 'object' && typeof oldVal === 'object' && val[valueKey] === oldVal[valueKey]) {
           return
         }
-        this.dispatch('FmSelect', 'setSelected')
+        this.dispatch('UiSelect', 'setSelected')
       }
     }
   },
@@ -149,7 +149,7 @@ export default {
 
     selectOptionClick () {
       if (this.disabled !== true && this.groupDisabled !== true) {
-        this.dispatch('FmSelect', 'handleOptionClick', [this, true])
+        this.dispatch('UiSelect', 'handleOptionClick', [this, true])
       }
     },
 

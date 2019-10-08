@@ -1,42 +1,42 @@
 <template>
-  <div class="fm-calendar">
-    <div class="fm-calendar__header">
-      <div class="fm-calendar__title">
+  <div class="ui-calendar">
+    <div class="ui-calendar__header">
+      <div class="ui-calendar__title">
         {{ i18nDate }}
       </div>
       <div
         v-if="validatedRange.length === 0"
-        class="fm-calendar__button-group"
+        class="ui-calendar__button-group"
       >
-        <fm-button-group>
-          <fm-button
+        <ui-button-group>
+          <ui-button
             type="plain"
             size="mini"
             @click="selectDate('prev-month')"
           >
-            {{ t('fm.datepicker.prevMonth') }}
-          </fm-button>
-          <fm-button
+            {{ t('ui.datepicker.prevMonth') }}
+          </ui-button>
+          <ui-button
             type="plain"
             size="mini"
             @click="selectDate('today')"
           >
-            {{ t('fm.datepicker.today') }}
-          </fm-button>
-          <fm-button
+            {{ t('ui.datepicker.today') }}
+          </ui-button>
+          <ui-button
             type="plain"
             size="mini"
             @click="selectDate('next-month')"
           >
-            {{ t('fm.datepicker.nextMonth') }}
-          </fm-button>
-        </fm-button-group>
+            {{ t('ui.datepicker.nextMonth') }}
+          </ui-button>
+        </ui-button-group>
       </div>
     </div>
     <div
       v-if="validatedRange.length === 0"
       key="no-range"
-      class="fm-calendar__body"
+      class="ui-calendar__body"
     >
       <date-table
         :date="date"
@@ -48,7 +48,7 @@
     <div
       v-else
       key="has-range"
-      class="fm-calendar__body"
+      class="ui-calendar__body"
     >
       <date-table
         v-for="(range, index) in validatedRange"
@@ -67,8 +67,8 @@
 <script>
 import Locale from '../../../js/mixins/locale'
 import fecha from '../../../js/utils/date'
-import FmButton from '../../button'
-import FmButtonGroup from '../../button-group'
+import UiButton from '../../button'
+import UiButtonGroup from '../../button-group'
 import DateTable from './date-table'
 import { validateRangeInOneMonth } from '../../../js/utils/date-util'
 
@@ -77,12 +77,12 @@ const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
 const oneDay = 86400000
 
 export default {
-  name: 'FmCalendar',
+  name: 'UiCalendar',
 
   components: {
     DateTable,
-    FmButton,
-    FmButtonGroup
+    UiButton,
+    UiButtonGroup
   },
 
   mixins: [Locale],
@@ -110,7 +110,7 @@ export default {
 
   provide () {
     return {
-      fmCalendar: this
+      uiCalendar: this
     }
   },
 
@@ -144,7 +144,7 @@ export default {
     i18nDate () {
       const year = this.date.getFullYear()
       const month = this.date.getMonth() + 1
-      return `${year} ${this.t('fm.datepicker.year')} ${this.t('fm.datepicker.month' + month)}`
+      return `${year} ${this.t('ui.datepicker.year')} ${this.t('ui.datepicker.month' + month)}`
     },
 
     formatedToday () {
@@ -191,7 +191,7 @@ export default {
       if (range.length === 2) {
         const [start, end] = range
         if (start > end) {
-          console.warn('[FmementCalendar]end time should be greater than start time')
+          console.warn('[UiementCalendar]end time should be greater than start time')
           return []
         }
         // start time and end time in one month
@@ -204,7 +204,7 @@ export default {
         let startDay = new Date(start.getFullYear(), start.getMonth() + 1, 1)
         const lastDay = this.toDate(startDay.getTime() - oneDay)
         if (!validateRangeInOneMonth(startDay, end)) {
-          console.warn('[FmementCalendar]start time and end time interval must not exceed two months')
+          console.warn('[UiementCalendar]start time and end time interval must not exceed two months')
           return []
         }
         // 第一个月的时间范围
@@ -278,7 +278,7 @@ export default {
       const expected = isStart ? firstDayOfWeek : (firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1)
       const message = `${isStart ? 'start' : 'end'} of range should be ${weekDays[expected]}.`
       if (date.getDay() !== expected) {
-        console.warn('[FmementCalendar]', message, 'Invalid range will be ignored.')
+        console.warn('[UiementCalendar]', message, 'Invalid range will be ignored.')
         return false
       }
       return true

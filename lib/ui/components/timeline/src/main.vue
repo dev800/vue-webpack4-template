@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'FmTimeline',
+  name: 'UiTimeline',
 
   props: {
     reverse: {
@@ -18,7 +18,7 @@ export default {
   render () {
     const reverse = this.reverse
     const classes = {
-      'fm-timeline': true,
+      'ui-timeline': true,
       'is-reverse': reverse
     }
     let slots = this.$slots.default || []

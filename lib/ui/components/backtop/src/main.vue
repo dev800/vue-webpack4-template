@@ -1,16 +1,16 @@
 <template>
-  <transition name="fm-fade-in">
+  <transition name="ui-fade-in">
     <div
       v-if="visible"
       :style="{
         'right': styleRight,
         'bottom': styleBottom
       }"
-      class="fm-backtop"
+      class="ui-backtop"
       @click.stop="handleClick"
     >
       <slot>
-        <fm-icon name="caret-top" />
+        <svg-icon icon-class="solid-caret-up"/>
       </slot>
     </div>
   </transition>
@@ -25,7 +25,7 @@ const easeInOutCubic = value => value < 0.5
   : 1 - cubic((1 - value) * 2) / 2
 
 export default {
-  name: 'FmBacktop',
+  name: 'UiBacktop',
 
   props: {
     visibilityHeight: {
@@ -73,7 +73,7 @@ export default {
   methods: {
     init () {
       this.container = document
-      this.el = document.documentFmement
+      this.el = document.documentUiement
       if (this.target) {
         this.el = document.querySelector(this.target)
         if (!this.el) {

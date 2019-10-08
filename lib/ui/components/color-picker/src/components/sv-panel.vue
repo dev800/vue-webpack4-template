@@ -1,14 +1,14 @@
 <template>
   <div
-    class="fm-color-svpanel"
+    class="ui-color-svpanel"
     :style="{
       backgroundColor: background
     }"
   >
-    <div class="fm-color-svpanel__white" />
-    <div class="fm-color-svpanel__black" />
+    <div class="ui-color-svpanel__white" />
+    <div class="ui-color-svpanel__black" />
     <div
-      class="fm-color-svpanel__cursor"
+      class="ui-color-svpanel__cursor"
       :style="{
         top: cursorTop + 'px',
         left: cursorLeft + 'px'
@@ -23,7 +23,7 @@
 import draggable from '../draggable'
 
 export default {
-  name: 'FmSlPanel',
+  name: 'UiSlPanel',
 
   props: {
     color: {

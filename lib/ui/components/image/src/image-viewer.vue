@@ -1,13 +1,13 @@
 <template>
   <transition name="viewer-fade">
     <div
-      class="fm-image-viewer__wrapper"
+      class="ui-image-viewer__wrapper"
       :style="{ 'z-index': zIndex }"
     >
-      <div class="fm-image-viewer__mask" />
+      <div class="ui-image-viewer__mask" />
       <!-- CLOSE -->
       <span
-        class="fm-image-viewer__btn fm-image-viewer__close"
+        class="ui-image-viewer__btn ui-image-viewer__close"
         @click="hide"
       >
         <svg-icon icon-class="solid-times-circle"></svg-icon>
@@ -15,14 +15,14 @@
       <!-- ARROW -->
       <template v-if="!isSingle">
         <span
-          class="fm-image-viewer__btn fm-image-viewer__prev"
+          class="ui-image-viewer__btn ui-image-viewer__prev"
           :class="{ 'is-disabled': !infinite && isFirst }"
           @click="prev"
         >
           <svg-icon icon-class="solid-angle-left"></svg-icon>
         </span>
         <span
-          class="fm-image-viewer__btn fm-image-viewer__next"
+          class="ui-image-viewer__btn ui-image-viewer__next"
           :class="{ 'is-disabled': !infinite && isLast }"
           @click="next"
         >
@@ -31,8 +31,8 @@
         </span>
       </template>
       <!-- ACTIONS -->
-      <div class="fm-image-viewer__btn fm-image-viewer__actions">
-        <div class="fm-image-viewer__actions__inner">
+      <div class="ui-image-viewer__btn ui-image-viewer__actions">
+        <div class="ui-image-viewer__actions__inner">
           <svg-icon
             icon-class="regular-zoom-out"
             @click="handleActions('zoomOut')"
@@ -41,12 +41,12 @@
             icon-class="regular-zoom-in"
             @click="handleActions('zoomIn')"
           ></svg-icon>
-          <i class="fm-image-viewer__actions__divider" />
+          <i class="ui-image-viewer__actions__divider" />
           <svg-icon
             :icon-class="mode.icon"
             @click="toggleMode"
           ></svg-icon>
-          <i class="fm-image-viewer__actions__divider" />
+          <i class="ui-image-viewer__actions__divider" />
           <svg-icon
             icon-class="regular-refresh-left"
             @click="handleActions('antiCloceLise')"
@@ -58,13 +58,13 @@
         </div>
       </div>
       <!-- CANVAS -->
-      <div class="fm-image-viewer__canvas">
+      <div class="ui-image-viewer__canvas">
         <img
           v-for="(url, i) in urlList"
           v-if="i === index"
           ref="img"
           :key="url"
-          class="fm-image-viewer__img"
+          class="ui-image-viewer__img"
           :src="currentImg"
           :style="imgStyle"
           @load="handleImgLoad"
@@ -83,18 +83,18 @@ import { rafThrottle, isFirefox } from '../../../js/utils/util'
 const Mode = {
   CONTAIN: {
     name: 'contain',
-    icon: 'fm-icon-full-screen'
+    icon: 'ui-icon-full-screen'
   },
   ORIGINAL: {
     name: 'original',
-    icon: 'fm-icon-c-scale-to-original'
+    icon: 'ui-icon-c-scale-to-original'
   }
 }
 
 const mousewheelEventName = isFirefox() ? 'DOMMouseScroll' : 'mousewheel'
 
 export default {
-  name: 'FmImageViewer',
+  name: 'UiImageViewer',
 
   props: {
     urlList: {

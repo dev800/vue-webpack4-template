@@ -1,10 +1,10 @@
 <template>
-  <div class="fm-color-predefine">
-    <div class="fm-color-predefine__colors">
+  <div class="ui-color-predefine">
+    <div class="ui-color-predefine__colors">
       <div
         v-for="(item, index) in rgbaColors"
         :key="colors[index]"
-        class="fm-color-predefine__color-selector"
+        class="ui-color-predefine__color-selector"
         :class="{selected: item.selected, 'is-alpha': item._alpha < 100}"
         @click="handleSelect(index)"
       >

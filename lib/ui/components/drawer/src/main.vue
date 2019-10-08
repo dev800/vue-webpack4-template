@@ -1,17 +1,17 @@
 <template>
   <transition
-    name="fm-drawer-fade"
+    name="ui-drawer-fade"
     @after-enter="afterEnter"
     @after-leave="afterLeave"
   >
     <div
       v-show="visible"
-      class="fm-dialog__wrapper"
+      class="ui-dialog__wrapper"
       role="presentation"
     >
       <div
-        class="fm-drawer__container"
-        :class="visible && 'fm-drawer__open'"
+        class="ui-drawer__container"
+        :class="visible && 'ui-drawer__open'"
         role="document"
         tabindex="-1"
         @click.self="handleWrapperClick"
@@ -19,15 +19,15 @@
         <div
           ref="drawer"
           aria-modal="true"
-          aria-labelledby="fm-drawer__title"
-          class="fm-drawer"
+          aria-labelledby="ui-drawer__title"
+          class="ui-drawer"
           :class="[direction, customClass]"
           :style="isHorizontal ? `width: ${size}` : `height: ${size}`"
           role="presentation"
         >
           <header
-            id="fm-drawer__title"
-            class="fm-drawer__header"
+            id="ui-drawer__title"
+            class="ui-drawer__header"
           >
             <slot name="title">
               <span role="heading">{{ title }}</span>
@@ -35,19 +35,19 @@
             <button
               v-if="showClose"
               :aria-label="`close ${title || 'drawer'}`"
-              class="fm-drawer__close-btn"
+              class="ui-drawer__close-btn"
               type="button"
               @click="closeDrawer"
             >
               <svg-icon
                 icon-class="solid-times"
-                class="fm-dialog__close"
+                class="ui-dialog__close"
               ></svg-icon>
             </button>
           </header>
           <section
             v-if="rendered"
-            class="fm-drawer__body"
+            class="ui-drawer__body"
           >
             <slot />
           </section>
@@ -63,7 +63,7 @@ import Migrating from '../../../js/mixins/migrating'
 import emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmDrawer',
+  name: 'UiDrawer',
   mixins: [Popup, emitter, Migrating],
   props: {
     appendToBody: {

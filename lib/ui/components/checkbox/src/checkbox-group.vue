@@ -2,14 +2,14 @@
 import Emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmCheckboxGroup',
+  name: 'UiCheckboxGroup',
 
-  componentName: 'FmCheckboxGroup',
+  componentName: 'UiCheckboxGroup',
 
   mixins: [Emitter],
 
   inject: {
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -25,17 +25,17 @@ export default {
   },
 
   computed: {
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
     checkboxGroupSize () {
-      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      return this.size || this._uiFormItemSize || (this.$ELEMENT || {}).size
     }
   },
 
   watch: {
     value (value) {
-      this.dispatch('FmFormItem', 'fm.form.change', [value])
+      this.dispatch('UiFormItem', 'ui.form.change', [value])
     }
   }
 }
@@ -43,7 +43,7 @@ export default {
 
 <template>
   <div
-    class="fm-checkbox-group"
+    class="ui-checkbox-group"
     role="group"
     aria-label="checkbox-group"
   >

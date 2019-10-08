@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fm-select-dropdown fm-popper"
+    class="ui-select-dropdown ui-popper"
     :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
     :style="{ minWidth: minWidth }"
   >
@@ -12,9 +12,9 @@
 import Popper from '../../../js/utils/vue-popper'
 
 export default {
-  name: 'FmSelectDropdown',
+  name: 'UiSelectDropdown',
 
-  componentName: 'FmSelectDropdown',
+  componentName: 'UiSelectDropdown',
 
   mixins: [Popper],
 
@@ -64,8 +64,8 @@ export default {
   },
 
   mounted () {
-    this.referenceFmm = this.$parent.$refs.reference.$el
-    this.$parent.popperFmm = this.popperFmm = this.$el
+    this.referenceUim = this.$parent.$refs.reference.$el
+    this.$parent.popperUim = this.popperUim = this.$el
     this.$on('updatePopper', () => {
       if (this.$parent.visible) this.updatePopper()
     })

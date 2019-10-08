@@ -1,6 +1,6 @@
 <template>
   <section
-    class="fm-container"
+    class="ui-container"
     :class="{ 'is-vertical': isVertical }"
   >
     <slot />
@@ -9,9 +9,9 @@
 
 <script>
 export default {
-  name: 'FmContainer',
+  name: 'UiContainer',
 
-  componentName: 'FmContainer',
+  componentName: 'UiContainer',
 
   props: {
     direction: {
@@ -30,7 +30,7 @@ export default {
       return this.$slots && this.$slots.default
         ? this.$slots.default.some(vnode => {
           const tag = vnode.componentOptions && vnode.componentOptions.tag
-          return tag === 'fm-header' || tag === 'fm-footer'
+          return tag === 'ui-header' || tag === 'ui-footer'
         })
         : false
     }

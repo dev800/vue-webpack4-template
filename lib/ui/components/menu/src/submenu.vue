@@ -1,5 +1,5 @@
 <script>
-import FmCollapseTransition from '../../collapse-transition'
+import UiCollapseTransition from '../../collapse-transition'
 import menuMixin from './menu-mixin'
 import Emitter from '../../../js/mixins/emitter'
 import Popper from '../../../js/utils/vue-popper'
@@ -21,11 +21,11 @@ const poperMixins = {
 }
 
 export default {
-  name: 'FmSubmenu',
+  name: 'UiSubmenu',
 
-  componentName: 'FmSubmenu',
+  componentName: 'UiSubmenu',
 
-  components: { FmCollapseTransition },
+  components: { UiCollapseTransition },
 
   mixins: [menuMixin, Emitter, poperMixins],
 
@@ -70,7 +70,7 @@ export default {
         : this.popperAppendToBody
     },
     menuTransitionName () {
-      return this.rootMenu.collapse ? 'fm-zoom-in-left' : 'fm-zoom-in-top'
+      return this.rootMenu.collapse ? 'ui-zoom-in-left' : 'ui-zoom-in-top'
     },
     opened () {
       return this.rootMenu.openedMenus.indexOf(this.index) > -1
@@ -138,7 +138,7 @@ export default {
       let isFirstLevel = true
       let parent = this.$parent
       while (parent && parent !== this.rootMenu) {
-        if (['FmSubmenu', 'FmMenuItemGroup'].indexOf(parent.$options.componentName) > -1) {
+        if (['UiSubmenu', 'UiMenuItemGroup'].indexOf(parent.$options.componentName) > -1) {
           isFirstLevel = false
           break
         } else {
@@ -206,7 +206,7 @@ export default {
       ) {
         return
       }
-      this.dispatch('FmMenu', 'submenu-click', this)
+      this.dispatch('UiMenu', 'submenu-click', this)
     },
     handleMouseenter (event, showTimeout = this.showTimeout) {
       if (!('ActiveXObject' in window) && event.type === 'focus' && !event.relatedTarget) {
@@ -220,7 +220,7 @@ export default {
       ) {
         return
       }
-      this.dispatch('FmSubmenu', 'mouse-enter-child')
+      this.dispatch('UiSubmenu', 'mouse-enter-child')
       clearTimeout(this.timeout)
       this.timeout = setTimeout(() => {
         this.rootMenu.openMenu(this.index, this.indexPath)
@@ -238,14 +238,14 @@ export default {
       ) {
         return
       }
-      this.dispatch('FmSubmenu', 'mouse-leave-child')
+      this.dispatch('UiSubmenu', 'mouse-leave-child')
       clearTimeout(this.timeout)
       this.timeout = setTimeout(() => {
         !this.mouseInChild && this.rootMenu.closeMenu(this.index)
       }, this.hideTimeout)
 
       if (this.appendToBody && deepDispatch) {
-        if (this.$parent.$options.name === 'FmSubmenu') {
+        if (this.$parent.$options.name === 'UiSubmenu') {
           this.$parent.handleMouseleave(true)
         }
       }
@@ -280,8 +280,8 @@ export default {
         : 'right-start'
     },
     initPopper () {
-      this.referenceFmm = this.$el
-      this.popperFmm = this.$refs.menu
+      this.referenceUim = this.$el
+      this.popperUim = this.$refs.menu
       this.updatePlacement()
     }
   },
@@ -307,12 +307,12 @@ export default {
         <ul
           ref="menu"
           v-show={opened}
-          class={[`fm-menu--${mode}`, popperClass]}
+          class={[`ui-menu--${mode}`, popperClass]}
           on-mouseenter={($event) => this.handleMouseenter($event, 100)}
           on-mouseleave={() => this.handleMouseleave(true)}
           on-focus={($event) => this.handleMouseenter($event, 100)}
           role="menu"
-          class={['fm-menu fm-menu--popup', `fm-menu--popup-${currentPlacement}`]}
+          class={['ui-menu ui-menu--popup', `ui-menu--popup-${currentPlacement}`]}
           style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
           {$slots.default}
         </ul>
@@ -320,15 +320,15 @@ export default {
     )
 
     const inlineMenu = (
-      <fm-collapse-transition>
+      <ui-collapse-transition>
         <ul
           role="menu"
-          class="fm-menu fm-menu--inline"
+          class="ui-menu ui-menu--inline"
           v-show={opened}
           style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
           {$slots.default}
         </ul>
-      </fm-collapse-transition>
+      </ui-collapse-transition>
     )
 
     const submenuTitleIcon = (
@@ -339,7 +339,7 @@ export default {
     return (
       <li
         class={{
-          'fm-submenu': true,
+          'ui-submenu': true,
           'is-active': active,
           'is-opened': opened,
           'is-disabled': disabled
@@ -352,7 +352,7 @@ export default {
         on-focus={this.handleMouseenter}
       >
         <div
-          class="fm-submenu__title"
+          class="ui-submenu__title"
           ref="submenu-title"
           on-click={this.handleClick}
           on-mouseenter={this.handleTitleMouseenter}
@@ -360,7 +360,7 @@ export default {
           style={[paddingStyle, titleStyle, { backgroundColor }]}
         >
           {$slots.title}
-          <svg-icon class="fm-submenu__icon-ios-arrow" iconClass={submenuTitleIcon}></svg-icon>
+          <svg-icon class="ui-submenu__icon-ios-arrow" iconClass={submenuTitleIcon}></svg-icon>
         </div>
         {this.isMenuPopup ? popupMenu : inlineMenu}
       </li>

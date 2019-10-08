@@ -1,8 +1,8 @@
 <template>
   <a
     :class="[
-      'fm-link',
-      type ? `fm-link--${type}` : '',
+      'ui-link',
+      type ? `ui-link--${type}` : '',
       disabled && 'is-disabled',
       underline && !disabled && 'is-underline'
     ]"
@@ -16,7 +16,7 @@
     ></svg-icon>
     <span
       v-if="$slots.default"
-      class="fm-link--inner"
+      class="ui-link--inner"
     >
       <slot />
     </span>
@@ -31,7 +31,7 @@
 <script>
 
 export default {
-  name: 'FmLink',
+  name: 'UiLink',
 
   props: {
     type: {

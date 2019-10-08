@@ -1,7 +1,7 @@
 <template>
-  <li class="fm-menu-item-group">
+  <li class="ui-menu-item-group">
     <div
-      class="fm-menu-item-group__title"
+      class="ui-menu-item-group__title"
       :style="{paddingLeft: levelPadding + 'px'}"
     >
       <template v-if="!$slots.title">
@@ -19,9 +19,9 @@
 </template>
 <script>
 export default {
-  name: 'FmMenuItemGroup',
+  name: 'UiMenuItemGroup',
 
-  componentName: 'FmMenuItemGroup',
+  componentName: 'UiMenuItemGroup',
 
   inject: ['rootMenu'],
   props: {
@@ -40,8 +40,8 @@ export default {
       let padding = 20
       let parent = this.$parent
       if (this.rootMenu.collapse) return 20
-      while (parent && parent.$options.componentName !== 'FmMenu') {
-        if (parent.$options.componentName === 'FmSubmenu') {
+      while (parent && parent.$options.componentName !== 'UiMenu') {
+        if (parent.$options.componentName === 'UiSubmenu') {
           padding += 20
         }
         parent = parent.$parent

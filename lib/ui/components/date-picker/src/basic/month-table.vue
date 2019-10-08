@@ -1,6 +1,6 @@
 <template>
   <table
-    class="fm-month-table"
+    class="ui-month-table"
     @click="handleMonthTableClick"
     @mousemove="handleMouseMove"
   >
@@ -15,7 +15,7 @@
           :class="getCellStyle(cell)"
         >
           <div>
-            <a class="cell">{{ t('fm.datepicker.months.' + months[cell.text]) }}</a>
+            <a class="cell">{{ t('ui.datepicker.months.' + months[cell.text]) }}</a>
           </div>
         </td>
       </tr>

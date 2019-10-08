@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="fm-aside"
+    class="ui-aside"
     :style="{ width }"
   >
     <slot />
@@ -9,9 +9,9 @@
 
 <script>
 export default {
-  name: 'FmAside',
+  name: 'UiAside',
 
-  componentName: 'FmAside',
+  componentName: 'UiAside',
 
   props: {
     width: {

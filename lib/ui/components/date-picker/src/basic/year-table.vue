@@ -1,6 +1,6 @@
 <template>
   <table
-    class="fm-year-table"
+    class="ui-year-table"
     @click="handleYearTableClick"
   >
     <tbody>

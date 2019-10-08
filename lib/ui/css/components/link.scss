@@ -45,7 +45,7 @@ $typeMap: (
   }
 
 
-  &.fm-link--default  {
+  &.ui-link--default  {
     color: $--link-default-font-color;
     &:hover {
       color: $--link-default-active-color
@@ -59,7 +59,7 @@ $typeMap: (
   }
 
   @each $type, $primaryColor in $typeMap {
-    &.fm-link--#{$type} {
+    &.ui-link--#{$type} {
       color: $primaryColor;
       &:hover {
         color: mix($primaryColor, $--color-white, 80%)

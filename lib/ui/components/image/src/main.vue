@@ -1,26 +1,26 @@
 <template>
-  <div class="fm-image">
+  <div class="ui-image">
     <slot
       v-if="loading"
       name="placeholder"
     >
-      <div class="fm-image__placeholder" />
+      <div class="ui-image__placeholder" />
     </slot>
     <slot
       v-else-if="error"
       name="error"
     >
-      <div class="fm-image__error">
-        {{ t('fm.image.error') }}
+      <div class="ui-image__error">
+        {{ t('ui.image.error') }}
       </div>
     </slot>
     <img
       v-else
-      class="fm-image__inner"
+      class="ui-image__inner"
       v-bind="$attrs"
       :src="src"
       :style="imageStyle"
-      :class="{ 'fm-image__inner--center': alignCenter, 'fm-image__preview': preview }"
+      :class="{ 'ui-image__inner--center': alignCenter, 'ui-image__preview': preview }"
       v-on="$listeners"
       @click="clickHandler"
     >
@@ -40,7 +40,7 @@ import { on, off, getScrollContainer, isInContainer } from '../../../js/utils/do
 import { isString, isHtmlElement } from '../../../js/utils/types'
 import { throttle } from 'throttle-debounce'
 
-const isSupportObjectFit = () => document.documentFmement.style.objectFit !== undefined
+const isSupportObjectFit = () => document.documentUiement.style.objectFit !== undefined
 
 const ObjectFit = {
   NONE: 'none',
@@ -51,7 +51,7 @@ const ObjectFit = {
 }
 
 export default {
-  name: 'FmImage',
+  name: 'UiImage',
 
   components: {
     ImageViewer

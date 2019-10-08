@@ -1,8 +1,8 @@
 <template>
-  <transition name="fm-notification-fade">
+  <transition name="ui-notification-fade">
     <div
       v-show="visible"
-      :class="['fm-notification', customClass, horizontalClass]"
+      :class="['ui-notification', customClass, horizontalClass]"
       :style="positionStyle"
       role="alert"
       @mouseenter="clearTimer()"
@@ -11,21 +11,21 @@
     >
       <svg-icon
         v-if="type || iconClass"
-        class="fm-notification__icon"
+        class="ui-notification__icon"
         :class="presentIconTypeClass"
         :icon-class="presentIconClass"
       ></svg-icon>
       <div
-        class="fm-notification__group"
+        class="ui-notification__group"
         :class="{ 'is-with-icon': !!(typeClass || iconClass) }"
       >
         <h2
-          class="fm-notification__title"
+          class="ui-notification__title"
           v-text="title"
         />
         <div
           v-show="message"
-          class="fm-notification__content"
+          class="ui-notification__content"
         >
           <slot>
             <p v-if="!dangerouslyUseHTMLString">
@@ -39,7 +39,7 @@
         </div>
         <svg-icon
           v-if="showClose"
-          class="fm-notification__close-btn"
+          class="ui-notification__close-btn"
           icon-class="solid-times"
           @click.stop="close"
         ></svg-icon>
@@ -113,7 +113,7 @@ export default {
     closed (newVal) {
       if (newVal) {
         this.visible = false
-        this.$el.addEventListener('transitionend', this.destroyFmement)
+        this.$el.addEventListener('transitionend', this.destroyUiement)
       }
     }
   },
@@ -132,8 +132,8 @@ export default {
   },
 
   methods: {
-    destroyFmement () {
-      this.$el.removeEventListener('transitionend', this.destroyFmement)
+    destroyUiement () {
+      this.$el.removeEventListener('transitionend', this.destroyUiement)
       this.$destroy(true)
       this.$el.parentNode.removeChild(this.$el)
     },

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fm-upload-dragger"
+    class="ui-upload-dragger"
     :class="{
       'is-dragover': dragover
     }"
@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  name: 'FmUploadDrag',
+  name: 'UiUploadDrag',
   props: {
     disabled: Boolean
   },

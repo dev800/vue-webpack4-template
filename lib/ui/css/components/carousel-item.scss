@@ -26,8 +26,8 @@
       &.is-in-stage {
         cursor: pointer;
         z-index: $--index-normal;
-        &:hover .fm-carousel__mask,
-        &.is-hover .fm-carousel__mask {
+        &:hover .ui-carousel__mask,
+        &.is-hover .ui-carousel__mask {
           opacity: 0.12;
         }
       }

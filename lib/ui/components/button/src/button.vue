@@ -1,12 +1,12 @@
 <template>
   <button
-    class="fm-button"
+    class="ui-button"
     :disabled="buttonDisabled || loading"
     :autofocus="autofocus"
     :type="nativeType"
     :class="[
-      type ? 'fm-button--' + type : '',
-      buttonSize ? 'fm-button--' + buttonSize : '',
+      type ? 'ui-button--' + type : '',
+      buttonSize ? 'ui-button--' + buttonSize : '',
       {
         'is-disabled': buttonDisabled,
         'is-loading': loading,
@@ -32,13 +32,13 @@
 </template>
 <script>
 export default {
-  name: 'FmButton',
+  name: 'UiButton',
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -69,14 +69,14 @@ export default {
   },
 
   computed: {
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
     buttonSize () {
-      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      return this.size || this._uiFormItemSize || (this.$ELEMENT || {}).size
     },
     buttonDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     }
   },
 

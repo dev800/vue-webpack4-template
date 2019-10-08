@@ -1,16 +1,16 @@
 <template>
   <label
     :id="id"
-    class="fm-checkbox"
+    class="ui-checkbox"
     :class="[
-      border && checkboxSize ? 'fm-checkbox--' + checkboxSize : '',
+      border && checkboxSize ? 'ui-checkbox--' + checkboxSize : '',
       { 'is-disabled': isDisabled },
       { 'is-bordered': border },
       { 'is-checked': isChecked }
     ]"
   >
     <span
-      class="fm-checkbox__input"
+      class="ui-checkbox__input"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': isChecked,
@@ -21,11 +21,11 @@
       :role="indeterminate ? 'checkbox' : false"
       :aria-checked="indeterminate ? 'mixed' : false"
     >
-      <span class="fm-checkbox__inner" />
+      <span class="ui-checkbox__inner" />
       <input
         v-if="trueLabel || falseLabel"
         v-model="model"
-        class="fm-checkbox__original"
+        class="ui-checkbox__original"
         type="checkbox"
         :aria-hidden="indeterminate ? 'true' : 'false'"
         :name="name"
@@ -39,7 +39,7 @@
       <input
         v-else
         v-model="model"
-        class="fm-checkbox__original"
+        class="ui-checkbox__original"
         type="checkbox"
         :aria-hidden="indeterminate ? 'true' : 'false'"
         :disabled="isDisabled"
@@ -52,7 +52,7 @@
     </span>
     <span
       v-if="$slots.default || label"
-      class="fm-checkbox__label"
+      class="ui-checkbox__label"
     >
       <slot />
       <template v-if="!$slots.default">{{ label }}</template>
@@ -63,20 +63,20 @@
 import Emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmCheckbox',
+  name: 'UiCheckbox',
 
   mixins: [Emitter],
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
 
-  componentName: 'FmCheckbox',
+  componentName: 'UiCheckbox',
 
   props: {
     value: {},
@@ -121,7 +121,7 @@ export default {
             (this.isLimitExceeded = true))
 
           this.isLimitExceeded === false &&
-            this.dispatch('FmCheckboxGroup', 'input', [val])
+            this.dispatch('UiCheckboxGroup', 'input', [val])
         } else {
           this.$emit('input', val)
           this.selfModel = val
@@ -144,7 +144,7 @@ export default {
     isGroup () {
       let parent = this.$parent
       while (parent) {
-        if (parent.$options.componentName !== 'FmCheckboxGroup') {
+        if (parent.$options.componentName !== 'UiCheckboxGroup') {
           parent = parent.$parent
         } else {
           this._checkboxGroup = parent
@@ -168,16 +168,16 @@ export default {
 
     isDisabled () {
       return this.isGroup
-        ? this._checkboxGroup.disabled || this.disabled || (this.fmForm || {}).disabled || this.isLimitDisabled
-        : this.disabled || (this.fmForm || {}).disabled
+        ? this._checkboxGroup.disabled || this.disabled || (this.uiForm || {}).disabled || this.isLimitDisabled
+        : this.disabled || (this.uiForm || {}).disabled
     },
 
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
 
     checkboxSize () {
-      const temCheckboxSize = this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      const temCheckboxSize = this.size || this._uiFormItemSize || (this.$ELEMENT || {}).size
       return this.isGroup
         ? this._checkboxGroup.checkboxGroupSize || temCheckboxSize
         : temCheckboxSize
@@ -186,7 +186,7 @@ export default {
 
   watch: {
     value (value) {
-      this.dispatch('FmFormItem', 'fm.form.change', value)
+      this.dispatch('UiFormItem', 'ui.form.change', value)
     }
   },
 
@@ -221,7 +221,7 @@ export default {
       this.$emit('change', value, ev)
       this.$nextTick(() => {
         if (this.isGroup) {
-          this.dispatch('FmCheckboxGroup', 'change', [this._checkboxGroup.value])
+          this.dispatch('UiCheckboxGroup', 'change', [this._checkboxGroup.value])
         }
       })
     }

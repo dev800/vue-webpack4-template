@@ -77,7 +77,7 @@
       text-align: center;
       position: static;
       transform: none;
-      .fm-carousel__indicator:hover button {
+      .ui-carousel__indicator:hover button {
         opacity: 0.64;
       }
       button {
@@ -92,14 +92,14 @@
       transform: none;
       text-align: center;
 
-      .fm-carousel__button {
+      .ui-carousel__button {
         height: auto;
         width: auto;
         padding: 2px 18px;
         font-size: 12px;
       }
 
-      .fm-carousel__indicator {
+      .ui-carousel__indicator {
         padding: 6px 4px;
       }
     }
@@ -120,7 +120,7 @@
 
     @include m(vertical) {
       padding: $--carousel-indicator-padding-horizontal $--carousel-indicator-padding-vertical;
-      .fm-carousel__button {
+      .ui-carousel__button {
         width: $--carousel-indicator-height;
         height: #{$--carousel-indicator-width / 2};
       }

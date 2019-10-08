@@ -1,17 +1,17 @@
 <template>
   <div
-    class="fm-collapse-item"
+    class="ui-collapse-item"
     :class="{'is-active': isActive, 'is-disabled': disabled }"
   >
     <div
       role="tab"
       :aria-expanded="isActive"
-      :aria-controls="`fm-collapse-content-${id}`"
-      :aria-describedby="`fm-collapse-content-${id}`"
+      :aria-controls="`ui-collapse-content-${id}`"
+      :aria-describedby="`ui-collapse-content-${id}`"
     >
       <div
-        :id="`fm-collapse-head-${id}`"
-        class="fm-collapse-item__header"
+        :id="`ui-collapse-head-${id}`"
+        class="ui-collapse-item__header"
         role="button"
         :tabindex="disabled ? undefined : 0"
         :class="{
@@ -33,33 +33,33 @@
         ></svg-icon>
       </div>
     </div>
-    <fm-collapse-transition>
+    <ui-collapse-transition>
       <div
         v-show="isActive"
-        :id="`fm-collapse-content-${id}`"
-        class="fm-collapse-item__wrap"
+        :id="`ui-collapse-content-${id}`"
+        class="ui-collapse-item__wrap"
         role="tabpanel"
         :aria-hidden="!isActive"
-        :aria-labelledby="`fm-collapse-head-${id}`"
+        :aria-labelledby="`ui-collapse-head-${id}`"
       >
-        <div class="fm-collapse-item__content">
+        <div class="ui-collapse-item__content">
           <slot />
         </div>
       </div>
-    </fm-collapse-transition>
+    </ui-collapse-transition>
   </div>
 </template>
 <script>
-import FmCollapseTransition from '../../collapse-transition'
+import UiCollapseTransition from '../../collapse-transition'
 import Emitter from '../../../js/mixins/emitter'
 import { generateId } from '../../../js/utils/util'
 
 export default {
-  name: 'FmCollapseItem',
+  name: 'UiCollapseItem',
 
-  componentName: 'FmCollapseItem',
+  componentName: 'UiCollapseItem',
 
-  components: { FmCollapseTransition },
+  components: { UiCollapseTransition },
 
   mixins: [Emitter],
 
@@ -107,12 +107,12 @@ export default {
     },
     handleHeaderClick () {
       if (this.disabled) return
-      this.dispatch('FmCollapse', 'item-click', this)
+      this.dispatch('UiCollapse', 'item-click', this)
       this.focusing = false
       this.isClick = true
     },
     handleEnterClick () {
-      this.dispatch('FmCollapse', 'item-click', this)
+      this.dispatch('UiCollapse', 'item-click', this)
     }
   }
 }

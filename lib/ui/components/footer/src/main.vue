@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="fm-footer"
+    class="ui-footer"
     :style="{ height }"
   >
     <slot />
@@ -9,9 +9,9 @@
 
 <script>
 export default {
-  name: 'FmFooter',
+  name: 'UiFooter',
 
-  componentName: 'FmFooter',
+  componentName: 'UiFooter',
 
   props: {
     height: {

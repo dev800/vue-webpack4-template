@@ -6,7 +6,7 @@
   >
     <div
       v-show="visible"
-      class="fm-dialog__wrapper"
+      class="ui-dialog__wrapper"
       @click.self="handleWrapperClick"
     >
       <div
@@ -15,35 +15,35 @@
         role="dialog"
         aria-modal="true"
         :aria-label="title || 'dialog'"
-        :class="['fm-dialog', { 'is-fullscreen': fullscreen, 'fm-dialog--center': center }, customClass]"
+        :class="['ui-dialog', { 'is-fullscreen': fullscreen, 'ui-dialog--center': center }, customClass]"
         :style="style"
       >
-        <div class="fm-dialog__header">
+        <div class="ui-dialog__header">
           <slot name="title">
-            <span class="fm-dialog__title">{{ title }}</span>
+            <span class="ui-dialog__title">{{ title }}</span>
           </slot>
           <button
             v-if="showClose"
             type="button"
-            class="fm-dialog__headerbtn"
+            class="ui-dialog__headerbtn"
             aria-label="Close"
             @click="handleClose"
           >
             <svg-icon
               icon-class="solid-times"
-              class="fm-dialog__close"
+              class="ui-dialog__close"
             ></svg-icon>
           </button>
         </div>
         <div
           v-if="rendered"
-          class="fm-dialog__body"
+          class="ui-dialog__body"
         >
           <slot />
         </div>
         <div
           v-if="$slots.footer"
-          class="fm-dialog__footer"
+          class="ui-dialog__footer"
         >
           <slot name="footer" />
         </div>
@@ -58,7 +58,7 @@ import Migrating from '../../../js/mixins/migrating'
 import emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmDialog',
+  name: 'UiDialog',
 
   mixins: [Popup, emitter, Migrating],
 
@@ -213,8 +213,8 @@ export default {
       }
     },
     updatePopper () {
-      this.broadcast('FmSelectDropdown', 'updatePopper')
-      this.broadcast('FmDropdownMenu', 'updatePopper')
+      this.broadcast('UiSelectDropdown', 'updatePopper')
+      this.broadcast('UiDropdownMenu', 'updatePopper')
     },
     afterEnter () {
       this.$emit('opened')

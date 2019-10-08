@@ -1,12 +1,12 @@
 <template functional>
   <div
     v-bind="data.attrs"
-    :class="[data.staticClass, 'fm-divider', `fm-divider--${props.direction}`]"
+    :class="[data.staticClass, 'ui-divider', `ui-divider--${props.direction}`]"
     v-on="listeners"
   >
     <div
       v-if="slots().default && props.direction !== 'vertical'"
-      :class="['fm-divider__text', `is-${props.contentPosition}`]"
+      :class="['ui-divider__text', `is-${props.contentPosition}`]"
     >
       <slot />
     </div>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'FmDivider',
+  name: 'UiDivider',
   props: {
     direction: {
       type: String,

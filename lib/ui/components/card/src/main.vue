@@ -1,18 +1,18 @@
 <template>
   <div
-    class="fm-card"
+    class="ui-card"
     :class="shadow ? 'is-' + shadow + '-shadow' : 'is-always-shadow'"
   >
     <div
       v-if="$slots.header || header"
-      class="fm-card__header"
+      class="ui-card__header"
     >
       <slot name="header">
         {{ header }}
       </slot>
     </div>
     <div
-      class="fm-card__body"
+      class="ui-card__body"
       :style="bodyStyle"
     >
       <slot />
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'FmCard',
+  name: 'UiCard',
   props: {
     header: {},
     bodyStyle: {},

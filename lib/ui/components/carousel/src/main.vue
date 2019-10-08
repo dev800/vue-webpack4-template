@@ -5,17 +5,17 @@
     @mouseleave.stop="handleMouseLeave"
   >
     <div
-      class="fm-carousel__container"
+      class="ui-carousel__container"
       :style="{ height: height }"
     >
       <transition
         v-if="arrowDisplay"
-        name="carousfm-arrow-left"
+        name="carousui-arrow-left"
       >
         <button
           v-show="(arrow === 'always' || hover) && (loop || activeIndex > 0)"
           type="button"
-          class="fm-carousel__arrow fm-carousel__arrow--left"
+          class="ui-carousel__arrow ui-carousel__arrow--left"
           @mouseenter="handleButtonEnter('left')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
@@ -25,12 +25,12 @@
       </transition>
       <transition
         v-if="arrowDisplay"
-        name="carousfm-arrow-right"
+        name="carousui-arrow-right"
       >
         <button
           v-show="(arrow === 'always' || hover) && (loop || activeIndex < items.length - 1)"
           type="button"
-          class="fm-carousel__arrow fm-carousel__arrow--right"
+          class="ui-carousel__arrow ui-carousel__arrow--right"
           @mouseenter="handleButtonEnter('right')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
@@ -48,13 +48,13 @@
         v-for="(item, index) in items"
         :key="index"
         :class="[
-          'fm-carousel__indicator',
-          'fm-carousel__indicator--' + direction,
+          'ui-carousel__indicator',
+          'ui-carousel__indicator--' + direction,
           { 'is-active': index === activeIndex }]"
         @mouseenter="throttledIndicatorHover(index)"
         @click.stop="handleIndicatorClick(index)"
       >
-        <button class="fm-carousel__button">
+        <button class="ui-carousel__button">
           <span v-if="hasLabel">{{ item.label }}</span>
         </button>
       </li>
@@ -67,7 +67,7 @@ import { throttle } from 'throttle-debounce'
 import { addResizeListener, removeResizeListener } from '../../../js/utils/resize-event'
 
 export default {
-  name: 'FmCarousel',
+  name: 'UiCarousel',
 
   props: {
     initialIndex: {
@@ -130,20 +130,20 @@ export default {
     },
 
     carouselClasses () {
-      const classes = ['fm-carousel', 'fm-carousfm--' + this.direction]
+      const classes = ['ui-carousel', 'ui-carousui--' + this.direction]
       if (this.type === 'card') {
-        classes.push('fm-carousfm--card')
+        classes.push('ui-carousui--card')
       }
       return classes
     },
 
     indicatorsClasses () {
-      const classes = ['fm-carousel__indicators', 'fm-carousel__indicators--' + this.direction]
+      const classes = ['ui-carousel__indicators', 'ui-carousel__indicators--' + this.direction]
       if (this.hasLabel) {
-        classes.push('fm-carousel__indicators--labels')
+        classes.push('ui-carousel__indicators--labels')
       }
       if (this.indicatorPosition === 'outside' || this.type === 'card') {
-        classes.push('fm-carousel__indicators--outside')
+        classes.push('ui-carousel__indicators--outside')
       }
       return classes
     }
@@ -235,7 +235,7 @@ export default {
     },
 
     updateItems () {
-      this.items = this.$children.filter(child => child.$options.name === 'FmCarouselItem')
+      this.items = this.$children.filter(child => child.$options.name === 'UiCarouselItem')
     },
 
     resetItemPosition (oldIndex) {
@@ -273,7 +273,7 @@ export default {
       }
       index = Number(index)
       if (isNaN(index) || index !== Math.floor(index)) {
-        console.warn('[Fmement Warn][Carousel]index must be an integer.')
+        console.warn('[Uiement Warn][Carousel]index must be an integer.')
         return
       }
       const length = this.items.length

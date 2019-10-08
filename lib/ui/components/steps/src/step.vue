@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fm-step"
+    class="ui-step"
     :style="style"
     :class="[
       !isSimple && `is-${$parent.direction}`,
@@ -11,21 +11,21 @@
   >
     <!-- icon & line -->
     <div
-      class="fm-step__head"
+      class="ui-step__head"
       :class="`is-${currentStatus}`"
     >
       <div
-        class="fm-step__line"
+        class="ui-step__line"
         :style="isLast ? '' : { marginRight: $parent.stepOffset + 'px' }"
       >
         <i
-          class="fm-step__line-inner"
+          class="ui-step__line-inner"
           :style="lineStyle"
         />
       </div>
 
       <div
-        class="fm-step__icon"
+        class="ui-step__icon"
         :class="`is-${icon ? 'icon' : 'text'}`"
       >
         <slot
@@ -34,28 +34,28 @@
         >
           <svg-icon
             v-if="icon"
-            class="fm-step__icon-inner"
+            class="ui-step__icon-inner"
             :icon-class="icon"
           />
           <div
             v-if="!icon && !isSimple"
-            class="fm-step__icon-inner"
+            class="ui-step__icon-inner"
           >
             {{ index + 1 }}
           </div>
         </slot>
         <svg-icon
           v-else
-          class="fm-step__icon-inner is-status"
+          class="ui-step__icon-inner is-status"
           :icon-class="currentStatus === 'success' ? 'solid-check' : 'solid-times'"
         />
       </div>
     </div>
     <!-- title & description -->
-    <div class="fm-step__main">
+    <div class="ui-step__main">
       <div
         ref="title"
-        class="fm-step__title"
+        class="ui-step__title"
         :class="['is-' + currentStatus]"
       >
         <slot name="title">
@@ -64,11 +64,11 @@
       </div>
       <div
         v-if="isSimple"
-        class="fm-step__arrow"
+        class="ui-step__arrow"
       />
       <div
         v-else
-        class="fm-step__description"
+        class="ui-step__description"
         :class="['is-' + currentStatus]"
       >
         <slot name="description">
@@ -81,7 +81,7 @@
 
 <script>
 export default {
-  name: 'FmStep',
+  name: 'UiStep',
 
   props: {
     title: String,

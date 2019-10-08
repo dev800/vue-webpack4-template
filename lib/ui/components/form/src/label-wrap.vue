@@ -6,7 +6,7 @@ export default {
     updateAll: Boolean
   },
 
-  inject: ['fmForm', 'fmFormItem'],
+  inject: ['uiForm', 'uiFormItem'],
 
   data () {
     return {
@@ -17,8 +17,8 @@ export default {
   watch: {
     computedWidth (val, oldVal) {
       if (this.updateAll) {
-        this.fmForm.registerLabelWidth(val, oldVal)
-        this.fmFormItem.updateComputedLabelWidth(val)
+        this.uiForm.registerLabelWidth(val, oldVal)
+        this.uiFormItem.updateComputedLabelWidth(val)
       }
     }
   },
@@ -37,19 +37,19 @@ export default {
 
   methods: {
     getLabelWidth () {
-      if (this.$el && this.$el.firstFmementChild) {
-        const computedWidth = window.getComputedStyle(this.$el.firstFmementChild).width
+      if (this.$el && this.$el.firstUiementChild) {
+        const computedWidth = window.getComputedStyle(this.$el.firstUiementChild).width
         return Math.ceil(parseFloat(computedWidth))
       } else {
         return 0
       }
     },
     updateLabelWidth (action = 'update') {
-      if (this.$slots.default && this.isAutoWidth && this.$el.firstFmementChild) {
+      if (this.$slots.default && this.isAutoWidth && this.$el.firstUiementChild) {
         if (action === 'update') {
           this.computedWidth = this.getLabelWidth()
         } else if (action === 'remove') {
-          this.fmForm.deregisterLabelWidth(this.computedWidth)
+          this.uiForm.deregisterLabelWidth(this.computedWidth)
         }
       }
     }
@@ -59,7 +59,7 @@ export default {
     const slots = this.$slots.default
     if (!slots) return null
     if (this.isAutoWidth) {
-      const autoLabelWidth = this.fmForm.autoLabelWidth
+      const autoLabelWidth = this.uiForm.autoLabelWidth
       const style = {}
       if (autoLabelWidth && autoLabelWidth !== 'auto') {
         const marginLeft = parseInt(autoLabelWidth, 10) - this.computedWidth
@@ -67,7 +67,7 @@ export default {
           style.marginLeft = marginLeft + 'px'
         }
       }
-      return (<div class="fm-form-item__label-wrap" style={style}>
+      return (<div class="ui-form-item__label-wrap" style={style}>
         {slots}
       </div>)
     } else {

@@ -1,13 +1,13 @@
 <template>
-  <li class="fm-timeline-item">
-    <div class="fm-timeline-item__tail" />
+  <li class="ui-timeline-item">
+    <div class="ui-timeline-item__tail" />
 
     <div
       v-if="!$slots.dot"
-      class="fm-timeline-item__node"
+      class="ui-timeline-item__node"
       :class="[
-        `fm-timeline-item__node--${size || ''}`,
-        `fm-timeline-item__node--${type || ''}`
+        `ui-timeline-item__node--${size || ''}`,
+        `ui-timeline-item__node--${type || ''}`
       ]"
       :style="{
         backgroundColor: color
@@ -15,32 +15,32 @@
     >
       <svg-icon
         v-if="icon"
-        class="fm-timeline-item__icon"
+        class="ui-timeline-item__icon"
         :icon-class="icon"
       ></svg-icon>
     </div>
     <div
       v-if="$slots.dot"
-      class="fm-timeline-item__dot"
+      class="ui-timeline-item__dot"
     >
       <slot name="dot" />
     </div>
 
-    <div class="fm-timeline-item__wrapper">
+    <div class="ui-timeline-item__wrapper">
       <div
         v-if="!hideTimestamp && placement === 'top'"
-        class="fm-timeline-item__timestamp is-top"
+        class="ui-timeline-item__timestamp is-top"
       >
         {{ timestamp }}
       </div>
 
-      <div class="fm-timeline-item__content">
+      <div class="ui-timeline-item__content">
         <slot />
       </div>
 
       <div
         v-if="!hideTimestamp && placement === 'bottom'"
-        class="fm-timeline-item__timestamp is-bottom"
+        class="ui-timeline-item__timestamp is-bottom"
       >
         {{ timestamp }}
       </div>
@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  name: 'FmTimelineItem',
+  name: 'UiTimelineItem',
 
   inject: ['timeline'],
 

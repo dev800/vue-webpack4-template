@@ -1,11 +1,11 @@
 <template>
   <div
-    class="fm-color-alpha-slider"
+    class="ui-color-alpha-slider"
     :class="{ 'is-vertical': vertical }"
   >
     <div
       ref="bar"
-      class="fm-color-alpha-slider__bar"
+      class="ui-color-alpha-slider__bar"
       :style="{
         background: background
       }"
@@ -13,7 +13,7 @@
     />
     <div
       ref="thumb"
-      class="fm-color-alpha-slider__thumb"
+      class="ui-color-alpha-slider__thumb"
       :style="{
         left: thumbLeft + 'px',
         top: thumbTop + 'px'
@@ -26,7 +26,7 @@
 import draggable from '../draggable'
 
 export default {
-  name: 'FmColorAlphaSlider',
+  name: 'UiColorAlphaSlider',
 
   props: {
     color: {

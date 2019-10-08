@@ -2,20 +2,20 @@
 import Clickoutside from '../../../js/utils/clickoutside'
 import Emitter from '../../../js/mixins/emitter'
 import Migrating from '../../../js/mixins/migrating'
-import FmButton from '../../button'
-import FmButtonGroup from '../../button-group'
+import UiButton from '../../button'
+import UiButtonGroup from '../../button-group'
 import { generateId } from '../../../js/utils/util'
 
 export default {
-  name: 'FmDropdown',
+  name: 'UiDropdown',
 
-  componentName: 'FmDropdown',
+  componentName: 'UiDropdown',
 
   directives: { Clickoutside },
 
   components: {
-    FmButton,
-    FmButtonGroup
+    UiButton,
+    UiButtonGroup
   },
 
   mixins: [Emitter, Migrating],
@@ -66,10 +66,10 @@ export default {
     return {
       timeout: null,
       visible: false,
-      triggerFmm: null,
+      triggerUim: null,
       menuItems: null,
       menuItemsArray: null,
-      dropdownFmm: null,
+      dropdownUim: null,
       focusing: false,
       listId: `dropdown-menu-${generateId()}`
     }
@@ -83,11 +83,11 @@ export default {
 
   watch: {
     visible (val) {
-      this.broadcast('FmDropdownMenu', 'visible', val)
+      this.broadcast('UiDropdownMenu', 'visible', val)
       this.$emit('visible-change', val)
     },
     focusing (val) {
-      const selfDefine = this.$el.querySelector('.fm-dropdown-selfdefine')
+      const selfDefine = this.$el.querySelector('.ui-dropdown-selfdefine')
       if (selfDefine) { // 自定义
         if (val) {
           selfDefine.className += ' focusing'
@@ -111,17 +111,17 @@ export default {
       }
     },
     show () {
-      if (this.triggerFmm.disabled) return
+      if (this.triggerUim.disabled) return
       clearTimeout(this.timeout)
       this.timeout = setTimeout(() => {
         this.visible = true
       }, this.trigger === 'click' ? 0 : this.showTimeout)
     },
     hide () {
-      if (this.triggerFmm.disabled) return
+      if (this.triggerUim.disabled) return
       this.removeTabindex()
       if (this.tabindex >= 0) {
-        this.resetTabindex(this.triggerFmm)
+        this.resetTabindex(this.triggerUim)
       }
       clearTimeout(this.timeout)
       this.timeout = setTimeout(() => {
@@ -129,7 +129,7 @@ export default {
       }, this.trigger === 'click' ? 0 : this.hideTimeout)
     },
     handleClick () {
-      if (this.triggerFmm.disabled) return
+      if (this.triggerUim.disabled) return
       if (this.visible) {
         this.hide()
       } else {
@@ -168,14 +168,14 @@ export default {
         ev.preventDefault()
         ev.stopPropagation()
       } else if (keyCode === 13) { // enter选中
-        this.triggerFmmFocus()
+        this.triggerUimFocus()
         target.click()
         if (this.hideOnClick) { // click关闭
           this.visible = false
         }
       } else if ([9, 27].indexOf(keyCode) > -1) { // tab // esc
         this.hide()
-        this.triggerFmmFocus()
+        this.triggerUimFocus()
       }
     },
     resetTabindex (ele) { // 下次tab时组件聚焦元素
@@ -183,51 +183,51 @@ export default {
       ele.setAttribute('tabindex', '0') // 下次期望的聚焦元素
     },
     removeTabindex () {
-      this.triggerFmm.setAttribute('tabindex', '-1')
+      this.triggerUim.setAttribute('tabindex', '-1')
       this.menuItemsArray.forEach((item) => {
         item.setAttribute('tabindex', '-1')
       })
     },
     initAria () {
-      this.dropdownFmm.setAttribute('id', this.listId)
-      this.triggerFmm.setAttribute('aria-haspopup', 'list')
-      this.triggerFmm.setAttribute('aria-controls', this.listId)
+      this.dropdownUim.setAttribute('id', this.listId)
+      this.triggerUim.setAttribute('aria-haspopup', 'list')
+      this.triggerUim.setAttribute('aria-controls', this.listId)
 
       if (!this.splitButton) { // 自定义
-        this.triggerFmm.setAttribute('role', 'button')
-        this.triggerFmm.setAttribute('tabindex', this.tabindex)
-        this.triggerFmm.setAttribute('class', (this.triggerFmm.getAttribute('class') || '') + ' fm-dropdown-selfdefine') // 控制
+        this.triggerUim.setAttribute('role', 'button')
+        this.triggerUim.setAttribute('tabindex', this.tabindex)
+        this.triggerUim.setAttribute('class', (this.triggerUim.getAttribute('class') || '') + ' ui-dropdown-selfdefine') // 控制
       }
     },
     initEvent () {
       const { trigger, show, hide, handleClick, splitButton, handleTriggerKeyDown, handleItemKeyDown } = this
-      this.triggerFmm = splitButton
+      this.triggerUim = splitButton
         ? this.$refs.trigger.$el
         : this.$slots.default[0].elm
 
-      const dropdownFmm = this.dropdownFmm
+      const dropdownUim = this.dropdownUim
 
-      this.triggerFmm.addEventListener('keydown', handleTriggerKeyDown) // triggerFmm keydown
-      dropdownFmm.addEventListener('keydown', handleItemKeyDown, true) // item keydown
+      this.triggerUim.addEventListener('keydown', handleTriggerKeyDown) // triggerUim keydown
+      dropdownUim.addEventListener('keydown', handleItemKeyDown, true) // item keydown
       // 控制自定义元素的样式
       if (!splitButton) {
-        this.triggerFmm.addEventListener('focus', () => {
+        this.triggerUim.addEventListener('focus', () => {
           this.focusing = true
         })
-        this.triggerFmm.addEventListener('blur', () => {
+        this.triggerUim.addEventListener('blur', () => {
           this.focusing = false
         })
-        this.triggerFmm.addEventListener('click', () => {
+        this.triggerUim.addEventListener('click', () => {
           this.focusing = false
         })
       }
       if (trigger === 'hover') {
-        this.triggerFmm.addEventListener('mouseenter', show)
-        this.triggerFmm.addEventListener('mouseleave', hide)
-        dropdownFmm.addEventListener('mouseenter', show)
-        dropdownFmm.addEventListener('mouseleave', hide)
+        this.triggerUim.addEventListener('mouseenter', show)
+        this.triggerUim.addEventListener('mouseleave', hide)
+        dropdownUim.addEventListener('mouseenter', show)
+        dropdownUim.addEventListener('mouseleave', hide)
       } else if (trigger === 'click') {
-        this.triggerFmm.addEventListener('click', handleClick)
+        this.triggerUim.addEventListener('click', handleClick)
       }
     },
     handleMenuItemClick (command, instance) {
@@ -236,12 +236,12 @@ export default {
       }
       this.$emit('command', command, instance)
     },
-    triggerFmmFocus () {
-      this.triggerFmm.focus && this.triggerFmm.focus()
+    triggerUimFocus () {
+      this.triggerUim.focus && this.triggerUim.focus()
     },
     initDomOperation () {
-      this.dropdownFmm = this.popperFmm
-      this.menuItems = this.dropdownFmm.querySelectorAll("[tabindex='-1']")
+      this.dropdownUim = this.popperUim
+      this.menuItems = this.dropdownUim.querySelectorAll("[tabindex='-1']")
       this.menuItemsArray = [].slice.call(this.menuItems)
 
       this.initEvent()
@@ -257,23 +257,23 @@ export default {
       hide()
     }
 
-    const triggerFmm = !splitButton
+    const triggerUim = !splitButton
       ? this.$slots.default
-      : (<fm-button-group>
-        <fm-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
+      : (<ui-button-group>
+        <ui-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
           {this.$slots.default}
-        </fm-button>
-        <fm-button ref="trigger" type={type} size={dropdownSize} class="fm-dropdown__caret-button">
+        </ui-button>
+        <ui-button ref="trigger" type={type} size={dropdownSize} class="ui-dropdown__caret-button">
           <svg-icon
             icon-class="solid-chevron-right"
-            class="fm-dropdown__icon"
+            class="ui-dropdown__icon"
           ></svg-icon>
-        </fm-button>
-      </fm-button-group>)
+        </ui-button>
+      </ui-button-group>)
 
     return (
-      <div class="fm-dropdown" v-clickoutside={hide}>
-        {triggerFmm}
+      <div class="ui-dropdown" v-clickoutside={hide}>
+        {triggerUim}
         {this.$slots.dropdown}
       </div>
     )

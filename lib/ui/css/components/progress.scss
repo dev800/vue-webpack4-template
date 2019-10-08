@@ -23,7 +23,7 @@
   @include m((circle,dashboard)) {
     display: inline-block;
 
-    .fm-progress__text {
+    .ui-progress__text {
       position: absolute;
       top: 50%;
       left: 0;
@@ -41,11 +41,11 @@
 
 
   @include m(without-text) {
-    .fm-progress__text {
+    .ui-progress__text {
       display: none;
     }
 
-    .fm-progress-bar {
+    .ui-progress-bar {
       padding-right: 0;
       margin-right: 0;
       display: block;
@@ -53,38 +53,38 @@
   }
 
   @include m(text-inside) {
-    .fm-progress-bar {
+    .ui-progress-bar {
       padding-right: 0;
       margin-right: 0;
     }
   }
 
   @include when(success) {
-    .fm-progress-bar__inner {
+    .ui-progress-bar__inner {
       background-color: $--color-success;
     }
 
-    .fm-progress__text {
+    .ui-progress__text {
       color: $--color-success;
     }
   }
 
   @include when(warning) {
-    .fm-progress-bar__inner {
+    .ui-progress-bar__inner {
       background-color: $--color-warning;
     }
 
-    .fm-progress__text {
+    .ui-progress__text {
       color: $--color-warning;
     }
   }
 
   @include when(exception) {
-    .fm-progress-bar__inner {
+    .ui-progress-bar__inner {
       background-color: $--color-danger;
     }
 
-    .fm-progress__text {
+    .ui-progress__text {
       color: $--color-danger;
     }
   }

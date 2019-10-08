@@ -1,10 +1,10 @@
 <template>
   <div
     v-show="ready"
-    class="fm-carousel__item"
+    class="ui-carousel__item"
     :class="{
       'is-active': active,
-      'fm-carousel__item--card': $parent.type === 'card',
+      'ui-carousel__item--card': $parent.type === 'card',
       'is-in-stage': inStage,
       'is-hover': hover,
       'is-animating': animating
@@ -15,7 +15,7 @@
     <div
       v-if="$parent.type === 'card'"
       v-show="!active"
-      class="fm-carousel__mask"
+      class="ui-carousel__mask"
     />
     <slot />
   </div>
@@ -25,7 +25,7 @@
 import { autoprefixer } from '../../../js/utils/util'
 const CARD_SCALE = 0.83
 export default {
-  name: 'FmCarouselItem',
+  name: 'UiCarouselItem',
 
   props: {
     name: String,
@@ -112,7 +112,7 @@ export default {
       }
       if (parentType === 'card') {
         if (parentDirection === 'vertical') {
-          console.warn('[Fmement Warn][Carousel]vertical directionis not supported in card mode')
+          console.warn('[Uiement Warn][Carousel]vertical directionis not supported in card mode')
         }
         this.inStage = Math.round(Math.abs(index - activeIndex)) <= 1
         this.active = index === activeIndex

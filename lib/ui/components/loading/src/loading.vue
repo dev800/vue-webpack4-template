@@ -1,22 +1,22 @@
 <template>
   <transition
-    name="fm-loading-fade"
+    name="ui-loading-fade"
     @after-leave="handleAfterLeave"
   >
     <div
       v-show="visible"
-      class="fm-loading-mask"
+      class="ui-loading-mask"
       :style="{ backgroundColor: background || '' }"
       :class="[customClass, { 'is-fullscreen': fullscreen }]"
     >
-      <div class="fm-loading-spinner">
+      <div class="ui-loading-spinner">
         <svg-icon
           class="animated spin infinite"
           :icon-class="spinner ? spinner : 'solid-loading'"
         ></svg-icon>
         <p
           v-if="text"
-          class="fm-loading-text"
+          class="ui-loading-text"
         >
           {{ text }}
         </p>

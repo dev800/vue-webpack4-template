@@ -1,12 +1,12 @@
 <template>
-  <div class="fm-badge">
+  <div class="ui-badge">
     <slot />
-    <transition name="fm-zoom-in-center">
+    <transition name="ui-zoom-in-center">
       <sup
         v-show="!hidden && (content || content === 0 || isDot)"
-        class="fm-badge__content"
+        class="ui-badge__content"
         :class="[
-          'fm-badge__content--' + type,
+          'ui-badge__content--' + type,
           {
             'is-fixed': $slots.default,
             'is-dot': isDot
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'FmBadge',
+  name: 'UiBadge',
 
   props: {
     value: [String, Number],

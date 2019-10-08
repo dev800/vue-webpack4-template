@@ -1,7 +1,7 @@
 <template>
   <div
     ref="button"
-    class="fm-slider__button-wrapper"
+    class="ui-slider__button-wrapper"
     :class="{ 'hover': hovering, 'dragging': dragging }"
     :style="wrapperStyle"
     tabindex="0"
@@ -16,7 +16,7 @@
     @keydown.down.prevent="onLeftKeyDown"
     @keydown.up.prevent="onRightKeyDown"
   >
-    <fm-tooltip
+    <ui-tooltip
       ref="tooltip"
       placement="top"
       :popper-class="tooltipClass"
@@ -24,21 +24,21 @@
     >
       <span slot="content">{{ formatValue }}</span>
       <div
-        class="fm-slider__button"
+        class="ui-slider__button"
         :class="{ 'hover': hovering, 'dragging': dragging }"
       />
-    </fm-tooltip>
+    </ui-tooltip>
   </div>
 </template>
 
 <script>
-import FmTooltip from '../../tooltip'
+import UiTooltip from '../../tooltip'
 
 export default {
-  name: 'FmSliderButton',
+  name: 'UiSliderButton',
 
   components: {
-    FmTooltip
+    UiTooltip
   },
 
   props: {

@@ -1,48 +1,48 @@
 <template>
-  <transition name="fm-alert-fade">
+  <transition name="ui-alert-fade">
     <div
       v-show="visible"
-      class="fm-alert"
+      class="ui-alert"
       :class="[typeClass, center ? 'is-center' : '', 'is-' + effect]"
       role="alert"
     >
       <svg-icon
         v-if="showIcon"
         :icon-class="iconClass"
-        class="fm-alert__icon"
+        class="ui-alert__icon"
         :class="[ isBigIcon ]"
       ></svg-icon>
-      <div class="fm-alert__content">
+      <div class="ui-alert__content">
         <span
           v-if="title || $slots.title"
-          class="fm-alert__title"
+          class="ui-alert__title"
           :class="[ isBoldTitle ]"
         >
           <slot name="title">{{ title }}</slot>
         </span>
         <p
           v-if="$slots.default && !description"
-          class="fm-alert__description"
+          class="ui-alert__description"
         >
           <slot />
         </p>
         <p
           v-if="description && !$slots.default"
-          class="fm-alert__description"
+          class="ui-alert__description"
         >
           {{ description }}
         </p>
         <svg-icon
           v-if="closeText === ''"
           v-show="closable"
-          class="fm-alert__closebtn"
+          class="ui-alert__closebtn"
           icon-class="solid-times"
           @click="close()"
         />
         <i
           v-else
           v-show="closable"
-          class="fm-alert__closebtn is-customed"
+          class="ui-alert__closebtn is-customed"
           @click="close()"
         >{{ closeText }}</i>
       </div>
@@ -57,7 +57,7 @@ const TYPE_CLASSES_MAP = {
   error: 'solid-times-circle'
 }
 export default {
-  name: 'FmAlert',
+  name: 'UiAlert',
 
   props: {
     title: {
@@ -99,7 +99,7 @@ export default {
 
   computed: {
     typeClass () {
-      return `fm-alert--${this.type}`
+      return `ui-alert--${this.type}`
     },
 
     iconClass () {

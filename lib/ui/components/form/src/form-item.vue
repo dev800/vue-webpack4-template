@@ -1,15 +1,15 @@
 <template>
   <div
-    class="fm-form-item"
+    class="ui-form-item"
     :class="[{
-               'fm-form-item--feedback': fmForm && fmForm.statusIcon,
+               'ui-form-item--feedback': uiForm && uiForm.statusIcon,
                'is-error': validateState === 'error',
                'is-validating': validateState === 'validating',
                'is-success': validateState === 'success',
                'is-required': isRequired || required,
-               'is-no-asterisk': fmForm && fmForm.hideRequiredAsterisk
+               'is-no-asterisk': uiForm && uiForm.hideRequiredAsterisk
              },
-             sizeClass ? 'fm-form-item--' + sizeClass : ''
+             sizeClass ? 'ui-form-item--' + sizeClass : ''
     ]"
   >
     <label-wrap
@@ -19,29 +19,29 @@
       <label
         v-if="label || $slots.label"
         :for="labelFor"
-        class="fm-form-item__label"
+        class="ui-form-item__label"
         :style="labelStyle"
       >
         <slot name="label">{{ label + form.labelSuffix }}</slot>
       </label>
     </label-wrap>
     <div
-      class="fm-form-item__content"
+      class="ui-form-item__content"
       :style="contentStyle"
     >
       <slot />
-      <transition name="fm-zoom-in-top">
+      <transition name="ui-zoom-in-top">
         <slot
           v-if="validateState === 'error' && showMessage && form.showMessage"
           name="error"
           :error="validateMessage"
         >
           <div
-            class="fm-form-item__error"
+            class="ui-form-item__error"
             :class="{
-              'fm-form-item__error--inline': typeof inlineMessage === 'boolean'
+              'ui-form-item__error--inline': typeof inlineMessage === 'boolean'
                 ? inlineMessage
-                : (fmForm && fmForm.inlineMessage || false)
+                : (uiForm && uiForm.inlineMessage || false)
             }"
           >
             {{ validateMessage }}
@@ -58,9 +58,9 @@ import objectAssign from '../../../js/utils/merge'
 import { noop, getPropByPath } from '../../../js/utils/util'
 import LabelWrap from './label-wrap'
 export default {
-  name: 'FmFormItem',
+  name: 'UiFormItem',
 
-  componentName: 'FmFormItem',
+  componentName: 'UiFormItem',
   components: {
     // use this component to calculate auto width
     LabelWrap
@@ -70,11 +70,11 @@ export default {
 
   provide () {
     return {
-      fmFormItem: this
+      uiFormItem: this
     }
   },
 
-  inject: ['fmForm'],
+  inject: ['uiForm'],
 
   props: {
     label: String,
@@ -131,7 +131,7 @@ export default {
         if (this.labelWidth === 'auto') {
           ret.marginLeft = this.computedLabelWidth
         } else if (this.form.labelWidth === 'auto') {
-          ret.marginLeft = this.fmForm.autoLabelWidth
+          ret.marginLeft = this.uiForm.autoLabelWidth
         }
       } else {
         ret.marginLeft = labelWidth
@@ -141,8 +141,8 @@ export default {
     form () {
       let parent = this.$parent
       let parentName = parent.$options.componentName
-      while (parentName !== 'FmForm') {
-        if (parentName === 'FmFormItem') {
+      while (parentName !== 'UiForm') {
+        if (parentName === 'UiFormItem') {
           this.isNested = true
         }
         parent = parent.$parent
@@ -177,13 +177,13 @@ export default {
       return isRequired
     },
     _formSize () {
-      return this.fmForm.size
+      return this.uiForm.size
     },
-    fmFormItemSize () {
+    uiFormItemSize () {
       return this.size || this._formSize
     },
     sizeClass () {
-      return this.fmFormItemSize || (this.$ELEMENT || {}).size
+      return this.uiFormItemSize || (this.$ELEMENT || {}).size
     }
   },
   watch: {
@@ -200,7 +200,7 @@ export default {
   },
   mounted () {
     if (this.prop) {
-      this.dispatch('FmForm', 'fm.form.addField', [this])
+      this.dispatch('UiForm', 'ui.form.addField', [this])
 
       let initialValue = this.fieldValue
       if (Array.isArray(initialValue)) {
@@ -214,7 +214,7 @@ export default {
     }
   },
   beforeDestroy () {
-    this.dispatch('FmForm', 'fm.form.removeField', [this])
+    this.dispatch('UiForm', 'ui.form.removeField', [this])
   },
   methods: {
     validate (trigger, callback = noop) {
@@ -245,7 +245,7 @@ export default {
         this.validateMessage = errors ? errors[0].message : ''
 
         callback(this.validateMessage, invalidFields)
-        this.fmForm && this.fmForm.$emit('validate', this.prop, !errors, this.validateMessage || null)
+        this.uiForm && this.uiForm.$emit('validate', this.prop, !errors, this.validateMessage || null)
       })
     },
     clearValidate () {
@@ -278,7 +278,7 @@ export default {
         this.validateDisabled = false
       })
 
-      this.broadcast('FmTimeSelect', 'fieldReset', this.initialValue)
+      this.broadcast('UiTimeSelect', 'fieldReset', this.initialValue)
     },
     getRules () {
       let formRules = this.form.rules
@@ -320,8 +320,8 @@ export default {
       const rules = this.getRules()
 
       if (rules.length || this.required !== undefined) {
-        this.$on('fm.form.blur', this.onFieldBlur)
-        this.$on('fm.form.change', this.onFieldChange)
+        this.$on('ui.form.blur', this.onFieldBlur)
+        this.$on('ui.form.change', this.onFieldChange)
       }
     },
     removeValidateEvents () {

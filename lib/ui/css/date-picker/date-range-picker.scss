@@ -12,11 +12,11 @@
     width: 100%;
   }
 
-  .fm-picker-panel__body {
+  .ui-picker-panel__body {
     min-width: 513px;
   }
 
-  .fm-picker-panel__content {
+  .ui-picker-panel__content {
     margin: 0;
   }
 
@@ -50,7 +50,7 @@
     @include when(left) {
       border-right: 1px solid $--datepicker-inner-border-color;
     }
-    .fm-date-range-picker__header {
+    .ui-date-range-picker__header {
 
       div {
         margin-left: 50px;
@@ -77,7 +77,7 @@
     width: 100%;
     box-sizing: border-box;
 
-    > .fm-icon-ios-arrow-right {
+    > .ui-icon-ios-arrow-right {
       font-size: 20px;
       vertical-align: middle;
       display: table-cell;
@@ -90,7 +90,7 @@
     display: table-cell;
     padding: 0 5px;
 
-    .fm-picker-panel {
+    .ui-picker-panel {
       position: absolute;
       top: 13px;
       right: 0;

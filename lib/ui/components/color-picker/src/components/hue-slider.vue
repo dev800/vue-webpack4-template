@@ -1,16 +1,16 @@
 <template>
   <div
-    class="fm-color-hue-slider"
+    class="ui-color-hue-slider"
     :class="{ 'is-vertical': vertical }"
   >
     <div
       ref="bar"
-      class="fm-color-hue-slider__bar"
+      class="ui-color-hue-slider__bar"
       @click="handleClick"
     />
     <div
       ref="thumb"
-      class="fm-color-hue-slider__thumb"
+      class="ui-color-hue-slider__thumb"
       :style="{
         left: thumbLeft + 'px',
         top: thumbTop + 'px'
@@ -23,7 +23,7 @@
 import draggable from '../draggable'
 
 export default {
-  name: 'FmColorHueSlider',
+  name: 'UiColorHueSlider',
 
   props: {
     color: {

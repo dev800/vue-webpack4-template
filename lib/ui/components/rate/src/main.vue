@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fm-rate"
+    class="ui-rate"
     role="slider"
     :aria-valuenow="currentValue"
     :aria-valuetext="text"
@@ -12,7 +12,7 @@
     <span
       v-for="(item, key) in max"
       :key="key"
-      class="fm-rate__item"
+      class="ui-rate__item"
       :style="{ cursor: rateDisabled ? 'auto' : 'pointer' }"
       @mousemove="setCurrentValue(item, $event)"
       @mouseleave="resetCurrentValue"
@@ -20,20 +20,20 @@
     >
       <i
         :class="[classes[item - 1], { 'hover': hoverIndex === item }]"
-        class="fm-rate__icon"
+        class="ui-rate__icon"
         :style="getIconStyle(item)"
       >
         <i
           v-if="showDecimalIcon(item)"
           :class="decimalIconClass"
           :style="decimalStyle"
-          class="fm-rate__decimal"
+          class="ui-rate__decimal"
         />
       </i>
     </span>
     <span
       v-if="showText || showScore"
-      class="fm-rate__text"
+      class="ui-rate__text"
       :style="{ color: textColor }"
     >{{ text }}</span>
   </div>
@@ -45,12 +45,12 @@ import { isObject } from '../../../js/utils/types'
 import Migrating from '../../../js/mixins/migrating'
 
 export default {
-  name: 'FmRate',
+  name: 'UiRate',
 
   mixins: [Migrating],
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     }
   },
@@ -89,16 +89,16 @@ export default {
     iconClasses: {
       type: [Array, Object],
       default () {
-        return ['fm-icon-star-on', 'fm-icon-star-on', 'fm-icon-star-on']
+        return ['ui-icon-star-on', 'ui-icon-star-on', 'ui-icon-star-on']
       }
     },
     voidIconClass: {
       type: String,
-      default: 'fm-icon-star-off'
+      default: 'ui-icon-star-off'
     },
     disabledVoidIconClass: {
       type: String,
-      default: 'fm-icon-star-on'
+      default: 'ui-icon-star-on'
     },
     disabled: {
       type: Boolean,
@@ -221,7 +221,7 @@ export default {
     },
 
     rateDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     }
   },
 
@@ -326,10 +326,10 @@ export default {
       /* istanbul ignore if */
       if (this.allowHalf) {
         let target = event.target
-        if (hasClass(target, 'fm-rate__item')) {
-          target = target.querySelector('.fm-rate__icon')
+        if (hasClass(target, 'ui-rate__item')) {
+          target = target.querySelector('.ui-rate__icon')
         }
-        if (hasClass(target, 'fm-rate__decimal')) {
+        if (hasClass(target, 'ui-rate__decimal')) {
           target = target.parentNode
         }
         this.pointerAtLeftHalf = event.offsetX * 2 <= target.clientWidth

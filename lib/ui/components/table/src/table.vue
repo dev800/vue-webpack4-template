@@ -1,18 +1,18 @@
 <template>
   <div
-    class="fm-table"
+    class="ui-table"
     :class="[{
-      'fm-table--fit': fit,
-      'fm-table--striped': stripe,
-      'fm-table--border': border || isGroup,
-      'fm-table--hidden': isHidden,
-      'fm-table--group': isGroup,
-      'fm-table--fluid-height': maxHeight,
-      'fm-table--scrollable-x': layout.scrollX,
-      'fm-table--scrollable-y': layout.scrollY,
-      'fm-table--enable-row-hover': !store.states.isComplex,
-      'fm-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
-    }, tableSize ? `fm-table--${ tableSize }` : '']"
+      'ui-table--fit': fit,
+      'ui-table--striped': stripe,
+      'ui-table--border': border || isGroup,
+      'ui-table--hidden': isHidden,
+      'ui-table--group': isGroup,
+      'ui-table--fluid-height': maxHeight,
+      'ui-table--scrollable-x': layout.scrollX,
+      'ui-table--scrollable-y': layout.scrollY,
+      'ui-table--enable-row-hover': !store.states.isComplex,
+      'ui-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
+    }, tableSize ? `ui-table--${ tableSize }` : '']"
     @mouseleave="handleMouseLeave($event)"
   >
     <div
@@ -25,7 +25,7 @@
       v-if="showHeader"
       ref="headerWrapper"
       v-mousewheel="handleHeaderFooterMousewheel"
-      class="fm-table__header-wrapper"
+      class="ui-table__header-wrapper"
     >
       <table-header
         ref="tableHeader"
@@ -39,7 +39,7 @@
     </div>
     <div
       ref="bodyWrapper"
-      class="fm-table__body-wrapper"
+      class="ui-table__body-wrapper"
       :class="[layout.scrollX ? `is-scrolling-${scrollPosition}` : 'is-scrolling-none']"
       :style="[bodyHeight]"
     >
@@ -57,17 +57,17 @@
       <div
         v-if="!data || data.length === 0"
         ref="emptyBlock"
-        class="fm-table__empty-block"
+        class="ui-table__empty-block"
         :style="emptyBlockStyle"
       >
-        <span class="fm-table__empty-text">
-          <slot name="empty">{{ emptyText || t('fm.table.emptyText') }}</slot>
+        <span class="ui-table__empty-text">
+          <slot name="empty">{{ emptyText || t('ui.table.emptyText') }}</slot>
         </span>
       </div>
       <div
         v-if="$slots.append"
         ref="appendWrapper"
-        class="fm-table__append-wrapper"
+        class="ui-table__append-wrapper"
       >
         <slot name="append" />
       </div>
@@ -77,12 +77,12 @@
       v-show="data && data.length > 0"
       ref="footerWrapper"
       v-mousewheel="handleHeaderFooterMousewheel"
-      class="fm-table__footer-wrapper"
+      class="ui-table__footer-wrapper"
     >
       <table-footer
         :store="store"
         :border="border"
-        :sum-text="sumText || t('fm.table.sumText')"
+        :sum-text="sumText || t('ui.table.sumText')"
         :summary-method="summaryMethod"
         :default-sort="defaultSort"
         :style="{
@@ -94,7 +94,7 @@
       v-if="fixedColumns.length > 0"
       ref="fixedWrapper"
       v-mousewheel="handleFixedMousewheel"
-      class="fm-table__fixed"
+      class="ui-table__fixed"
       :style="[{
                  width: layout.fixedWidth ? layout.fixedWidth + 'px' : ''
                },
@@ -103,7 +103,7 @@
       <div
         v-if="showHeader"
         ref="fixedHeaderWrapper"
-        class="fm-table__fixed-header-wrapper"
+        class="ui-table__fixed-header-wrapper"
       >
         <table-header
           ref="fixedTableHeader"
@@ -117,7 +117,7 @@
       </div>
       <div
         ref="fixedBodyWrapper"
-        class="fm-table__fixed-body-wrapper"
+        class="ui-table__fixed-body-wrapper"
         :style="[{
                    top: layout.headerHeight + 'px'
                  },
@@ -136,7 +136,7 @@
         />
         <div
           v-if="$slots.append"
-          class="fm-table__append-gutter"
+          class="ui-table__append-gutter"
           :style="{ height: layout.appendHeight + 'px'}"
         />
       </div>
@@ -144,12 +144,12 @@
         v-if="showSummary"
         v-show="data && data.length > 0"
         ref="fixedFooterWrapper"
-        class="fm-table__fixed-footer-wrapper"
+        class="ui-table__fixed-footer-wrapper"
       >
         <table-footer
           fixed="left"
           :border="border"
-          :sum-text="sumText || t('fm.table.sumText')"
+          :sum-text="sumText || t('ui.table.sumText')"
           :summary-method="summaryMethod"
           :store="store"
           :style="{
@@ -162,7 +162,7 @@
       v-if="rightFixedColumns.length > 0"
       ref="rightFixedWrapper"
       v-mousewheel="handleFixedMousewheel"
-      class="fm-table__fixed-right"
+      class="ui-table__fixed-right"
       :style="[{
                  width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '',
                  right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 0)) + 'px' : ''
@@ -172,7 +172,7 @@
       <div
         v-if="showHeader"
         ref="rightFixedHeaderWrapper"
-        class="fm-table__fixed-header-wrapper"
+        class="ui-table__fixed-header-wrapper"
       >
         <table-header
           ref="rightFixedTableHeader"
@@ -186,7 +186,7 @@
       </div>
       <div
         ref="rightFixedBodyWrapper"
-        class="fm-table__fixed-body-wrapper"
+        class="ui-table__fixed-body-wrapper"
         :style="[{
                    top: layout.headerHeight + 'px'
                  },
@@ -205,7 +205,7 @@
         />
         <div
           v-if="$slots.append"
-          class="fm-table__append-gutter"
+          class="ui-table__append-gutter"
           :style="{ height: layout.appendHeight + 'px' }"
         />
       </div>
@@ -213,12 +213,12 @@
         v-if="showSummary"
         v-show="data && data.length > 0"
         ref="rightFixedFooterWrapper"
-        class="fm-table__fixed-footer-wrapper"
+        class="ui-table__fixed-footer-wrapper"
       >
         <table-footer
           fixed="right"
           :border="border"
-          :sum-text="sumText || t('fm.table.sumText')"
+          :sum-text="sumText || t('ui.table.sumText')"
           :summary-method="summaryMethod"
           :store="store"
           :style="{
@@ -230,7 +230,7 @@
     <div
       v-if="rightFixedColumns.length > 0"
       ref="rightFixedPatch"
-      class="fm-table__fixed-right-patch"
+      class="ui-table__fixed-right-patch"
       :style="{
         width: layout.scrollY ? layout.gutterWidth + 'px' : '0',
         height: layout.headerHeight + 'px'
@@ -239,7 +239,7 @@
     <div
       v-show="resizeProxyVisible"
       ref="resizeProxy"
-      class="fm-table__column-resize-proxy"
+      class="ui-table__column-resize-proxy"
     />
   </div>
 </template>
@@ -260,7 +260,7 @@ import { parseHeight } from './util'
 let tableIdSeed = 1
 
 export default {
-  name: 'FmTable',
+  name: 'UiTable',
 
   directives: {
     Mousewheel
@@ -497,7 +497,7 @@ export default {
 
     doLayout () {
       if (this.shouldUpdateHeight) {
-        this.layout.updateFmsHeight()
+        this.layout.updateUisHeight()
       }
       this.layout.updateColumnsWidth()
     },
@@ -655,7 +655,7 @@ export default {
   },
 
   created () {
-    this.tableId = 'fm-table_' + tableIdSeed++
+    this.tableId = 'ui-table_' + tableIdSeed++
     this.debouncedUpdateLayout = debounce(50, () => this.doLayout())
   },
 

@@ -4,12 +4,12 @@
 
 @include b(form) {
   @include m(label-left) {
-    & .fm-form-item__label {
+    & .ui-form-item__label {
       text-align: left;
     }
   }
   @include m(label-top) {
-    & .fm-form-item__label {
+    & .ui-form-item__label {
       float: none;
       display: inline-block;
       text-align: left;
@@ -17,20 +17,20 @@
     }
   }
   @include m(inline) {
-    & .fm-form-item {
+    & .ui-form-item {
       display: inline-block;
       margin-right: 10px;
       vertical-align: top;
     }
-    & .fm-form-item__label {
+    & .ui-form-item__label {
       float: none;
       display: inline-block;
     }
-    & .fm-form-item__content {
+    & .ui-form-item__content {
       display: inline-block;
       vertical-align: top;
     }
-    &.fm-form--label-top .fm-form-item__content {
+    &.ui-form--label-top .ui-form-item__content {
       display: block;
     }
   }
@@ -39,54 +39,54 @@
   margin-bottom: 22px;
   @include utils-clearfix;
 
-  & .fm-form-item {
+  & .ui-form-item {
     margin-bottom: 0;
   }
 
-  & .fm-input__validateIcon {
+  & .ui-input__validateIcon {
     display: none;
   }
 
   @include m(medium) {
-    .fm-form-item__label {
+    .ui-form-item__label {
       line-height: 36px;
     }
-    .fm-form-item__content {
+    .ui-form-item__content {
       line-height: 36px;
     }
   }
   @include m(small) {
-    .fm-form-item__label {
+    .ui-form-item__label {
       line-height: 32px;
     }
-    .fm-form-item__content {
+    .ui-form-item__content {
       line-height: 32px;
     }
-    &.fm-form-item {
+    &.ui-form-item {
       margin-bottom: 18px;
     }
-    .fm-form-item__error {
+    .ui-form-item__error {
       padding-top: 2px;
     }
   }
   @include m(mini) {
-    .fm-form-item__label {
+    .ui-form-item__label {
       line-height: 28px;
     }
-    .fm-form-item__content {
+    .ui-form-item__content {
       line-height: 28px;
     }
-    &.fm-form-item {
+    &.ui-form-item {
       margin-bottom: 18px;
     }
-    .fm-form-item__error {
+    .ui-form-item__error {
       padding-top: 1px;
     }
   }
 
   @include e(label-wrap) {
     float: left;
-    .fm-form-item__label {
+    .ui-form-item__label {
       display: inline-block;
       float: none;
     }
@@ -108,7 +108,7 @@
     font-size: 14px;
     @include utils-clearfix;
 
-    .fm-input-group {
+    .ui-input-group {
       vertical-align: top;
     }
   }
@@ -132,8 +132,8 @@
 
   @include when(required) {
     @include pseudo('not(.is-no-asterisk)') {
-      & > .fm-form-item__label:before,
-      & .fm-form-item__label-wrap > .fm-form-item__label:before {
+      & > .ui-form-item__label:before,
+      & .ui-form-item__label-wrap > .ui-form-item__label:before {
         content: '*';
         color: $--color-danger;
         margin-right: 4px;
@@ -142,25 +142,25 @@
   }
 
   @include when(error) {
-    & .fm-input__inner,
-    & .fm-textarea__inner {
+    & .ui-input__inner,
+    & .ui-textarea__inner {
       &, &:focus {
         border-color: $--color-danger;
       }
     }
-    & .fm-input-group__append,
-    & .fm-input-group__prepend {
-      & .fm-input__inner {
+    & .ui-input-group__append,
+    & .ui-input-group__prepend {
+      & .ui-input__inner {
         border-color: transparent;
       }
     }
-    .fm-input__validateIcon {
+    .ui-input__validateIcon {
       color: $--color-danger;
     }
   }
 
   @include m(feedback) {
-    .fm-input__validateIcon {
+    .ui-input__validateIcon {
       display: inline-block;
     }
   }

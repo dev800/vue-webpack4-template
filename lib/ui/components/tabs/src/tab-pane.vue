@@ -3,7 +3,7 @@
     v-if="(!lazy || loaded) || active"
     v-show="active"
     :id="`pane-${paneName}`"
-    class="fm-tab-pane"
+    class="ui-tab-pane"
     role="tabpanel"
     :aria-hidden="!active"
     :aria-labelledby="`tab-${paneName}`"
@@ -13,9 +13,9 @@
 </template>
 <script>
 export default {
-  name: 'FmTabPane',
+  name: 'UiTabPane',
 
-  componentName: 'FmTabPane',
+  componentName: 'UiTabPane',
 
   props: {
     label: String,

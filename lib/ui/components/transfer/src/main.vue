@@ -1,43 +1,43 @@
 <template>
-  <div class="fm-transfer">
+  <div class="ui-transfer">
     <transfer-panel
       ref="leftPanel"
       v-bind="$props"
       :data="sourceData"
-      :title="titles[0] || t('fm.transfer.titles.0')"
+      :title="titles[0] || t('ui.transfer.titles.0')"
       :default-checked="leftDefaultChecked"
-      :placeholder="filterPlaceholder || t('fm.transfer.filterPlaceholder')"
+      :placeholder="filterPlaceholder || t('ui.transfer.filterPlaceholder')"
       @checked-change="onSourceCheckedChange"
     >
       <slot name="left-footer" />
     </transfer-panel>
-    <div class="fm-transfer__buttons">
-      <fm-button
+    <div class="ui-transfer__buttons">
+      <ui-button
         type="primary"
-        :class="['fm-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
+        :class="['ui-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         :disabled="rightChecked.length === 0"
         @click.native="addToLeft"
       >
         <svg-icon icon-class="solid-angle-left"></svg-icon>
         <span v-if="buttonTexts[0] !== undefined">{{ buttonTexts[0] }}</span>
-      </fm-button>
-      <fm-button
+      </ui-button>
+      <ui-button
         type="primary"
-        :class="['fm-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
+        :class="['ui-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         :disabled="leftChecked.length === 0"
         @click.native="addToRight"
       >
         <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
         <svg-icon icon-class="solid-angle-right"></svg-icon>
-      </fm-button>
+      </ui-button>
     </div>
     <transfer-panel
       ref="rightPanel"
       v-bind="$props"
       :data="targetData"
-      :title="titles[1] || t('fm.transfer.titles.1')"
+      :title="titles[1] || t('ui.transfer.titles.1')"
       :default-checked="rightDefaultChecked"
-      :placeholder="filterPlaceholder || t('fm.transfer.filterPlaceholder')"
+      :placeholder="filterPlaceholder || t('ui.transfer.filterPlaceholder')"
       @checked-change="onTargetCheckedChange"
     >
       <slot name="right-footer" />
@@ -46,18 +46,18 @@
 </template>
 
 <script>
-import FmButton from '../../button'
+import UiButton from '../../button'
 import Emitter from '../../../js/mixins/emitter'
 import Locale from '../../../js/mixins/locale'
 import TransferPanel from './transfer-panel.vue'
 import Migrating from '../../../js/mixins/migrating'
 
 export default {
-  name: 'FmTransfer',
+  name: 'UiTransfer',
 
   components: {
     TransferPanel,
-    FmButton
+    UiButton
   },
 
   mixins: [Emitter, Locale, Migrating],
@@ -166,7 +166,7 @@ export default {
 
   watch: {
     value (val) {
-      this.dispatch('FmFormItem', 'fm.form.change', val)
+      this.dispatch('UiFormItem', 'ui.form.change', val)
     }
   },
 

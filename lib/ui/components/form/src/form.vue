@@ -1,9 +1,9 @@
 <template>
   <form
-    class="fm-form"
+    class="ui-form"
     :class="[
-      labelPosition ? 'fm-form--label-' + labelPosition : '',
-      { 'fm-form--inline': inline }
+      labelPosition ? 'ui-form--label-' + labelPosition : '',
+      { 'ui-form--inline': inline }
     ]"
   >
     <slot />
@@ -13,13 +13,13 @@
 import objectAssign from '../../../js/utils/merge'
 
 export default {
-  name: 'FmForm',
+  name: 'UiForm',
 
-  componentName: 'FmForm',
+  componentName: 'UiForm',
 
   provide () {
     return {
-      fmForm: this
+      uiForm: this
     }
   },
 
@@ -77,13 +77,13 @@ export default {
     }
   },
   created () {
-    this.$on('fm.form.addField', (field) => {
+    this.$on('ui.form.addField', (field) => {
       if (field) {
         this.fields.push(field)
       }
     })
     /* istanbul ignore next */
-    this.$on('fm.form.removeField', (field) => {
+    this.$on('ui.form.removeField', (field) => {
       if (field.prop) {
         this.fields.splice(this.fields.indexOf(field), 1)
       }
@@ -92,7 +92,7 @@ export default {
   methods: {
     resetFields () {
       if (!this.model) {
-        console.warn('[Fmement Warn][Form]model is required for resetFields to work.')
+        console.warn('[Uiement Warn][Form]model is required for resetFields to work.')
         return
       }
       this.fields.forEach(field => {
@@ -111,7 +111,7 @@ export default {
     },
     validate (callback) {
       if (!this.model) {
-        console.warn('[Fmement Warn][Form]model is required for validate to work!')
+        console.warn('[Uiement Warn][Form]model is required for validate to work!')
         return
       }
 
@@ -152,7 +152,7 @@ export default {
       props = [].concat(props)
       const fields = this.fields.filter(field => props.indexOf(field.prop) !== -1)
       if (!fields.length) {
-        console.warn('[Fmement Warn]please pass correct props!')
+        console.warn('[Uiement Warn]please pass correct props!')
         return
       }
 
@@ -164,7 +164,7 @@ export default {
       const index = this.potentialLabelWidthArr.indexOf(width)
       // it's impossible
       if (index === -1) {
-        throw new Error('[FmementForm]unpected width ', width)
+        throw new Error('[UiementForm]unpected width ', width)
       }
       return index
     },

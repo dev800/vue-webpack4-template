@@ -1,21 +1,21 @@
 <template>
   <transition
-    name="fm-zoom-in-top"
+    name="ui-zoom-in-top"
     @after-leave="$emit('dodestroy')"
   >
     <div
       v-show="visible"
-      class="fm-time-range-picker fm-picker-panel fm-popper"
+      class="ui-time-range-picker ui-picker-panel ui-popper"
       :class="popperClass"
     >
-      <div class="fm-time-range-picker__content">
-        <div class="fm-time-range-picker__cell">
-          <div class="fm-time-range-picker__header">
-            {{ t('fm.datepicker.startTime') }}
+      <div class="ui-time-range-picker__content">
+        <div class="ui-time-range-picker__cell">
+          <div class="ui-time-range-picker__header">
+            {{ t('ui.datepicker.startTime') }}
           </div>
           <div
             :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
-            class="fm-time-range-picker__body fm-time-panel__content"
+            class="ui-time-range-picker__body ui-time-panel__content"
           >
             <time-spinner
               ref="minSpinner"
@@ -28,13 +28,13 @@
             />
           </div>
         </div>
-        <div class="fm-time-range-picker__cell">
-          <div class="fm-time-range-picker__header">
-            {{ t('fm.datepicker.endTime') }}
+        <div class="ui-time-range-picker__cell">
+          <div class="ui-time-range-picker__header">
+            {{ t('ui.datepicker.endTime') }}
           </div>
           <div
             :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
-            class="fm-time-range-picker__body fm-time-panel__content"
+            class="ui-time-range-picker__body ui-time-panel__content"
           >
             <time-spinner
               ref="maxSpinner"
@@ -48,21 +48,21 @@
           </div>
         </div>
       </div>
-      <div class="fm-time-panel__footer">
+      <div class="ui-time-panel__footer">
         <button
           type="button"
-          class="fm-time-panel__btn cancel"
+          class="ui-time-panel__btn cancel"
           @click="handleCancel()"
         >
-          {{ t('fm.datepicker.cancel') }}
+          {{ t('ui.datepicker.cancel') }}
         </button>
         <button
           type="button"
-          class="fm-time-panel__btn confirm"
+          class="ui-time-panel__btn confirm"
           :disabled="btnDisabled"
           @click="handleConfirm()"
         >
-          {{ t('fm.datepicker.confirm') }}
+          {{ t('ui.datepicker.confirm') }}
         </button>
       </div>
     </div>

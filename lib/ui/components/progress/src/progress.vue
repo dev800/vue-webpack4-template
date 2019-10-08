@@ -1,12 +1,12 @@
 <template>
   <div
-    class="fm-progress"
+    class="ui-progress"
     :class="[
-      'fm-progress--' + type,
+      'ui-progress--' + type,
       status ? 'is-' + status : '',
       {
-        'fm-progress--without-text': !showText,
-        'fm-progress--text-inside': textInside,
+        'ui-progress--without-text': !showText,
+        'ui-progress--text-inside': textInside,
       }
     ]"
     role="progressbar"
@@ -16,19 +16,19 @@
   >
     <div
       v-if="type === 'line'"
-      class="fm-progress-bar"
+      class="ui-progress-bar"
     >
       <div
-        class="fm-progress-bar__outer"
+        class="ui-progress-bar__outer"
         :style="{height: strokeWidth + 'px'}"
       >
         <div
-          class="fm-progress-bar__inner"
+          class="ui-progress-bar__inner"
           :style="barStyle"
         >
           <div
             v-if="showText && textInside"
-            class="fm-progress-bar__innerText"
+            class="ui-progress-bar__innerText"
           >
             {{ content }}
           </div>
@@ -37,12 +37,12 @@
     </div>
     <div
       v-else
-      class="fm-progress-circle"
+      class="ui-progress-circle"
       :style="{height: width + 'px', width: width + 'px'}"
     >
       <svg viewBox="0 0 100 100">
         <path
-          class="fm-progress-circle__track"
+          class="ui-progress-circle__track"
           :d="trackPath"
           stroke="#e5e9f2"
           :stroke-width="relativeStrokeWidth"
@@ -50,7 +50,7 @@
           :style="trailPathStyle"
         />
         <path
-          class="fm-progress-circle__path"
+          class="ui-progress-circle__path"
           :d="trackPath"
           :stroke="stroke"
           fill="none"
@@ -62,7 +62,7 @@
     </div>
     <div
       v-if="showText && !textInside"
-      class="fm-progress__text"
+      class="ui-progress__text"
       :style="{fontSize: progressTextSize + 'px'}"
     >
       <template v-if="!status">
@@ -77,7 +77,7 @@
 </template>
 <script>
 export default {
-  name: 'FmProgress',
+  name: 'UiProgress',
   props: {
     type: {
       type: String,

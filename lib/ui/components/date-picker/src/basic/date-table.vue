@@ -2,7 +2,7 @@
   <table
     cellspacing="0"
     cellpadding="0"
-    class="fm-date-table"
+    class="ui-date-table"
     :class="{ 'is-week-mode': selectionMode === 'week' }"
     @click="handleClick"
     @mousemove="handleMouseMove"
@@ -10,19 +10,19 @@
     <tbody>
       <tr>
         <th v-if="showWeekNumber">
-          {{ t('fm.datepicker.week') }}
+          {{ t('ui.datepicker.week') }}
         </th>
         <th
           v-for="(week, key) in WEEKS"
           :key="key"
         >
-          {{ t('fm.datepicker.weeks.' + week) }}
+          {{ t('ui.datepicker.weeks.' + week) }}
         </th>
       </tr>
       <tr
         v-for="(row, key) in rows"
         :key="key"
-        class="fm-date-table__row"
+        class="ui-date-table__row"
         :class="{ current: isWeekActive(row[1]) }"
       >
         <td

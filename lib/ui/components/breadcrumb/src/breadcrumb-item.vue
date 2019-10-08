@@ -1,8 +1,8 @@
 <template>
-  <span class="fm-breadcrumb__item">
+  <span class="ui-breadcrumb__item">
     <span
       ref="link"
-      :class="['fm-breadcrumb__inner', to ? 'is-link' : '']"
+      :class="['ui-breadcrumb__inner', to ? 'is-link' : '']"
       role="link"
     >
       <slot />
@@ -10,18 +10,18 @@
     <svg-icon
       v-if="separatorClass"
       :icon-class="separatorClass"
-      class="fm-breadcrumb__separator"
+      class="ui-breadcrumb__separator"
     ></svg-icon>
     <span
       v-else
-      class="fm-breadcrumb__separator"
+      class="ui-breadcrumb__separator"
       role="presentation"
     >{{ separator }}</span>
   </span>
 </template>
 <script>
 export default {
-  name: 'FmBreadcrumbItem',
+  name: 'UiBreadcrumbItem',
   props: {
     to: {},
     replace: Boolean
@@ -33,11 +33,11 @@ export default {
     }
   },
 
-  inject: ['fmBreadcrumb'],
+  inject: ['uiBreadcrumb'],
 
   mounted () {
-    this.separator = this.fmBreadcrumb.separator
-    this.separatorClass = this.fmBreadcrumb.separatorClass
+    this.separator = this.uiBreadcrumb.separator
+    this.separatorClass = this.uiBreadcrumb.separatorClass
     const link = this.$refs.link
     link.setAttribute('role', 'link')
     link.addEventListener('click', _ => {

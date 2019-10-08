@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fm-tabs__active-bar"
+    class="ui-tabs__active-bar"
     :class="`is-${ rootTabs.tabPosition }`"
     :style="barStyle"
   />

@@ -1,13 +1,13 @@
 <template>
   <div
     v-clickoutside="close"
-    class="fm-autocomplete"
+    class="ui-autocomplete"
     aria-haspopup="listbox"
     role="combobox"
     :aria-expanded="suggestionVisible"
     :aria-owns="id"
   >
-    <fm-input
+    <ui-input
       ref="input"
       v-bind="[$props, $attrs]"
       @input="handleChange"
@@ -43,8 +43,8 @@
       >
         <slot name="suffix" />
       </template>
-    </fm-input>
-    <fm-autocomplete-suggestions
+    </ui-input>
+    <ui-autocomplete-suggestions
       :id="id"
       ref="suggestions"
       visible-arrow
@@ -66,31 +66,31 @@
           {{ item[valueKey] }}
         </slot>
       </li>
-    </fm-autocomplete-suggestions>
+    </ui-autocomplete-suggestions>
   </div>
 </template>
 <script>
 import { debounce } from 'throttle-debounce'
-import FmInput from '../../input'
+import UiInput from '../../input'
 import Clickoutside from '../../../js/utils/clickoutside'
-import FmAutocompleteSuggestions from './autocomplete-suggestions.vue'
+import UiAutocompleteSuggestions from './autocomplete-suggestions.vue'
 import Emitter from '../../../js/mixins/emitter'
 import Migrating from '../../../js/mixins/migrating'
 import { generateId } from '../../../js/utils/util'
 import Focus from '../../../js/mixins/focus'
 
 export default {
-  name: 'FmAutocomplete',
+  name: 'UiAutocomplete',
 
   mixins: [Emitter, Focus('input'), Migrating],
 
   inheritAttrs: false,
 
-  componentName: 'FmAutocomplete',
+  componentName: 'UiAutocomplete',
 
   components: {
-    FmInput,
-    FmAutocompleteSuggestions
+    UiInput,
+    UiAutocompleteSuggestions
   },
 
   directives: { Clickoutside },
@@ -161,14 +161,14 @@ export default {
       return (isValidData || this.loading) && this.activated
     },
     id () {
-      return `fm-autocomplete-${generateId()}`
+      return `ui-autocomplete-${generateId()}`
     }
   },
   watch: {
     suggestionVisible (val) {
       const $input = this.getInput()
       if ($input) {
-        this.broadcast('FmAutocompleteSuggestions', 'visible', [val, $input.offsetWidth])
+        this.broadcast('UiAutocompleteSuggestions', 'visible', [val, $input.offsetWidth])
       }
     }
   },
@@ -209,7 +209,7 @@ export default {
           this.suggestions = suggestions
           this.highlightedIndex = this.highlightFirstItem ? 0 : -1
         } else {
-          console.error('[Fmement Error][Autocomplete]autocomplete suggestions must be an array')
+          console.error('[Uiement Error][Autocomplete]autocomplete suggestions must be an array')
         }
       })
     },
@@ -269,8 +269,8 @@ export default {
       if (index >= this.suggestions.length) {
         index = this.suggestions.length - 1
       }
-      const suggestion = this.$refs.suggestions.$el.querySelector('.fm-autocomplete-suggestion__wrap')
-      const suggestionList = suggestion.querySelectorAll('.fm-autocomplete-suggestion__list li')
+      const suggestion = this.$refs.suggestions.$el.querySelector('.ui-autocomplete-suggestion__wrap')
+      const suggestionList = suggestion.querySelectorAll('.ui-autocomplete-suggestion__list li')
 
       const highlightItem = suggestionList[index]
       const scrollTop = suggestion.scrollTop

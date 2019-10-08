@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fm-header"
+    class="ui-header"
     :style="{ height }"
   >
     <slot />
@@ -9,9 +9,9 @@
 
 <script>
 export default {
-  name: 'FmHeader',
+  name: 'UiHeader',
 
-  componentName: 'FmHeader',
+  componentName: 'UiHeader',
 
   props: {
     height: {

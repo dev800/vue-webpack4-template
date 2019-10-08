@@ -10,8 +10,8 @@
   height: $--switch-height;
   vertical-align: middle;
   @include when(disabled) {
-    & .fm-switch__core,
-    & .fm-switch__label {
+    & .ui-switch__core,
+    & .ui-switch__label {
       cursor: not-allowed;
     }
   }
@@ -80,7 +80,7 @@
   }
 
   @include when(checked) {
-    .fm-switch__core {
+    .ui-switch__core {
       border-color: $--switch-on-color;
       background-color: $--switch-on-color;
       &::after {
@@ -95,13 +95,13 @@
   }
 
   @include m(wide) {
-    .fm-switch__label {
-      &.fm-switch__label--left {
+    .ui-switch__label {
+      &.ui-switch__label--left {
         span {
           left: 10px;
         }
       }
-      &.fm-switch__label--right {
+      &.ui-switch__label--right {
         span {
           right: 10px;
         }

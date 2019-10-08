@@ -1,14 +1,14 @@
 <template>
   <div
-    class="fm-time-spinner"
+    class="ui-time-spinner"
     :class="{ 'has-seconds': showSeconds }"
   >
     <template v-if="!arrowControl">
-      <fm-scrollbar
-        class="fm-time-spinner__wrapper"
+      <ui-scrollbar
+        class="ui-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         ref="hours"
-        view-class="fm-time-spinner__list"
+        view-class="ui-time-spinner__list"
         noresize
         tag="ul"
         @mouseenter.native="emitSelectRange('hours')"
@@ -17,18 +17,18 @@
         <li
           v-for="(disabled, hour) in hoursList"
           :key="hour"
-          class="fm-time-spinner__item"
+          class="ui-time-spinner__item"
           :class="{ 'active': hour === hours, 'disabled': disabled }"
           @click="handleClick('hours', { value: hour, disabled: disabled })"
         >
           {{ ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{ amPm(hour) }}
         </li>
-      </fm-scrollbar>
-      <fm-scrollbar
-        class="fm-time-spinner__wrapper"
+      </ui-scrollbar>
+      <ui-scrollbar
+        class="ui-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         ref="minutes"
-        view-class="fm-time-spinner__list"
+        view-class="ui-time-spinner__list"
         noresize
         tag="ul"
         @mouseenter.native="emitSelectRange('minutes')"
@@ -37,19 +37,19 @@
         <li
           v-for="(enabled, key) in minutesList"
           :key="key"
-          class="fm-time-spinner__item"
+          class="ui-time-spinner__item"
           :class="{ 'active': key === minutes, disabled: !enabled }"
           @click="handleClick('minutes', { value: key, disabled: false })"
         >
           {{ ('0' + key).slice(-2) }}
         </li>
-      </fm-scrollbar>
-      <fm-scrollbar
+      </ui-scrollbar>
+      <ui-scrollbar
         v-show="showSeconds"
-        class="fm-time-spinner__wrapper"
+        class="ui-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         ref="seconds"
-        view-class="fm-time-spinner__list"
+        view-class="ui-time-spinner__list"
         noresize
         tag="ul"
         @mouseenter.native="emitSelectRange('seconds')"
@@ -58,37 +58,37 @@
         <li
           v-for="(second, key) in 60"
           :key="key"
-          class="fm-time-spinner__item"
+          class="ui-time-spinner__item"
           :class="{ 'active': key === seconds }"
           @click="handleClick('seconds', { value: key, disabled: false })"
         >
           {{ ('0' + key).slice(-2) }}
         </li>
-      </fm-scrollbar>
+      </ui-scrollbar>
     </template>
     <template v-if="arrowControl">
       <div
-        class="fm-time-spinner__wrapper is-arrow"
+        class="ui-time-spinner__wrapper is-arrow"
         @mouseenter="emitSelectRange('hours')"
       >
         <svg-icon
           v-repeat-click="decrease"
           icon-class="solid-chevron-up"
-          class="fm-time-spinner__arrow"
+          class="ui-time-spinner__arrow"
         ></svg-icon>
         <svg-icon
           v-repeat-click="increase"
           icon-class="solid-chevron-down"
-          class="fm-time-spinner__arrow"
+          class="ui-time-spinner__arrow"
         ></svg-icon>
         <ul
           ref="hours"
-          class="fm-time-spinner__list"
+          class="ui-time-spinner__list"
         >
           <li
             v-for="(hour, key) in arrowHourList"
             :key="key"
-            class="fm-time-spinner__item"
+            class="ui-time-spinner__item"
             :class="{ 'active': hour === hours, 'disabled': hoursList[hour] }"
           >
             {{ hour === undefined ? '' : ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) + amPm(hour) }}
@@ -96,27 +96,27 @@
         </ul>
       </div>
       <div
-        class="fm-time-spinner__wrapper is-arrow"
+        class="ui-time-spinner__wrapper is-arrow"
         @mouseenter="emitSelectRange('minutes')"
       >
         <svg-icon
           v-repeat-click="decrease"
           icon-class="solid-chevron-up"
-          class="fm-time-spinner__arrow"
+          class="ui-time-spinner__arrow"
         ></svg-icon>
         <svg-icon
           v-repeat-click="increase"
           icon-class="solid-chevron-down"
-          class="fm-time-spinner__arrow"
+          class="ui-time-spinner__arrow"
         ></svg-icon>
         <ul
           ref="minutes"
-          class="fm-time-spinner__list"
+          class="ui-time-spinner__list"
         >
           <li
             v-for="(minute, key) in arrowMinuteList"
             :key="key"
-            class="fm-time-spinner__item"
+            class="ui-time-spinner__item"
             :class="{ 'active': minute === minutes }"
           >
             {{ minute === undefined ? '' : ('0' + minute).slice(-2) }}
@@ -125,27 +125,27 @@
       </div>
       <div
         v-if="showSeconds"
-        class="fm-time-spinner__wrapper is-arrow"
+        class="ui-time-spinner__wrapper is-arrow"
         @mouseenter="emitSelectRange('seconds')"
       >
         <svg-icon
           v-repeat-click="decrease"
           icon-class="solid-chevron-up"
-          class="fm-time-spinner__arrow"
+          class="ui-time-spinner__arrow"
         ></svg-icon>
         <svg-icon
           v-repeat-click="increase"
           icon-class="solid-chevron-down"
-          class="fm-time-spinner__arrow"
+          class="ui-time-spinner__arrow"
         ></svg-icon>
         <ul
           ref="seconds"
-          class="fm-time-spinner__list"
+          class="ui-time-spinner__list"
         >
           <li
             v-for="(second, key) in arrowSecondList"
             :key="key"
-            class="fm-time-spinner__item"
+            class="ui-time-spinner__item"
             :class="{ 'active': second === seconds }"
           >
             {{ second === undefined ? '' : ('0' + second).slice(-2) }}
@@ -158,11 +158,11 @@
 
 <script type="text/babel">
 import { getRangeHours, getRangeMinutes, modifyTime } from '../../../../js/utils/date-util'
-import FmScrollbar from '../../../scrollbar'
+import UiScrollbar from '../../../scrollbar'
 import RepeatClick from '../../../../js/directives/repeat-click'
 
 export default {
-  components: { FmScrollbar },
+  components: { UiScrollbar },
 
   directives: {
     repeatClick: RepeatClick

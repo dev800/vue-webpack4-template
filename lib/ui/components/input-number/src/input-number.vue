@@ -1,8 +1,8 @@
 <template>
   <div
     :class="[
-      'fm-input-number',
-      inputNumberSize ? 'fm-input-number--' + inputNumberSize : '',
+      'ui-input-number',
+      inputNumberSize ? 'ui-input-number--' + inputNumberSize : '',
       { 'is-disabled': inputNumberDisabled },
       { 'is-without-controls': !controls },
       { 'is-controls-right': controlsAtRight }
@@ -12,7 +12,7 @@
     <span
       v-if="controls"
       v-repeat-click="decrease"
-      class="fm-input-number__decrease"
+      class="ui-input-number__decrease"
       role="button"
       :class="{'is-disabled': minDisabled}"
       @keydown.enter="decrease"
@@ -22,14 +22,14 @@
     <span
       v-if="controls"
       v-repeat-click="increase"
-      class="fm-input-number__increase"
+      class="ui-input-number__increase"
       role="button"
       :class="{'is-disabled': maxDisabled}"
       @keydown.enter="increase"
     >
       <svg-icon :icon-class="`${controlsAtRight ? 'solid-chevron-up' : 'solid-plus'}`"></svg-icon>
     </span>
-    <fm-input
+    <ui-input
       ref="input"
       :value="displayValue"
       :placeholder="placeholder"
@@ -49,18 +49,18 @@
   </div>
 </template>
 <script>
-import FmInput from '../../input'
+import UiInput from '../../input'
 import Focus from '../../../js/mixins/focus'
 import RepeatClick from '../../../js/directives/repeat-click'
 
 export default {
-  name: 'FmInputNumber',
+  name: 'UiInputNumber',
   mixins: [Focus('input')],
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -68,7 +68,7 @@ export default {
     repeatClick: RepeatClick
   },
   components: {
-    FmInput
+    UiInput
   },
   props: {
     step: {
@@ -126,7 +126,7 @@ export default {
       const stepPrecision = getPrecision(step)
       if (precision !== undefined) {
         if (stepPrecision > precision) {
-          console.warn('[Fmement Warn][InputNumber]precision should not be less than the decimal places of step')
+          console.warn('[Uiement Warn][InputNumber]precision should not be less than the decimal places of step')
         }
         return precision
       } else {
@@ -136,14 +136,14 @@ export default {
     controlsAtRight () {
       return this.controls && this.controlsPosition === 'right'
     },
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
     inputNumberSize () {
-      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      return this.size || this._uiFormItemSize || (this.$ELEMENT || {}).size
     },
     inputNumberDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     },
     displayValue () {
       if (this.userInput !== null) {

@@ -18,7 +18,7 @@ export default {
     firstDayOfWeek: Number
   },
 
-  inject: ['fmCalendar'],
+  inject: ['uiCalendar'],
 
   data () {
     return {
@@ -43,7 +43,7 @@ export default {
     },
 
     formatedToday () {
-      return this.fmCalendar.formatedToday
+      return this.uiCalendar.formatedToday
     },
 
     isInRange () {
@@ -143,7 +143,7 @@ export default {
     },
 
     cellRenderProxy ({ text, type }) {
-      const render = this.fmCalendar.$scopedSlots.dateCell
+      const render = this.uiCalendar.$scopedSlots.dateCell
       if (!render) return <span>{text}</span>
 
       const day = this.getFormateDate(text, type)
@@ -166,7 +166,7 @@ export default {
     return (
       <table
         class={{
-          'fm-calendar-table': true,
+          'ui-calendar-table': true,
           'is-range': this.isInRange
         }}
         cellspacing="0"
@@ -178,15 +178,15 @@ export default {
           {
             this.rows.map((row, index) => <tr
               class={{
-                'fm-calendar-table__row': true,
-                'fm-calendar-table__row--hide-border': index === 0 && this.hideHeader
+                'ui-calendar-table__row': true,
+                'ui-calendar-table__row--hide-border': index === 0 && this.hideHeader
               }}
               key={index}>
               {
                 row.map((cell, key) => <td key={key}
                   class={this.getCellClass(cell)}
                   onClick={this.pickDay.bind(this, cell)}>
-                  <div class="fm-calendar-day">
+                  <div class="ui-calendar-day">
                     {
                       this.cellRenderProxy(cell)
                     }

@@ -1,6 +1,6 @@
 <script>
-import FmCheckbox from '../../checkbox'
-import FmRadio from '../../radio'
+import UiCheckbox from '../../checkbox'
+import UiRadio from '../../radio'
 import { isEqual } from '../../../js/utils/util'
 
 const stopPropagation = e => e.stopPropagation()
@@ -9,8 +9,8 @@ export default {
   inject: ['panel'],
 
   components: {
-    FmCheckbox,
-    FmRadio
+    UiCheckbox,
+    UiRadio
   },
 
   props: {
@@ -130,12 +130,12 @@ export default {
       }
 
       return (
-        <fm-checkbox
+        <ui-checkbox
           value={node.checked}
           indeterminate={node.indeterminate}
           disabled={isDisabled}
           {...events}
-        ></fm-checkbox>
+        ></ui-checkbox>
       )
     },
 
@@ -148,7 +148,7 @@ export default {
       }
 
       return (
-        <fm-radio
+        <ui-radio
           value={checkedValue}
           label={value}
           disabled={isDisabled}
@@ -156,25 +156,25 @@ export default {
           nativeOnClick={stopPropagation}>
           {/* add an empty element to avoid render label */}
           <span></span>
-        </fm-radio>
+        </ui-radio>
       )
     },
 
     renderCheckIcon (h) {
       return (
-        <svg-icon icon-class="solid-check" class="fm-cascader-node__postfix"></svg-icon>
+        <svg-icon icon-class="solid-check" class="ui-cascader-node__postfix"></svg-icon>
       )
     },
 
     renderLoadingIcon (h) {
       return (
-        <svg-icon icon-class="solid-loading" class="fm-cascader-node__postfix animated spin infinite"></svg-icon>
+        <svg-icon icon-class="solid-loading" class="ui-cascader-node__postfix animated spin infinite"></svg-icon>
       )
     },
 
     renderExpandIcon (h) {
       return (
-        <svg-icon icon-class="solid-chevron-right" class="fm-cascader-node__postfix"></svg-icon>
+        <svg-icon icon-class="solid-chevron-right" class="ui-cascader-node__postfix"></svg-icon>
       )
     },
 
@@ -186,7 +186,7 @@ export default {
         : null
 
       return (
-        <span class="fm-cascader-node__label">{vnode || node.label}</span>
+        <span class="ui-cascader-node__label">{vnode || node.label}</span>
       )
     }
   },
@@ -228,7 +228,7 @@ export default {
         aria-expanded={inActivePath}
         tabindex={disabled ? null : -1}
         class={{
-          'fm-cascader-node': true,
+          'ui-cascader-node': true,
           'is-selectable': checkStrictly,
           'in-active-path': inActivePath,
           'in-checked-path': inCheckedPath,

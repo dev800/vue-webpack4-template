@@ -1,18 +1,18 @@
 <template>
   <div
     v-clickoutside="handleClose"
-    class="fm-select"
-    :class="[selectSize ? 'fm-select--' + selectSize : '']"
+    class="ui-select"
+    :class="[selectSize ? 'ui-select--' + selectSize : '']"
     @click.stop="toggleMenu"
   >
     <div
       v-if="multiple"
       ref="tags"
-      class="fm-select__tags"
+      class="ui-select__tags"
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }"
     >
       <span v-if="collapseTags && selected.length">
-        <fm-tag
+        <ui-tag
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
@@ -20,23 +20,23 @@
           disable-transitions
           @close="deleteTag($event, selected[0])"
         >
-          <span class="fm-select__tags-text">{{ selected[0].currentLabel }}</span>
-        </fm-tag>
-        <fm-tag
+          <span class="ui-select__tags-text">{{ selected[0].currentLabel }}</span>
+        </ui-tag>
+        <ui-tag
           v-if="selected.length > 1"
           :closable="false"
           :size="collapseTagSize"
           type="info"
           disable-transitions
         >
-          <span class="fm-select__tags-text">+ {{ selected.length - 1 }}</span>
-        </fm-tag>
+          <span class="ui-select__tags-text">+ {{ selected.length - 1 }}</span>
+        </ui-tag>
       </span>
       <transition-group
         v-if="!collapseTags"
         @after-leave="resetInputHeight"
       >
-        <fm-tag
+        <ui-tag
           v-for="item in selected"
           :key="getValueKey(item)"
           :closable="!selectDisabled"
@@ -46,13 +46,13 @@
           disable-transitions
           @close="deleteTag($event, item)"
         >
-          <span class="fm-select__tags-text">{{ item.currentLabel }}</span>
-        </fm-tag>
+          <span class="ui-select__tags-text">{{ item.currentLabel }}</span>
+        </ui-tag>
       </transition-group>
 
       <input
         type="text"
-        class="fm-select__input"
+        class="ui-select__input"
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="selectDisabled"
         :autocomplete="autoComplete || autocomplete"
@@ -76,7 +76,7 @@
         @input="debouncedQueryChange"
       >
     </div>
-    <fm-input
+    <ui-input
       :id="id"
       ref="reference"
       v-model="selectedLabel"
@@ -111,43 +111,43 @@
       <template slot="suffix">
         <svg-icon
           v-show="!showClose"
-          class="fm-select__caret fm-input__icon"
+          class="ui-select__caret ui-input__icon"
           :class="[{'is-reverse': !!(remote && filterable && visible)}]"
           :icon-class="iconClass"
         />
         <svg-icon
           v-if="showClose"
-          class="fm-select__caret fm-input__icon"
+          class="ui-select__caret ui-input__icon"
           icon-class="solid-times-circle"
           @click="handleClearClick"
         />
       </template>
-    </fm-input>
+    </ui-input>
     <transition
-      name="fm-zoom-in-top"
+      name="ui-zoom-in-top"
       @before-enter="handleMenuEnter"
       @after-leave="doDestroy"
     >
-      <fm-select-menu
+      <ui-select-menu
         v-show="visible && emptyText !== false"
         ref="popper"
         :append-to-body="popperAppendToBody"
       >
-        <fm-scrollbar
+        <ui-scrollbar
           v-show="options.length > 0 && !loading"
           ref="scrollbar"
           tag="ul"
-          wrap-class="fm-select-dropdown__wrap"
-          view-class="fm-select-dropdown__list"
+          wrap-class="ui-select-dropdown__wrap"
+          view-class="ui-select-dropdown__list"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
         >
-          <fm-option
+          <ui-option
             v-if="showNewOption"
             :value="query"
             created
           />
           <slot />
-        </fm-scrollbar>
+        </ui-scrollbar>
         <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0 ))">
           <slot
             v-if="$slots.empty"
@@ -155,12 +155,12 @@
           />
           <p
             v-else
-            class="fm-select-dropdown__empty"
+            class="ui-select-dropdown__empty"
           >
             {{ emptyText }}
           </p>
         </template>
-      </fm-select-menu>
+      </ui-select-menu>
     </transition>
   </div>
 </template>
@@ -169,11 +169,11 @@
 import Emitter from '../../../js/mixins/emitter'
 import Focus from '../../../js/mixins/focus'
 import Locale from '../../../js/mixins/locale'
-import FmInput from '../../input'
-import FmSelectMenu from './select-dropdown.vue'
-import FmOption from './option.vue'
-import FmTag from '../../tag'
-import FmScrollbar from '../../scrollbar'
+import UiInput from '../../input'
+import UiSelectMenu from './select-dropdown.vue'
+import UiOption from './option.vue'
+import UiTag from '../../tag'
+import UiScrollbar from '../../scrollbar'
 import { debounce } from 'throttle-debounce'
 import Clickoutside from '../../../js/utils/clickoutside'
 import { addResizeListener, removeResizeListener } from '../../../js/utils/resize-event'
@@ -186,16 +186,16 @@ import { isKorean } from '../../../js/utils/shared'
 export default {
   mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
 
-  name: 'FmSelect',
+  name: 'UiSelect',
 
-  componentName: 'FmSelect',
+  componentName: 'UiSelect',
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
 
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -221,7 +221,7 @@ export default {
       type: String,
       validator (val) {
         process.env.NODE_ENV !== 'production' &&
-          console.warn('[Fmement Warn][Select]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.')
+          console.warn('[Uiement Warn][Select]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.')
         return true
       }
     },
@@ -247,7 +247,7 @@ export default {
     placeholder: {
       type: String,
       default () {
-        return t('fm.select.placeholder')
+        return t('ui.select.placeholder')
       }
     },
     defaultFirstOption: Boolean,
@@ -291,8 +291,8 @@ export default {
   },
 
   computed: {
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
 
     readonly () {
@@ -320,14 +320,14 @@ export default {
 
     emptyText () {
       if (this.loading) {
-        return this.loadingText || this.t('fm.select.loading')
+        return this.loadingText || this.t('ui.select.loading')
       } else {
         if (this.remote && this.query === '' && this.options.length === 0) return false
         if (this.filterable && this.query && this.options.length > 0 && this.filteredOptionsCount === 0) {
-          return this.noMatchText || this.t('fm.select.noMatch')
+          return this.noMatchText || this.t('ui.select.noMatch')
         }
         if (this.options.length === 0) {
-          return this.noDataText || this.t('fm.select.noData')
+          return this.noDataText || this.t('ui.select.noData')
         }
       }
       return null
@@ -340,11 +340,11 @@ export default {
     },
 
     selectSize () {
-      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      return this.size || this._uiFormItemSize || (this.$ELEMENT || {}).size
     },
 
     selectDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     },
 
     collapseTagSize () {
@@ -355,11 +355,11 @@ export default {
   },
 
   components: {
-    FmInput,
-    FmSelectMenu,
-    FmOption,
-    FmTag,
-    FmScrollbar
+    UiInput,
+    UiSelectMenu,
+    UiOption,
+    UiTag,
+    UiScrollbar
   },
 
   directives: { Clickoutside },
@@ -393,13 +393,13 @@ export default {
         this.inputLength = 20
       }
       if (!valueEquals(val, oldVal)) {
-        this.dispatch('FmFormItem', 'fm.form.change', val)
+        this.dispatch('UiFormItem', 'ui.form.change', val)
       }
     },
 
     visible (val) {
       if (!val) {
-        this.broadcast('FmSelectDropdown', 'destroyPopper')
+        this.broadcast('UiSelectDropdown', 'destroyPopper')
         if (this.$refs.input) {
           this.$refs.input.blur()
         }
@@ -432,7 +432,7 @@ export default {
           }
         }
       } else {
-        this.broadcast('FmSelectDropdown', 'updatePopper')
+        this.broadcast('UiSelectDropdown', 'updatePopper')
         if (this.filterable) {
           this.query = this.remote ? '' : this.selectedLabel
           this.handleQueryChange(this.query)
@@ -440,8 +440,8 @@ export default {
             this.$refs.input.focus()
           } else {
             if (!this.remote) {
-              this.broadcast('FmOption', 'queryChange', '')
-              this.broadcast('FmOptionGroup', 'queryChange')
+              this.broadcast('UiOption', 'queryChange', '')
+              this.broadcast('UiOptionGroup', 'queryChange')
             }
 
             if (this.selectedLabel) {
@@ -457,13 +457,13 @@ export default {
     options () {
       if (this.$isServer) return
       this.$nextTick(() => {
-        this.broadcast('FmSelectDropdown', 'updatePopper')
+        this.broadcast('UiSelectDropdown', 'updatePopper')
       })
       if (this.multiple) {
         this.resetInputHeight()
       }
       const inputs = this.$el.querySelectorAll('input')
-      if ([].indexOf.call(inputs, document.activeFmement) === -1) {
+      if ([].indexOf.call(inputs, document.activeUiement) === -1) {
         this.setSelected()
       }
       if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
@@ -546,7 +546,7 @@ export default {
       }
       this.previousQuery = val
       this.$nextTick(() => {
-        if (this.visible) this.broadcast('FmSelectDropdown', 'updatePopper')
+        if (this.visible) this.broadcast('UiSelectDropdown', 'updatePopper')
       })
       this.hoverIndex = -1
       if (this.multiple && this.filterable) {
@@ -562,11 +562,11 @@ export default {
         this.remoteMethod(val)
       } else if (typeof this.filterMethod === 'function') {
         this.filterMethod(val)
-        this.broadcast('FmOptionGroup', 'queryChange')
+        this.broadcast('UiOptionGroup', 'queryChange')
       } else {
         this.filteredOptionsCount = this.optionsCount
-        this.broadcast('FmOption', 'queryChange', val)
-        this.broadcast('FmOptionGroup', 'queryChange')
+        this.broadcast('UiOption', 'queryChange', val)
+        this.broadcast('UiOptionGroup', 'queryChange')
       }
       if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
         this.checkDefaultFirstOption()
@@ -576,7 +576,7 @@ export default {
     scrollToOption (option) {
       const target = Array.isArray(option) && option[0] ? option[0].$el : option.$el
       if (this.$refs.popper && target) {
-        const menu = this.$refs.popper.$el.querySelector('.fm-select-dropdown__wrap')
+        const menu = this.$refs.popper.$el.querySelector('.ui-select-dropdown__wrap')
         scrollIntoView(menu, target)
       }
       this.$refs.scrollbar && this.$refs.scrollbar.handleScroll()
@@ -739,7 +739,7 @@ export default {
             sizeInMap
           ) + 'px'
         if (this.visible && this.emptyText !== false) {
-          this.broadcast('FmSelectDropdown', 'updatePopper')
+          this.broadcast('UiSelectDropdown', 'updatePopper')
         }
       })
     },

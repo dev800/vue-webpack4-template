@@ -1,15 +1,15 @@
 <template>
   <transition
-    name="fm-zoom-in-top"
+    name="ui-zoom-in-top"
     @after-leave="$emit('dodestroy')"
   >
     <div
       v-show="visible"
-      class="fm-time-panel fm-popper"
+      class="ui-time-panel ui-popper"
       :class="popperClass"
     >
       <div
-        class="fm-time-panel__content"
+        class="ui-time-panel__content"
         :class="{ 'has-seconds': showSeconds }"
       >
         <time-spinner
@@ -22,21 +22,21 @@
           @select-range="setSelectionRange"
         />
       </div>
-      <div class="fm-time-panel__footer">
+      <div class="ui-time-panel__footer">
         <button
           type="button"
-          class="fm-time-panel__btn cancel"
+          class="ui-time-panel__btn cancel"
           @click="handleCancel"
         >
-          {{ t('fm.datepicker.cancel') }}
+          {{ t('ui.datepicker.cancel') }}
         </button>
         <button
           type="button"
-          class="fm-time-panel__btn"
+          class="ui-time-panel__btn"
           :class="{confirm: !disabled}"
           @click="handleConfirm()"
         >
-          {{ t('fm.datepicker.confirm') }}
+          {{ t('ui.datepicker.confirm') }}
         </button>
       </div>
     </div>

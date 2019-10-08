@@ -1,12 +1,12 @@
 <template>
-  <main class="fm-main">
+  <main class="ui-main">
     <slot />
   </main>
 </template>
 
 <script>
 export default {
-  name: 'FmMain',
-  componentName: 'FmMain'
+  name: 'UiMain',
+  componentName: 'UiMain'
 }
 </script>

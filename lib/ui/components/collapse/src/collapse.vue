@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fm-collapse"
+    class="ui-collapse"
     role="tablist"
     aria-multiselectable="true"
   >
@@ -9,9 +9,9 @@
 </template>
 <script>
 export default {
-  name: 'FmCollapse',
+  name: 'UiCollapse',
 
-  componentName: 'FmCollapse',
+  componentName: 'UiCollapse',
 
   props: {
     accordion: Boolean,

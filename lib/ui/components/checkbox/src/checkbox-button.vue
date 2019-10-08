@@ -1,8 +1,8 @@
 <template>
   <label
-    class="fm-checkbox-button"
+    class="ui-checkbox-button"
     :class="[
-      size ? 'fm-checkbox-button--' + size : '',
+      size ? 'ui-checkbox-button--' + size : '',
       { 'is-disabled': isDisabled },
       { 'is-checked': isChecked },
       { 'is-focus': focus },
@@ -14,7 +14,7 @@
     <input
       v-if="trueLabel || falseLabel"
       v-model="model"
-      class="fm-checkbox-button__original"
+      class="ui-checkbox-button__original"
       type="checkbox"
       :name="name"
       :disabled="isDisabled"
@@ -27,7 +27,7 @@
     <input
       v-else
       v-model="model"
-      class="fm-checkbox-button__original"
+      class="ui-checkbox-button__original"
       type="checkbox"
       :name="name"
       :disabled="isDisabled"
@@ -39,7 +39,7 @@
 
     <span
       v-if="$slots.default || label"
-      class="fm-checkbox-button__inner"
+      class="ui-checkbox-button__inner"
       :style="isChecked ? activeStyle : null"
     >
       <slot>{{ label }}</slot>
@@ -51,15 +51,15 @@
 import Emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmCheckboxButton',
+  name: 'UiCheckboxButton',
 
   mixins: [Emitter],
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -101,7 +101,7 @@ export default {
             (this.isLimitExceeded = true))
 
           this.isLimitExceeded === false &&
-            this.dispatch('FmCheckboxGroup', 'input', [val])
+            this.dispatch('UiCheckboxGroup', 'input', [val])
         } else if (this.value !== undefined) {
           this.$emit('input', val)
         } else {
@@ -125,7 +125,7 @@ export default {
     _checkboxGroup () {
       let parent = this.$parent
       while (parent) {
-        if (parent.$options.componentName !== 'FmCheckboxGroup') {
+        if (parent.$options.componentName !== 'UiCheckboxGroup') {
           parent = parent.$parent
         } else {
           return parent
@@ -148,12 +148,12 @@ export default {
       }
     },
 
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
 
     size () {
-      return this._checkboxGroup.checkboxGroupSize || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      return this._checkboxGroup.checkboxGroupSize || this._uiFormItemSize || (this.$ELEMENT || {}).size
     },
 
     /* used to make the isDisabled judgment under max/min props */
@@ -166,8 +166,8 @@ export default {
 
     isDisabled () {
       return this._checkboxGroup
-        ? this._checkboxGroup.disabled || this.disabled || (this.fmForm || {}).disabled || this.isLimitDisabled
-        : this.disabled || (this.fmForm || {}).disabled
+        ? this._checkboxGroup.disabled || this.disabled || (this.uiForm || {}).disabled || this.isLimitDisabled
+        : this.disabled || (this.uiForm || {}).disabled
     }
   },
 
@@ -196,7 +196,7 @@ export default {
       this.$emit('change', value, ev)
       this.$nextTick(() => {
         if (this._checkboxGroup) {
-          this.dispatch('FmCheckboxGroup', 'change', [this._checkboxGroup.value])
+          this.dispatch('UiCheckboxGroup', 'change', [this._checkboxGroup.value])
         }
       })
     }

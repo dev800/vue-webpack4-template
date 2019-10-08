@@ -98,12 +98,12 @@
     padding-left: 15px;
     display: block;
 
-    & + .fm-transfer-panel__item {
+    & + .ui-transfer-panel__item {
       margin-left: 0;
       display: block!important;
     }
 
-    &.fm-checkbox {
+    &.ui-checkbox {
       color: $--color-text-regular;
     }
 
@@ -111,7 +111,7 @@
       color: $--color-primary;
     }
 
-    &.fm-checkbox .fm-checkbox__label {
+    &.ui-checkbox .ui-checkbox__label {
       width: 100%;
       @include utils-ellipsis;
       display: block;
@@ -120,7 +120,7 @@
       line-height: $--transfer-item-height;
     }
 
-    .fm-checkbox__input {
+    .ui-checkbox__input {
       position: absolute;
       top: 8px;
     }
@@ -133,7 +133,7 @@
     display: block;
     width: auto;
 
-    .fm-input__inner {
+    .ui-input__inner {
       height: $--transfer-filter-height;
       width: 100%;
       font-size: 12px;
@@ -144,7 +144,7 @@
       padding-left: 30px;
     }
 
-    .fm-input__icon {
+    .ui-input__icon {
       margin-left: 5px;
     }
 
@@ -153,7 +153,7 @@
     }
   }
 
-  .fm-transfer-panel__header {
+  .ui-transfer-panel__header {
     height: $--transfer-panel-header-height;
     line-height: $--transfer-panel-header-height;
     background: $--transfer-panel-header-background-color;
@@ -163,11 +163,11 @@
     box-sizing: border-box;
     color: $--color-black;
 
-    .fm-checkbox {
+    .ui-checkbox {
       display: block;
       line-height: 40px;
 
-      .fm-checkbox__label {
+      .ui-checkbox__label {
         font-size: 16px;
         color: $--color-text-primary;
         font-weight: normal;
@@ -183,7 +183,7 @@
     }
   }
 
-  .fm-transfer-panel__footer {
+  .ui-transfer-panel__footer {
     height: $--transfer-panel-footer-height;
     background: $--color-white;
     margin: 0;
@@ -196,13 +196,13 @@
     z-index: $--index-normal;
     @include utils-vertical-center;
 
-    .fm-checkbox {
+    .ui-checkbox {
       padding-left: 20px;
       color: $--color-text-regular;
     }
   }
 
-  .fm-transfer-panel__empty {
+  .ui-transfer-panel__empty {
     margin: 0;
     height: $--transfer-item-height;
     line-height: $--transfer-item-height;
@@ -211,11 +211,11 @@
     text-align: center;
   }
 
-  .fm-checkbox__label {
+  .ui-checkbox__label {
     padding-left: 8px;
   }
 
-  .fm-checkbox__inner {
+  .ui-checkbox__inner {
     height: 14px;
     width: 14px;
     border-radius: 3px;

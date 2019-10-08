@@ -21,23 +21,23 @@
     box-sizing: border-box;
   }
 
-  .fm-input__inner {
+  .ui-input__inner {
     text-align: center;
     -moz-appearance: textfield;
     line-height: normal;
   }
 
   // pagesize 的下拉 icon
-  .fm-input__suffix {
+  .ui-input__suffix {
     right: 0;
     transform: scale(.8);
   }
 
-  .fm-select .fm-input {
+  .ui-select .ui-input {
     width: 100px;
     margin: 0 5px;
 
-    .fm-input__inner {
+    .ui-input__inner {
       padding-right: 25px;
       border-radius: $--pagination-border-radius;
     }
@@ -72,7 +72,7 @@
     margin: 0;
     color: $--pagination-button-color;
 
-    .fm-icon {
+    .svg-icon {
       display: block;
       font-size: 12px;
       font-weight: bold;
@@ -87,7 +87,7 @@
     padding-left: 12px;
   }
 
-  .fm-pager li.disabled {
+  .ui-pager li.disabled {
     color: $--color-text-placeholder;
     cursor: not-allowed;
   }
@@ -95,10 +95,10 @@
   @include m(small) {
     .btn-prev,
     .btn-next,
-    .fm-pager li,
-    .fm-pager li.btn-quicknext,
-    .fm-pager li.btn-quickprev,
-    .fm-pager li:last-child {
+    .ui-pager li,
+    .ui-pager li.btn-quick-next,
+    .ui-pager li.btn-quick-prev,
+    .ui-pager li:last-child {
       border-color: transparent;
       font-size: 12px;
       line-height: 22px;
@@ -123,7 +123,7 @@
 
     @include e(editor) {
       height: 22px;
-      &.fm-input .fm-input__inner {
+      &.ui-input .ui-input__inner {
         height: 22px;
       }
     }
@@ -134,7 +134,7 @@
     font-weight: normal;
     color: $--color-text-regular;
 
-    .fm-input .fm-input__inner {
+    .ui-input .ui-input__inner {
       font-size: $--pagination-font-size;
       padding-left: 8px;
 
@@ -155,7 +155,7 @@
     font-weight: normal;
     color: $--color-text-regular;
 
-    .fm-input__inner {
+    .ui-input__inner {
       padding: 0 3px;
     }
   }
@@ -174,16 +174,16 @@
     box-sizing: border-box;
     border-radius: $--pagination-border-radius;
 
-    &.fm-input {
+    &.ui-input {
       width: 50px;
     }
 
-    &.fm-input .fm-input__inner {
+    &.ui-input .ui-input__inner {
       height: $--pagination-button-height;
     }
 
-    .fm-input__inner::-webkit-inner-spin-button,
-    .fm-input__inner::-webkit-outer-spin-button {
+    .ui-input__inner::-webkit-inner-spin-button,
+    .ui-input__inner::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
@@ -192,7 +192,7 @@
   @include when(background) {
     .btn-prev,
     .btn-next,
-    .fm-pager li {
+    .ui-pager li {
       margin: 0 5px;
       background-color: $--color-info-lighter;
       color: $--color-text-regular;
@@ -212,7 +212,7 @@
       }
     }
 
-    .fm-pager li:not(.disabled) {
+    .ui-pager li:not(.disabled) {
       &:hover {
         color: $--pagination-hover-color;
       }
@@ -223,10 +223,10 @@
       }
     }
 
-    &.fm-pagination--small {
+    &.ui-pagination--small {
       .btn-prev,
       .btn-next,
-      .fm-pager li {
+      .ui-pager li {
         margin: 0 3px;
         min-width: 22px;
       }
@@ -261,8 +261,8 @@
     text-align: center;
     margin: 0;
 
-    &.btn-quicknext,
-    &.btn-quickprev {
+    &.btn-quick-next,
+    &.btn-quick-prev {
       line-height: 28px;
       color: $--pagination-button-color;
 
@@ -271,11 +271,11 @@
       }
     }
 
-    &.btn-quickprev:hover {
+    &.btn-quick-prev:hover {
       cursor: pointer;
     }
 
-    &.btn-quicknext:hover {
+    &.btn-quick-next:hover {
       cursor: pointer;
     }
 

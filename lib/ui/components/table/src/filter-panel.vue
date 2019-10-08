@@ -1,37 +1,37 @@
 <template>
-  <transition name="fm-zoom-in-top">
+  <transition name="ui-zoom-in-top">
     <div
       v-if="multiple"
       v-show="showPopper"
       v-clickoutside="handleOutsideClick"
-      class="fm-table-filter"
+      class="ui-table-filter"
     >
-      <div class="fm-table-filter__content">
-        <fm-scrollbar wrap-class="fm-table-filter__wrap">
-          <fm-checkbox-group
+      <div class="ui-table-filter__content">
+        <ui-scrollbar wrap-class="ui-table-filter__wrap">
+          <ui-checkbox-group
             v-model="filteredValue"
-            class="fm-table-filter__checkbox-group"
+            class="ui-table-filter__checkbox-group"
           >
-            <fm-checkbox
+            <ui-checkbox
               v-for="filter in filters"
               :key="filter.value"
               :label="filter.value"
             >
               {{ filter.text }}
-            </fm-checkbox>
-          </fm-checkbox-group>
-        </fm-scrollbar>
+            </ui-checkbox>
+          </ui-checkbox-group>
+        </ui-scrollbar>
       </div>
-      <div class="fm-table-filter__bottom">
+      <div class="ui-table-filter__bottom">
         <button
           :class="{ 'is-disabled': filteredValue.length === 0 }"
           :disabled="filteredValue.length === 0"
           @click="handleConfirm"
         >
-          {{ t('fm.table.confirmFilter') }}
+          {{ t('ui.table.confirmFilter') }}
         </button>
         <button @click="handleReset">
-          {{ t('fm.table.resetFilter') }}
+          {{ t('ui.table.resetFilter') }}
         </button>
       </div>
     </div>
@@ -39,20 +39,20 @@
       v-else
       v-show="showPopper"
       v-clickoutside="handleOutsideClick"
-      class="fm-table-filter"
+      class="ui-table-filter"
     >
-      <ul class="fm-table-filter__list">
+      <ul class="ui-table-filter__list">
         <li
-          class="fm-table-filter__list-item"
+          class="ui-table-filter__list-item"
           :class="{ 'is-active': filterValue === undefined || filterValue === null }"
           @click="handleSelect(null)"
         >
-          {{ t('fm.table.clearFilter') }}
+          {{ t('ui.table.clearFilter') }}
         </li>
         <li
           v-for="filter in filters"
           :key="filter.value"
-          class="fm-table-filter__list-item"
+          class="ui-table-filter__list-item"
           :label="filter.value"
           :class="{ 'is-active': isActive(filter) }"
           @click="handleSelect(filter.value)"
@@ -70,21 +70,21 @@ import { PopupManager } from '../../../js/utils/popup'
 import Locale from '../../../js/mixins/locale'
 import Clickoutside from '../../../js/utils/clickoutside'
 import Dropdown from './dropdown'
-import FmCheckbox from '../../checkbox'
-import FmCheckboxGroup from '../../checkbox-group'
-import FmScrollbar from '../../scrollbar'
+import UiCheckbox from '../../checkbox'
+import UiCheckboxGroup from '../../checkbox-group'
+import UiScrollbar from '../../scrollbar'
 
 export default {
-  name: 'FmTableFilterPanel',
+  name: 'UiTableFilterPanel',
 
   directives: {
     Clickoutside
   },
 
   components: {
-    FmCheckbox,
-    FmCheckboxGroup,
-    FmScrollbar
+    UiCheckbox,
+    UiCheckboxGroup,
+    UiScrollbar
   },
 
   mixins: [Popper, Locale],
@@ -154,8 +154,8 @@ export default {
   },
 
   mounted () {
-    this.popperFmm = this.$el
-    this.referenceFmm = this.cell
+    this.popperUim = this.$el
+    this.referenceUim = this.cell
     this.table.bodyWrapper.addEventListener('scroll', () => {
       this.updatePopper()
     })

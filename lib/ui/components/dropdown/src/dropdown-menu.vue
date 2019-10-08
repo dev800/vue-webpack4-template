@@ -1,12 +1,12 @@
 <template>
   <transition
-    name="fm-zoom-in-top"
+    name="ui-zoom-in-top"
     @after-leave="doDestroy"
   >
     <ul
       v-show="showPopper"
-      class="fm-dropdown-menu fm-popper"
-      :class="[size && `fm-dropdown-menu--${size}`]"
+      class="ui-dropdown-menu ui-popper"
+      :class="[size && `ui-dropdown-menu--${size}`]"
     >
       <slot />
     </ul>
@@ -16,9 +16,9 @@
 import Popper from '../../../js/utils/vue-popper'
 
 export default {
-  name: 'FmDropdownMenu',
+  name: 'UiDropdownMenu',
 
-  componentName: 'FmDropdownMenu',
+  componentName: 'UiDropdownMenu',
 
   mixins: [Popper],
 
@@ -60,10 +60,10 @@ export default {
   },
 
   mounted () {
-    this.dropdown.popperFmm = this.popperFmm = this.$el
-    this.referenceFmm = this.dropdown.$el
+    this.dropdown.popperUim = this.popperUim = this.$el
+    this.referenceUim = this.dropdown.$el
     // compatible with 2.6 new v-slot syntax
-    // issue link https://github.com/FmemeFE/element/issues/14345
+    // issue link https://github.com/UiemeFE/element/issues/14345
     this.dropdown.initDomOperation()
   }
 }

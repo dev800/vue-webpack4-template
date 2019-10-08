@@ -1,18 +1,18 @@
 <template>
   <div
-    class="fm-slider"
-    :class="{ 'is-vertical': vertical, 'fm-slider--with-input': showInput }"
+    class="ui-slider"
+    :class="{ 'is-vertical': vertical, 'ui-slider--with-input': showInput }"
     role="slider"
     :aria-valuemin="min"
     :aria-valuemax="max"
     :aria-orientation="vertical ? 'vertical': 'horizontal'"
     :aria-disabled="sliderDisabled"
   >
-    <fm-input-number
+    <ui-input-number
       v-if="showInput && !range"
       ref="input"
       v-model="firstValue"
-      class="fm-slider__input"
+      class="ui-slider__input"
       :step="step"
       :disabled="sliderDisabled"
       :controls="showInputControls"
@@ -24,13 +24,13 @@
     />
     <div
       ref="slider"
-      class="fm-slider__runway"
+      class="ui-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
       :style="runwayStyle"
       @click="onSliderClick"
     >
       <div
-        class="fm-slider__bar"
+        class="ui-slider__bar"
         :style="barStyle"
       />
       <slider-button
@@ -49,7 +49,7 @@
       <div
         v-for="(item, key) in stopsOfShow"
         :key="key"
-        class="fm-slider__stop"
+        class="ui-slider__stop"
         :style="getStopStyle(item)"
       />
       <template v-if="markList.length > 0">
@@ -58,10 +58,10 @@
             v-for="(item, key) in markList"
             :key="key"
             :style="getStopStyle(item.position)"
-            class="fm-slider__stop fm-slider__marks-stop"
+            class="ui-slider__stop ui-slider__marks-stop"
           />
         </div>
-        <div class="fm-slider__marks">
+        <div class="ui-slider__marks">
           <slider-marker
             v-for="(item, key) in markList"
             :key="key"
@@ -75,16 +75,16 @@
 </template>
 
 <script type="text/babel">
-import FmInputNumber from '../../input-number'
+import UiInputNumber from '../../input-number'
 import SliderButton from './button.vue'
 import SliderMarker from './marker'
 import Emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmSlider',
+  name: 'UiSlider',
 
   components: {
-    FmInputNumber,
+    UiInputNumber,
     SliderButton,
     SliderMarker
   },
@@ -92,7 +92,7 @@ export default {
   mixins: [Emitter],
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     }
   },
@@ -184,7 +184,7 @@ export default {
       if (!this.showStops || this.min > this.max) return []
       if (this.step === 0) {
         process.env.NODE_ENV !== 'production' &&
-          console.warn('[Fmement Warn][Slider]step should not be 0.')
+          console.warn('[Uiement Warn][Slider]step should not be 0.')
         return []
       }
       const stopCount = (this.max - this.min) / this.step
@@ -263,7 +263,7 @@ export default {
     },
 
     sliderDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     }
   },
 
@@ -352,7 +352,7 @@ export default {
     },
     setValues () {
       if (this.min > this.max) {
-        console.error('[Fmement Error][Slider]min should not be greater than max.')
+        console.error('[Uiement Error][Slider]min should not be greater than max.')
         return
       }
       const val = this.value
@@ -369,7 +369,7 @@ export default {
           this.firstValue = val[0]
           this.secondValue = val[1]
           if (this.valueChanged()) {
-            this.dispatch('FmFormItem', 'fm.form.change', [this.minValue, this.maxValue])
+            this.dispatch('UiFormItem', 'ui.form.change', [this.minValue, this.maxValue])
             this.oldValue = val.slice()
           }
         }
@@ -381,7 +381,7 @@ export default {
         } else {
           this.firstValue = val
           if (this.valueChanged()) {
-            this.dispatch('FmFormItem', 'fm.form.change', val)
+            this.dispatch('UiFormItem', 'ui.form.change', val)
             this.oldValue = val
           }
         }

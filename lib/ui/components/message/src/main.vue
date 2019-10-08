@@ -1,13 +1,13 @@
 <template>
   <transition
-    name="fm-message-fade"
+    name="ui-message-fade"
     @after-leave="handleAfterLeave"
   >
     <div
       v-show="visible"
       :class="[
-        'fm-message',
-        type && !iconClass ? `fm-message--${ type }` : '',
+        'ui-message',
+        type && !iconClass ? `ui-message--${ type }` : '',
         center ? 'is-center' : '',
         showClose ? 'is-closable' : '',
         customClass
@@ -23,25 +23,25 @@
       ></svg-icon>
       <svg-icon
         v-else
-        class="fm-message__icon"
+        class="ui-message__icon"
         :icon-class="typeClass"
       ></svg-icon>
       <slot>
         <p
           v-if="!dangerouslyUseHTMLString"
-          class="fm-message__content"
+          class="ui-message__content"
         >
           {{ message }}
         </p>
         <p
           v-else
-          class="fm-message__content"
+          class="ui-message__content"
           v-html="message"
         />
       </slot>
       <svg-icon
         v-if="showClose"
-        class="fm-message__close-btn"
+        class="ui-message__close-btn"
         icon-class="solid-times"
         @click="close"
       ></svg-icon>

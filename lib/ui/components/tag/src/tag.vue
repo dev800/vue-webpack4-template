@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'FmTag',
+  name: 'UiTag',
   props: {
     text: String,
     closable: Boolean,
@@ -34,25 +34,25 @@ export default {
   render (h) {
     const { type, tagSize, hit, effect } = this
     const classes = [
-      'fm-tag',
-      type ? `fm-tag--${type}` : '',
-      tagSize ? `fm-tag--${tagSize}` : '',
-      effect ? `fm-tag--${effect}` : '',
+      'ui-tag',
+      type ? `ui-tag--${type}` : '',
+      tagSize ? `ui-tag--${tagSize}` : '',
+      effect ? `ui-tag--${effect}` : '',
       hit && 'is-hit'
     ]
-    const tagFm = (
+    const tagUi = (
       <span
         class={classes}
         style={{ backgroundColor: this.color }}
         on-click={this.handleClick}>
         {this.$slots.default}
         {
-          this.closable && <svg-icon class="fm-tag__close" icon-class="solid-times" on-click={this.handleClose}></svg-icon>
+          this.closable && <svg-icon class="ui-tag__close" icon-class="solid-times" on-click={this.handleClose}></svg-icon>
         }
       </span>
     )
 
-    return this.disableTransitions ? tagFm : <transition name="fm-zoom-in-center">{tagFm}</transition>
+    return this.disableTransitions ? tagUi : <transition name="ui-zoom-in-center">{tagUi}</transition>
   }
 }
 </script>

@@ -1,13 +1,13 @@
 <template>
   <transition
-    name="fm-zoom-in-top"
+    name="ui-zoom-in-top"
     @after-leave="doDestroy"
   >
     <div
       v-show="showPopper"
-      class="fm-color-dropdown"
+      class="ui-color-dropdown"
     >
-      <div class="fm-color-dropdown__main-wrapper">
+      <div class="ui-color-dropdown__main-wrapper">
         <hue-slider
           ref="hue"
           :color="color"
@@ -29,9 +29,9 @@
         :color="color"
         :colors="predefine"
       />
-      <div class="fm-color-dropdown__btns">
-        <span class="fm-color-dropdown__value">
-          <fm-input
+      <div class="ui-color-dropdown__btns">
+        <span class="ui-color-dropdown__value">
+          <ui-input
             v-model="customInput"
             :validate-event="false"
             size="mini"
@@ -39,22 +39,22 @@
             @blur="handleConfirm"
           />
         </span>
-        <fm-button
+        <ui-button
           size="mini"
           type="text"
-          class="fm-color-dropdown__link-btn"
+          class="ui-color-dropdown__link-btn"
           @click="$emit('clear')"
         >
-          {{ t('fm.colorpicker.clear') }}
-        </fm-button>
-        <fm-button
+          {{ t('ui.colorpicker.clear') }}
+        </ui-button>
+        <ui-button
           plain
           size="mini"
-          class="fm-color-dropdown__btn"
+          class="ui-color-dropdown__btn"
           @click="confirmValue"
         >
-          {{ t('fm.colorpicker.confirm') }}
-        </fm-button>
+          {{ t('ui.colorpicker.confirm') }}
+        </ui-button>
       </div>
     </div>
   </transition>
@@ -67,18 +67,18 @@ import AlphaSlider from './alpha-slider'
 import Predefine from './predefine'
 import Popper from '../../../js/utils/vue-popper'
 import Locale from '../../../js/mixins/locale'
-import FmInput from '../../input'
-import FmButton from '../../button'
+import UiInput from '../../input'
+import UiButton from '../../button'
 
 export default {
-  name: 'FmColorPickerDropdown',
+  name: 'UiColorPickerDropdown',
 
   components: {
     SvPanel,
     HueSlider,
     AlphaSlider,
-    FmInput,
-    FmButton,
+    UiInput,
+    UiButton,
     Predefine
   },
 
@@ -126,8 +126,8 @@ export default {
   },
 
   mounted () {
-    this.$parent.popperFmm = this.popperFmm = this.$el
-    this.referenceFmm = this.$parent.$el
+    this.$parent.popperUim = this.popperUim = this.$el
+    this.referenceUim = this.$parent.$el
   },
 
   methods: {

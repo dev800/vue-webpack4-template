@@ -83,14 +83,14 @@
   @include e(checkbox-group) {
     padding: 10px;
 
-    label.fm-checkbox {
+    label.ui-checkbox {
       display: block;
       margin-right: 5px;
       margin-bottom: 8px;
       margin-left: 5px;
     }
 
-    .fm-checkbox:last-child {
+    .ui-checkbox:last-child {
       margin-bottom: 0;
     }
   }

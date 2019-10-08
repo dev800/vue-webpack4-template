@@ -2,43 +2,44 @@
   <div
     v-clickoutside="hide"
     :class="[
-      'fm-color-picker',
+      'ui-color-picker',
       colorDisabled ? 'is-disabled' : '',
-      colorSize ? `fm-color-picker--${ colorSize }` : ''
+      colorSize ? `ui-color-picker--${ colorSize }` : ''
     ]"
   >
     <div
       v-if="colorDisabled"
-      class="fm-color-picker__mask"
+      class="ui-color-picker__mask"
     />
     <div
-      class="fm-color-picker__trigger"
+      class="ui-color-picker__trigger"
       @click="handleTrigger"
     >
       <span
-        class="fm-color-picker__color"
+        class="ui-color-picker__color"
         :class="{ 'is-alpha': showAlpha }"
       >
         <span
-          class="fm-color-picker__color-inner"
+          class="ui-color-picker__color-inner"
           :style="{
             backgroundColor: displayedColor
           }"
         />
         <span
           v-if="!value && !showPanelColor"
-          class="fm-color-picker__empty solid-times"
+          class="ui-color-picker__empty solid-times"
         />
       </span>
-      <span
+      <svg-icon
         v-show="value || showPanelColor"
-        class="fm-color-picker__icon fm-icon-ios-arrow-down"
+        class="ui-color-picker__icon"
+        icon-class="solid-angle-down"
       />
     </div>
     <picker-dropdown
       ref="dropdown"
       v-model="showPicker"
-      :class="['fm-color-picker__panel', popperClass || '']"
+      :class="['ui-color-picker__panel', popperClass || '']"
       :color="color"
       :show-alpha="showAlpha"
       :predefine="predefine"
@@ -55,7 +56,7 @@ import Clickoutside from '../../../js/utils/clickoutside'
 import Emitter from '../../../js/mixins/emitter'
 
 export default {
-  name: 'FmColorPicker',
+  name: 'UiColorPicker',
 
   directives: { Clickoutside },
 
@@ -76,10 +77,10 @@ export default {
   },
 
   inject: {
-    fmForm: {
+    uiForm: {
       default: ''
     },
-    fmFormItem: {
+    uiFormItem: {
       default: ''
     }
   },
@@ -106,16 +107,16 @@ export default {
       return this.displayedRgb(this.color, this.showAlpha)
     },
 
-    _fmFormItemSize () {
-      return (this.fmFormItem || {}).fmFormItemSize
+    _uiFormItemSize () {
+      return (this.uiFormItem || {}).uiFormItemSize
     },
 
     colorSize () {
-      return this.size || this._fmFormItemSize || (this.$ELEMENT || {}).size
+      return this.size || this._uiFormItemSize || (this.$ELEMENT || {}).size
     },
 
     colorDisabled () {
-      return this.disabled || (this.fmForm || {}).disabled
+      return this.disabled || (this.uiForm || {}).disabled
     }
   },
 
@@ -153,7 +154,7 @@ export default {
     if (value) {
       this.color.fromString(value)
     }
-    this.popperFmm = this.$refs.dropdown.$el
+    this.popperUim = this.$refs.dropdown.$el
   },
 
   methods: {
@@ -165,14 +166,14 @@ export default {
       const value = this.color.value
       this.$emit('input', value)
       this.$emit('change', value)
-      this.dispatch('FmFormItem', 'fm.form.change', value)
+      this.dispatch('UiFormItem', 'ui.form.change', value)
       this.showPicker = false
     },
     clearValue () {
       this.$emit('input', null)
       this.$emit('change', null)
       if (this.value !== null) {
-        this.dispatch('FmFormItem', 'fm.form.change', null)
+        this.dispatch('UiFormItem', 'ui.form.change', null)
       }
       this.showPanelColor = false
       this.showPicker = false

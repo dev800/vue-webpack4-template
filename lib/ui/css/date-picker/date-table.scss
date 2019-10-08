@@ -6,7 +6,7 @@
   user-select: none;
 
   @include when(week-mode) {
-    .fm-date-table__row {
+    .ui-date-table__row {
       &:hover {
         div {
           background-color: $--datepicker-inrange-background-color;
