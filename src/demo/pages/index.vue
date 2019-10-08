@@ -1,6 +1,11 @@
 <template>
   <div class="x-page-home">
     <div>
+      <ui-rate
+        :allow-half="false"
+        v-model="rateValue"
+        show-text
+      />
       <!-- <div v-loading="true">你好吗？？？</div> -->
       <ui-pagination
         :page-size="20"
@@ -97,6 +102,7 @@
 <script>
 import NProgress from 'nprogress'
 import UiButton from '~/lib/ui/components/button'
+import UiRate from '~/lib/ui/components/rate'
 import UiProgress from '~/lib/ui/components/progress'
 import UiPagination from '~/lib/ui/components/pagination'
 import UiDatePicker from '~/lib/ui/components/date-picker'
@@ -104,12 +110,14 @@ import UiDatePicker from '~/lib/ui/components/date-picker'
 export default {
   components: {
     UiButton,
+    UiRate,
     UiProgress,
     UiPagination,
     UiDatePicker
   },
   data () {
     return {
+      rateValue: 3.5,
       fullscreenLoading: false,
       valueDatatime: '',
       show: true

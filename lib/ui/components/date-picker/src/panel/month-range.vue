@@ -32,17 +32,17 @@
         <div class="ui-picker-panel__body">
           <div class="ui-picker-panel__content ui-date-range-picker__content is-left">
             <div class="ui-date-range-picker__header">
-              <button
-                type="button"
-                class="ui-picker-panel__icon-btn ui-icon-d-arrow-left"
+              <svg-icon
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-double-left"
                 @click="leftPrevYear"
               />
-              <button
+              <svg-icon
                 v-if="unlinkPanels"
-                type="button"
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="ui-picker-panel__icon-btn ui-icon-d-arrow-right"
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-double-right"
                 @click="leftNextYear"
               />
               <div>{{ leftLabel }}</div>
@@ -63,15 +63,15 @@
             <div class="ui-date-range-picker__header">
               <button
                 v-if="unlinkPanels"
-                type="button"
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="ui-picker-panel__icon-btn ui-icon-d-arrow-left"
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-double-left"
                 @click="rightPrevYear"
               />
               <button
-                type="button"
-                class="ui-picker-panel__icon-btn ui-icon-d-arrow-right"
+                class="ui-picker-panel__icon-btn"
+                icon-class="solid-angle-double-right"
                 @click="rightNextYear"
               />
               <div>{{ rightLabel }}</div>

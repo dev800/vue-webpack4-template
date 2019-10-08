@@ -27,12 +27,12 @@
       class="ui-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }"
     >
-      <span
+      <svg-icon
         :class="[
           { 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded },
           'ui-tree-node__expand-icon',
-          tree.iconClass ? tree.iconClass : 'ui-icon-caret-right'
         ]"
+        :icon-class="tree.iconClass ? tree.iconClass : 'solid-caret-right'"
         @click.stop="handleExpandIconClick"
       />
       <ui-checkbox
@@ -43,9 +43,10 @@
         @click.native.stop
         @change="handleCheckChange"
       />
-      <span
+      <svg-icon
         v-if="node.loading"
-        class="ui-tree-node__loading-icon ui-icon-loading"
+        icon-class="solid-loading"
+        class="animated spin infinite ui-tree-node__loading-icon"
       />
       <node-content :node="node" />
     </div>

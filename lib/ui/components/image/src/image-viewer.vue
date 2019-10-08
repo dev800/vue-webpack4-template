@@ -83,11 +83,11 @@ import { rafThrottle, isFirefox } from '../../../js/utils/util'
 const Mode = {
   CONTAIN: {
     name: 'contain',
-    icon: 'ui-icon-full-screen'
+    icon: 'regular-full-screen'
   },
   ORIGINAL: {
     name: 'original',
-    icon: 'ui-icon-c-scale-to-original'
+    icon: 'regular-original'
   }
 }
 

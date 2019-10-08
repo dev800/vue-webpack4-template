@@ -40,9 +40,10 @@
         </div>
         <div class="ui-message-box__content">
           <div class="ui-message-box__container">
-            <div
+            <svg-icon
               v-if="icon && !center && message !== ''"
-              :class="['ui-message-box__status', icon]"
+              :class="['ui-message-box__status']"
+              :icon-class="icon"
             />
             <div
               v-if="message !== ''"
@@ -205,7 +206,7 @@ export default {
     icon () {
       const { type, iconClass } = this
       return (
-        iconClass || (type && typeMap[type] ? `ui-icon-${typeMap[type]}` : '')
+        iconClass || (type && typeMap[type] ? `${typeMap[type]}` : '')
       )
     },
 

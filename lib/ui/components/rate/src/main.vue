@@ -18,18 +18,19 @@
       @mouseleave="resetCurrentValue"
       @click="selectValue(item)"
     >
-      <i
-        :class="[classes[item - 1], { 'hover': hoverIndex === item }]"
+      <svg-icon
         class="ui-rate__icon"
+        :class="[{ 'hover': hoverIndex === item }]"
         :style="getIconStyle(item)"
+        :icon-class="classes[item - 1]"
       >
-        <i
+        <!-- <svg-icon
           v-if="showDecimalIcon(item)"
-          :class="decimalIconClass"
           :style="decimalStyle"
           class="ui-rate__decimal"
-        />
-      </i>
+          :icon-class="decimalIconClass"
+        /> -->
+      </svg-icon>
     </span>
     <span
       v-if="showText || showScore"
@@ -89,23 +90,24 @@ export default {
     iconClasses: {
       type: [Array, Object],
       default () {
-        return ['ui-icon-star-on', 'ui-icon-star-on', 'ui-icon-star-on']
+        return ['solid-star', 'solid-star', 'solid-star']
       }
     },
     voidIconClass: {
       type: String,
-      default: 'ui-icon-star-off'
+      default: 'regular-star'
     },
     disabledVoidIconClass: {
       type: String,
-      default: 'ui-icon-star-on'
+      default: 'solid-star'
     },
     disabled: {
       type: Boolean,
       default: false
     },
+    // FIXME: 实现的还不好
     allowHalf: {
-      type: Boolean,
+      type: [String, Boolean],
       default: false
     },
     showText: {
@@ -123,6 +125,7 @@ export default {
     texts: {
       type: Array,
       default () {
+        // 改为可国际化
         return ['极差', '失望', '一般', '满意', '惊喜']
       }
     },
