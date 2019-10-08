@@ -109,13 +109,16 @@
         <slot name="prefix" />
       </template>
       <template slot="suffix">
-        <i
+        <svg-icon
           v-show="!showClose"
-          :class="['fm-select__caret', 'fm-input__icon', 'fm-icon-' + iconClass]"
+          class="fm-select__caret fm-input__icon"
+          :class="[{'is-reverse': !!(remote && filterable && visible)}]"
+          :icon-class="iconClass"
         />
-        <i
+        <svg-icon
           v-if="showClose"
-          class="fm-select__caret fm-input__icon fm-icon-circle-close"
+          class="fm-select__caret fm-input__icon"
+          icon-class="solid-times-circle"
           @click="handleClearClick"
         />
       </template>
@@ -308,7 +311,7 @@ export default {
     },
 
     iconClass () {
-      return this.remote && this.filterable ? '' : (this.visible ? 'arrow-up is-reverse' : 'arrow-up')
+      return this.remote && this.filterable ? '' : 'solid-chevron-up'
     },
 
     debounce () {

@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const utils = require('./utils')
 
 const HOST = 'localhost'
 const PORT = 8080
@@ -28,9 +29,10 @@ module.exports = merge(baseConfig, {
     rules: [
       {
         test: /\.(c|sc|sa)ss$/,
-        use: [{
-          loader: MiniCssExtractPlugin.loader
-        },
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
           'css-loader',
           'postcss-loader',
           'sass-loader'
@@ -38,15 +40,17 @@ module.exports = merge(baseConfig, {
       },
       {
         test: /\.(le)ss$/,
-        use: [{
-          loader: MiniCssExtractPlugin.loader
-        },
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
           'css-loader',
           'less-loader?javascriptEnabled=true'
         ]
       },
       {
         test: /\.(woff2?|eot|ttf|otf|mp4|webm|ogg|mp3|wav|flac|aac|png|jpe?g|gif|svg)(\?.*)?$/i,
+        exclude: [utils.resolve('lib/ui/icons/svg')],
         use: {
           loader: 'file-loader',
           options: {

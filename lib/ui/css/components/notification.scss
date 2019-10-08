@@ -11,7 +11,7 @@
   position: fixed;
   background-color: $--color-white;
   box-shadow: $--notification-shadow;
-  transition: opacity .3s, transform .3s, left .3s, right .3s, top 0.4s, bottom .3s;
+  transition: opacity 0.3s, transform 0.3s, left 0.3s, right 0.3s, top 0.4s, bottom 0.3s;
   overflow: hidden;
 
   &.right {
@@ -25,6 +25,10 @@
   @include e(group) {
     margin-left: $--notification-group-margin-left;
     margin-right: $--notification-group-margin-right;
+
+    &.is-with-icon {
+      margin-left: $--notification-group-margin-left + $--notification-icon-size;
+    }
   }
 
   @include e(title) {
@@ -50,6 +54,23 @@
     height: $--notification-icon-size;
     width: $--notification-icon-size;
     font-size: $--notification-icon-size;
+    position: absolute;
+
+    &.icon_type-success {
+      color: $--notification-success-icon-color;
+    }
+
+    &.icon_type-error {
+      color: $--notification-danger-icon-color;
+    }
+
+    &.icon_type-info {
+      color: $--notification-info-icon-color;
+    }
+
+    &.icon_type-warning {
+      color: $--notification-warning-icon-color;
+    }
   }
 
   @include e(close-btn) {
@@ -63,22 +84,6 @@
     &:hover {
       color: $--notification-close-hover-color;
     }
-  }
-
-  .fm-icon-success {
-    color: $--notification-success-icon-color;
-  }
-
-  .fm-icon-error {
-    color: $--notification-danger-icon-color;
-  }
-
-  .fm-icon-info {
-    color: $--notification-info-icon-color;
-  }
-
-  .fm-icon-warning {
-    color: $--notification-warning-icon-color;
   }
 }
 

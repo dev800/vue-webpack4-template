@@ -399,7 +399,7 @@ $--notification-shadow: $--box-shadow-light !default;
 $--notification-border-color: $--border-color-lighter !default;
 $--notification-icon-size: 24px !default;
 $--notification-close-font-size: $--message-close-size !default;
-$--notification-group-margin-left: 13px !default;
+$--notification-group-margin-left: 8px !default;
 $--notification-group-margin-right: 8px !default;
 /// fontSize||Font|1
 $--notification-content-font-size: $--font-size-base !default;
@@ -889,7 +889,7 @@ $--transfer-filter-height: 32px !default;
 
 /* Header
   --------------------------*/
-$--header-padding: 0 18px !default;
+$--header-padding: 0 18px 0 0 !default;
 
 /* Footer
 --------------------------*/
@@ -897,7 +897,7 @@ $--footer-padding: 0 18px !default;
 
 /* Main
 --------------------------*/
-$--main-padding: 18px !default;
+$--main-padding: 0 18px !default;
 
 /* Timeline
 --------------------------*/

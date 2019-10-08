@@ -39,7 +39,10 @@
               type="button"
               @click="closeDrawer"
             >
-              <i class="fm-dialog__close fm-icon fm-icon-close" />
+              <svg-icon
+                icon-class="solid-times"
+                class="fm-dialog__close"
+              ></svg-icon>
             </button>
           </header>
           <section

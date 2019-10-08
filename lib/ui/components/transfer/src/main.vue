@@ -18,7 +18,7 @@
         :disabled="rightChecked.length === 0"
         @click.native="addToLeft"
       >
-        <i class="fm-icon-ios-arrow-left" />
+        <svg-icon icon-class="solid-angle-left"></svg-icon>
         <span v-if="buttonTexts[0] !== undefined">{{ buttonTexts[0] }}</span>
       </fm-button>
       <fm-button
@@ -28,7 +28,7 @@
         @click.native="addToRight"
       >
         <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
-        <i class="fm-icon-ios-arrow-right" />
+        <svg-icon icon-class="solid-angle-right"></svg-icon>
       </fm-button>
     </div>
     <transfer-panel

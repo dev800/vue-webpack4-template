@@ -17,14 +17,15 @@
       @mouseenter="clearTimer"
       @mouseleave="startTimer"
     >
-      <i
+      <svg-icon
         v-if="iconClass"
-        :class="iconClass"
-      />
-      <i
+        :icon-class="iconClass"
+      ></svg-icon>
+      <svg-icon
         v-else
-        :class="typeClass"
-      />
+        class="fm-message__icon"
+        :icon-class="typeClass"
+      ></svg-icon>
       <slot>
         <p
           v-if="!dangerouslyUseHTMLString"
@@ -38,21 +39,22 @@
           v-html="message"
         />
       </slot>
-      <i
+      <svg-icon
         v-if="showClose"
-        class="fm-message__close-btn fm-icon-close"
+        class="fm-message__close-btn"
+        icon-class="solid-times"
         @click="close"
-      />
+      ></svg-icon>
     </div>
   </transition>
 </template>
 
 <script type="text/babel">
 const typeMap = {
-  success: 'success',
-  info: 'info',
-  warning: 'warning',
-  error: 'error'
+  success: 'solid-check-circle',
+  info: 'solid-info-circle',
+  warning: 'solid-exclamation-circle',
+  error: 'solid-times-circle'
 }
 
 export default {
@@ -77,7 +79,7 @@ export default {
   computed: {
     typeClass () {
       return this.type && !this.iconClass
-        ? `fm-message__icon fm-icon-${typeMap[this.type]}`
+        ? typeMap[this.type]
         : ''
     },
     positionStyle () {

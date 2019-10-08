@@ -49,11 +49,11 @@
         class="fm-input__prefix"
       >
         <slot name="prefix" />
-        <i
+        <svg-icon
           v-if="prefixIcon"
           class="fm-input__icon"
-          :class="prefixIcon"
-        />
+          :icon-class="prefixIcon"
+        ></svg-icon>
       </span>
       <!-- 后置内容 -->
       <span
@@ -63,23 +63,25 @@
         <span class="fm-input__suffix-inner">
           <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
             <slot name="suffix" />
-            <i
+            <svg-icon
               v-if="suffixIcon"
               class="fm-input__icon"
-              :class="suffixIcon"
-            />
+              :icon-class="suffixIcon"
+            ></svg-icon>
           </template>
-          <i
+          <svg-icon
             v-if="showClear"
-            class="fm-input__icon fm-icon-circle-close fm-input__clear"
+            class="fm-input__icon fm-input__clear"
+            icon-class="regular-times-circle"
             @mousedown.prevent
             @click="clear"
-          />
-          <i
+          ></svg-icon>
+          <svg-icon
             v-if="showPwdVisible"
-            class="fm-input__icon fm-icon-view fm-input__clear"
+            class="fm-input__icon fm-input__clear"
+            icon-class="regular-eye"
             @click="handlePasswordVisible"
-          />
+          ></svg-icon>
           <span
             v-if="isWordLimitVisible"
             class="fm-input__count"
@@ -89,11 +91,18 @@
             </span>
           </span>
         </span>
-        <i
+        <svg-icon
           v-if="validateState"
           class="fm-input__icon"
-          :class="['fm-input__validateIcon', validateIcon]"
-        />
+          icon-class="regular-eye"
+          @click="handlePasswordVisible"
+        ></svg-icon>
+        <svg-icon
+          v-if="validateState"
+          class="fm-input__icon fm-input__validate-icon"
+          :class="[this.validateState === 'validating' ? 'animated spin infinite' : '']"
+          :icon-class="validateIcon"
+        ></svg-icon>
       </span>
       <!-- 后置元素 -->
       <div
@@ -242,9 +251,9 @@ export default {
     },
     validateIcon () {
       return {
-        validating: 'fm-icon-loading',
-        success: 'fm-icon-circle-check',
-        error: 'fm-icon-circle-close'
+        validating: 'solid-loading',
+        success: 'solid-check',
+        error: 'solid-times'
       }[this.validateState]
     },
     textareaStyle () {

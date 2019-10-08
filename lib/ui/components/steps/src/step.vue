@@ -32,10 +32,10 @@
           v-if="currentStatus !== 'success' && currentStatus !== 'error'"
           name="icon"
         >
-          <i
+          <svg-icon
             v-if="icon"
             class="fm-step__icon-inner"
-            :class="[icon]"
+            :icon-class="icon"
           />
           <div
             v-if="!icon && !isSimple"
@@ -44,10 +44,10 @@
             {{ index + 1 }}
           </div>
         </slot>
-        <i
+        <svg-icon
           v-else
-          :class="['fm-icon-' + (currentStatus === 'success' ? 'check' : 'close')]"
           class="fm-step__icon-inner is-status"
+          :icon-class="currentStatus === 'success' ? 'solid-check' : 'solid-times'"
         />
       </div>
     </div>

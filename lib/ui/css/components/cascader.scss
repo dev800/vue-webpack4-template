@@ -38,7 +38,7 @@
       }
     }
 
-    .fm-icon-circle-close:hover {
+    .solid-times-circle:hover {
       color: $--input-clear-hover-color;
     }
 
@@ -110,7 +110,7 @@
         text-overflow: ellipsis;
       }
 
-      .fm-icon-close {
+      .solid-times {
         flex: none;
         background-color: $--color-text-placeholder;
         color: $--color-white;

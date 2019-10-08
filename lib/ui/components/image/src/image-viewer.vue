@@ -10,7 +10,7 @@
         class="fm-image-viewer__btn fm-image-viewer__close"
         @click="hide"
       >
-        <i class="fm-icon-circle-close" />
+        <svg-icon icon-class="solid-times-circle"></svg-icon>
       </span>
       <!-- ARROW -->
       <template v-if="!isSingle">
@@ -19,41 +19,42 @@
           :class="{ 'is-disabled': !infinite && isFirst }"
           @click="prev"
         >
-          <i class="fm-icon-ios-arrow-left" />
+          <svg-icon icon-class="solid-angle-left"></svg-icon>
         </span>
         <span
           class="fm-image-viewer__btn fm-image-viewer__next"
           :class="{ 'is-disabled': !infinite && isLast }"
           @click="next"
         >
-          <i class="fm-icon-ios-arrow-right" />
+          <svg-icon icon-class="solid-angle-right"></svg-icon>
+        </span>
         </span>
       </template>
       <!-- ACTIONS -->
       <div class="fm-image-viewer__btn fm-image-viewer__actions">
         <div class="fm-image-viewer__actions__inner">
-          <i
-            class="fm-icon-zoom-out"
+          <svg-icon
+            icon-class="regular-zoom-out"
             @click="handleActions('zoomOut')"
-          />
-          <i
-            class="fm-icon-zoom-in"
+          ></svg-icon>
+          <svg-icon
+            icon-class="regular-zoom-in"
             @click="handleActions('zoomIn')"
-          />
+          ></svg-icon>
           <i class="fm-image-viewer__actions__divider" />
-          <i
-            :class="mode.icon"
+          <svg-icon
+            :icon-class="mode.icon"
             @click="toggleMode"
-          />
+          ></svg-icon>
           <i class="fm-image-viewer__actions__divider" />
-          <i
-            class="fm-icon-refresh-left"
-            @click="handleActions('anticlocelise')"
-          />
-          <i
-            class="fm-icon-refresh-right"
-            @click="handleActions('clocelise')"
-          />
+          <svg-icon
+            icon-class="regular-refresh-left"
+            @click="handleActions('antiCloceLise')"
+          ></svg-icon>
+          <svg-icon
+            icon-class="regular-refresh-right"
+            @click="handleActions('cloceLise')"
+          ></svg-icon>
         </div>
       </div>
       <!-- CANVAS -->
@@ -305,10 +306,10 @@ export default {
         case 'zoomIn':
           transform.scale = parseFloat((transform.scale + zoomRate).toFixed(3))
           break
-        case 'clocelise':
+        case 'cloceLise':
           transform.deg += rotateDeg
           break
-        case 'anticlocelise':
+        case 'antiCloceLise':
           transform.deg -= rotateDeg
           break
       }

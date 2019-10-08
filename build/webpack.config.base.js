@@ -1,16 +1,17 @@
 'use strict'
 const path = require('path')
 
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const ManifestPlugin = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ROOT_PATH = path.resolve(__dirname, '../')
+const utils = require('./utils')
 
 const {
   VueLoaderPlugin
 } = require('vue-loader')
 
-const utils = require('./utils')
 
 module.exports = {
   resolve: {
@@ -22,10 +23,10 @@ module.exports = {
     }
   },
 
+  // devtool: 'eval',
   devtool: 'source-map',
   entry: {
     'app/demo': ['@/demo/index.ts'],
-    'app/admin': ['@/admin/index.js'],
   },
   output: {
     publicPath: '/',
@@ -59,6 +60,27 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(svg)(\?.*)?$/,
+        include: [utils.resolve('lib/ui/icons/svg')],
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: {
+              symbolId: 'icon-[name]'
+            }
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                { removeViewBox: false },
+                { removeXMLNS: true }
+              ]
+            }
+          },
+        ]
+      },
+      {
         test: /\.(js|vue)$/,
         use: 'eslint-loader',
         enforce: 'pre'
@@ -91,19 +113,13 @@ module.exports = {
   },
 
   plugins: [
+    new SpriteLoaderPlugin(),
     // https://github.com/jantimon/html-webpack-plugin/tree/master/examples
     new HtmlWebpackPlugin({
       filename: 'demo.html',
       template: 'src/demo/index.html',
       chunksSortMode: "manual",
       chunks: ['vendors', 'app/demo'],
-      inject: true
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'admin.html',
-      template: 'src/admin/index.html',
-      chunksSortMode: "manual",
-      chunks: ['vendors', 'app/admin'],
       inject: true
     }),
     new ManifestPlugin(),

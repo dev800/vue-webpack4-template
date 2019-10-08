@@ -26,10 +26,11 @@
         <slot name="title">
           {{ title }}
         </slot>
-        <i
-          class="fm-collapse-item__arrow fm-icon-ios-arrow-right"
+        <svg-icon
+          icon-class="solid-check"
+          class="solid-angle-right"
           :class="{'is-active': isActive}"
-        />
+        ></svg-icon>
       </div>
     </div>
     <fm-collapse-transition>

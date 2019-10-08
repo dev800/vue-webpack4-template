@@ -29,7 +29,10 @@
             aria-label="Close"
             @click="handleClose"
           >
-            <i class="fm-dialog__close fm-icon fm-icon-close" />
+            <svg-icon
+              icon-class="solid-times"
+              class="fm-dialog__close"
+            ></svg-icon>
           </button>
         </div>
         <div

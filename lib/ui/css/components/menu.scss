@@ -51,6 +51,7 @@
 
   @include m(horizontal) {
     border-right: none;
+
     & > .fm-menu-item {
       float: left;
       height: 60px;
@@ -69,6 +70,7 @@
         background-color: #fff;
       }
     }
+
     & > .fm-submenu {
       float: left;
 
@@ -134,15 +136,17 @@
 
     > .fm-menu-item,
     > .fm-submenu > .fm-submenu__title {
-      [class^="fm-icon-"] {
+      .svg-icon {
         margin: 0;
         vertical-align: middle;
         width: 24px;
         text-align: center;
       }
+
       .fm-submenu__icon-ios-arrow {
         display: none;
       }
+
       span {
         height: 0;
         width: 0;
@@ -199,7 +203,7 @@
 @include b(menu-item) {
   @include menu-item;
 
-  & [class^="fm-icon-"] {
+  & .svg-icon {
     margin-right: 5px;
     width: 24px;
     text-align: center;
@@ -261,12 +265,11 @@
       background: none !important;
     }
   }
-  [class^="fm-icon-"] {
+  .svg-icon {
     vertical-align: middle;
     margin-right: 5px;
     width: 24px;
     text-align: center;
-    font-size: 18px;
   }
 }
 

@@ -68,9 +68,9 @@
       <template v-if="!status">
         {{ content }}
       </template>
-      <i
+      <svg-icon
         v-else
-        :class="iconClass"
+        :icon-class="iconClass"
       />
     </div>
   </div>
@@ -189,12 +189,12 @@ export default {
     },
     iconClass () {
       if (this.status === 'warning') {
-        return 'fm-icon-warning'
+        return 'solid-exclamation-circle'
       }
       if (this.type === 'line') {
-        return this.status === 'success' ? 'fm-icon-circle-check' : 'fm-icon-circle-close'
+        return this.status === 'success' ? 'solid-check-circle' : 'solid-times-circle'
       } else {
-        return this.status === 'success' ? 'fm-icon-check' : 'fm-icon-close'
+        return this.status === 'success' ? 'solid-check' : 'solid-times'
       }
     },
     progressTextSize () {

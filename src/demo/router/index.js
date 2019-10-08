@@ -4,6 +4,7 @@ function load (path) {
 
 const routes = [
   { path: '/', component: load('index') },
+  { path: '/charts', component: load('charts/index') },
   { path: '/*', component: load('errors/not-found') }
 ]
 

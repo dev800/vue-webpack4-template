@@ -334,7 +334,7 @@ export default {
     const submenuTitleIcon = (
       (rootMenu.mode === 'horizontal' && isFirstLevel) ||
       (rootMenu.mode === 'vertical' && !rootMenu.collapse)
-    ) ? 'fm-icon-ios-arrow-down' : 'fm-icon-ios-arrow-right'
+    ) ? 'solid-chevron-down' : 'solid-chevron-right'
 
     return (
       <li
@@ -360,7 +360,7 @@ export default {
           style={[paddingStyle, titleStyle, { backgroundColor }]}
         >
           {$slots.title}
-          <i class={['fm-submenu__icon-ios-arrow', submenuTitleIcon]}></i>
+          <svg-icon class="fm-submenu__icon-ios-arrow" iconClass={submenuTitleIcon}></svg-icon>
         </div>
         {this.isMenuPopup ? popupMenu : inlineMenu}
       </li>

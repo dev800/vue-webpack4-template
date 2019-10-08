@@ -16,7 +16,10 @@
         view-class="fm-autocomplete-suggestion__list"
       >
         <li v-if="!parent.hideLoading && parent.loading">
-          <i class="fm-icon-loading" />
+          <svg-icon
+            icon-class="solid-loading"
+            class="animated spin infinite"
+          ></svg-icon>
         </li>
         <slot v-else />
       </fm-scrollbar>

@@ -6,11 +6,12 @@
       :class="[typeClass, center ? 'is-center' : '', 'is-' + effect]"
       role="alert"
     >
-      <i
+      <svg-icon
         v-if="showIcon"
+        :icon-class="iconClass"
         class="fm-alert__icon"
-        :class="[ iconClass, isBigIcon ]"
-      />
+        :class="[ isBigIcon ]"
+      ></svg-icon>
       <div class="fm-alert__content">
         <span
           v-if="title || $slots.title"
@@ -31,10 +32,17 @@
         >
           {{ description }}
         </p>
-        <i
+        <svg-icon
+          v-if="closeText === ''"
           v-show="closable"
           class="fm-alert__closebtn"
-          :class="{ 'is-customed': closeText !== '', 'fm-icon-close': closeText === '' }"
+          icon-class="solid-times"
+          @click="close()"
+        />
+        <i
+          v-else
+          v-show="closable"
+          class="fm-alert__closebtn is-customed"
           @click="close()"
         >{{ closeText }}</i>
       </div>
@@ -44,9 +52,9 @@
 
 <script type="text/babel">
 const TYPE_CLASSES_MAP = {
-  success: 'fm-icon-success',
-  warning: 'fm-icon-warning',
-  error: 'fm-icon-error'
+  success: 'solid-check-circle',
+  warning: 'solid-exclamation-circle',
+  error: 'solid-times-circle'
 }
 export default {
   name: 'FmAlert',
@@ -95,7 +103,7 @@ export default {
     },
 
     iconClass () {
-      return TYPE_CLASSES_MAP[this.type] || 'fm-icon-info'
+      return TYPE_CLASSES_MAP[this.type] || 'solid-info-circle'
     },
 
     isBigIcon () {

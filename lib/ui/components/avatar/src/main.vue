@@ -78,7 +78,7 @@ export default {
       }
 
       if (icon) {
-        return (<i class={icon} />)
+        return (<svg-icon icon-class={icon} />)
       }
 
       return this.$slots.default

@@ -21,9 +21,10 @@
         @mouseenter.native="inputHover = true"
         @mouseleave.native="inputHover = false"
       >
-        <i
+        <svg-icon
           slot="prefix"
-          :class="['fm-input__icon', 'fm-icon-' + inputIcon]"
+          :class="['fm-input__icon']"
+          :icon-class="inputIcon"
           @click="clearQuery"
         />
       </fm-input>
@@ -174,8 +175,8 @@ export default {
 
     inputIcon () {
       return this.query.length > 0 && this.inputHover
-        ? 'circle-close'
-        : 'search'
+        ? 'solid-times'
+        : 'solid-search'
     },
 
     labelProp () {
@@ -256,7 +257,7 @@ export default {
     },
 
     clearQuery () {
-      if (this.inputIcon === 'circle-close') {
+      if (this.inputIcon === 'solid-times') {
         this.query = ''
       }
     }

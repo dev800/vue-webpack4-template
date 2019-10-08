@@ -14,7 +14,7 @@
       >
         <fm-submenu index="1">
           <template slot="title">
-            <i class="fm-icon-ios-pin"></i>
+            <svg-icon icon-class="solid-th-large"></svg-icon>
             <span>组件</span>
           </template>
           <fm-menu-item-group>
@@ -41,18 +41,22 @@
           </fm-submenu>
         </fm-submenu>
         <fm-menu-item index="2">
-          <i class="fm-icon-ios-menu"></i>
+          <svg-icon icon-class="solid-snowboarding"></svg-icon>
           <span slot="title">技巧</span>
         </fm-menu-item>
         <fm-menu-item
           index="3"
           disabled
         >
-          <i class="fm-icon-ios-document"></i>
+          <svg-icon icon-class="solid-frown"></svg-icon>
           <span slot="title">不可用</span>
         </fm-menu-item>
+        <fm-menu-item index="3">
+          <svg-icon icon-class="solid-snowflake"></svg-icon>
+          <span slot="title">页面</span>
+        </fm-menu-item>
         <fm-menu-item index="4">
-          <i class="fm-icon-ios-settings"></i>
+          <svg-icon icon-class="solid-splotch"></svg-icon>
           <span slot="title">页面</span>
         </fm-menu-item>
       </fm-menu>

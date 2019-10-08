@@ -264,7 +264,10 @@ export default {
           {this.$slots.default}
         </fm-button>
         <fm-button ref="trigger" type={type} size={dropdownSize} class="fm-dropdown__caret-button">
-          <i class="fm-dropdown__icon fm-icon-ios-arrow-down"></i>
+          <svg-icon
+            icon-class="solid-chevron-right"
+            class="fm-dropdown__icon"
+          ></svg-icon>
         </fm-button>
       </fm-button-group>)
 

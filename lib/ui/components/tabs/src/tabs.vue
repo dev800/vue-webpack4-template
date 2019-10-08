@@ -147,7 +147,7 @@ export default {
           tabindex="0"
           on-keydown={(ev) => { if (ev.keyCode === 13) { handleTabAdd() } }}
         >
-          <i class="fm-icon-plus"></i>
+          <svg-icon icon-class="solid-plus"></svg-icon>
         </span>
       )
       : null

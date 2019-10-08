@@ -52,7 +52,7 @@
       font-size: 14px;
     }
 
-    & [class*="fm-icon-"] + span {
+    & .svg-icon + span {
       margin-left: 0;
     }
   }
@@ -148,7 +148,7 @@
       margin-left: 5px;
     }
 
-    .fm-icon-circle-close {
+    .solid-times-circle {
       cursor: pointer;
     }
   }

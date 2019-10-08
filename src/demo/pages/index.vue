@@ -1,6 +1,34 @@
 <template>
   <div class="x-page-home">
     <div>
+      <!-- <div v-loading="true">你好吗？？？</div> -->
+      <fm-progress :percentage="50"></fm-progress>
+      <fm-progress
+        :percentage="100"
+        :format="format"
+      ></fm-progress>
+      <fm-progress
+        :percentage="100"
+        status="success"
+      ></fm-progress>
+      <fm-progress
+        :percentage="100"
+        status="warning"
+      ></fm-progress>
+      <fm-progress
+        :percentage="50"
+        status="exception"
+      ></fm-progress>
+      <fm-button
+        plain
+        @click="openNotify"
+      >
+        可自动关闭的通知
+      </fm-button>
+      <svg-icon
+        icon-class="solid-loading"
+        class="animated spin infinite"
+      />
       <fm-date-picker
         v-model="valueDatatime"
         type="datetime"
@@ -20,8 +48,11 @@
       >
         UI测试
       </fm-button>
-      <fm-button type="primary">
-        UI大测试
+      <fm-button
+        type="primary"
+        :loading="true"
+      >
+        UI大测试加载中...
       </fm-button>
       <input
         type="button"
@@ -53,15 +84,18 @@
 <script>
 import NProgress from 'nprogress'
 import FmButton from '~/lib/ui/components/button'
+import FmProgress from '~/lib/ui/components/progress'
 import FmDatePicker from '~/lib/ui/components/date-picker'
 
 export default {
   components: {
     FmButton,
+    FmProgress,
     FmDatePicker
   },
   data () {
     return {
+      fullscreenLoading: false,
       valueDatatime: '',
       show: true
     }
@@ -81,6 +115,26 @@ export default {
     // NProgress.configure({ showSpinner: false })
   },
   methods: {
+    format (percentage) {
+      return percentage === 100 ? '满' : `${percentage}%`
+    },
+    openNotify () {
+      const h = this.$createElement
+
+      this.$notify({
+        type: 'warning',
+        // showClose: false,
+        // duration: 1200,
+        title: '标题名称',
+        message: h('i', { style: 'color: teal' }, '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')
+      })
+    },
+    openFullScreen () {
+      this.fullscreenLoading = true
+      setTimeout(() => {
+        this.fullscreenLoading = false
+      }, 2000)
+    },
     onShowMessage (e) {
       this.$message({ message: '你好测试一下错误消息啦啦', type: 'warning', duration: 1500 })
     },

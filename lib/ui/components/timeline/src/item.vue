@@ -13,11 +13,11 @@
         backgroundColor: color
       }"
     >
-      <i
+      <svg-icon
         v-if="icon"
         class="fm-timeline-item__icon"
-        :class="icon"
-      />
+        :icon-class="icon"
+      ></svg-icon>
     </div>
     <div
       v-if="$slots.dot"

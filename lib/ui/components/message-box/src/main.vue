@@ -32,7 +32,10 @@
             @click="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
             @keydown.enter="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
           >
-            <i class="fm-message-box__close fm-icon-close" />
+            <svg-icon
+              class="fm-message-box__close"
+              icon-class="solid-times"
+            ></svg-icon>
           </button>
         </div>
         <div class="fm-message-box__content">
@@ -116,10 +119,10 @@ import Dialog from '../../../js/utils/aria-dialog'
 
 let messageBox
 const typeMap = {
-  success: 'success',
-  info: 'info',
-  warning: 'warning',
-  error: 'error'
+  success: 'solid-check-circle',
+  info: 'solid-info-circle',
+  warning: 'solid-exclamation-circle',
+  error: 'solid-times-circle'
 }
 
 export default {

@@ -20,7 +20,7 @@
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
         >
-          <i class="fm-icon-ios-arrow-left" />
+          <svg-icon icon-class="solid-chevron-left"></svg-icon>
         </button>
       </transition>
       <transition
@@ -35,7 +35,7 @@
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
         >
-          <i class="fm-icon-ios-arrow-right" />
+          <svg-icon icon-class="solid-chevron-right"></svg-icon>
         </button>
       </transition>
       <slot />

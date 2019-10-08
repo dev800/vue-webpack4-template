@@ -27,7 +27,7 @@
         />
         <span
           v-if="!value && !showPanelColor"
-          class="fm-color-picker__empty fm-icon-close"
+          class="fm-color-picker__empty solid-times"
         />
       </span>
       <span

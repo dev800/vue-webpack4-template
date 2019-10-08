@@ -4,7 +4,7 @@
       class="fm-page-header__left"
       @click="$emit('back')"
     >
-      <i class="fm-icon-back" />
+      <svg-icon icon-class="solid-arrow-left"></svg-icon>
       <div class="fm-page-header__title">
         <slot name="title">
           {{ title }}

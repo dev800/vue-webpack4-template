@@ -7,11 +7,11 @@
     >
       <slot />
     </span>
-    <i
+    <svg-icon
       v-if="separatorClass"
+      :icon-class="separatorClass"
       class="fm-breadcrumb__separator"
-      :class="separatorClass"
-    />
+    ></svg-icon>
     <span
       v-else
       class="fm-breadcrumb__separator"
@@ -33,11 +33,11 @@ export default {
     }
   },
 
-  inject: ['elBreadcrumb'],
+  inject: ['fmBreadcrumb'],
 
   mounted () {
-    this.separator = this.elBreadcrumb.separator
-    this.separatorClass = this.elBreadcrumb.separatorClass
+    this.separator = this.fmBreadcrumb.separator
+    this.separatorClass = this.fmBreadcrumb.separatorClass
     const link = this.$refs.link
     link.setAttribute('role', 'link')
     link.addEventListener('click', _ => {

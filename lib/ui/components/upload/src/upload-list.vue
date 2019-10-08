@@ -29,23 +29,19 @@
           class="fm-upload-list__item-name"
           @click="handleClick(file)"
         >
-          <i class="fm-icon-document" />{{ file.name }}
+          <svg-icon icon-class="regular-file-alt"></svg-icon>{{ file.name }}
         </a>
         <label class="fm-upload-list__item-status-label">
-          <i :class="{
-              'fm-icon-upload-success': true,
-              'fm-icon-circle-check': listType === 'text',
-              'fm-icon-check': ['picture-card', 'picture'].indexOf(listType) > -1
-            }" />
+          <svg-icon icon-class="solid-check-circle"></svg-icon>
         </label>
-        <i
+        <svg-icon
+          icon-class="regular-times-circle"
           v-if="!disabled"
-          class="fm-icon-close"
           @click="$emit('remove', file)"
-        />
+        ></svg-icon>
         <i
           v-if="!disabled"
-          class="fm-icon-close-tip"
+          class="solid-times-tip"
         >{{ t('fm.upload.deleteTip') }}</i>
         <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
         <fm-progress
@@ -63,14 +59,14 @@
             class="fm-upload-list__item-preview"
             @click="handlePreview(file)"
           >
-            <i class="fm-icon-zoom-in" />
+            <svg-icon icon-class="regular-zoom-in"></svg-icon>
           </span>
           <span
             v-if="!disabled"
             class="fm-upload-list__item-delete"
             @click="$emit('remove', file)"
           >
-            <i class="fm-icon-delete" />
+            <svg-icon icon-class="regular-trash-alt"></svg-icon>
           </span>
         </span>
       </slot>

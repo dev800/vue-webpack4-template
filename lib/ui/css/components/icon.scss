@@ -1,7 +1,4 @@
-[class^="fm-icon-"],
-[class*=" fm-icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: "fmfont" !important;
+.svg-icon {
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -26,4 +23,18 @@
       cursor: pointer;
     }
   }
+}
+
+.svg-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.25em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.svg-external-icon {
+  background-color: currentColor;
+  mask-size: cover !important;
+  display: inline-block;
 }

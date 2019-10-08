@@ -9,14 +9,15 @@
       @mouseleave="startTimer()"
       @click="click"
     >
-      <i
+      <svg-icon
         v-if="type || iconClass"
         class="fm-notification__icon"
-        :class="[ typeClass, iconClass ]"
-      />
+        :class="presentIconTypeClass"
+        :icon-class="presentIconClass"
+      ></svg-icon>
       <div
         class="fm-notification__group"
-        :class="{ 'is-with-icon': typeClass || iconClass }"
+        :class="{ 'is-with-icon': !!(typeClass || iconClass) }"
       >
         <h2
           class="fm-notification__title"
@@ -36,11 +37,12 @@
             />
           </slot>
         </div>
-        <div
+        <svg-icon
           v-if="showClose"
-          class="fm-notification__close-btn fm-icon-close"
+          class="fm-notification__close-btn"
+          icon-class="solid-times"
           @click.stop="close"
-        />
+        ></svg-icon>
       </div>
     </div>
   </transition>
@@ -48,10 +50,10 @@
 
 <script type="text/babel">
 const typeMap = {
-  success: 'success',
-  info: 'info',
-  warning: 'warning',
-  error: 'error'
+  success: 'solid-check-circle',
+  info: 'solid-info-circle',
+  warning: 'solid-exclamation-circle',
+  error: 'solid-times-circle'
 }
 
 export default {
@@ -76,8 +78,20 @@ export default {
   },
 
   computed: {
+    presentIconTypeClass () {
+      return `icon_type-${this.type}`
+    },
+
+    presentIconClass () {
+      if (this.typeClass !== '') {
+        return this.typeClass
+      } else {
+        return this.iconClass
+      }
+    },
+
     typeClass () {
-      return this.type && typeMap[this.type] ? `fm-icon-${typeMap[this.type]}` : ''
+      return this.type && typeMap[this.type] ? `${typeMap[this.type]}` : ''
     },
 
     horizontalClass () {

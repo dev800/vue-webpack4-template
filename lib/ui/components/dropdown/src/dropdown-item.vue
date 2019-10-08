@@ -9,10 +9,10 @@
     :tabindex="disabled ? null : -1"
     @click="handleClick"
   >
-    <i
+    <svg-icon
       v-if="icon"
-      :class="icon"
-    />
+      :icon-class="icon"
+    ></svg-icon>
     <slot />
   </li>
 </template>

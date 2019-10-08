@@ -10,23 +10,10 @@
       :class="[customClass, { 'is-fullscreen': fullscreen }]"
     >
       <div class="fm-loading-spinner">
-        <svg
-          v-if="!spinner"
-          class="circular"
-          viewBox="25 25 50 50"
-        >
-          <circle
-            class="path"
-            cx="50"
-            cy="50"
-            r="20"
-            fill="none"
-          />
-        </svg>
-        <i
-          v-else
-          :class="spinner"
-        />
+        <svg-icon
+          class="animated spin infinite"
+          :icon-class="spinner ? spinner : 'solid-loading'"
+        ></svg-icon>
         <p
           v-if="text"
           class="fm-loading-text"

@@ -17,14 +17,15 @@
     ]"
     @click="handleClick"
   >
-    <i
+    <svg-icon
       v-if="loading"
-      class="fm-icon-loading"
-    />
-    <i
+      icon-class="solid-loading"
+      class="animated spin infinite"
+    ></svg-icon>
+    <svg-icon
       v-if="icon && !loading"
-      :class="icon"
-    />
+      :icon-class="icon"
+    ></svg-icon>
     <span v-if="$slots.default">
       <slot /></span>
   </button>

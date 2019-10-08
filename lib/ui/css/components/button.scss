@@ -44,7 +44,7 @@
     border: 0;
   }
 
-  & [class*="fm-icon-"] {
+  & .svg-icon {
     & + span {
       margin-left: 5px;
     }

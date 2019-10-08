@@ -10,19 +10,16 @@
     v-bind="$attrs"
     @click="handleClick"
   >
-
-    <i
+    <svg-icon
       v-if="icon"
-      :class="icon"
-    />
-
+      :icon-class="icon"
+    ></svg-icon>
     <span
       v-if="$slots.default"
       class="fm-link--inner"
     >
       <slot />
     </span>
-
     <template v-if="$slots.icon">
       <slot
         v-if="$slots.icon"

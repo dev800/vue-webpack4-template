@@ -4,6 +4,7 @@ const path = require('path')
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const utils = require('./utils')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 const ROOT_PATH = path.resolve(__dirname, '../')
@@ -45,6 +46,7 @@ module.exports = merge(baseConfig, {
       },
       {
         test: /\.(woff2?|eot|ttf|otf|mp4|webm|ogg|mp3|wav|flac|aac|png|jpe?g|gif|svg)(\?.*)?$/i,
+        exclude: [utils.resolve('lib/ui/icons/svg')],
         use: {
           loader: 'file-loader',
           options: {

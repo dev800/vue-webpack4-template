@@ -26,22 +26,23 @@
       @input="handleInput"
     >
       <template slot="suffix">
-        <i
+        <svg-icon
           v-if="clearBtnVisible"
           key="clear"
-          class="fm-input__icon fm-icon-circle-close"
+          icon-class="regular-times-circle"
+          class="fm-input__icon"
           @click.stop="handleClear"
-        />
-        <i
+        ></svg-icon>
+        <svg-icon
           v-else
           key="arrow-down"
+          icon-class="solid-angle-down"
           :class="[
             'fm-input__icon',
-            'fm-icon-ios-arrow-down',
             dropDownVisible && 'is-reverse'
           ]"
           @click.stop="toggleDropDownVisible()"
-        />
+        ></svg-icon>
       </template>
     </fm-input>
 
@@ -114,10 +115,10 @@
               @click="handleSuggestionClick(index)"
             >
               <span>{{ item.text }}</span>
-              <i
+              <svg-icon
                 v-if="item.checked"
-                class="fm-icon-check"
-              />
+                icon-class="solid-check"
+              ></svg-icon>
             </li>
           </template>
           <slot

@@ -113,7 +113,7 @@
       border-radius: 3px;
     }
 
-    & .fm-icon-close {
+    & .solid-times {
       border-radius: 50%;
       text-align: center;
       transition: all .3s cubic-bezier(.645,.045,.355,1);
@@ -163,7 +163,7 @@
     > .fm-tabs__header .fm-tabs__active-bar {
       display: none;
     }
-    > .fm-tabs__header .fm-tabs__item .fm-icon-close {
+    > .fm-tabs__header .fm-tabs__item .solid-times {
       position: relative;
       font-size: 12px;
       width: 0;
@@ -187,7 +187,7 @@
           padding-left: 13px;
           padding-right: 13px;
 
-          & .fm-icon-close {
+          & .solid-times {
             width: 14px;
           }
         }
@@ -199,7 +199,7 @@
           padding-left: 20px;
           padding-right: 20px;
 
-          .fm-icon-close {
+          .solid-times {
             width: 14px;
           }
         }

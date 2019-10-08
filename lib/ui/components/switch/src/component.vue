@@ -23,9 +23,9 @@
       v-if="inactiveIconClass || inactiveText"
       :class="['fm-switch__label', 'fm-switch__label--left', !checked ? 'is-active' : '']"
     >
-      <i
+      <svg-icon
         v-if="inactiveIconClass"
-        :class="[inactiveIconClass]"
+        :icon-class="inactiveIconClass"
       />
       <span
         v-if="!inactiveIconClass && inactiveText"
@@ -41,9 +41,9 @@
       v-if="activeIconClass || activeText"
       :class="['fm-switch__label', 'fm-switch__label--right', checked ? 'is-active' : '']"
     >
-      <i
+      <svg-icon
         v-if="activeIconClass"
-        :class="[activeIconClass]"
+        :icon-class="activeIconClass"
       />
       <span
         v-if="!activeIconClass && activeText"

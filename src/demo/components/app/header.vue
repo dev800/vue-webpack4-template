@@ -1,11 +1,11 @@
 <template>
   <div class="x-header">
-    <fm-icon
-      class="header__icon-trigger"
-      isLink="true"
-      @click="onClickCollapseToggle"
-      :type="`indent-${uiAsideMenu.collapse ? 'right' : 'left'}`"
-    ></fm-icon>
+    <div class="header__icon-trigger">
+      <svg-icon
+        @click="onClickCollapseToggle"
+        :icon-class="uiAsideMenu.collapse ? 'solid-indent' : 'solid-outdent'"
+      ></svg-icon>
+    </div>
     <fm-breadcrumb
       separator="/"
       class="header__breadcrumb"
@@ -21,13 +21,11 @@
 <script>
 import { mapState } from 'vuex'
 
-import FmIcon from '~/lib/ui/components/icon'
 import FmBreadcrumb from '~/lib/ui/components/breadcrumb'
 import FmBreadcrumbItem from '~/lib/ui/components/breadcrumb-item'
 
 export default {
   components: {
-    FmIcon,
     FmBreadcrumb,
     FmBreadcrumbItem
   },
@@ -52,11 +50,21 @@ export default {
   .header_ {
     &_icon-trigger,
     &_breadcrumb {
-      line-height: 3.8;
+      line-height: 50px;
     }
 
     &_icon-trigger {
-      padding-right: 16px;
+      padding: 0 16px;
+      font-size: 20px;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.025);
+      }
+    }
+
+    &_breadcrumb {
+      padding-left: 8px;
     }
   }
 }

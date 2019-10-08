@@ -24,7 +24,7 @@ export default {
 
   provide () {
     return {
-      elBreadcrumb: this
+      fmBreadcrumb: this
     }
   },
 

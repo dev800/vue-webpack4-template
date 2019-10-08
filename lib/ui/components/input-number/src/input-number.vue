@@ -17,7 +17,7 @@
       :class="{'is-disabled': minDisabled}"
       @keydown.enter="decrease"
     >
-      <i :class="`fm-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`" />
+      <svg-icon :icon-class="`${controlsAtRight ? 'solid-chevron-down' : 'solid-minus'}`"></svg-icon>
     </span>
     <span
       v-if="controls"
@@ -27,7 +27,7 @@
       :class="{'is-disabled': maxDisabled}"
       @keydown.enter="increase"
     >
-      <i :class="`fm-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`" />
+      <svg-icon :icon-class="`${controlsAtRight ? 'solid-chevron-up' : 'solid-plus'}`"></svg-icon>
     </span>
     <fm-input
       ref="input"

@@ -47,7 +47,7 @@ export default {
         on-click={this.handleClick}>
         {this.$slots.default}
         {
-          this.closable && <i class="fm-tag__close fm-icon-close" on-click={this.handleClose}></i>
+          this.closable && <svg-icon class="fm-tag__close" icon-class="solid-times" on-click={this.handleClose}></svg-icon>
         }
       </span>
     )

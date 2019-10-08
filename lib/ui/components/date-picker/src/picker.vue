@@ -20,19 +20,19 @@
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
   >
-    <i
+    <svg-icon
       slot="prefix"
       class="fm-input__icon"
-      :class="triggerClass"
+      :icon-class="triggerIconClass"
       @click="handleFocus"
-    />
-    <i
+    ></svg-icon>
+    <svg-icon
       v-if="haveTrigger"
       slot="suffix"
       class="fm-input__icon"
-      :class="[showClose ? '' + clearIcon : '']"
+      :icon-class="showClose ? '' + clearIcon : ''"
       @click="handleClickIcon"
-    />
+    ></svg-icon>
   </fm-input>
   <div
     v-else
@@ -50,7 +50,10 @@
     @mouseleave="showClose = false"
     @keydown="handleKeydown"
   >
-    <i :class="['fm-input__icon', 'fm-range__icon', triggerClass]" />
+    <svg-icon
+      class="fm-input__icon fm-range__icon"
+      :icon-class="triggerIconClass"
+    ></svg-icon>
     <input
       autocomplete="off"
       :placeholder="startPlaceholder"
@@ -80,12 +83,12 @@
       @change="handleEndChange"
       @focus="handleFocus"
     >
-    <i
+    <svg-icon
       v-if="haveTrigger"
-      :class="[showClose ? '' + clearIcon : '']"
       class="fm-input__icon fm-range__close-icon"
+      :icon-class="showClose ? '' + clearIcon : ''"
       @click="handleClickIcon"
-    />
+    ></svg-icon>
   </div>
 </template>
 
@@ -363,7 +366,7 @@ export default {
     prefixIcon: String,
     clearIcon: {
       type: String,
-      default: 'fm-icon-circle-close'
+      default: 'solid-times'
     },
     name: {
       default: '',
@@ -444,8 +447,8 @@ export default {
       return true
     },
 
-    triggerClass () {
-      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'fm-icon-time' : 'fm-icon-date')
+    triggerIconClass () {
+      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'regular-clock' : 'regular-calendar-alt')
     },
 
     selectionMode () {

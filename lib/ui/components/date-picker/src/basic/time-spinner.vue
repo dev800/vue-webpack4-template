@@ -71,14 +71,16 @@
         class="fm-time-spinner__wrapper is-arrow"
         @mouseenter="emitSelectRange('hours')"
       >
-        <i
+        <svg-icon
           v-repeat-click="decrease"
-          class="fm-time-spinner__arrow fm-icon-ios-arrow-up"
-        />
-        <i
+          icon-class="solid-chevron-up"
+          class="fm-time-spinner__arrow"
+        ></svg-icon>
+        <svg-icon
           v-repeat-click="increase"
-          class="fm-time-spinner__arrow fm-icon-ios-arrow-down"
-        />
+          icon-class="solid-chevron-down"
+          class="fm-time-spinner__arrow"
+        ></svg-icon>
         <ul
           ref="hours"
           class="fm-time-spinner__list"
@@ -97,14 +99,16 @@
         class="fm-time-spinner__wrapper is-arrow"
         @mouseenter="emitSelectRange('minutes')"
       >
-        <i
+        <svg-icon
           v-repeat-click="decrease"
-          class="fm-time-spinner__arrow fm-icon-ios-arrow-up"
-        />
-        <i
+          icon-class="solid-chevron-up"
+          class="fm-time-spinner__arrow"
+        ></svg-icon>
+        <svg-icon
           v-repeat-click="increase"
-          class="fm-time-spinner__arrow fm-icon-ios-arrow-down"
-        />
+          icon-class="solid-chevron-down"
+          class="fm-time-spinner__arrow"
+        ></svg-icon>
         <ul
           ref="minutes"
           class="fm-time-spinner__list"
@@ -124,14 +128,16 @@
         class="fm-time-spinner__wrapper is-arrow"
         @mouseenter="emitSelectRange('seconds')"
       >
-        <i
+        <svg-icon
           v-repeat-click="decrease"
-          class="fm-time-spinner__arrow fm-icon-ios-arrow-up"
-        />
-        <i
+          icon-class="solid-chevron-up"
+          class="fm-time-spinner__arrow"
+        ></svg-icon>
+        <svg-icon
           v-repeat-click="increase"
-          class="fm-time-spinner__arrow fm-icon-ios-arrow-down"
-        />
+          icon-class="solid-chevron-down"
+          class="fm-time-spinner__arrow"
+        ></svg-icon>
         <ul
           ref="seconds"
           class="fm-time-spinner__list"

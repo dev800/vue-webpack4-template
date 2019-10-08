@@ -228,8 +228,8 @@ export default {
     } = this
     const scrollBtn = scrollable
       ? [
-        <span class={['fm-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="fm-icon-ios-arrow-left"></i></span>,
-        <span class={['fm-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="fm-icon-ios-arrow-right"></i></span>
+        <span class={['fm-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><svg-icon icon-class="solid-angle-left"></svg-icon></span>,
+        <span class={['fm-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><svg-icon icon-class="solid-angle-right"></svg-icon></span>
       ] : null
 
     const tabs = this._l(panes, (pane, index) => {
@@ -239,7 +239,7 @@ export default {
       pane.index = `${index}`
 
       const btnClose = closable
-        ? <span class="fm-icon-close" on-click={(ev) => { onTabRemove(pane, ev) }}></span>
+        ? <span class="solid-times" on-click={(ev) => { onTabRemove(pane, ev) }}></span>
         : null
 
       const tabLabelContent = pane.$slots.label || pane.label

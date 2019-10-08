@@ -162,19 +162,19 @@ export default {
 
     renderCheckIcon (h) {
       return (
-        <i class="fm-icon-check fm-cascader-node__prefix"></i>
+        <svg-icon icon-class="solid-check" class="fm-cascader-node__postfix"></svg-icon>
       )
     },
 
     renderLoadingIcon (h) {
       return (
-        <i class="fm-icon-loading fm-cascader-node__postfix"></i>
+        <svg-icon icon-class="solid-loading" class="fm-cascader-node__postfix animated spin infinite"></svg-icon>
       )
     },
 
     renderExpandIcon (h) {
       return (
-        <i class="fm-icon-ios-arrow-right fm-cascader-node__postfix"></i>
+        <svg-icon icon-class="solid-chevron-right" class="fm-cascader-node__postfix"></svg-icon>
       )
     },
 
