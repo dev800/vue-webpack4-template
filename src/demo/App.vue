@@ -1,7 +1,7 @@
 <template>
   <ui-container class="x-app">
     <x-app-aside />
-    <ui-container class="app__container">
+    <ui-container :class="['app__container', {'app__container-collapse': uiAsideMenu.collapse}]">
       <ui-header
         height="52px"
         class="app__header"
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 
 import XAppAside from './components/app/aside'
 import XAppFooter from './components/app/footer'
@@ -60,6 +60,10 @@ export default {
   .app_ {
     &_container {
       margin-left: $---aside-width;
+    }
+
+    &_container-collapse {
+      margin-left: $---aside-width-collapse;
     }
   }
 }

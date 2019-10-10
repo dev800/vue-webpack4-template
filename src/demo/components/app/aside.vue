@@ -113,6 +113,7 @@ export default {
       position: fixed;
       top: 0;
       left: 0;
+      z-index: 999;
 
       .ui-menu {
         border-right: none;
@@ -121,8 +122,12 @@ export default {
     }
 
     &_aside-collapse {
-      width: 64px !important;
+      width: $---aside-width-collapse !important;;
       overflow: initial;
+
+      .app__aside-scroller {
+        overflow-y: initial;
+      }
     }
 
     &_aside-logo {

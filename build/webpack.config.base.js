@@ -26,7 +26,7 @@ module.exports = {
   // devtool: 'eval',
   devtool: 'source-map',
   entry: {
-    'app/demo': ['@/demo/index.ts'],
+    'app/demo': ['babel-polyfill', '@/demo/index.ts'],
   },
   output: {
     publicPath: '/',
