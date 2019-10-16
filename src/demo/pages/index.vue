@@ -149,7 +149,7 @@
   </div>
 </template>
 
-<script>
+<script lang="js">
 import NProgress from 'nprogress'
 import UiButton from '~/lib/ui/components/button'
 import UiInputNumber from '~/lib/ui/components/input-number'

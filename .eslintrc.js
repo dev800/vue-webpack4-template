@@ -2,7 +2,10 @@
 
 module.exports = {
   root: true,
+  // parser: 'eslint-plugin-typescript',
   parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 2018,
     parser: 'babel-eslint'
   },
   env: {
@@ -34,6 +37,7 @@ module.exports = {
     'vue/no-use-v-if-with-v-for': 'off',
     'vue/valid-v-model': 'off',
     'standard/no-callback-literal': 'off',
+    'scss(css-propertyvalueexpected)': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

@@ -1,5 +1,5 @@
-function load (path) {
-  return () => import(/* webpackPrefetch: true */ `@/demo/pages/${path}`)
+function load (path: string) {
+  return () => import(/* webpackChunkName: `demo` */ `@/demo/pages/${path}`)
 }
 
 const routes = [
