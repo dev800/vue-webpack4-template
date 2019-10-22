@@ -11,10 +11,10 @@ const getters: GetterTree<State, State> = {
   }
 }
 
-const mutationTypes = {
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
-  SET_COUNT: 'SET_COUNT'
+const enum mutationTypes {
+  INCREMENT = 'INCREMENT',
+  DECREMENT = 'DECREMENT',
+  SET_COUNT = 'SET_COUNT'
 }
 
 // actions

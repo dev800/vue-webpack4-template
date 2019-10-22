@@ -21,11 +21,11 @@ const getters: GetterTree<State, State> = {
   }
 }
 
-const mutationTypes = {
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
-  SET_COUNT: 'SET_COUNT',
-  ASIDE_MENU_COLLAPSE_TOGGLE: 'ASIDE_MENU_COLLAPSE_TOGGLE'
+const enum mutationTypes {
+  INCREMENT = 'INCREMENT',
+  DECREMENT = 'DECREMENT',
+  SET_COUNT = 'SET_COUNT',
+  ASIDE_MENU_COLLAPSE_TOGGLE = 'ASIDE_MENU_COLLAPSE_TOGGLE'
 }
 
 // actions

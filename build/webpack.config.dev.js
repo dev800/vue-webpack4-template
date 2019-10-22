@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const utils = require('./utils')
 
 const HOST = 'localhost'
-const PORT = 8080
+const PORT = 9001
 
 module.exports = merge(baseConfig, {
   mode: 'development',
