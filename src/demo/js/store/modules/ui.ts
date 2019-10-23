@@ -1,4 +1,5 @@
-import { ActionContext, ActionTree, MutationTree, GetterTree } from 'vuex'
+import { Module, ActionContext, ActionTree, MutationTree, GetterTree } from 'vuex'
+import { RootState } from '../root-types'
 
 class MenuItemRoute {
   public url: string
@@ -23,7 +24,7 @@ class AsideMenu {
   // 模式(horizontal / vertical)：默认: vertical
   public mode?: string = 'vertical'
   // 是否折叠
-  public collapse?: boolean = false
+  public collapse?: boolean = localStorage.getItem('asideMenu.collapse') === 'true'
   // 菜单项
   public items?: Array<MenuItem> = []
 
@@ -36,7 +37,7 @@ class State {
 }
 
 // getters
-const getters: GetterTree<State, State> = {
+const getters: GetterTree<State, RootState> = {
   evenOrOdd (state: State): string {
     return state.count % 2 === 0 ? 'even' : 'odd'
   }
@@ -50,17 +51,17 @@ const enum MutationTypes {
 }
 
 // actions
-const actions: ActionTree<State, State> = {
-  increment ({ commit }: ActionContext<State, State>): void {
+const actions: ActionTree<State, RootState> = {
+  increment ({ commit }: ActionContext<State, RootState>): void {
     commit(MutationTypes.INCREMENT)
   },
-  decrement ({ commit }: ActionContext<State, State>): void {
+  decrement ({ commit }: ActionContext<State, RootState>): void {
     commit(MutationTypes.DECREMENT)
   },
-  setCount ({ commit }: ActionContext<State, State>, count: number): void {
+  setCount ({ commit }: ActionContext<State, RootState>, count: number): void {
     commit(MutationTypes.SET_COUNT, count)
   },
-  asideMenuCollapseToggle ({ commit }: ActionContext<State, State>): void {
+  asideMenuCollapseToggle ({ commit, state }: ActionContext<State, RootState>): void {
     commit(MutationTypes.ASIDE_MENU_COLLAPSE_TOGGLE)
   },
 }
@@ -77,6 +78,7 @@ const mutations: MutationTree<State> = {
   },
   [MutationTypes.ASIDE_MENU_COLLAPSE_TOGGLE] (state: State): void {
     state.asideMenu.collapse = !state.asideMenu.collapse
+    localStorage.setItem('asideMenu.collapse', String(state.asideMenu.collapse))
   },
 }
 
@@ -90,7 +92,7 @@ const stateInstance = new State()
 //   }
 // ]
 
-export default {
+export const ui: Module<State, RootState> = {
   namespaced: true,
   state: stateInstance,
   getters,

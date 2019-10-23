@@ -58,6 +58,10 @@ export default {
 
 .x-app {
   .app {
+    &__header {
+      padding: 0;
+    }
+
     &__main {
       min-height: calc(100vh - 50px - 120px)
     }

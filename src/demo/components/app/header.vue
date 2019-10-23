@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     onClickCollapseToggle (e) {
+      console.log('click: onClickCollapseToggle', e)
       this.$store.dispatch('ui/asideMenuCollapseToggle')
     }
   }

@@ -3,7 +3,8 @@
     <div class="app__aside-logo">Vue</div>
     <div class="app__aside-scroller">
       <ui-menu
-        default-active="2"
+        :default-active="defaultActiveIndex"
+        :unique-opened="false"
         :mode="uiAsideMenu.mode"
         :collapse="uiAsideMenu.collapse"
         @open="onMenuOpen"
@@ -39,10 +40,19 @@ export default {
     }),
     routes () {
       return this.$router.options.routes
+    },
+    defaultActiveIndex () {
+      const route = this.$route
+      const { meta, path } = route
+
+      if (meta.activeMenu) {
+        return meta.activeMenu
+      }
+
+      return path
     }
   },
   mounted () {
-    console.log(this.uiAsideMenu)
   },
   methods: {
     onMenuOpen (e) {
@@ -73,7 +83,11 @@ export default {
 
       .ui-menu {
         border-right: none;
-        background: none;
+        background: $---aside-background;
+
+        &.ui-menu--inline {
+          background: $---aside-inline-background;
+        }
 
         .ui-submenu {
           &__title {
@@ -84,10 +98,16 @@ export default {
               background: $---aside-background;
             }
           }
+
+          .ui-menu-item {
+            padding: 0 24px;
+          }
         }
 
         .ui-menu-item {
           color: $---aside-color;
+          text-overflow: ellipsis;
+          overflow: hidden;
 
           &:hover {
             color: $---aside-hover-color;
@@ -95,7 +115,7 @@ export default {
           }
 
           &.is-active {
-            color: $---aside-color;
+            color: $---aside-active-color;
             background: $---aside-active-background;
           }
         }
@@ -116,6 +136,12 @@ export default {
         .ui-menu {
           background: $---aside-background;
           box-shadow: $---aside-box-shadow;
+        }
+
+        &.is-active {
+          .ui-submenu__title {
+            color: $---aside-active-color;
+          }
         }
       }
     }

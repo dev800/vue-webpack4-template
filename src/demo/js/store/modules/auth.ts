@@ -1,11 +1,12 @@
-import { ActionContext, ActionTree, MutationTree, GetterTree } from 'vuex'
+import { Module, ActionContext, ActionTree, MutationTree, GetterTree } from 'vuex'
+import { RootState } from '../root-types'
 
 class State {
   public count: number
 }
 
 // getters
-const getters: GetterTree<State, State> = {
+const getters: GetterTree<State, RootState> = {
   evenOrOdd (state: State): string {
     return state.count % 2 === 0 ? 'even' : 'odd'
   }
@@ -18,14 +19,14 @@ const enum MutationTypes {
 }
 
 // actions
-const actions: ActionTree<State, State> = {
-  increment ({ commit }: ActionContext<State, State>): void {
+const actions: ActionTree<State, RootState> = {
+  increment ({ commit }: ActionContext<State, RootState>): void {
     commit(MutationTypes.INCREMENT)
   },
-  decrement ({ commit }: ActionContext<State, State>): void {
+  decrement ({ commit }: ActionContext<State, RootState>): void {
     commit(MutationTypes.DECREMENT)
   },
-  setCount ({ commit }: ActionContext<State, State>, count: number): void {
+  setCount ({ commit }: ActionContext<State, RootState>, count: number): void {
     commit(MutationTypes.SET_COUNT, count)
   },
 }
@@ -42,7 +43,7 @@ const mutations: MutationTree<State> = {
   },
 }
 
-export default {
+export const auth: Module<State, RootState> = {
   namespaced: true,
   state: new State(),
   getters,
