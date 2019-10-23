@@ -243,7 +243,7 @@ export default {
 
   render (h) {
     const component = (
-      <ul
+      <div
         role="menubar"
         key={+this.collapse}
         style={{ backgroundColor: this.backgroundColor || '' }}
@@ -254,7 +254,7 @@ export default {
         }}
       >
         {this.$slots.default}
-      </ul>
+      </div>
     )
 
     return component

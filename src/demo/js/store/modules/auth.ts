@@ -11,7 +11,7 @@ const getters: GetterTree<State, State> = {
   }
 }
 
-const enum mutationTypes {
+const enum MutationTypes {
   INCREMENT = 'INCREMENT',
   DECREMENT = 'DECREMENT',
   SET_COUNT = 'SET_COUNT'
@@ -20,24 +20,24 @@ const enum mutationTypes {
 // actions
 const actions: ActionTree<State, State> = {
   increment ({ commit }: ActionContext<State, State>): void {
-    commit(mutationTypes.INCREMENT)
+    commit(MutationTypes.INCREMENT)
   },
   decrement ({ commit }: ActionContext<State, State>): void {
-    commit(mutationTypes.DECREMENT)
+    commit(MutationTypes.DECREMENT)
   },
   setCount ({ commit }: ActionContext<State, State>, count: number): void {
-    commit(mutationTypes.SET_COUNT, count)
+    commit(MutationTypes.SET_COUNT, count)
   },
 }
 
 const mutations: MutationTree<State> = {
-  [mutationTypes.INCREMENT] (state: State): void {
+  [MutationTypes.INCREMENT] (state: State): void {
     state.count++
   },
-  [mutationTypes.DECREMENT] (state: State): void {
+  [MutationTypes.DECREMENT] (state: State): void {
     state.count--
   },
-  [mutationTypes.SET_COUNT] (state: State, count: number): void {
+  [MutationTypes.SET_COUNT] (state: State, count: number): void {
     state.count = count
   },
 }

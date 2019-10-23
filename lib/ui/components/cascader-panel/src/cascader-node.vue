@@ -222,7 +222,7 @@ export default {
     }
 
     return (
-      <li
+      <div
         role="menuitem"
         id={nodeId}
         aria-expanded={inActivePath}
@@ -239,7 +239,7 @@ export default {
         {this.renderPrefix(h)}
         {this.renderContent(h)}
         {this.renderPostfix(h)}
-      </li>
+      </div>
     )
   }
 }

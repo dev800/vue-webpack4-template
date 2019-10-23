@@ -1,8 +1,8 @@
 <template>
   <div class="x-header">
-    <div class="header__icon-trigger">
+    <div class="header__collapse-trigger">
       <svg-icon
-        @click="onClickCollapseToggle"
+        @click.stop="onClickCollapseToggle"
         :icon-class="uiAsideMenu.collapse ? 'solid-indent' : 'solid-outdent'"
       ></svg-icon>
     </div>
@@ -47,13 +47,13 @@ export default {
   display: flex;
   align-items: center;
 
-  .header_ {
-    &_icon-trigger,
-    &_breadcrumb {
+  .header {
+    &__collapse-trigger,
+    &__breadcrumb {
       line-height: 50px;
     }
 
-    &_icon-trigger {
+    &__collapse-trigger {
       padding: 0 16px;
       font-size: 20px;
       cursor: pointer;
@@ -63,7 +63,7 @@ export default {
       }
     }
 
-    &_breadcrumb {
+    &__breadcrumb {
       padding-left: 8px;
     }
   }

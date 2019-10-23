@@ -1,5 +1,5 @@
 <template>
-  <li class="ui-menu-item-group">
+  <div class="ui-menu-item-group">
     <div
       class="ui-menu-item-group__title"
       :style="{paddingLeft: levelPadding + 'px'}"
@@ -15,7 +15,7 @@
     <ul>
       <slot />
     </ul>
-  </li>
+  </div>
 </template>
 <script>
 export default {

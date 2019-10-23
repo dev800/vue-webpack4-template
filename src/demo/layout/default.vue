@@ -57,12 +57,16 @@ export default {
 @import '../css/index.scss';
 
 .x-app {
-  .app_ {
-    &_container {
+  .app {
+    &__main {
+      min-height: calc(100vh - 50px - 120px)
+    }
+
+    &__container {
       margin-left: $---aside-width;
     }
 
-    &_container-collapse {
+    &__container-collapse {
       margin-left: $---aside-width-collapse;
     }
   }

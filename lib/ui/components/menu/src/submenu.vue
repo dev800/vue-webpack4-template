@@ -304,7 +304,7 @@ export default {
 
     const popupMenu = (
       <transition name={menuTransitionName}>
-        <ul
+        <div
           ref="menu"
           v-show={opened}
           class={[`ui-menu--${mode}`, popperClass]}
@@ -315,19 +315,19 @@ export default {
           class={['ui-menu ui-menu--popup', `ui-menu--popup-${currentPlacement}`]}
           style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
           {$slots.default}
-        </ul>
+        </div>
       </transition>
     )
 
     const inlineMenu = (
       <ui-collapse-transition>
-        <ul
+        <div
           role="menu"
           class="ui-menu ui-menu--inline"
           v-show={opened}
           style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
           {$slots.default}
-        </ul>
+        </div>
       </ui-collapse-transition>
     )
 
@@ -337,7 +337,7 @@ export default {
     ) ? 'solid-chevron-down' : 'solid-chevron-right'
 
     return (
-      <li
+      <div
         class={{
           'ui-submenu': true,
           'is-active': active,
@@ -360,10 +360,10 @@ export default {
           style={[paddingStyle, titleStyle, { backgroundColor }]}
         >
           {$slots.title}
-          <svg-icon class="ui-submenu__icon-ios-arrow" iconClass={submenuTitleIcon}></svg-icon>
+          <svg-icon class="ui-submenu__icon-arrow" iconClass={submenuTitleIcon}></svg-icon>
         </div>
         {this.isMenuPopup ? popupMenu : inlineMenu}
-      </li>
+      </div>
     )
   }
 }

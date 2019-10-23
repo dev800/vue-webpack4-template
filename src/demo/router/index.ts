@@ -17,29 +17,32 @@ const router = new VueRouter({
     {
       path: '/',
       component: loadLayout('default'),
-      redirect: { name: 'dashboardConsole' }
+      redirect: { name: 'dashboardConsole' },
+      meta: {
+        menuHide: true
+      }
     },
     {
       path: '/dashboard',
       component: loadLayout('default'),
-      meta: { title: '总览', icon: 'component' },
+      meta: { title: '总览', icon: 'solid-th-large' },
       children: [
         {
           path: 'console',
           name: 'dashboardConsole',
-          meta: { title: '控制台', icon: 'dashboard' },
+          meta: { title: '控制台', icon: 'solid-th-large' },
           component: loadPage('dashboard/console')
         },
         {
           path: 'monitor',
           name: 'dashboardMonitor',
-          meta: { title: '监控器', icon: 'dashboard' },
+          meta: { title: '监控器', icon: 'solid-th-large' },
           component: loadPage('dashboard/monitor')
         },
         {
           path: 'workplace',
           name: 'dashboardWorkplace',
-          meta: { title: '监控器', icon: 'dashboard' },
+          meta: { title: '监控器', icon: 'solid-th-large' },
           component: loadPage('dashboard/workplace')
         }
       ]
@@ -48,29 +51,29 @@ const router = new VueRouter({
     {
       path: '/components',
       component: loadLayout('default'),
-      meta: { title: '组件', icon: 'component' },
+      meta: { title: '组件', icon: 'solid-th-large' },
       children: [
         {
           path: 'index',
           name: 'components',
-          meta: { title: '概览', icon: 'dashboard' },
+          meta: { title: '概览', icon: 'solid-th-large' },
           component: loadPage('components/index')
         },
         {
           path: 'basic',
           name: 'components',
-          meta: { title: '基础组件', icon: 'dashboard' },
+          meta: { title: '基础组件', icon: 'solid-th-large' },
           children: [
             {
               path: 'layout',
               name: 'componentsLayout',
-              meta: { title: 'Layout布局', icon: 'dashboard' },
+              meta: { title: 'Layout布局', icon: 'solid-th-large' },
               component: loadPage('components/layout')
             },
             {
               path: 'container',
               name: 'componentsContainer',
-              meta: { title: 'Container布局容器', icon: 'dashboard' },
+              meta: { title: 'Container布局容器', icon: 'solid-th-large' },
               component: loadPage('components/container')
             }
           ]
@@ -78,18 +81,18 @@ const router = new VueRouter({
         {
           path: 'form',
           name: 'components',
-          meta: { title: '表单组件', icon: 'dashboard' },
+          meta: { title: '表单组件', icon: 'solid-th-large' },
           children: [
             {
               path: 'radio',
               name: 'componentsRadio',
-              meta: { title: 'Radio 单选框', icon: 'dashboard' },
+              meta: { title: 'Radio 单选框', icon: 'solid-th-large' },
               component: loadPage('components/radio')
             },
             {
               path: 'checkbox',
               name: 'componentsCheckbox',
-              meta: { title: 'Checkbox 复选框', icon: 'dashboard' },
+              meta: { title: 'Checkbox 复选框', icon: 'solid-th-large' },
               component: loadPage('components/checkbox')
             }
           ]
@@ -97,7 +100,13 @@ const router = new VueRouter({
       ]
     },
 
-    { path: '/*', component: loadPage('errors/not-found') }
+    {
+      path: '/*',
+      meta: {
+        menuHide: true
+      },
+      component: loadPage('errors/not-found')
+    }
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }

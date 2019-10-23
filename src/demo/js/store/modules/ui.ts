@@ -1,17 +1,38 @@
 import { ActionContext, ActionTree, MutationTree, GetterTree } from 'vuex'
 
-class StateAsideMenu {
+class MenuItemRoute {
+  public url: string
+  public params: object
+}
+
+class MenuItem {
+  /** 自己菜单 */
+  public children?: Array<MenuItem> = []
+  /** 图标 */
+  public icon?: string
+  /** 标题 */
+  public title?: string
+  /** 路由 */
+  public route?: MenuItemRoute = new MenuItemRoute()
+  /** 跳转类型 */
+  public jumpType?: string = '__self'
+}
+
+/** 侧栏菜单 */
+class AsideMenu {
   // 模式(horizontal / vertical)：默认: vertical
-  public mode: string = 'vertical'
+  public mode?: string = 'vertical'
   // 是否折叠
-  public collapse: boolean = false
+  public collapse?: boolean = false
+  // 菜单项
+  public items?: Array<MenuItem> = []
 
   constructor () { }
 }
 
 class State {
   public count: number
-  public asideMenu: StateAsideMenu = new StateAsideMenu()
+  public asideMenu: AsideMenu = new AsideMenu()
 }
 
 // getters
@@ -21,7 +42,7 @@ const getters: GetterTree<State, State> = {
   }
 }
 
-const enum mutationTypes {
+const enum MutationTypes {
   INCREMENT = 'INCREMENT',
   DECREMENT = 'DECREMENT',
   SET_COUNT = 'SET_COUNT',
@@ -31,37 +52,47 @@ const enum mutationTypes {
 // actions
 const actions: ActionTree<State, State> = {
   increment ({ commit }: ActionContext<State, State>): void {
-    commit(mutationTypes.INCREMENT)
+    commit(MutationTypes.INCREMENT)
   },
   decrement ({ commit }: ActionContext<State, State>): void {
-    commit(mutationTypes.DECREMENT)
+    commit(MutationTypes.DECREMENT)
   },
   setCount ({ commit }: ActionContext<State, State>, count: number): void {
-    commit(mutationTypes.SET_COUNT, count)
+    commit(MutationTypes.SET_COUNT, count)
   },
   asideMenuCollapseToggle ({ commit }: ActionContext<State, State>): void {
-    commit(mutationTypes.ASIDE_MENU_COLLAPSE_TOGGLE)
+    commit(MutationTypes.ASIDE_MENU_COLLAPSE_TOGGLE)
   },
 }
 
 const mutations: MutationTree<State> = {
-  [mutationTypes.INCREMENT] (state: State): void {
+  [MutationTypes.INCREMENT] (state: State): void {
     state.count++
   },
-  [mutationTypes.DECREMENT] (state: State): void {
+  [MutationTypes.DECREMENT] (state: State): void {
     state.count--
   },
-  [mutationTypes.SET_COUNT] (state: State, count: number): void {
+  [MutationTypes.SET_COUNT] (state: State, count: number): void {
     state.count = count
   },
-  [mutationTypes.ASIDE_MENU_COLLAPSE_TOGGLE] (state: State): void {
+  [MutationTypes.ASIDE_MENU_COLLAPSE_TOGGLE] (state: State): void {
     state.asideMenu.collapse = !state.asideMenu.collapse
   },
 }
 
+const stateInstance = new State()
+
+// stateInstance.asideMenu.items = [
+//   {
+//     children: [],
+//     icon: 'th-large',
+//     title: ''
+//   }
+// ]
+
 export default {
   namespaced: true,
-  state: new State(),
+  state: stateInstance,
   getters,
   actions,
   mutations

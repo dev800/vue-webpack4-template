@@ -15,6 +15,7 @@
   transition: border-color 0.3s, background-color 0.3s, color 0.3s;
   box-sizing: border-box;
   white-space: nowrap;
+  user-select: none;
 
   * {
     vertical-align: middle;
@@ -31,7 +32,7 @@
   }
 
   @include when(disabled) {
-    opacity: 0.25;
+    opacity: 0.42;
     cursor: not-allowed;
     background: none !important;
   }
@@ -99,7 +100,7 @@
           background-color: #fff;
         }
       }
-      & .ui-submenu__icon-ios-arrow {
+      & .ui-submenu__icon-arrow {
         position: static;
         vertical-align: middle;
         margin-left: 8px;
@@ -134,6 +135,14 @@
   @include m(collapse) {
     width: 64px;
 
+    > .menu-wrapper > .ui-submenu > .ui-submenu__title,
+    > .ui-submenu > .ui-submenu__title {
+      .ui-submenu__icon-arrow,
+      .ui-menu-item__text {
+        display: none;
+      }
+    }
+
     > .ui-menu-item,
     > .ui-submenu > .ui-submenu__title {
       .svg-icon {
@@ -141,10 +150,6 @@
         vertical-align: middle;
         width: 24px;
         text-align: center;
-      }
-
-      .ui-submenu__icon-ios-arrow {
-        display: none;
       }
 
       span {
@@ -177,7 +182,7 @@
       }
 
       &.is-opened {
-        > .ui-submenu__title .ui-submenu__icon-ios-arrow {
+        > .ui-submenu__title .ui-submenu__icon-arrow {
           transform: none;
         }
       }
@@ -239,7 +244,7 @@
     padding: 0 45px;
     min-width: 200px;
   }
-  @include e(icon-ios-arrow) {
+  @include e(icon-arrow) {
     position: absolute;
     top: 50%;
     right: 20px;
@@ -253,14 +258,14 @@
     }
   }
   @include when(opened) {
-    > .ui-submenu__title .ui-submenu__icon-ios-arrow {
+    > .ui-submenu__title .ui-submenu__icon-arrow {
       transform: rotateZ(180deg);
     }
   }
   @include when(disabled) {
     .ui-submenu__title,
     .ui-menu-item {
-      opacity: 0.25;
+      opacity: 0.42;
       cursor: not-allowed;
       background: none !important;
     }
@@ -269,6 +274,7 @@
     vertical-align: middle;
     margin-right: 5px;
     width: 24px;
+    font-size: 18px;
     text-align: center;
   }
 }
@@ -285,7 +291,7 @@
   }
 }
 
-.horizontal-collapse-transition .ui-submenu__title .ui-submenu__icon-ios-arrow {
+.horizontal-collapse-transition .ui-submenu__title .ui-submenu__icon-arrow {
   transition: 0.2s;
   opacity: 0;
 }
