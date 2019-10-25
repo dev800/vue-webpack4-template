@@ -1,11 +1,11 @@
 <template>
   <default-collection>
-    <router-view />
+    <div>i18n</div>
   </default-collection>
 </template>
 
 <script>
-import DefaultCollection from './collections/default-collection.vue'
+import DefaultCollection from '@/demo/layout/collections/default-collection'
 
 export default {
   components: {

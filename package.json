@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "webpack-dev-server --progress --watch --config build/webpack.config.dev.js",
     "build": "NODE_ENV=production webpack --progress  --config build/webpack.config.prod.js",
-    "lint": "eslint --ext .ts,.js,.vue src lib",
-    "lint:fix": "eslint --ext .ts,.js,.vue src lib --fix",
+    "lint": "eslint --ext .ts,.js,.vue src",
+    "lint:fix": "eslint --ext .ts,.js,.vue src --fix",
     "test:unit": "jest --config test/jest.config.js",
     "test": "npm run lint && npm run test:unit",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand --config test/jest.config.js"

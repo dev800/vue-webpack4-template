@@ -4,7 +4,6 @@
     <div class="app__aside-scroller">
       <ui-menu
         :default-active="defaultActiveIndex"
-        :unique-opened="false"
         :mode="uiAsideMenu.mode"
         :collapse="uiAsideMenu.collapse"
         @open="onMenuOpen"
@@ -29,6 +28,7 @@ import UiMenu from '~/lib/ui/components/menu'
 import MenuItem from './menu-item'
 
 export default {
+  name: 'Aside',
   components: {
     UiAside,
     UiMenu,
@@ -139,7 +139,7 @@ export default {
         }
 
         &.is-active {
-          .ui-submenu__title {
+          > .ui-submenu__title {
             color: $---aside-active-color;
           }
         }

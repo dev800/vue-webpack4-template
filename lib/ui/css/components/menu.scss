@@ -4,8 +4,8 @@
 @import "../common/transition";
 
 @mixin menu-item {
-  height: 56px;
-  line-height: 56px;
+  height: $--menu-item-height;
+  line-height: $--menu-item-height;
   font-size: $--menu-item-font-size;
   color: $--menu-item-font-color;
   padding: 0 20px;
@@ -46,6 +46,7 @@
   padding-left: 0;
   background-color: $--menu-background-color;
   @include utils-clearfix;
+
   &.ui-menu--horizontal {
     border-bottom: solid 1px $--menu-border-color;
   }
@@ -55,8 +56,8 @@
 
     & > .ui-menu-item {
       float: left;
-      height: 60px;
-      line-height: 60px;
+      height: $--menu-item-horizontal-height;
+      line-height: $--menu-item-horizontal-height;
       margin: 0;
       border-bottom: 2px solid transparent;
       color: $--color-text-secondary;
@@ -91,8 +92,8 @@
       }
 
       & .ui-submenu__title {
-        height: 60px;
-        line-height: 60px;
+        height: $--menu-item-submenu-title-height;
+        line-height: $--menu-item-submenu-title-height;
         border-bottom: 2px solid transparent;
         color: $--color-text-secondary;
 
@@ -100,6 +101,7 @@
           background-color: #fff;
         }
       }
+
       & .ui-submenu__icon-arrow {
         position: static;
         vertical-align: middle;
@@ -107,13 +109,14 @@
         margin-top: -3px;
       }
     }
+
     & .ui-menu {
       & .ui-menu-item,
       & .ui-submenu__title {
         background-color: $--color-white;
         float: none;
-        height: 36px;
-        line-height: 36px;
+        height: $--menu-item-submenu-title-height;
+        line-height: $--menu-item-submenu-title-height;
         padding: 0 10px;
         color: $--color-text-secondary;
       }
@@ -122,11 +125,13 @@
         color: $--color-text-primary;
       }
     }
+
     & .ui-menu-item:not(.is-disabled):hover,
     & .ui-menu-item:not(.is-disabled):focus {
       outline: none;
       color: $--color-text-primary;
     }
+
     & > .ui-menu-item.is-active {
       border-bottom: 2px solid $--color-primary;
       color: $--color-text-primary;
@@ -134,6 +139,14 @@
   }
   @include m(collapse) {
     width: 64px;
+
+    &.ui-menu {
+      .ui-menu-item,
+      .ui-submenu__title {
+        height: $--menu-item-collapse-height;
+        line-height: $--menu-item-collapse-height;
+      }
+    }
 
     > .menu-wrapper > .ui-submenu > .ui-submenu__title,
     > .ui-submenu > .ui-submenu__title {
@@ -171,6 +184,7 @@
 
     .ui-submenu {
       position: relative;
+
       & .ui-menu {
         position: absolute;
         margin-left: 5px;
@@ -188,17 +202,19 @@
       }
     }
   }
+
   @include m(popup) {
     z-index: 100;
     min-width: 200px;
     border: none;
-    padding: 5px 0;
+    padding: 6px 0;
     border-radius: $--border-radius-small;
     box-shadow: $--box-shadow-light;
 
     &-bottom-start {
       margin-top: 5px;
     }
+
     &-right-start {
       margin-left: 5px;
       margin-right: 5px;

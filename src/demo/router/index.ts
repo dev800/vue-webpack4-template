@@ -16,11 +16,9 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: loadLayout('default'),
-      redirect: { name: 'dashboardConsole' },
-      meta: {
-        menuHide: true
-      }
+      name: 'root',
+      meta: { title: '首页', icon: 'solid-th-large' },
+      component: loadPage('index')
     },
     {
       path: '/dashboard',
@@ -61,7 +59,6 @@ const router = new VueRouter({
         },
         {
           path: 'basic',
-          name: 'components',
           meta: { title: '基础组件', icon: 'solid-th-large' },
           children: [
             {
@@ -80,7 +77,6 @@ const router = new VueRouter({
         },
         {
           path: 'form',
-          name: 'components',
           meta: { title: '表单组件', icon: 'solid-th-large' },
           children: [
             {
@@ -99,12 +95,15 @@ const router = new VueRouter({
         }
       ]
     },
-
+    {
+      path: '/functions/i18n',
+      name: 'functionsI18n',
+      meta: { title: '国际化' },
+      component: loadPage('functions/i18n')
+    },
     {
       path: '/*',
-      meta: {
-        menuHide: true
-      },
+      meta: { menuHide: true },
       component: loadPage('errors/not-found')
     }
   ],

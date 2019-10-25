@@ -6,28 +6,17 @@
         :icon-class="uiAsideMenu.collapse ? 'solid-indent' : 'solid-outdent'"
       ></svg-icon>
     </div>
-    <ui-breadcrumb
-      separator="/"
-      class="header__breadcrumb"
-    >
-      <ui-breadcrumb-item :to="{ path: '/' }">首页</ui-breadcrumb-item>
-      <ui-breadcrumb-item><a href="/">活动管理</a></ui-breadcrumb-item>
-      <ui-breadcrumb-item>活动列表</ui-breadcrumb-item>
-      <ui-breadcrumb-item>活动详情</ui-breadcrumb-item>
-    </ui-breadcrumb>
+    <app-breadcrumb />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-
-import UiBreadcrumb from '~/lib/ui/components/breadcrumb'
-import UiBreadcrumbItem from '~/lib/ui/components/breadcrumb-item'
+import AppBreadcrumb from './breadcrumb'
 
 export default {
   components: {
-    UiBreadcrumb,
-    UiBreadcrumbItem
+    AppBreadcrumb
   },
   computed: {
     ...mapState('ui', {

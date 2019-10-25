@@ -9,10 +9,11 @@
         :to="resolvePath(onlyOneChild.path)"
       >
         <ui-menu-item
+          :route="onlyOneChild"
           :index="resolvePath(onlyOneChild.path)"
           :class="{'submenu-title-noDropdown': !isNest}"
         >
-          <menu-item-inner
+          <app-menu-item-inner
             :icon="onlyOneChild.meta.icon || (item.meta && item.meta.icon)"
             :title="onlyOneChild.meta.title"
           />
@@ -27,7 +28,7 @@
       popper-append-to-body
     >
       <template slot="title">
-        <menu-item-inner
+        <app-menu-item-inner
           v-if="item.meta"
           :icon="item.meta && item.meta.icon"
           :title="item.meta.title"
@@ -47,8 +48,8 @@
 
 <script>
 import path from 'path'
-import MenuItemInner from './menu-item-inner.vue'
-import AppLink from './app-link'
+import AppMenuItemInner from './menu-item-inner.vue'
+import AppLink from './link'
 import UiSubmenu from '~/lib/ui/components/submenu'
 import UiMenuItem from '~/lib/ui/components/menu-item'
 // import UiMenuItemGroup from '~/lib/ui/components/menu-item-group'
@@ -56,7 +57,7 @@ import UiMenuItem from '~/lib/ui/components/menu-item'
 export default {
   name: 'MenuItem',
   components: {
-    MenuItemInner,
+    AppMenuItemInner,
     AppLink,
     UiSubmenu,
     UiMenuItem // ,

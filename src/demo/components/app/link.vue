@@ -1,6 +1,6 @@
 
 <template>
-  <component v-bind="linkProps(to)">
+  <component v-bind="linkProps(to)" :is="'AppLink'">
     <slot />
   </component>
 </template>
