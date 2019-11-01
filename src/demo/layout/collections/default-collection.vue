@@ -60,10 +60,16 @@ export default {
   .app {
     &__header {
       padding: 0;
+      height: $--app-header-height;
+      background: $--app-header-background;
+      position: fixed;
+      z-index: 999;
+      width: 100%;
     }
 
     &__main {
       min-height: calc(100vh - 120px);
+      padding-top: $--app-header-height;
     }
 
     &__container {
