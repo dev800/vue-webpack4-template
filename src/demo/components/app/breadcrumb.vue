@@ -23,8 +23,8 @@
 
 <script>
 import pathToRegexp from 'path-to-regexp'
-import UiBreadcrumb from '~/lib/ui/components/breadcrumb'
-import UiBreadcrumbItem from '~/lib/ui/components/breadcrumb-item'
+import UiBreadcrumb from '~~/lib/ui/components/breadcrumb'
+import UiBreadcrumbItem from '~~/lib/ui/components/breadcrumb-item'
 
 export default {
   name: 'Breadcrumb',

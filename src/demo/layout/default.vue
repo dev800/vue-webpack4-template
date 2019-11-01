@@ -4,7 +4,7 @@
   </default-collection>
 </template>
 
-<script>
+<script lang="ts">
 import DefaultCollection from './collections/default-collection.vue'
 
 export default {

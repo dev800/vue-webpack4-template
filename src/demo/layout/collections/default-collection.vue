@@ -18,16 +18,16 @@
   </ui-container>
 </template>
 
-<script>
+<script lang="ts">
 import { mapState } from 'vuex'
 
-import XAppAside from '../../components/app/aside'
-import XAppFooter from '../../components/app/footer'
-import XAppHeader from '../../components/app/header'
-import UiHeader from '~/lib/ui/components/header'
-import UiContainer from '~/lib/ui/components/container'
-import UiFooter from '~/lib/ui/components/footer'
-import UiMain from '~/lib/ui/components/main'
+import XAppAside from '../../components/app/aside.vue'
+import XAppFooter from '../../components/app/footer.vue'
+import XAppHeader from '../../components/app/header.vue'
+import UiHeader from '@@/lib/ui/components/header'
+import UiContainer from '@@/lib/ui/components/container'
+import UiFooter from '@@/lib/ui/components/footer'
+import UiMain from '@@/lib/ui/components/main'
 
 export default {
   components: {
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~/lib/ui/css/index.scss';
+@import '~~/lib/ui/css/index.scss';
 @import '../../css/variables.scss';
 @import '../../css/index.scss';
 

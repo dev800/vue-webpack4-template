@@ -1,9 +1,9 @@
 import 'babel-polyfill'
 import Vue from 'vue'
-import FarmerUI from '~/lib/ui/js/index'
-import lang from '~/lib/ui/js/locale/lang/zh-CN.js'
-// import locale from '~/lib/ui/js/locale/index.js'
-import store from './js/store/index'
+import FarmerUI from '~~/lib/ui/js/index'
+import lang from '~~/lib/ui/js/locale/lang/zh-CN.js'
+// import locale from '~~/lib/ui/js/locale/index.js'
+import store from './ts/store/index'
 import router from './router/index'
 
 const appDOM = document.querySelector('#app')

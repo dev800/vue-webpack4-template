@@ -143,7 +143,7 @@
         leave-active-class="animated slideOutUp"
       >
         <img
-          src="~/static/img/logo.png"
+          src="@/demo/assets/img/logo.png"
           v-if="show"
         >
       </transition>
@@ -153,12 +153,12 @@
 
 <script lang="js">
 import NProgress from 'nprogress'
-import UiButton from '~/lib/ui/components/button'
-import UiInputNumber from '~/lib/ui/components/input-number'
-import UiRate from '~/lib/ui/components/rate'
-import UiProgress from '~/lib/ui/components/progress'
-import UiPagination from '~/lib/ui/components/pagination'
-import UiDatePicker from '~/lib/ui/components/date-picker'
+import UiButton from '~~/lib/ui/components/button'
+import UiInputNumber from '~~/lib/ui/components/input-number'
+import UiRate from '~~/lib/ui/components/rate'
+import UiProgress from '~~/lib/ui/components/progress'
+import UiPagination from '~~/lib/ui/components/pagination'
+import UiDatePicker from '~~/lib/ui/components/date-picker'
 import DefaultCollection from '@/demo/layout/collections/default-collection'
 
 export default {

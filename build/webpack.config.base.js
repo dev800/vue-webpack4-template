@@ -17,9 +17,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts', '.vue', '.json'],
     alias: {
-      '~': ROOT_PATH,
+      '~': utils.resolve('src'),
+      '~~': ROOT_PATH,
       '@': utils.resolve('src'),
-      'static': utils.resolve('static'),
+      '@@': ROOT_PATH
     }
   },
 
@@ -82,13 +83,24 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: [{
-          loader: 'vue-loader',
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            ts: [
+              {
+                loader: 'ts-loader',
+                options: {
+                  appendTsSuffixTo: [/\.vue$/],
+                  transpileOnly: true
+                }
+              }]
+          },
           options: {
+            esModule: true,
             extractCSS: true,
             preserveWhitespace: false
           }
-        }]
+        }
       },
       {
         test: /\.js$/,
@@ -98,10 +110,11 @@ module.exports = {
         }
       },
       {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'ts-loader'
+        test: /\.ts$/,
+        loader: "ts-loader",
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+          transpileOnly: true
         }
       }
     ]

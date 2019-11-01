@@ -23,8 +23,8 @@
 <script>
 import { mapState } from 'vuex'
 
-import UiAside from '~/lib/ui/components/aside'
-import UiMenu from '~/lib/ui/components/menu'
+import UiAside from '~~/lib/ui/components/aside'
+import UiMenu from '~~/lib/ui/components/menu'
 import MenuItem from './menu-item'
 
 export default {

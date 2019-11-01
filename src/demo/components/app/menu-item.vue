@@ -50,9 +50,9 @@
 import path from 'path'
 import AppMenuItemInner from './menu-item-inner.vue'
 import AppLink from './link'
-import UiSubmenu from '~/lib/ui/components/submenu'
-import UiMenuItem from '~/lib/ui/components/menu-item'
-// import UiMenuItemGroup from '~/lib/ui/components/menu-item-group'
+import UiSubmenu from '~~/lib/ui/components/submenu'
+import UiMenuItem from '~~/lib/ui/components/menu-item'
+// import UiMenuItemGroup from '~~/lib/ui/components/menu-item-group'
 
 export default {
   name: 'MenuItem',
