@@ -21,7 +21,7 @@
     "noImplicitAny": true,
     "module": "esnext",
     "target": "es5",
-    "jsx": "react",
+    "jsx": "preserve",
     "allowJs": true
   },
   "include": [

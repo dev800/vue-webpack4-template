@@ -82,51 +82,24 @@ module.exports = {
         ]
       },
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
+        test: /\.vue$/, loader: 'vue-loader',
         options: {
           loaders: {
-            ts: [
-              {
-                loader: 'ts-loader',
-                options: {
-                  appendTsSuffixTo: [/\.vue$/],
-                  transpileOnly: true
-                }
-              }
-            ],
-            js: [
-              {
-                loader: 'babel-loader',
-                options: {
-                  appendTsSuffixTo: [/\.vue$/],
-                  transpileOnly: true
-                }
-              }
-            ],
+            js: 'babel-loader',
+            jsx: 'babel-loader',
+            ts: 'ts-loader',
             tsx: [
               {
+                loader: 'babel-loader'
+              },
+              {
                 loader: 'ts-loader',
                 options: {
-                  appendTsSuffixTo: [/\.vue$/],
-                  transpileOnly: true
-                }
-              }
-            ],
-            jsx: [
-              {
-                loader: 'babel-loader',
-                options: {
-                  appendTsSuffixTo: [/\.vue$/],
+                  appendTsxSuffixTo: [/\.vue$/],
                   transpileOnly: true
                 }
               }
             ]
-          },
-          options: {
-            esModule: true,
-            extractCSS: true,
-            preserveWhitespace: false
           }
         }
       },
@@ -138,12 +111,33 @@ module.exports = {
         }
       },
       {
-        test: /\.tsx?$/,
-        loader: "ts-loader",
-        options: {
-          appendTsSuffixTo: [/\.vue$/],
-          transpileOnly: true
-        }
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsxSuffixTo: [/ts\.vue$/],
+              transpileOnly: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.tsx$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsxSuffixTo: [/\.vue$/],
+              transpileOnly: true
+            }
+          }
+        ]
       }
     ]
   },
