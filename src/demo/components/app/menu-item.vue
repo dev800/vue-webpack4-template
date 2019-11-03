@@ -46,26 +46,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import path from 'path'
 import AppMenuItemInner from './menu-item-inner.vue'
 import AppLink from './link'
 import UiSubmenu from '~~/lib/ui/components/submenu'
 import UiMenuItem from '~~/lib/ui/components/menu-item'
-// import UiMenuItemGroup from '~~/lib/ui/components/menu-item-group'
 
 export default {
   name: 'MenuItem',
+  mixins: [],
+
   components: {
     AppMenuItemInner,
     AppLink,
     UiSubmenu,
-    UiMenuItem // ,
-    // UiMenuItemGroup
+    UiMenuItem
   },
-  mixins: [],
+
   props: {
-    // route object
     item: {
       type: Object,
       required: true
@@ -79,10 +78,12 @@ export default {
       default: ''
     }
   },
+
   data () {
     this.onlyOneChild = null
     return {}
   },
+
   methods: {
     hasOneShowingChild (children = [], parent) {
       const showingChildren = children.filter(item => {
@@ -108,6 +109,7 @@ export default {
 
       return false
     },
+
     resolvePath (routePath) {
       return path.resolve(this.basePath, routePath)
     }

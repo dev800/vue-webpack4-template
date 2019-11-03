@@ -10,9 +10,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapState } from 'vuex'
-import AppBreadcrumb from './breadcrumb'
+import AppBreadcrumb from './breadcrumb.vue'
 
 export default {
   components: {
@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     onClickCollapseToggle (e) {
-      console.log('click: onClickCollapseToggle', e)
       this.$store.dispatch('ui/asideMenuCollapseToggle')
     }
   }

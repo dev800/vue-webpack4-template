@@ -5,7 +5,7 @@
   </component>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: {
     to: {
@@ -17,6 +17,7 @@ export default {
     isExternal (path) {
       return /^(https?:|mailto:|tel:)/.test(path)
     },
+
     linkProps (url) {
       if (this.isExternal(url)) {
         return {

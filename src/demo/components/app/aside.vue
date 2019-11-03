@@ -20,7 +20,7 @@
   </ui-aside>
 </template>
 
-<script>
+<script lang="ts">
 import { mapState } from 'vuex'
 
 import UiAside from '~~/lib/ui/components/aside'
