@@ -93,7 +93,35 @@ module.exports = {
                   appendTsSuffixTo: [/\.vue$/],
                   transpileOnly: true
                 }
-              }]
+              }
+            ],
+            js: [
+              {
+                loader: 'babel-loader',
+                options: {
+                  appendTsSuffixTo: [/\.vue$/],
+                  transpileOnly: true
+                }
+              }
+            ],
+            tsx: [
+              {
+                loader: 'ts-loader',
+                options: {
+                  appendTsSuffixTo: [/\.vue$/],
+                  transpileOnly: true
+                }
+              }
+            ],
+            jsx: [
+              {
+                loader: 'babel-loader',
+                options: {
+                  appendTsSuffixTo: [/\.vue$/],
+                  transpileOnly: true
+                }
+              }
+            ]
           },
           options: {
             esModule: true,
@@ -103,14 +131,14 @@ module.exports = {
         }
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
         }
       },
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         loader: "ts-loader",
         options: {
           appendTsSuffixTo: [/\.vue$/],
