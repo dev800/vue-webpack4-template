@@ -9,7 +9,7 @@
         @open="onMenuOpen"
         @close="onMenuClose"
       >
-        <menu-item
+        <app-menu-item
           v-for="route in routes"
           :key="route.path"
           :item="route"
@@ -26,13 +26,13 @@ import { State } from 'vuex-class'
 
 import UiAside from '~~/lib/ui/components/aside'
 import UiMenu from '~~/lib/ui/components/menu'
-import MenuItem from './menu-item'
+import AppMenuItem from './menu-item.vue'
 
 @Component({
   components: {
     UiAside,
     UiMenu,
-    MenuItem
+    AppMenuItem
   }
 })
 

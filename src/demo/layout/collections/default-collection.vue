@@ -1,5 +1,5 @@
 <template>
-  <ui-container class="x-app">
+  <ui-container class="app">
     <x-app-aside />
     <ui-container :class="['app__container', {'app__container-collapse': uiAsideMenu.collapse}]">
       <ui-header
@@ -52,29 +52,28 @@ export default class DefaultCollection extends Vue {
 @import '../../css/variables.scss';
 @import '../../css/index.scss';
 
-.x-app {
-  .app {
-    &__header {
-      padding: 0;
-      height: $--app-header-height;
-      background: $--app-header-background;
-      position: fixed;
-      z-index: 999;
-      width: 100%;
-    }
+.app {
+  &__header {
+    padding: 0;
+    height: $--app-header-height;
+    background: $--app-header-background;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+  }
 
-    &__main {
-      min-height: calc(100vh - 120px);
-      padding-top: $--app-header-height;
-    }
+  &__main {
+    min-height: calc(100vh - 120px);
+    padding-top: $--app-header-height;
+  }
 
-    &__container {
-      margin-left: $--aside-width;
-    }
+  &__container {
+    margin-left: $--aside-width;
+    min-height: 100vh;
+  }
 
-    &__container-collapse {
-      margin-left: $--aside-width-collapse;
-    }
+  &__container-collapse {
+    margin-left: $--aside-width-collapse;
   }
 }
 </style>

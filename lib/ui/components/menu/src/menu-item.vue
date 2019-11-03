@@ -99,9 +99,7 @@ export default {
     this.rootMenu.removeItem(this)
   },
   methods: {
-    onMouseEnter () {
-      if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return
-    },
+    onMouseEnter () { },
     onMouseLeave () {
       if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return
       this.$el.style.backgroundColor = this.backgroundColor

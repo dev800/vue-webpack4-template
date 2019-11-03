@@ -46,7 +46,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import path from 'path'
 import AppMenuItemInner from './menu-item-inner.vue'
 import AppLink from './link'
@@ -101,7 +101,7 @@ export default {
         return true
       }
 
-      // Show parent if there are no child router to display
+      // Show parent if there are no child router to display.
       if (showingChildren.length === 0) {
         this.onlyOneChild = { ...parent, path: '', noShowingChildren: true }
         return true

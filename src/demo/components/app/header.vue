@@ -1,10 +1,7 @@
 <template>
   <div class="x-header">
-    <div class="header__collapse-trigger">
-      <svg-icon
-        @click.stop="onClickCollapseToggle"
-        :icon-class="uiAsideMenu.collapse ? 'solid-indent' : 'solid-outdent'"
-      ></svg-icon>
+    <div class="header__collapse-trigger" @click.stop="onClickCollapseToggle">
+      <svg-icon :icon-class="uiAsideMenu.collapse ? 'solid-indent' : 'solid-outdent'"></svg-icon>
     </div>
     <app-breadcrumb />
   </div>
@@ -42,6 +39,7 @@ export default class Header extends Vue {
     }
 
     &__collapse-trigger {
+      display: inline-block;
       padding: 0 16px;
       font-size: 20px;
       cursor: pointer;

@@ -1,0 +1,29 @@
+h1 {
+  &.demo__title {
+    font-size: 24px;
+    margin: 32px 8px 18px;
+  }
+}
+
+h2 {
+  &.demo__title {
+    font-size: 18px;
+    margin: 32px 8px 18px;
+  }
+}
+
+.demo {
+  &__block {
+    border-radius: 4px;
+    padding: 24px;
+    background: #fff;
+  }
+
+  &__row {
+    padding-top: 18px;
+
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+}

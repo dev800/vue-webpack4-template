@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import DefaultCollection from './collections/default-collection.vue'
+import DefaultCollection from '../collections/default-collection.vue'
 
 @Component({
   components: {

@@ -77,9 +77,15 @@
             @click="clear"
           ></svg-icon>
           <svg-icon
-            v-if="showPwdVisible"
+            v-if="showPwdVisible && !passwordVisible"
             class="ui-input__icon ui-input__clear"
             icon-class="regular-eye"
+            @click="handlePasswordVisible"
+          ></svg-icon>
+          <svg-icon
+            v-if="showPwdVisible && passwordVisible"
+            class="ui-input__icon ui-input__clear"
+            icon-class="regular-eye-slash"
             @click="handlePasswordVisible"
           ></svg-icon>
           <span

@@ -1,8 +1,8 @@
 <template>
-  <div> hello world ddddd </div>
+  <div> hello world @ index</div>
 </template>
 
-<script lang="js">
+<script lang="ts">
 export default {
 
 }

@@ -8,7 +8,7 @@ function loadPage (path: string) {
 }
 
 function loadLayout (name: string) {
-  return () => import(`../layout/${name}`)
+  return () => import(`../layout/layouts/${name}`)
 }
 
 const router = new VueRouter({
@@ -60,6 +60,7 @@ const router = new VueRouter({
         {
           path: 'basic',
           meta: { title: '基础组件', icon: 'solid-th-large' },
+          component: loadLayout('empty'),
           children: [
             {
               path: 'layout',
@@ -78,6 +79,7 @@ const router = new VueRouter({
         {
           path: 'form',
           meta: { title: '表单组件', icon: 'solid-th-large' },
+          component: loadLayout('empty'),
           children: [
             {
               path: 'radio',
@@ -90,6 +92,12 @@ const router = new VueRouter({
               name: 'componentsCheckbox',
               meta: { title: 'Checkbox 复选框', icon: 'solid-th-large' },
               component: loadPage('components/checkbox')
+            },
+            {
+              path: 'input',
+              name: 'componentsInput',
+              meta: { title: 'Input 文本框', icon: 'solid-th-large' },
+              component: loadPage('components/input')
             }
           ]
         }

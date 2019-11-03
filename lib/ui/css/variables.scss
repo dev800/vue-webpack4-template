@@ -218,6 +218,8 @@ $--checkbox-button-checked-border-color: $--color-primary !default;
 
 /* Radio
 -------------------------- */
+$--radio-label-padding-left: 2px !default;
+$--radio-margin-right: 16px !default;
 /// fontSize||Font|1
 $--radio-font-size: $--font-size-base !default;
 /// fontWeight||Font|1
@@ -898,6 +900,7 @@ $--header-padding: 0 18px 0 0 !default;
 /* Footer
 --------------------------*/
 $--footer-padding: 0 18px !default;
+$--footer-margin: 18px 0 0 0 !default;
 
 /* Main
 --------------------------*/

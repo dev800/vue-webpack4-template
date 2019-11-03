@@ -2,6 +2,7 @@
 @import "../variables";
 
 @include b(footer) {
+  margin: $--footer-margin;
   padding: $--footer-padding;
   box-sizing: border-box;
   flex-shrink: 0;
