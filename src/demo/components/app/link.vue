@@ -6,31 +6,28 @@
 </template>
 
 <script lang="ts">
-export default {
-  props: {
-    to: {
-      type: String,
-      required: true
-    }
-  },
-  methods: {
-    isExternal (path) {
-      return /^(https?:|mailto:|tel:)/.test(path)
-    },
+import { Component, Vue, Watch, Prop } from 'vue-property-decorator'
 
-    linkProps (url) {
-      if (this.isExternal(url)) {
-        return {
-          is: 'a',
-          href: url,
-          target: '_blank',
-          rel: 'noopener'
-        }
-      }
+@Component
+export default class Link extends Vue {
+  @Prop(String) to: string | undefined
+
+  isExternal (path) {
+    return /^(https?:|mailto:|tel:)/.test(path)
+  }
+
+  linkProps (url) {
+    if (this.isExternal(url)) {
       return {
-        is: 'router-link',
-        to: url
+        is: 'a',
+        href: url,
+        target: '_blank',
+        rel: 'noopener'
       }
+    }
+    return {
+      is: 'router-link',
+      to: url
     }
   }
 }

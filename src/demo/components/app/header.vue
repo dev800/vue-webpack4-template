@@ -11,22 +11,21 @@
 </template>
 
 <script lang="ts">
-import { mapState } from 'vuex'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { State } from 'vuex-class'
 import AppBreadcrumb from './breadcrumb.vue'
 
-export default {
+@Component({
   components: {
     AppBreadcrumb
-  },
-  computed: {
-    ...mapState('ui', {
-      uiAsideMenu: state => state.asideMenu
-    })
-  },
-  methods: {
-    onClickCollapseToggle (e) {
-      this.$store.dispatch('ui/asideMenuCollapseToggle')
-    }
+  }
+})
+
+export default class Header extends Vue {
+  @State(state => state.ui.asideMenu) uiAsideMenu
+
+  onClickCollapseToggle (e) {
+    this.$store.dispatch('ui/asideMenuCollapseToggle')
   }
 }
 </script>
