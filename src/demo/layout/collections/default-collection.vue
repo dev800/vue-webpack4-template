@@ -19,7 +19,8 @@
 </template>
 
 <script lang="ts">
-import { mapState } from 'vuex'
+import { Component, Vue } from 'vue-property-decorator'
+import { State } from 'vuex-class'
 
 import XAppAside from '../../components/app/aside.vue'
 import XAppFooter from '../../components/app/footer.vue'
@@ -29,7 +30,7 @@ import UiContainer from '@@/lib/ui/components/container'
 import UiFooter from '@@/lib/ui/components/footer'
 import UiMain from '@@/lib/ui/components/main'
 
-export default {
+@Component({
   components: {
     XAppAside,
     XAppFooter,
@@ -38,16 +39,11 @@ export default {
     UiContainer,
     UiFooter,
     UiMain
-  },
-  computed: {
-    ...mapState('ui', {
-      uiAsideMenu: state => state.asideMenu
-    })
-  },
-  data () {
-    return {}
-  },
-  methods: {}
+  }
+})
+
+export default class DefaultCollection extends Vue {
+  @State(state => state.ui.asideMenu) uiAsideMenu
 }
 </script>
 

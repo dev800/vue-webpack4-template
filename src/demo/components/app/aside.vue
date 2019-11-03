@@ -1,5 +1,5 @@
 <template>
-  <ui-aside :class="['app__aside', {'app__aside-collapse': uiAsideMenu.collapse}]">
+  <ui-aside :class="['app__aside', {'app__aside-collapse': uiAsideMenu.collapse}]" name="ui-aside">
     <div class="app__aside-logo">Vue</div>
     <div class="app__aside-scroller">
       <ui-menu
@@ -21,46 +21,45 @@
 </template>
 
 <script lang="ts">
-import { mapState } from 'vuex'
+import { Component, Vue } from 'vue-property-decorator'
+import { State } from 'vuex-class'
 
 import UiAside from '~~/lib/ui/components/aside'
 import UiMenu from '~~/lib/ui/components/menu'
 import MenuItem from './menu-item'
 
-export default {
-  name: 'Aside',
+@Component({
   components: {
     UiAside,
     UiMenu,
     MenuItem
-  },
-  computed: {
-    ...mapState('ui', {
-      uiAsideMenu: state => state.asideMenu
-    }),
-    routes () {
-      return this.$router.options.routes
-    },
-    defaultActiveIndex () {
-      const route = this.$route
-      const { meta, path } = route
+  }
+})
 
-      if (meta.activeMenu) {
-        return meta.activeMenu
-      }
+export default class Aside extends Vue {
+  @State(state => state.ui.asideMenu) uiAsideMenu
 
-      return path
+  get routes () {
+    return this.$router.options.routes
+  }
+
+  get defaultActiveIndex () {
+    const route = this.$route
+    const { meta, path } = route
+
+    if (meta.activeMenu) {
+      return meta.activeMenu
     }
-  },
-  mounted () {
-  },
-  methods: {
-    onMenuOpen (e) {
-      console.log('menu open', e)
-    },
-    onMenuClose (e) {
-      console.log('menu close', e)
-    }
+
+    return path
+  }
+
+  onMenuOpen (e) {
+    console.log('menu open', e)
+  }
+
+  onMenuClose (e) {
+    console.log('menu close', e)
   }
 }
 </script>

@@ -5,17 +5,17 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
 import DefaultCollection from './collections/default-collection.vue'
 
-export default {
+@Component({
   components: {
     DefaultCollection
-  },
-  computed: {},
-  data () {
-    return {}
-  },
-  methods: {}
+  }
+})
+
+export default class LayoutDefault extends Vue {
+
 }
 </script>
 

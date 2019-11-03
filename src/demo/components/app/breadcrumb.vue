@@ -4,11 +4,11 @@
     separator="/"
   >
     <ui-breadcrumb-item
-      v-for="(item, itemIndex) in levelList"
+      v-for="(item, itemIndex) in items"
       :key="item.path"
     >
       <span
-        v-if="item.redirect === 'noRedirect' || itemIndex == levelList.length - 1"
+        v-if="item.redirect === 'noRedirect' || itemIndex == items.length - 1"
         class="no-redirect"
       >{{ item.meta.title }}</span>
       <a
@@ -20,57 +20,56 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import pathToRegexp from 'path-to-regexp'
 import UiBreadcrumb from '~~/lib/ui/components/breadcrumb'
 import UiBreadcrumbItem from '~~/lib/ui/components/breadcrumb-item'
 
-export default {
-  name: 'Breadcrumb',
+@Component({
   components: {
     UiBreadcrumb,
     UiBreadcrumbItem
-  },
-  data () {
-    return {
-      levelList: null
-    }
-  },
-  watch: {
-    $route (route) {
-      if (route.redirect) {
-        return
-      }
+  }
+})
 
-      this.generateBreadcrumb()
+export default class Breadcrumb extends Vue {
+  items: Array = []
+
+  @Watch('$route', { immediate: true, deep: true })
+  onUrlChange (route: any, _oldRoute: any) {
+    if (route.redirect) {
+      return
     }
-  },
+
+    this.generateBreadcrumb()
+  }
+
   created () {
     this.generateBreadcrumb()
-  },
-  methods: {
-    generateBreadcrumb () {
-      let matched = this.$route.matched.filter(item => item.meta && item.meta.title)
+  }
 
-      matched = [{ path: '/', meta: { title: '首页' } }].concat(matched)
-      this.levelList = matched.filter(item => item.meta && item.meta.title && !item.meta.breadcrumbHide)
-    },
+  generateBreadcrumb () {
+    let matched = this.$route.matched.filter(item => item.meta && item.meta.title)
 
-    pathCompile (path) {
-      const { params } = this.$route
-      var toPath = pathToRegexp.compile(path)
-      return toPath(params)
-    },
+    matched = [{ path: '/', meta: { title: '首页' } }].concat(matched)
+    this.items = matched.filter(item => item.meta && item.meta.title && !item.meta.breadcrumbHide)
+  }
 
-    handleLink (item) {
-      const { redirect, path } = item
+  pathCompile (path) {
+    const { params } = this.$route
+    var toPath = pathToRegexp.compile(path)
+    return toPath(params)
+  }
 
-      if (redirect) {
-        this.$router.push(redirect)
-        return
-      }
+  handleLink (item) {
+    const { redirect, path } = item
 
-      this.$router.push(this.pathCompile(path))
+    if (redirect) {
+      this.$router.push(redirect)
+      return
     }
+
+    this.$router.push(this.pathCompile(path))
   }
 }
 </script>
