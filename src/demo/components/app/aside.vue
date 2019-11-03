@@ -68,97 +68,95 @@ export default {
 <style lang="scss">
 @import '../../css/variables.scss';
 
-.x-app {
-  .app {
-    &__aside {
-      height: 100vh;
-      width: $---aside-width !important;
-      background: $---aside-background;
-      box-shadow: $---aside-box-shadow;
-      transition: width 0.28s;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 999;
+.app {
+  &__aside {
+    height: 100vh;
+    width: $--aside-width !important;
+    background: $--aside-background;
+    box-shadow: $--aside-box-shadow;
+    transition: width 0.28s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
 
-      .ui-menu {
-        border-right: none;
-        background: $---aside-background;
+    .ui-menu {
+      border-right: none;
+      background: $--aside-background;
 
-        &.ui-menu--inline {
-          background: $---aside-inline-background;
-        }
+      &.ui-menu--inline {
+        background: $--aside-inline-background;
+      }
 
-        .ui-submenu {
-          &__title {
-            color: $---aside-color;
+      .ui-submenu {
+        &__title {
+          color: $--aside-color;
 
-            &:hover {
-              color: $---aside-hover-color;
-              background: $---aside-background;
-            }
-          }
-
-          .ui-menu-item {
-            padding: 0 24px;
+          &:hover {
+            color: $--aside-hover-color;
+            background: $--aside-background;
           }
         }
 
         .ui-menu-item {
-          color: $---aside-color;
-          text-overflow: ellipsis;
-          overflow: hidden;
-
-          &:hover {
-            color: $---aside-hover-color;
-            background: $---aside-background;
-          }
-
-          &.is-active {
-            color: $---aside-active-color;
-            background: $---aside-active-background;
-          }
-        }
-      }
-    }
-
-    &__aside-collapse {
-      width: $---aside-width-collapse !important;
-      overflow: initial;
-
-      .app {
-        &__aside-scroller {
-          overflow-y: initial;
+          padding: 0 24px;
         }
       }
 
-      .ui-submenu {
-        .ui-menu {
-          background: $---aside-background;
-          box-shadow: $---aside-box-shadow;
+      .ui-menu-item {
+        color: $--aside-color;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        &:hover {
+          color: $--aside-hover-color;
+          background: $--aside-background;
         }
 
         &.is-active {
-          > .ui-submenu__title {
-            color: $---aside-active-color;
-          }
+          color: $--aside-active-color;
+          background: $--aside-active-background;
         }
       }
     }
+  }
 
-    &__aside-logo {
-      height: 64px;
-      line-height: 64px;
-      font-size: 32px;
-      color: #fff;
-      vertical-align: middle;
-      text-align: center;
+  &__aside-collapse {
+    width: $--aside-width-collapse !important;
+    overflow: initial;
+
+    .app {
+      &__aside-scroller {
+        overflow-y: initial;
+      }
     }
 
-    &__aside-scroller {
-      height: calc(100vh - 64px);
-      overflow-y: auto;
+    .ui-submenu {
+      .ui-menu {
+        background: $--aside-background;
+        box-shadow: $--aside-box-shadow;
+      }
+
+      &.is-active {
+        > .ui-submenu__title {
+          color: $--aside-active-color;
+        }
+      }
     }
+  }
+
+  &__aside-logo {
+    height: 64px;
+    line-height: 64px;
+    font-size: 32px;
+    color: #fff;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  &__aside-scroller {
+    height: calc(100vh - 64px);
+    overflow-y: auto;
   }
 }
 </style>

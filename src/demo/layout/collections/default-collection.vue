@@ -73,11 +73,11 @@ export default {
     }
 
     &__container {
-      margin-left: $---aside-width;
+      margin-left: $--aside-width;
     }
 
     &__container-collapse {
-      margin-left: $---aside-width-collapse;
+      margin-left: $--aside-width-collapse;
     }
   }
 }

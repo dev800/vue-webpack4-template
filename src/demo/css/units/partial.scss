@@ -1,19 +1,19 @@
 .u-partials {
   .partial_ {
     &_title {
-      margin-top: $---padding-lg;
+      margin-top: $--padding-lg;
     }
 
     &_subtitle {
-      margin-top: $---padding;
+      margin-top: $--padding;
     }
 
     &_content {
-      padding: $---padding-sm 0;
+      padding: $--padding-sm 0;
     }
   }
 
   .partial__content + .partial__subtitle {
-    margin-top: $---padding-xxs;
+    margin-top: $--padding-xxs;
   }
 }
