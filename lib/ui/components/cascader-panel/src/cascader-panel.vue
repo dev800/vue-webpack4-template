@@ -339,11 +339,11 @@ export default {
 
       const menus = this.$refs.menu || []
       menus.forEach(menu => {
-        const menuUiement = menu.$el
-        if (menuUiement) {
-          const container = menuUiement.querySelector('.ui-scrollbar__wrap')
-          const activeNode = menuUiement.querySelector('.ui-cascader-node.is-active') ||
-            menuUiement.querySelector('.ui-cascader-node.in-active-path')
+        const menuElement = menu.$el
+        if (menuElement) {
+          const container = menuElement.querySelector('.ui-scrollbar__wrap')
+          const activeNode = menuElement.querySelector('.ui-cascader-node.is-active') ||
+            menuElement.querySelector('.ui-cascader-node.in-active-path')
           scrollIntoView(container, activeNode)
         }
       })

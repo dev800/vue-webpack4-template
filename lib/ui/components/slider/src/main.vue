@@ -184,7 +184,7 @@ export default {
       if (!this.showStops || this.min > this.max) return []
       if (this.step === 0) {
         process.env.NODE_ENV !== 'production' &&
-          console.warn('[Uiement Warn][Slider]step should not be 0.')
+          console.warn('[Element Warn][Slider]step should not be 0.')
         return []
       }
       const stopCount = (this.max - this.min) / this.step
@@ -352,7 +352,7 @@ export default {
     },
     setValues () {
       if (this.min > this.max) {
-        console.error('[Uiement Error][Slider]min should not be greater than max.')
+        console.error('[Element Error][Slider]min should not be greater than max.')
         return
       }
       const val = this.value

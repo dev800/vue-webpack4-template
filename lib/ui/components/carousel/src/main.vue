@@ -273,7 +273,7 @@ export default {
       }
       index = Number(index)
       if (isNaN(index) || index !== Math.floor(index)) {
-        console.warn('[Uiement Warn][Carousel]index must be an integer.')
+        console.warn('[Element Warn][Carousel]index must be an integer.')
         return
       }
       const length = this.items.length

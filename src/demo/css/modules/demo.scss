@@ -1,18 +1,22 @@
 h1 {
   &.demo__title {
     font-size: 24px;
-    margin: 32px 8px 18px;
+    margin: 32px 0 18px;
   }
 }
 
 h2 {
   &.demo__title {
     font-size: 18px;
-    margin: 32px 8px 18px;
+    margin: 32px 0 12px;
   }
 }
 
 .demo {
+  &__intro {
+    padding: 12px 0;
+  }
+
   &__block {
     border-radius: 4px;
     padding: 24px;

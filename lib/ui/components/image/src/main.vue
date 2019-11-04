@@ -40,7 +40,7 @@ import { on, off, getScrollContainer, isInContainer } from '../../../js/utils/do
 import { isString, isHtmlElement } from '../../../js/utils/types'
 import { throttle } from 'throttle-debounce'
 
-const isSupportObjectFit = () => document.documentUiement.style.objectFit !== undefined
+const isSupportObjectFit = () => document.documentElement.style.objectFit !== undefined
 
 const ObjectFit = {
   NONE: 'none',

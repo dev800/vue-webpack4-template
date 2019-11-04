@@ -113,7 +113,7 @@ export default {
     closed (newVal) {
       if (newVal) {
         this.visible = false
-        this.$el.addEventListener('transitionend', this.destroyUiement)
+        this.$el.addEventListener('transitionend', this.destroyElement)
       }
     }
   },
@@ -132,8 +132,8 @@ export default {
   },
 
   methods: {
-    destroyUiement () {
-      this.$el.removeEventListener('transitionend', this.destroyUiement)
+    destroyElement () {
+      this.$el.removeEventListener('transitionend', this.destroyElement)
       this.$destroy(true)
       this.$el.parentNode.removeChild(this.$el)
     },

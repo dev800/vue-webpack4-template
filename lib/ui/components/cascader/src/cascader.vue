@@ -589,11 +589,11 @@ export default {
           target.click()
           break
         case KeyCode.up:
-          const prev = target.previousUiementSibling
+          const prev = target.previousElementSibling
           prev && prev.focus()
           break
         case KeyCode.down:
-          const next = target.nextUiementSibling
+          const next = target.nextElementSibling
           next && next.focus()
           break
         case KeyCode.esc:

@@ -238,7 +238,7 @@ export default {
             this.$refs.confirm.$el.focus()
           })
         }
-        this.focusAfterClosed = document.activeUiement
+        this.focusAfterClosed = document.activeElement
         messageBox = new Dialog(
           this.$el,
           this.focusAfterClosed,
@@ -251,12 +251,12 @@ export default {
       if (val) {
         setTimeout(() => {
           if (this.$refs.input && this.$refs.input.$el) {
-            this.getInputUiement().focus()
+            this.getInputElement().focus()
           }
         }, 500)
       } else {
         this.editorErrorMessage = ''
-        removeClass(this.getInputUiement(), 'invalid')
+        removeClass(this.getInputElement(), 'invalid')
       }
     }
   },
@@ -335,7 +335,7 @@ export default {
         if (inputPattern && !inputPattern.test(this.inputValue || '')) {
           this.editorErrorMessage =
             this.inputErrorMessage || t('ui.messagebox.error')
-          addClass(this.getInputUiement(), 'invalid')
+          addClass(this.getInputElement(), 'invalid')
           return false
         }
         const inputValidator = this.inputValidator
@@ -344,18 +344,18 @@ export default {
           if (validateResult === false) {
             this.editorErrorMessage =
               this.inputErrorMessage || t('ui.messagebox.error')
-            addClass(this.getInputUiement(), 'invalid')
+            addClass(this.getInputElement(), 'invalid')
             return false
           }
           if (typeof validateResult === 'string') {
             this.editorErrorMessage = validateResult
-            addClass(this.getInputUiement(), 'invalid')
+            addClass(this.getInputElement(), 'invalid')
             return false
           }
         }
       }
       this.editorErrorMessage = ''
-      removeClass(this.getInputUiement(), 'invalid')
+      removeClass(this.getInputElement(), 'invalid')
       return true
     },
     getFirstFocus () {
@@ -365,7 +365,7 @@ export default {
       )
       return btn || title
     },
-    getInputUiement () {
+    getInputElement () {
       const inputRefs = this.$refs.input.$refs
       return inputRefs.input || inputRefs.textarea
     },

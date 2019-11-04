@@ -209,7 +209,7 @@ export default {
           this.suggestions = suggestions
           this.highlightedIndex = this.highlightFirstItem ? 0 : -1
         } else {
-          console.error('[Uiement Error][Autocomplete]autocomplete suggestions must be an array')
+          console.error('[Element Error][Autocomplete]autocomplete suggestions must be an array')
         }
       })
     },

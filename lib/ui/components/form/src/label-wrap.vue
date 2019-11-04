@@ -37,15 +37,15 @@ export default {
 
   methods: {
     getLabelWidth () {
-      if (this.$el && this.$el.firstUiementChild) {
-        const computedWidth = window.getComputedStyle(this.$el.firstUiementChild).width
+      if (this.$el && this.$el.firstElementChild) {
+        const computedWidth = window.getComputedStyle(this.$el.firstElementChild).width
         return Math.ceil(parseFloat(computedWidth))
       } else {
         return 0
       }
     },
     updateLabelWidth (action = 'update') {
-      if (this.$slots.default && this.isAutoWidth && this.$el.firstUiementChild) {
+      if (this.$slots.default && this.isAutoWidth && this.$el.firstElementChild) {
         if (action === 'update') {
           this.computedWidth = this.getLabelWidth()
         } else if (action === 'remove') {
