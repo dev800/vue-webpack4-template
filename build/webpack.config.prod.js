@@ -1,26 +1,26 @@
 'use strict'
 
-const path = require('path')
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const utils = require('./utils')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
-const ROOT_PATH = path.resolve(__dirname, '../')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
+
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
   devtool: 'cheap-source-map',
+
   output: {
     publicPath: '/',
     filename: 'js/[name].[contenthash].js',
     chunkFilename: 'js/[name].chunk.[contenthash].js',
-    path: `${ROOT_PATH}/dist`
   },
+
   module: {
     rules: [
       {
@@ -59,6 +59,7 @@ module.exports = merge(baseConfig, {
       }
     ]
   },
+
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',

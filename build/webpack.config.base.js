@@ -7,34 +7,36 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ROOT_PATH = path.resolve(__dirname, '../')
 const utils = require('./utils')
+const CONFIG_ENV = process.env.CONFIG_ENV
 
 const {
   VueLoaderPlugin
 } = require('vue-loader')
 
-
 module.exports = {
+  // devtool: 'eval',
+  devtool: 'source-map',
+
+  output: {
+    path: `${ROOT_PATH}/dist/${CONFIG_ENV}`
+  },
+
   resolve: {
-    extensions: ['.js', '.ts', '.vue', '.json'],
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.vue', '.json'],
     alias: {
+      // 源码目录
       '~': utils.resolve('src'),
+      // 项目根目录
       '~~': ROOT_PATH,
       '@': utils.resolve('src'),
       '@@': ROOT_PATH
     }
   },
 
-  // devtool: 'eval',
-  devtool: 'source-map',
   entry: {
     'app/demo': ['babel-polyfill', '@/demo/index.ts'],
   },
-  output: {
-    publicPath: '/',
-    filename: 'js/[name].js',
-    chunkFilename: 'js/[name].chunk.js',
-    path: `${ROOT_PATH}/dist`
-  },
+
   optimization: {
     splitChunks: {
       chunks: 'async',
@@ -58,6 +60,7 @@ module.exports = {
       }
     }
   },
+
   module: {
     rules: [
       {
@@ -156,7 +159,7 @@ module.exports = {
     new VueLoaderPlugin(),
     new CopyWebpackPlugin([{
       from: utils.resolve('static'),
-      to: utils.resolve('dist/static'),
+      to: utils.resolve(`dist/${CONFIG_ENV}`),
       toType: 'dir'
     }])
   ]

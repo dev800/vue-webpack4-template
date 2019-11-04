@@ -4,8 +4,10 @@
   "description": "A Vuejs template using Webpack 4",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --progress --watch --config build/webpack.config.dev.js",
-    "build": "NODE_ENV=production webpack --progress  --config build/webpack.config.prod.js",
+    "dev": "CONFIG_ENV=dev webpack-dev-server --progress --watch --config build/webpack.config.dev.js",
+    "alpha": "CONFIG_ENV=alpha NODE_ENV=production webpack --progress --config build/webpack.config.alpha.js",
+    "beta": "CONFIG_ENV=beta NODE_ENV=production webpack --progress --config build/webpack.config.beta.js",
+    "build": "CONFIG_ENV=prod NODE_ENV=production webpack --progress --config build/webpack.config.prod.js",
     "lint": "eslint --ext .ts,.js,.vue src",
     "lint:fix": "eslint --ext .ts,.js,.vue src --fix",
     "test:unit": "jest --config test/jest.config.js",
