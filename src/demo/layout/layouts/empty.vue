@@ -1,8 +1,8 @@
 <script lang="tsx">
-import { Component } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component({})
-export default {
+export default class Empty extends Vue {
   render (h, context) {
     return [<router-view />]
   }

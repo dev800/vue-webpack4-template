@@ -2,38 +2,36 @@ import { Module, ActionContext, ActionTree, MutationTree, GetterTree } from 'vue
 import { RootState } from '../root-types'
 
 class MenuItemRoute {
-  public url: string
-  public params: object
+  url: string
+  params: any
 }
 
 class MenuItem {
   /** 自己菜单 */
-  public children?: Array<MenuItem> = []
+  children: Array<MenuItem> = []
   /** 图标 */
-  public icon?: string
+  icon: string
   /** 标题 */
-  public title?: string
+  title: string
   /** 路由 */
-  public route?: MenuItemRoute = new MenuItemRoute()
+  route: MenuItemRoute = new MenuItemRoute()
   /** 跳转类型 */
-  public jumpType?: string = '__self'
+  jumpType: string = '__self'
 }
 
 /** 侧栏菜单 */
 class AsideMenu {
   // 模式(horizontal / vertical)：默认: vertical
-  public mode?: string = 'vertical'
+  mode: string = 'vertical'
   // 是否折叠
-  public collapse?: boolean = localStorage.getItem('asideMenu.collapse') === 'true'
+  collapse: boolean = localStorage.getItem('asideMenu.collapse') === 'true'
   // 菜单项
-  public items?: Array<MenuItem> = []
-
-  constructor () { }
+  items: Array<MenuItem> = []
 }
 
 class State {
-  public count: number
-  public asideMenu: AsideMenu = new AsideMenu()
+  count: number
+  asideMenu: AsideMenu = new AsideMenu()
 }
 
 // getters
@@ -43,11 +41,11 @@ const getters: GetterTree<State, RootState> = {
   }
 }
 
-const enum MutationTypes {
-  INCREMENT = 'INCREMENT',
-  DECREMENT = 'DECREMENT',
-  SET_COUNT = 'SET_COUNT',
-  ASIDE_MENU_COLLAPSE_TOGGLE = 'ASIDE_MENU_COLLAPSE_TOGGLE'
+const MutationTypes = {
+  INCREMENT: 'INCREMENT',
+  DECREMENT: 'DECREMENT',
+  SET_COUNT: 'SET_COUNT',
+  ASIDE_MENU_COLLAPSE_TOGGLE: 'ASIDE_MENU_COLLAPSE_TOGGLE'
 }
 
 // actions
@@ -63,7 +61,7 @@ const actions: ActionTree<State, RootState> = {
   },
   asideMenuCollapseToggle ({ commit, state }: ActionContext<State, RootState>): void {
     commit(MutationTypes.ASIDE_MENU_COLLAPSE_TOGGLE)
-  },
+  }
 }
 
 const mutations: MutationTree<State> = {
@@ -79,7 +77,7 @@ const mutations: MutationTree<State> = {
   [MutationTypes.ASIDE_MENU_COLLAPSE_TOGGLE] (state: State): void {
     state.asideMenu.collapse = !state.asideMenu.collapse
     localStorage.setItem('asideMenu.collapse', String(state.asideMenu.collapse))
-  },
+  }
 }
 
 const stateInstance = new State()

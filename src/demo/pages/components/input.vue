@@ -105,9 +105,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
-import { State } from "vuex-class";
-import UiInput from "~~/lib/ui/components/input";
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { State } from 'vuex-class'
+import UiInput from '~~/lib/ui/components/input'
 
 @Component({
   components: {
@@ -115,7 +115,7 @@ import UiInput from "~~/lib/ui/components/input";
   }
 })
 export default class Header extends Vue {
-  inputValue: string = "hello world";
+  inputValue: string = 'hello world';
   inputPassword: string = null;
 }
 </script>

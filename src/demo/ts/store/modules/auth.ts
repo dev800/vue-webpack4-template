@@ -2,7 +2,7 @@ import { Module, ActionContext, ActionTree, MutationTree, GetterTree } from 'vue
 import { RootState } from '../root-types'
 
 class State {
-  public count: number
+  count: number
 }
 
 // getters
@@ -12,10 +12,10 @@ const getters: GetterTree<State, RootState> = {
   }
 }
 
-const enum MutationTypes {
-  INCREMENT = 'INCREMENT',
-  DECREMENT = 'DECREMENT',
-  SET_COUNT = 'SET_COUNT'
+const MutationTypes = {
+  INCREMENT: 'INCREMENT',
+  DECREMENT: 'DECREMENT',
+  SET_COUNT: 'SET_COUNT'
 }
 
 // actions
@@ -28,7 +28,7 @@ const actions: ActionTree<State, RootState> = {
   },
   setCount ({ commit }: ActionContext<State, RootState>, count: number): void {
     commit(MutationTypes.SET_COUNT, count)
-  },
+  }
 }
 
 const mutations: MutationTree<State> = {
@@ -40,7 +40,7 @@ const mutations: MutationTree<State> = {
   },
   [MutationTypes.SET_COUNT] (state: State, count: number): void {
     state.count = count
-  },
+  }
 }
 
 export const auth: Module<State, RootState> = {
