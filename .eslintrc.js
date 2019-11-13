@@ -13,6 +13,7 @@ module.exports = {
   },
   env: {
     browser: true,
+    jest: true
   },
   extends: [
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
@@ -24,7 +25,8 @@ module.exports = {
   ],
   // required to lint *.vue files
   plugins: [
-    'vue'
+    'vue',
+    'jest'
   ],
   // add your custom rules here
   rules: {
@@ -42,6 +44,11 @@ module.exports = {
     'standard/no-callback-literal': 'off',
     'scss(css-propertyvalueexpected)': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error"
   }
 }
