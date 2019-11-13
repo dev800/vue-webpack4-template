@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   rootDir: path.resolve(__dirname, '..'),
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{js,vue}'
   ],
@@ -20,5 +20,10 @@ module.exports = {
   },
   snapshotSerializers: [
     '<rootDir>/node_modules/jest-serializer-vue'
-  ]
+  ],
+  globals: {
+    'ts-jest': {
+      skipBabel: true
+    }
+  }
 }
