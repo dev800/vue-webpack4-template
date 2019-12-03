@@ -2,7 +2,6 @@
 
 module.exports = {
   root: true,
-  // parser: 'eslint-plugin-typescript',
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 2018,
@@ -15,12 +14,12 @@ module.exports = {
     browser: true,
     jest: true
   },
+  // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
+  // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
+  // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
     'plugin:vue/essential',
     'eslint:recommended',
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
     'standard'
   ],
   // required to lint *.vue files
@@ -43,12 +42,12 @@ module.exports = {
     'vue/valid-v-model': 'off',
     'standard/no-callback-literal': 'off',
     'scss(css-propertyvalueexpected)': 'off',
-    // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    "jest/no-disabled-tests": "warn",
-    "jest/no-focused-tests": "error",
-    "jest/no-identical-title": "error",
-    "jest/prefer-to-have-length": "warn",
-    "jest/valid-expect": "error"
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error'
   }
 }

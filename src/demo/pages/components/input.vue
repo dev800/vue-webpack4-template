@@ -15,6 +15,10 @@
         placeholder="请输入内容值"
         disabled
       />
+      <ui-input-number
+        v-model="inputValue"
+        placeholder="请输入内容值"
+      />
     </div>
     <h2 class="demo__title">可清空的输入框</h2>
     <div class="demo__block">
@@ -108,10 +112,12 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { State } from 'vuex-class'
 import UiInput from '~~/lib/ui/components/input'
+import UiInputNumber from '~~/lib/ui/components/input-number'
 
 @Component({
   components: {
-    UiInput
+    UiInput,
+    UiInputNumber
   }
 })
 export default class Header extends Vue {

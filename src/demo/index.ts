@@ -1,6 +1,6 @@
 import 'babel-polyfill'
 import Vue from 'vue'
-import FarmerUI from '~~/lib/ui/js/index'
+import UI from '~~/lib/ui/js/index'
 import lang from '~~/lib/ui/js/locale/lang/zh-CN.js'
 // import locale from '~~/lib/ui/js/locale/index.js'
 import store from './ts/store/index'
@@ -14,7 +14,7 @@ if (appDOM) {
   // locale.use(lang)
 
   Vue.config.devtools = process.env.NODE_ENV === 'development' // 去掉注释来打开Vue调试工具
-  Vue.use(FarmerUI, { lang })
+  Vue.use(UI, { lang })
 
   Vue.prototype.$store = store
 

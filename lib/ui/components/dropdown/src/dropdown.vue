@@ -265,7 +265,7 @@ export default {
         </ui-button>
         <ui-button ref="trigger" type={type} size={dropdownSize} class="ui-dropdown__caret-button">
           <svg-icon
-            icon-class="solid-chevron-right"
+            icon-class="solid-chevron-down"
             class="ui-dropdown__icon"
           ></svg-icon>
         </ui-button>

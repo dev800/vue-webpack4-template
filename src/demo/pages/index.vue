@@ -216,7 +216,7 @@ export default {
       }, 2000)
     },
     onShowMessage (e) {
-      this.$message({ message: '你好测试一下错误消息啦啦', type: 'warning', duration: 1500 })
+      this.$message({ message: '你好测试一下错误消息啦啦', type: 'warning', duration: 150000 })
     },
     onStartProgress (e) {
       console.log('onStartProgress', e)

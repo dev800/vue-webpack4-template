@@ -34,7 +34,8 @@
   }
 
   @include m(info) {
-    .ui-message__content {
+    .ui-message__content,
+    .ui-message__icon {
       color: $--message-info-font-color;
     }
   }
@@ -43,7 +44,8 @@
     background-color: $--color-success-lighter;
     border-color: $--color-success-light;
 
-    .ui-message__content {
+    .ui-message__content,
+    .ui-message__icon {
       color: $--message-success-font-color;
     }
   }
@@ -52,7 +54,8 @@
     background-color: $--color-warning-lighter;
     border-color: $--color-warning-light;
 
-    .ui-message__content {
+    .ui-message__content,
+    .ui-message__icon {
       color: $--message-warning-font-color;
     }
   }
@@ -61,7 +64,8 @@
     background-color: $--color-danger-lighter;
     border-color: $--color-danger-light;
 
-    .ui-message__content {
+    .ui-message__content,
+    .ui-message__icon {
       color: $--message-danger-font-color;
     }
   }

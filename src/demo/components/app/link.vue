@@ -10,7 +10,7 @@ import { Component, Vue, Watch, Prop } from 'vue-property-decorator'
 
 @Component
 export default class Link extends Vue {
-  @Prop(String) to: string | undefined
+  @Prop([String, Object]) to: string | any
 
   isExternal (path) {
     return /^(https?:|mailto:|tel:)/.test(path)
@@ -24,10 +24,11 @@ export default class Link extends Vue {
         target: '_blank',
         rel: 'noopener'
       }
-    }
-    return {
-      is: 'router-link',
-      to: url
+    } else {
+      return {
+        is: 'router-link',
+        to: url
+      }
     }
   }
 }
