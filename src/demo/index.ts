@@ -22,7 +22,7 @@ if (appDOM) {
     if (to.meta.title) {
       document.title = to.meta.title
     } else {
-      document.title = 'UI for vue'
+      document.title = "UI for vue"
     }
 
     next()
